@@ -1,112 +1,240 @@
 ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
-Welcome USER_NAME,
+# Hitch Hound: a lightweight issue-tracker
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+'Hitch Hound' is built using Django, Python, Bootstrap, JavaScript and PostgreSQL. It is hosted on Heroku.
+Automated testing is done with Jest (JavaScript) and Unittest (Python).
 
-You can safely delete this README.md file or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **April 26, 2024**
+(Add responsive screenshot here)
 
-## Gitpod Reminders
+# Table of Contents
+1. [Purpose](#purpose)
+2. [Requirement Gathering and Planning](#requirement-gathering-and-planning)
+    a. [Brief Competitor Analysis and Target Demographic](#brief-competitor-analysis-and-target-demographic)
+    b. [Epics and User Stories](#epics-and-user-stories)
+    c. [User Journeys](#user-journeys)
+3. [Data Design](#data)
+    a. [Database Schema](#database-schema)
+    b. [Data Manipulation](#data-manipulation)
+    c. [Data Validation](#data-validation)
+4. [User Interface Design](#user-interface-design)
+    a. [Wireframes](#wireframes)
+    b. [Colour Scheme](#colour-scheme)
+    c. [Icons](#icons)
+5. [Testing](#testing)
+    a. [Test Plan](#test-plan)
+    b. [Automated Testing](#automated-testing)
+    c. [Manual Testing](#manual-testing)
+    d. [Browser Compatibility and Screen Size Responsiveness](#browser-compatibility-and-screen-size-responsiveness)
+    e. [Key Responsiveness Differences](#key-responsiveness-differences)
+    f. [Accessibility](#accessibility)
+6. [Bugs](#bugs)
+7. [Deployment](#deployment)
+8. [Agile Methodology](#agile-methodology)
+    a. [Sprint One](#sprint-one-2705-to-0206)
+    b. [Sprint Two](#sprint-two-0306-to-0906)
+    c. [Sprint Three](#sprint-three-1006-to-1606)
+9. [Credits](#credits)
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+## Purpose
+The objective of this program is to streamline the process of tracking and communicating about issues and bugs arising in software development projects. It is lightweight and intuitive, providing ample functionality for small to medium enterprises who don't need an elevated level of auditing and oversight. 
 
-`python3 -m http.server`
+## Requirement Gathering and Planning
 
-A blue button should appear to click: _Make Public_,
+Before starting the coding for this project, I created a detailed plan including my database schema, user journeys and wireframes.
 
-Another blue button should appear to click: _Open Browser_.
+### Brief Competitor Analysis and Target Demographic
+When considering competitors in the realm of issue and bug tracking software, it's helpful to look at some well-known options. Atlassian's Jira is widely recognised for its range of features and flexibility, making it a go-to choice for companies of all sizes. Another popular option is GitHub's issue tracking system, which seamlessly integrates with its version control platform, making it a convenient choice for teams already using GitHub. Additionally, tools like Trello are valued for their user-friendly interface and adaptability, though they do lack some of the specific features tailored for issue tracking. In this landscape, my program intends to stand out by focusing on simplicity and ease of use, making it ideal for small to medium enterprises (SMEs) looking for a straightforward solution without unnecessary complexity. The goal is to provide a practical and efficient tool for managing software development issues, offering a simpler alternative in a market dominated by larger, more complex platforms.
 
-To run a backend Python file, type `python3 app.py` if your Python file is named `app.py`, of course.
+### Epics and User Stories
 
-A blue button should appear to click: _Make Public_,
+My user stories can be seen in full in the associated GitHub Project on my repo. This is where all the details, including tasks and acceptance criteria can be seen. These user stories have been assigned to Epics.
 
-Another blue button should appear to click: _Open Browser_.
+I have listed them by title below to show the split between the absolutely necessary user stories for the MVP (Minimum Viable Product) and those that do improve the user experience but are not essential for the first version of my program. 
 
-By Default, Gitpod gives you superuser security privileges. Therefore, you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+**MVP**
+1. Epic: User Management 
+    a. User Registration
+    b. User Login and Logout
+    c. View and Assign Superuser Status to Users
+    d. Add Meaningful 404 Page
+2. Epic: Issue Management
+    a. Create Issue
+    b. Edit Issue
+    c. View Issues
+    d. Close, Cancel or Delete Issues
+    e. Comment on Issues
 
-To log into the Heroku toolbelt CLI:
+**Future Enhancements**
+3. Epic: Enhanced User Management
+    a. Password Reset
+    b. Create and Edit Role-Based Permissions
+    c. Receive Notifications from Other Users' Actions
+4. Epic: Enhanced Issue Management
+    a. Attach Files to Issues
+    b. Provide a Change History Log
+    c. Connect 2+ Issues as Related
+    d.Search for Issues by Keyword
+5. Epic: Project Management
+    a. Create Project
+    b. Edit Project
+    c. Close, Cancel or Delete Projects
+6. Epic: Reporting
+    a. Add Reporting
+ 
+### User Journeys
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+## Data Design
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you, so do not share it. If you accidentally make it public, you can create a new one with _Regenerate API Key_.
+### Database Schema 
 
-------
+### Data Manipulation
 
-## Release History
+### Data Validation
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+## User Interface Design
 
-**April 26 2024:** Update node version to 16
+### Wireframes
 
-**September 20 2023:** Update Python version to 3.9.17.
+### Colour Scheme 
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+### Icons
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+## Testing
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+### Test Plan
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+**Continuous Testing**
+I developed this program using the 'red, green, refactor' approach
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+Through a combination of automated testing written using Jest for JavaScript and Unittest for Python, and manual testing from the front-end, I achieved a good coverage of test cases. The code I wrote was also passed through validators/linters at the end to ensure adherance to coding standards and best practices, ultimately aiming for robust and maintainable code.
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+### Automated Testing
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+Jest Testing:
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+Unittest Testing:
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+### Manual Testing
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+My manual testing covered: 
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+- Each user journey from end to end
+- The level of access when logged out 
+- The level of access when logged in as a regular user
+- The level of access when logged in as a superuser
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+### Browser Compatibility and Screen Size Responsiveness
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+I viewed the program on each of the three key screen sizes (mobile, tablet and computer), using devtools, on four of the most popular browsers. I also used the responsive setting to slide the width of the screen from narrow all the way through to wide to check the transition points. 
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+Pixel references for each of the screen sizes:
 
-------
+|Screen | Pixels |
+|-----|-----|
+| Mobile - iPhone SE | 375px |
+| Tablet - iPad Mini | 768px |
+| Computer | 1366px |
 
-## FAQ about the uptime script
+| Browser | Screen Size | Appearance | Responsiveness |
+|-------|-----|-----|-----|
+| Chrome | Mobile |   | |
+| | Tablet |  |  |
+| | Computer |  |  |
+| | Transition Points |  |  |
+| Firefox | Mobile |  |  |
+| | Tablet |  |  |
+| | Computer |  |  |
+| | Transition Points |  |  |
+| Safari | Mobile |   |   |
+| | Tablet | |   |
+| | Computer |   |  |
+| | Transition Points | |  |
+| Edge | Mobile |  |  |
+| | Tablet |  |  |
+| | Computer |  |  |
+| | Transition Points |  |  |
 
-**Why have you added this script?**
+#### Key Responsiveness Differences
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+The 
 
-**How will this affect me?**
+### Code Validation
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+| Language | Validation Method | Outcome |
+|---|----|----|
+| HTML | [W3C HTML Validator](https://validator.w3.org/) | X errors. All resolved.|
+| CSS | [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) | X errors. All resolved. |
+| JavaScript | [JS Hint](https://jshint.com/) | X errors. All resolved.  |
+| Python | [PEP8 Code Institute Python Linter](https://pep8ci.herokuapp.com/) | X errors. All resolved. |
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+### Accessibility 
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+**Lighthouse**
+To ensure the front end of my program was accessible I used Lighthouse. 
 
-**So….?**
+Here are the results: 
+(screenshot)
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+**Colour Contrast**
+I also checked the colour contrast using of my color palette combinations using [Coolors](https://coolors.co/contrast-checker/112a46-acc8e5.)
 
-**Can I opt out?**
+**Alternative Text**
+I ensured I had set alternative text for the only image on my site: the logo. 
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+## Bugs
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+Here is the list of bugs found towards the end of development when I encountered functionality not working as intended that I had previously thought did. I don't believe I have left any unresolved bugs. 
 
-**Anything more?**
+### Bug One
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+#### Issue
 
----
+#### Solution
 
-Happy coding!
+## Deployment
+This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
+
+These are the steps I took to set up my infrastructure and deploy my app:
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+8. I created a new repository on my GitHub from the [Code Institute template](https://github.com/Code-Institute-Org/p3-template) and named it 'hitch-hound'
+9. I opened this repo on my IDE and
+10. 
+11.
+12. Next I clicked on the 'Deploy' tab and connected my github repository code to the Heroku app. I clicked 'Enable Automatic Deploys' and Heroku deployed the app for me. Once this was done, the link to the app appeared and could be clicked to go to the deployed app.
+
+## Agile Methodology
+I set this project up in GitHub projects using agile methodology. This facilitated my prioritisation and time management. I added all the user stories as issues and then divided them into 'MVP'(Minimum Viable Product) and 'Future Enhancements' to signify what I intend to complete for my assessed project and what could come later. Those MVP stories were then stack-ranked. I added three one-week sprints to the project and filled my first sprint with my intended work according to the MoSCoW prioritisation system. 
+
+### Sprint One: 27/05 to 02/06
+![Sprint One](documentation/sprint1.png)
+
+Sprint planning involved taking the highest priority issues from the top of the stack and assigning them to the first sprint. I marked the first two as 'Must Have' for this sprint, the next one 'Should Have' and the last one 'Could Have'. This gave me a breakdown of 50% for must and 25% each for should and could. This seemed like a manageable workload for me. 
+
+In the screenshot, those marked 'Won't Have' are the stories that were deemed to be above and beyond the requirements for an MVP and have been labelled as such to indicate that they will not be included.
+### Sprint Two: 03/06 to 09/06
+
+### Sprint Three: 10/06 to 16/06
+
+## Credits
+
+### APIs and Third Party Libraries
+
+
+### Sources of Learning
+I referred back to the Code Institute set up videos to remind me how to set up the APIs, credentials and files before starting coding.
+
+- I built my flowcharts using [Mermaid](https://mermaid.js.org/syntax/flowchart.html) in my readme.
+
+### General Credit
+As ever, I want to thank the open source community for the great resources that teach me so much and also remind me of what I learnt in my Code Institute lessons. 
+
+I believe I have specifically credited where I used specific items in the previous section but this is a general credit to the reference resources I looked through to teach me new elements as well as reminding me how things I'd already come across worked as I went along. 
+
+Every effort has been made to credit everything used, but if I find anything else specific later on that needs crediting, that I missed, I will be sure to add it.
