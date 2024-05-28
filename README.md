@@ -9,31 +9,32 @@ Automated testing is done with Jest (JavaScript) and Unittest (Python).
 
 # Table of Contents
 1. [Purpose](#purpose)
-2. [Requirement Gathering and Planning](#requirement-gathering-and-planning)
-    a. [Brief Competitor Analysis and Target Demographic](#brief-competitor-analysis-and-target-demographic)
-    b. [Epics and User Stories](#epics-and-user-stories)
-    c. [User Journeys](#user-journeys)
-3. [Data Design](#data)
-    a. [Database Schema](#database-schema)
-    b. [Data Manipulation](#data-manipulation)
-    c. [Data Validation](#data-validation)
-4. [User Interface Design](#user-interface-design)
-    a. [Wireframes](#wireframes)
-    b. [Colour Scheme](#colour-scheme)
-    c. [Icons](#icons)
-5. [Testing](#testing)
-    a. [Test Plan](#test-plan)
-    b. [Automated Testing](#automated-testing)
-    c. [Manual Testing](#manual-testing)
-    d. [Browser Compatibility and Screen Size Responsiveness](#browser-compatibility-and-screen-size-responsiveness)
-    e. [Key Responsiveness Differences](#key-responsiveness-differences)
-    f. [Accessibility](#accessibility)
+2. [Requirement Gathering and Planning](#requirement-gathering-and-planning) <br>
+    a. [Brief Competitor Analysis and Target Demographic](#brief-competitor-analysis-and-target-demographic) <br>
+    b. [Data and Security features](#data-and-security-features)<br>
+    c. [Epics and User Stories](#epics-and-user-stories) <br>
+    d. [User Journeys](#user-journeys) <br>
+3. [Data Design](#data) <br>
+    a. [Database Schema](#database-schema) <br>
+    b. [Data Manipulation](#data-manipulation) <br>
+    c. [Data Validation](#data-validation) <br>
+4. [User Interface Design](#user-interface-design) <br>
+    a. [Wireframes](#wireframes) <br>
+    b. [Colour Scheme](#colour-scheme) <br>
+    c. [Icons](#icons) <br>
+5. [Testing](#testing) <br>
+    a. [Test Plan](#test-plan) <br>
+    b. [Automated Testing](#automated-testing) <br>
+    c. [Manual Testing](#manual-testing) <br>
+    d. [Browser Compatibility and Screen Size Responsiveness](#browser-compatibility-and-screen-size-responsiveness) <br>
+    e. [Key Responsiveness Differences](#key-responsiveness-differences) <br>
+    f. [Accessibility](#accessibility) <br>
 6. [Bugs](#bugs)
 7. [Deployment](#deployment)
-8. [Agile Methodology](#agile-methodology)
-    a. [Sprint One](#sprint-one-2705-to-0206)
-    b. [Sprint Two](#sprint-two-0306-to-0906)
-    c. [Sprint Three](#sprint-three-1006-to-1606)
+8. [Agile Methodology](#agile-methodology) <br>
+    a. [Sprint One](#sprint-one-2705-to-0206) <br>
+    b. [Sprint Two](#sprint-two-0306-to-0906) <br>
+    c. [Sprint Three](#sprint-three-1006-to-1606) <br>
 9. [Credits](#credits)
 
 ## Purpose
@@ -46,41 +47,47 @@ Before starting the coding for this project, I created a detailed plan including
 ### Brief Competitor Analysis and Target Demographic
 When considering competitors in the realm of issue and bug tracking software, it's helpful to look at some well-known options. Atlassian's Jira is widely recognised for its range of features and flexibility, making it a go-to choice for companies of all sizes. Another popular option is GitHub's issue tracking system, which seamlessly integrates with its version control platform, making it a convenient choice for teams already using GitHub. Additionally, tools like Trello are valued for their user-friendly interface and adaptability, though they do lack some of the specific features tailored for issue tracking. In this landscape, my program intends to stand out by focusing on simplicity and ease of use, making it ideal for small to medium enterprises (SMEs) looking for a straightforward solution without unnecessary complexity. The goal is to provide a practical and efficient tool for managing software development issues, offering a simpler alternative in a market dominated by larger, more complex platforms.
 
+### Data and Security Features
+
+With this in mind, the data features chosen are clean and simple. Users can create issues that they associate with a particular project. This allows for a streamlined and intuitive user experience, enhancing productivity and facilitating effective project management. 
+
+The security features cover the essentials: authentication with a username and password, data validation and sanitisation, and keeping track of any changes made with an audit trail.
+
 ### Epics and User Stories
 
 My user stories can be seen in full in the associated GitHub Project on my repo. This is where all the details, including tasks and acceptance criteria can be seen. These user stories have been assigned to Epics.
 
-I have listed them by title below to show the split between the absolutely necessary user stories for the MVP (Minimum Viable Product) and those that do improve the user experience but are not essential for the first version of my program. 
+Epic 1: User Management
+- User Registration <br>
+- User Login and Logout <br>
+- Password Reset <br>
+- Create and Edit Role-Based Permissions <br>
+- View and Assign Superuser Status to Users <br>
 
-**MVP**
-1. Epic: User Management 
-    a. User Registration
-    b. User Login and Logout
-    c. View and Assign Superuser Status to Users
-    d. Add Meaningful 404 Page
-2. Epic: Issue Management
-    a. Create Issue
-    b. Edit Issue
-    c. View Issues
-    d. Close, Cancel or Delete Issues
-    e. Comment on Issues
+Epic 2: Issue Management 
+- Create Issue <br>
+- Edit Issue <br>
+- View Issues <br>
+- Close, Cancel or Delete Issues <br>
+- Comment on Issues <br>
+- Attach Files to Issues <br>
 
-**Future Enhancements**
-3. Epic: Enhanced User Management
-    a. Password Reset
-    b. Create and Edit Role-Based Permissions
-    c. Receive Notifications from Other Users' Actions
-4. Epic: Enhanced Issue Management
-    a. Attach Files to Issues
-    b. Provide a Change History Log
-    c. Connect 2+ Issues as Related
-    d.Search for Issues by Keyword
-5. Epic: Project Management
-    a. Create Project
-    b. Edit Project
-    c. Close, Cancel or Delete Projects
-6. Epic: Reporting
-    a. Add Reporting
+Epic 3: Notifications and Error Messaging
+- Add Meaningful 404 Page <br>
+- Receive Notifications from Other Users' Actions <br>
+
+Epic 4: Enhanced Issue Management
+- Provide a Change History Log <br>
+- Connect 2+ Issues as Related <br>
+- Search for Issues by Keyword <br>
+
+Epic 5: Project Management
+- Create Project <br>
+- Edit Project <br>
+- Close, Cancel or Delete Projects <br>
+
+Epic 6: Reporting
+- Add Reporting <br>
  
 ### User Journeys
 
@@ -212,15 +219,19 @@ These are the steps I took to set up my infrastructure and deploy my app:
 ## Agile Methodology
 I set this project up in GitHub projects using agile methodology. This facilitated my prioritisation and time management. I added all the user stories as issues and then divided them into 'MVP'(Minimum Viable Product) and 'Future Enhancements' to signify what I intend to complete for my assessed project and what could come later. Those MVP stories were then stack-ranked. I added three one-week sprints to the project and filled my first sprint with my intended work according to the MoSCoW prioritisation system. 
 
-### Sprint One: 27/05 to 02/06
+### Sprint One: 03/06 to 09/06
 ![Sprint One](documentation/sprint1.png)
 
-Sprint planning involved taking the highest priority issues from the top of the stack and assigning them to the first sprint. I marked the first two as 'Must Have' for this sprint, the next one 'Should Have' and the last one 'Could Have'. This gave me a breakdown of 50% for must and 25% each for should and could. This seemed like a manageable workload for me. 
+#### Sprint Planning
+Sprint planning involved taking the highest priority issues from the top of the stack and assigning them to the first sprint. I marked the first two as 'Must Have' for this sprint, the next one 'Should Have' and the last two 'Could Have'. This gave me a breakdown of 40% for must, 20% for should and 40% for could. If I achieve all of these user stories in the first sprint, I will have completed my first epic: User Management.
 
-In the screenshot, those marked 'Won't Have' are the stories that were deemed to be above and beyond the requirements for an MVP and have been labelled as such to indicate that they will not be included.
-### Sprint Two: 03/06 to 09/06
+#### Sprint Retrospective
+- Placeholder 
 
-### Sprint Three: 10/06 to 16/06
+
+### Sprint Two: 10/06 to 16/06
+
+### Sprint Three: 17/06 to 23/06
 
 ## Credits
 
