@@ -103,6 +103,48 @@ Epic 6: Reporting
 
 ### Wireframes
 
+The wireframes I created illustrate the core user interface and functionality of Hitch Hound. These visual guides serve as a blueprint for the design and structure of the application, ensuring a cohesive and intuitive user experience. These are not mobile-first because this type of program is more likely to be accessed from a desktop or laptop computer. The pages will however be fully responsive.
+
+#### Home: Sign Up
+
+![signup](documentation/signup.png)
+
+#### Home: Log In
+
+![login](documentation/login.png)
+
+#### Home: Logged In
+
+![loggedin](documentation/loggedin.png)
+
+#### Individual Issue
+
+![individualissue](documentation/individualissue.png)
+
+#### New Issue
+
+![newissue](documentation/newissue.png)
+
+#### Projects
+
+![projects](documentation/projects.png)
+
+#### Individual Project
+
+![individualproject](documentation/individualproject.png)
+
+#### Reports
+
+![reports](documentation/reports.png)
+
+#### User Profile
+
+![userprofile](documentation/userprofile.png)
+
+#### Notification Modal
+
+![notificationmodal](documentation/notificationmodal.png)
+
 ### Colour Scheme 
 
 ### Icons
