@@ -147,7 +147,26 @@ The wireframes I created illustrate the core user interface and functionality of
 
 ### Colour Scheme 
 
+I wanted to pick a muted palette to reflect the business nature of my program. I chose my base colour and then selected two lighter shades to implement as a gradient. I then desaturated my base colour by 90% to find a complementary charcoal grey. Finally, I lightened my colour by 95% to find a complementary cream colour. 
+
+![colourscheme](documentation/colourscheme.png)
+
 ### Icons
+
+As I had chosen the name 'Hitch Hound' for my program, I thought it would provide visual interest and be a fun twist, to include dog imagery in my logo and icons.
+
+#### Logo
+
+This dog in a shield was perfect for my logo:<br> 
+![shield](documentation/shield.png)
+
+#### Other
+
+There were also a few other options for use throughout the program: <br>
+![dog](documentation/dog.png)
+![paw](documentation/paw.png)
+![bone](documentation/bone.png)
+
 
 ## Testing
 
@@ -270,7 +289,6 @@ Sprint planning involved taking the highest priority issues from the top of the 
 #### Sprint Retrospective
 - Placeholder 
 
-
 ### Sprint Two: 10/06 to 16/06
 
 ### Sprint Three: 17/06 to 23/06
@@ -280,10 +298,13 @@ Sprint planning involved taking the highest priority issues from the top of the 
 ### APIs and Third Party Libraries
 
 
-### Sources of Learning
+### Sources
 I referred back to the Code Institute set up videos to remind me how to set up the APIs, credentials and files before starting coding.
 
 - I built my flowcharts using [Mermaid](https://mermaid.js.org/syntax/flowchart.html) in my readme.
+- I manipulated my base colour to figure out my colour palette using [MDigi Tools](https://mdigi.tools/desaturate-color/#508072).
+- I visually represented my colour palette using [Adobe Colour](https://color.adobe.com/create/color-wheel).
+- I sourced my icons from [Font Awesome](https://fontawesome.com/search?q=dog&o=r&m=free)
 
 ### General Credit
 As ever, I want to thank the open source community for the great resources that teach me so much and also remind me of what I learnt in my Code Institute lessons. 
