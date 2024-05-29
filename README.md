@@ -14,14 +14,16 @@ Automated testing is done with Jest (JavaScript) and Unittest (Python).
     b. [Data and Security features](#data-and-security-features)<br>
     c. [Epics and User Stories](#epics-and-user-stories) <br>
     d. [User Journeys](#user-journeys) <br>
+    e. [User Permissions](#user-permissions)<br>
 3. [Data Design](#data) <br>
     a. [Database Schema](#database-schema) <br>
     b. [Data Manipulation](#data-manipulation) <br>
     c. [Data Validation](#data-validation) <br>
 4. [User Interface Design](#user-interface-design) <br>
-    a. [Wireframes](#wireframes) <br>
-    b. [Colour Scheme](#colour-scheme) <br>
-    c. [Icons](#icons) <br>
+    a. [Computer Wireframes](#computer-wireframes)<br>
+    b. [Mobile Wireframes](#mobile-wireframes)<br>
+    c. [Colour Scheme](#colour-scheme) <br>
+    d. [Icons](#icons) <br>
 5. [Testing](#testing) <br>
     a. [Test Plan](#test-plan) <br>
     b. [Automated Testing](#automated-testing) <br>
@@ -91,6 +93,66 @@ Epic 6: Reporting
  
 ### User Journeys
 
+As a lightweight issue tracking program, my goal was to make each user journey as simple as possible with the fewest steps, whilst still providing value and flexibility of working method. There are therefore five basic user journeys: 
+
+1. New User
+```mermaid
+flowchart LR
+    A[Navigate to Hitch Hound] --> B[Enter details on Sign Up form]
+    B --> C[Click Sign Up button]
+    C --> D[Log in with email and password]
+```
+
+2. Create an Issue
+```mermaid
+flowchart LR
+    A[Log In] --> B[Click 'Create New Issue' button]
+    B --> C[Fill in New Issue form]
+    C --> D[Click 'Submit New Issue' button]
+```
+
+3. Browse Issues
+```mermaid
+flowchart TD
+    A[Log In] --> B[Click 'Issues' in\n the navigation bar]
+    A --> C[Click 'Projects' in\n the navigation bar]
+    A --> D[Click 'Reports' in \nthe navigation bar]
+    A --> E[Click on User Profile\n in the navigation bar]
+    B --> F[Scroll through issues\nand click through pages]
+    C --> G[Click 'View All Issues'\nbutton next to the \ndesired project]
+    D --> H[Click on 'Issue Listing \nby Status' button]
+    H --> I[Select status in dropdown]
+    E --> J[Scroll through issues\n and click through pages]
+```
+4. Close an Issue
+```mermaid
+flowchart LR
+    A[Log In] --> B[Navigate to an issue as per\n 'Browse Issues' user journey]
+    B --> C[Set status to 'Closed'\n or 'Cancelled']
+    C --> D[Click 'Save Changes']
+```
+5. Generate Reports
+```mermaid
+flowchart LR
+    A[Log In] --> B[Click on 'Reports' in\nthe navigation bar]
+    B --> C[Click on one of the\n available report buttons]
+    C --> D[Adjust settings as needed\n with dropdowns provided]
+```
+### User Permissions
+
+There are four types of user, each with different permissions.
+
+| Type | Can create issue? | Can change status to | Can close issue?| Can access admin panel? |
+|---|---|---|---|---|
+| **Role Based** |
+| --> Developer | Yes | In-Progress | No | No |
+| --> Quality Assurance | Yes | Testing | No | No |
+| --> Product Manager | Yes | Approved |Yes | No |
+| **Secondary** |
+| --> Superuser | Yes | Any | Yes | Yes |
+
+Each user *must* be assigned a role-based type and *may* also be assigned the superuser type additionally. 
+
 ## Data Design
 
 ### Database Schema 
@@ -101,9 +163,9 @@ Epic 6: Reporting
 
 ## User Interface Design
 
-### Wireframes
+### Computer Wireframes
 
-The wireframes I created illustrate the core user interface and functionality of Hitch Hound. These visual guides serve as a blueprint for the design and structure of the application, ensuring a cohesive and intuitive user experience. These are not mobile-first because this type of program is more likely to be accessed from a desktop or laptop computer. The pages will however be fully responsive.
+The wireframes I created illustrate the core user interface and functionality of Hitch Hound from both a desktop/laptop perspective and a mobile/tablet perspective. These visual guides serve as a blueprint for the design and structure of the application, ensuring a cohesive and intuitive user experience. 
 
 #### Home: Sign Up
 
@@ -121,9 +183,11 @@ The wireframes I created illustrate the core user interface and functionality of
 
 ![individualissue](documentation/individualissue.png)
 
+
 #### New Issue
 
 ![newissue](documentation/newissue.png)
+
 
 #### Projects
 
@@ -133,17 +197,49 @@ The wireframes I created illustrate the core user interface and functionality of
 
 ![individualproject](documentation/individualproject.png)
 
+
 #### Reports
 
 ![reports](documentation/reports.png)
+
 
 #### User Profile
 
 ![userprofile](documentation/userprofile.png)
 
+
 #### Notification Modal
 
 ![notificationmodal](documentation/notificationmodal.png)
+
+### Mobile Wireframes
+
+#### Home: Sign Up and Log In
+
+![signupmobile](documentation/signupmobile.png)
+![loginmobile](documentation/loginmobile.png)
+
+#### Home: All Issues
+
+![loggedinmobile](documentation/loggedinmobile.png)
+
+#### Issues
+
+![individualissuemobile](documentation/individualissuemobile.png)
+![newissuemobile](documentation/newissuemobile.png)
+
+#### Projects
+
+![projectsmobile](documentation/projectsmobile.png)
+![individualprojectmobile](documentation/individualprojectmobile.png)
+
+#### Reports
+
+![reportsmobile](documentation/reportsmobile.png)
+
+#### User Profile and Notifications
+![userprofilemobile](documentation/userprofilemobile.png)
+![notificationmobile](documentation/notificationsmobile.png)
 
 ### Colour Scheme 
 
