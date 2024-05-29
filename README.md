@@ -214,32 +214,29 @@ The wireframes I created illustrate the core user interface and functionality of
 
 ### Mobile Wireframes
 
-#### Home: Sign Up and Log In
+| Sign Up | Log In |
+|---|---|
+|![signupmobile](documentation/signupmobile.png) | ![loginmobile](documentation/loginmobile.png) |
 
-![signupmobile](documentation/signupmobile.png)
-![loginmobile](documentation/loginmobile.png)
+| All Issues |
+|---|
+|![loggedinmobile](documentation/loggedinmobile.png)|
 
-#### Home: All Issues
+|Individual Issue | New Issue |
+|---|---|
+| ![individualissuemobile](documentation/individualissuemobile.png) | ![newissuemobile](documentation/newissuemobile.png) |
 
-![loggedinmobile](documentation/loggedinmobile.png)
+| Projects | Individual Projects |
+|---|---|
+|![projectsmobile](documentation/projectsmobile.png) | ![individualprojectmobile](documentation/individualprojectmobile.png) |
 
-#### Issues
+| Reports |
+|---|
+| ![reportsmobile](documentation/reportsmobile.png) |
 
-![individualissuemobile](documentation/individualissuemobile.png)
-![newissuemobile](documentation/newissuemobile.png)
-
-#### Projects
-
-![projectsmobile](documentation/projectsmobile.png)
-![individualprojectmobile](documentation/individualprojectmobile.png)
-
-#### Reports
-
-![reportsmobile](documentation/reportsmobile.png)
-
-#### User Profile and Notifications
-![userprofilemobile](documentation/userprofilemobile.png)
-![notificationmobile](documentation/notificationsmobile.png)
+|User Profile | Notifications |
+|---|---|
+| ![userprofilemobile](documentation/userprofilemobile.png) | ![notificationmobile](documentation/notificationsmobile.png) |
 
 ### Colour Scheme 
 
