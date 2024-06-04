@@ -60,40 +60,40 @@ The security features cover the essentials: authentication with a username and p
 My user stories can be seen in full in the associated GitHub Project on my repo. This is where all the details, including tasks and acceptance criteria can be seen. These user stories have been assigned to Epics.
 
 Epic 1: User Management
-- User Registration <br>
-- User Login and Logout <br>
-- Password Reset <br>
-- Create and Edit Role-Based Permissions <br>
-- View and Assign Superuser Status to Users <br>
+- User Registration 
+- User Login and Logout
+- Password Reset
+- Create and Edit Role-Based Permissions
+- View and Assign Superuser Status to Users
 
 Epic 2: Issue Management 
-- Create Issue <br>
-- Edit Issue <br>
-- View Issues <br>
-- Close, Cancel or Delete Issues <br>
-- Comment on Issues <br>
-- Attach Files to Issues <br>
+- Create Issue
+- Edit Issue 
+- View Issues
+- Close, Cancel or Delete Issues 
+- Comment on Issues
+- Attach Files to Issues
 
 Epic 3: Notifications and Error Messaging
-- Add Meaningful 404 Page <br>
-- Receive Notifications from Other Users' Actions <br>
+- Add Meaningful 404 Page
+- Receive Notifications from Other Users' Actions
 
 Epic 4: Enhanced Issue Management
-- Provide a Change History Log <br>
-- Connect 2+ Issues as Related <br>
-- Search for Issues by Keyword <br>
+- Provide a Change History Log
+- Connect 2+ Issues as Related
+- Search for Issues by Keyword
 
 Epic 5: Project Management
-- Create Project <br>
-- Edit Project <br>
-- Close, Cancel or Delete Projects <br>
+- Create Project
+- Edit Project
+- Delete Projects
 
 Epic 6: Reporting
-- Add Reporting <br>
+- Add Reporting
  
 ### User Journeys
 
-As a lightweight issue tracking program, my goal was to make each user journey as simple as possible with the fewest steps, whilst still providing value and flexibility of working method. There are therefore five basic user journeys: 
+As a lightweight issue tracking program, my goal was to make each user journey as simple as possible with the fewest steps, whilst still providing value and flexibility of working method. There are ten core user journeys. The below is not an exhaustive list of all possible user journeys, just the most important ones:
 
 1. New User
 ```mermaid
@@ -106,9 +106,10 @@ flowchart LR
 2. Create an Issue
 ```mermaid
 flowchart LR
-    A[Log In] --> B[Click 'Create New Issue' button]
-    B --> C[Fill in New Issue form]
-    C --> D[Click 'Submit New Issue' button]
+    A[Log In] --> B[Click '+'\n button]
+    B --> |New Item \nPopup|C[Click 'Issue'\n button]
+    C --> D[Fill in New\n Issue form]
+    D --> E[Click 'Submit \nNew Issue' button]
 ```
 
 3. Browse Issues
@@ -124,20 +125,65 @@ flowchart TD
     H --> I[Select status in dropdown]
     E --> J[Scroll through issues\n and click through pages]
 ```
-4. Close an Issue
+4. Edit an Issue
+```mermaid
+flowchart LR
+    A[Log In] --> B[Navigate to an issue as per \n 'Browse Issues' user journey]
+    B --> C[Click\n 'Edit Issue']
+    C --> D[Amend details\n or add a comment]
+    D --> E[Click\n 'Save Issue']
+```
+
+5. Close, Cancel or Delete an Issue
 ```mermaid
 flowchart LR
     A[Log In] --> B[Navigate to an issue as per\n 'Browse Issues' user journey]
     B --> C[Set status to 'Closed'\n or 'Cancelled']
+    B --> E[Click 'Delete Issue']
+    E --> F[Confirm deletion]
     C --> D[Click 'Save Changes']
 ```
-5. Generate Reports
+6. Create a Project
+```mermaid
+flowchart LR
+    A[Log In] --> B[Click '+'\n button]
+    B --> |New Item \nPopup|C[Click 'Project'\n button]
+    C --> D[Fill in New\n Project form]
+    D --> E[Click 'Create \nNew Project' button]
+```
+
+7. Browse Projects
+```mermaid
+flowchart LR
+    A[Log In] --> B[Click 'Projects' in\n the navigation bar]
+    B --> C[Scroll through projects\n and click through pages]
+```
+
+8. Edit a Project
+```mermaid
+flowchart LR
+    A[Log In] --> B[Navigate to a project as per\n 'Browse Projects' user journey]
+    B --> C[Click 'Edit\n Project' button]
+    C --> D[Amend\n details]
+    D --> E[Click\n 'Save Project']
+```
+
+9. Delete a Project
+```mermaid
+flowchart LR
+    A[Log In] --> B[Navigate to a project as per\n 'Browse Projects' user journey]
+    B --> C[Click 'Delete\n Project' button]
+    C --> D[Confirm deletion]
+```
+
+10. Generate Reports
 ```mermaid
 flowchart LR
     A[Log In] --> B[Click on 'Reports' in\nthe navigation bar]
     B --> C[Click on one of the\n available report buttons]
     C --> D[Adjust settings as needed\n with dropdowns provided]
 ```
+
 ### User Permissions
 
 There are four types of user, each with different permissions.
@@ -183,6 +229,9 @@ The wireframes I created illustrate the core user interface and functionality of
 
 ![individualissue](documentation/individualissue.png)
 
+#### Issue Change History
+
+![changehistory](documentation/changehistory.png)
 
 #### New Issue
 
@@ -197,6 +246,13 @@ The wireframes I created illustrate the core user interface and functionality of
 
 ![individualproject](documentation/individualproject.png)
 
+#### New Project
+
+![newproject](documentation/newproject.png)
+
+#### Edit Project
+
+![editproject](documentation/editproject.png)
 
 #### Reports
 
@@ -212,31 +268,43 @@ The wireframes I created illustrate the core user interface and functionality of
 
 ![notificationmodal](documentation/notificationmodal.png)
 
+#### 404 Page
+
+![404page](documentation/404page.png)
+
 ### Mobile Wireframes
 
 | Sign Up | Log In |
 |---|---|
 |![signupmobile](documentation/signupmobile.png) | ![loginmobile](documentation/loginmobile.png) |
 
-| All Issues |
-|---|
-|![loggedinmobile](documentation/loggedinmobile.png)|
-
-|Individual Issue | New Issue |
+| All Issues | Individual Issue  |
 |---|---|
-| ![individualissuemobile](documentation/individualissuemobile.png) | ![newissuemobile](documentation/newissuemobile.png) |
+|![loggedinmobile](documentation/loggedinmobile.png)| ![individualissuemobile](documentation/individualissuemobile.png)|
+
+|Issue Change History| New Issue |
+|---|---|
+|![changehistorymobile](documentation/changehistorymobile.png) | ![newissuemobile](documentation/newissuemobile.png) |
 
 | Projects | Individual Projects |
 |---|---|
 |![projectsmobile](documentation/projectsmobile.png) | ![individualprojectmobile](documentation/individualprojectmobile.png) |
 
+| New Project | Edit Project |
+|---|---|
+|![newprojectmobile](documentation/newprojectmobile.png) | ![editprojectmobile](documentation/editprojectmobile.png) |
+
 | Reports |
 |---|
-| ![reportsmobile](documentation/reportsmobile.png) |
+| ![reportsmobile](documentation/reportsmobile.png) | 
 
-|User Profile | Notifications |
+| User Profile | Notifications |
 |---|---|
-| ![userprofilemobile](documentation/userprofilemobile.png) | ![notificationmobile](documentation/notificationsmobile.png) |
+|![userprofilemobile](documentation/userprofilemobile.png)| ![notificationmobile](documentation/notificationsmobile.png) |
+
+| 404 Page |
+|---|
+| ![404pagemobile](documentation/404pagemobile.png) |
 
 ### Colour Scheme 
 
@@ -373,7 +441,7 @@ These are the steps I took to set up my infrastructure and deploy my app:
 ## Agile Methodology
 I set this project up in GitHub projects using agile methodology. This facilitated my prioritisation and time management. I added all the user stories as issues and then divided them into 'MVP'(Minimum Viable Product) and 'Future Enhancements' to signify what I intend to complete for my assessed project and what could come later. Those MVP stories were then stack-ranked. I added three one-week sprints to the project and filled my first sprint with my intended work according to the MoSCoW prioritisation system. 
 
-### Sprint One: 03/06 to 09/06
+### Sprint One: 10/06 to 16/06
 ![Sprint One](documentation/sprint1.png)
 
 #### Sprint Planning
@@ -382,9 +450,14 @@ Sprint planning involved taking the highest priority issues from the top of the 
 #### Sprint Retrospective
 - Placeholder 
 
-### Sprint Two: 10/06 to 16/06
+### Sprint Two: 17/06 to 23/06
 
-### Sprint Three: 17/06 to 23/06
+### Sprint Three: 24/06 to 30/06
+
+### Future Development
+Likely to be, at a minimum:
+- Connect 2+ Issues as Related
+- Search for Issues by Keyword
 
 ## Credits
 
