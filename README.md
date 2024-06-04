@@ -203,9 +203,123 @@ Each user *must* be assigned a role-based type and *may* also be assigned the su
 
 ### Database Schema 
 
+The following Entity Relationship Diagram (ERD) illustrates the key entities and relationships in Hitch Hound. It defines the relationships between Issues and all other entities.
+
+```mermaid
+erDiagram
+    USER }|--o{ ISSUE : raises
+    USER {
+        integer userID PK
+        string firstName
+        string lastName
+        string emailAddress
+        string password
+        enum role
+        boolean superuser
+    }
+    PROJECT ||--o{ ISSUE : contains
+    ISSUE { 
+        integer issueID PK
+        string title
+        string description
+        enum severity
+        string project FK "title from PROJECT"
+        enum type
+        enum status
+        integer reporter FK "userID from USER"
+        integer developer FK "userID from USER"
+        integer qualityAssurance FK "userID from USER"
+        integer productManager FK "userID from USER"
+    }
+    PROJECT {
+        string title PK
+    }
+    ISSUE ||--o{ COMMENT : contains
+    COMMENT {
+        integer commentID PK
+        string commentText
+        integer userID FK "userID from USER"
+        integer issueID FK "issueID from ISSUE"
+        timestamp commentTimestamp
+    }
+    ISSUE ||--o{ CHANGE : has
+    CHANGE {
+        integer changeID PK
+        integer issueID FK "issueID from ISSUE"
+        integer userID FK "userID from USER"
+        timestamp changeTimestamp
+        enum fieldChanged
+        string oldValue
+        string newValue
+    }
+```
+
 ### Data Manipulation
 
+Hitch Hound uses CRUD principles to guide all data manipulation. 
+
+#### Issues
+- Create: report a new issue, filling in all mandatory fields.
+- Read: retrieve an issue by project, issues page, reports or user profile.
+- Update: edit an issue's fields or add a new comment. 
+- Delete: delete an issue.
+
+#### Projects
+- Create: start a new project, filling in the title. 
+- Read: retrieve a project via the projects page.
+- Update: change the title of a project. 
+<br>
+- Deletion of 'Projects is not allowed in order to retain accurate records and protect data integrity.
+
+#### Other Data
+
+- The 'Change' entity type is a type of metadata created after an 'Issue' entity is updated in any way. It is not possible to update or delete a 'Change' entity.
+- The 'Comment' entity type is simply one of the updates to the 'Issue' entity type.
+
 ### Data Validation
+
+The following data validation rules ensure the accuracy and reliability of information stored in the system, ensuring all entries adhere to expected formats.
+
+#### Users
+- userID: Must be a unique integer
+- firstName: Must be non-empty string 
+- lastName: Must be non-empty string
+- emailAddress: Must be a valid email format and unique within the system
+- password: Must meet complexity requirements (e.g., minimum length, inclusion of special characters)
+- role: Must be one of the predefined roles (developer, quality assurance or product manager)
+- superuser: Must be a boolean value
+
+#### Projects
+- title: Must be a unique, non-empty string
+
+#### Issues
+- issueID: Must be a unique integer
+- title: Must be a non-empty string
+- description: Must be a string, can be empty
+- severity: Must be one of the predefined levels (4-low, 3-medium, 2-high, 1-critical)
+- project: Must reference a valid project title
+- type: Must be one of the predefined types (bug, missed requirement or other issue)
+- status: Must be one of the predefined statuses (open, in progress, testing, approved, closed or cancelled)
+- reporter: Must reference valid userID
+- developer: Must reference valid userID
+- qualityAssurance: Must reference valid userID
+- productManager: Must reference valid userID
+
+#### Comments
+- commentID: Must be a unique integer
+- commentText: Must be a non-empty string
+- userID: Must reference a valid userID
+- issueID: Must reference a valid issueID
+- commentTimestamp: Must be a valid timestamp
+
+#### Changes
+- changeID: Must be a unique integer
+- issueID: Must reference a valid issueID
+- userID: Must reference a valid userID
+- changeTimestamp: Must be a valid timestamp
+- fieldChanged: Must be one of the predefined types (all 'Issue' attributes apart from IssueID).
+- oldValue: Must be a string, can be empty.
+- newValue: Must be a string, can be empty.
 
 ## User Interface Design
 
