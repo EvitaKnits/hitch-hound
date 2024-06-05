@@ -19,6 +19,8 @@ from django.urls import path
 from issues import views as issues_views
 from users import views as users_views
 from projects import views as project_views
+from notifications import views as notification_views
+from reporting import views as reporting_views
 
 urlpatterns = [
     path('login/', users_views.user_login, name='login'),
@@ -31,5 +33,9 @@ urlpatterns = [
     path('projects/', project_views.list_projects, name='projects'),
     path('newproject/', project_views.new_project, name='newproject'),
     path('editproject/', project_views.edit_project, name='editproject'),
+    path('notfound/', notification_views.not_found, name='notfound' ),
+    path('notifications/', notification_views.list_notifications, name='notifications'),
+    path('changehistory/', notification_views.change_history, name='changehistory'),
+    path('reports/', reporting_views.list_reports, name='reports'),
     path('admin/', admin.site.urls),
 ]
