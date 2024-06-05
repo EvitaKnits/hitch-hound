@@ -60,6 +60,7 @@ The security features cover the essentials: authentication with a username and p
 My user stories can be seen in full in the associated GitHub Project on my repo. This is where all the details, including tasks and acceptance criteria can be seen. These user stories have been assigned to Epics.
 
 Epic 1: User Management
+- Create basic front-end
 - User Registration 
 - User Login and Logout
 - Password Reset
@@ -559,7 +560,7 @@ I set this project up in GitHub projects using agile methodology. This facilitat
 ![Sprint One](documentation/sprint1.png)
 
 #### Sprint Planning
-Sprint planning involved taking the highest priority issues from the top of the stack and assigning them to the first sprint. I marked the first two as 'Must Have' for this sprint, the next one 'Should Have' and the last two 'Could Have'. This gave me a breakdown of 40% for must, 20% for should and 40% for could. If I achieve all of these user stories in the first sprint, I will have completed my first epic: User Management.
+Sprint planning involved taking the highest priority issues from the top of the stack and assigning them to the first sprint. I marked the first three as 'Must Have' for this sprint, the next one 'Should Have' and the last two 'Could Have'. This gave me a breakdown of 50% for must, 16.6% for should and 33.4% for could. If I achieve all of these user stories in the first sprint, I will have completed my first epic: User Management.
 
 #### Sprint Retrospective
 - Placeholder 

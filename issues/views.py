@@ -3,5 +3,5 @@ from django.http import HttpResponse
 
 # Create your views here.
 
-def my_issues(request):
+def general_issues(request):
     return HttpResponse("Hello, Issues!")

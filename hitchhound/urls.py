@@ -17,8 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from issues import views as issues_views
+from users import views as users_views
 
 urlpatterns = [
-    path('issues/', issues_views.my_issues, name='issues'),
+    path('login/', users_views.user_login, name='login'),
+    path('signup/', users_views.user_signup, name='signup'),
+    path('reset/', users_views.password_reset, name='reset'),
+    path('profile/', users_views.user_profile, name='profile'),
+    path('issues/', issues_views.general_issues, name='issues'),
     path('admin/', admin.site.urls),
 ]
