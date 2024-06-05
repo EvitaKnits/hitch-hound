@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from issues import views as issues_views
 from users import views as users_views
+from projects import views as project_views
 
 urlpatterns = [
     path('login/', users_views.user_login, name='login'),
@@ -27,5 +28,8 @@ urlpatterns = [
     path('issues/', issues_views.list_issues, name='issues'),
     path('newissue/', issues_views.create_issue, name='newissue'),
     path('editissue/', issues_views.edit_issue, name='editissue'),
+    path('projects/', project_views.list_projects, name='projects'),
+    path('newproject/', project_views.new_project, name='newproject'),
+    path('editproject/', project_views.edit_project, name='editproject'),
     path('admin/', admin.site.urls),
 ]
