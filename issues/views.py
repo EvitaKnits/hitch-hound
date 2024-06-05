@@ -4,7 +4,7 @@ from django.http import HttpResponse
 # Create your views here.
 
 def list_issues(request):
-    return HttpResponse("Hello, Issues!")
+    return render(request, 'issues.html')
 
 def create_issue(request):
     return HttpResponse("This is the create a new issue page")

@@ -23,11 +23,11 @@ from notifications import views as notification_views
 from reporting import views as reporting_views
 
 urlpatterns = [
+    path('', issues_views.list_issues, name='issues'),
     path('login/', users_views.user_login, name='login'),
     path('signup/', users_views.user_signup, name='signup'),
     path('reset/', users_views.password_reset, name='reset'),
     path('profile/', users_views.user_profile, name='profile'),
-    path('issues/', issues_views.list_issues, name='issues'),
     path('newissue/', issues_views.create_issue, name='newissue'),
     path('editissue/', issues_views.edit_issue, name='editissue'),
     path('projects/', project_views.list_projects, name='projects'),
