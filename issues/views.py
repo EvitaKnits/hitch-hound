@@ -4,10 +4,10 @@ from django.http import HttpResponse
 # Create your views here.
 
 def list_issues(request):
-    return render(request, 'issues.html')
+    return render(request, 'issues.html', {'active_page': 'issues'})
 
 def create_issue(request):
-    return HttpResponse("This is the create a new issue page")
+    return render(request, 'newissue.html', {'active_page': 'issues'})
 
 def edit_issue(request):
-    return HttpResponse("This is the edit issue page")
+    return render(request, 'editissue.html', {'active_page': 'issues'})

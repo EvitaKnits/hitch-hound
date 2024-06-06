@@ -23,8 +23,9 @@ from notifications import views as notification_views
 from reporting import views as reporting_views
 
 urlpatterns = [
-    path('', issues_views.list_issues, name='issues'),
+    path('issues', issues_views.list_issues, name='issues'),
     path('login/', users_views.user_login, name='login'),
+    path('logout/', users_views.user_logout, name='logout'),
     path('signup/', users_views.user_signup, name='signup'),
     path('reset/', users_views.password_reset, name='reset'),
     path('profile/', users_views.user_profile, name='profile'),

@@ -4,10 +4,10 @@ from django.http import HttpResponse
 # Create your views here.
 
 def not_found(request):
-    return HttpResponse("This is the 404 page")
+    return render(request, 'notfound.html')
 
 def list_notifications(request):
-    return HttpResponse("This is the notification list page")
+    return render(request, 'notifications.html')
 
 def change_history(request):
-    return HttpResponse("This is the change history page")
+    return render(request, 'changehistory.html')

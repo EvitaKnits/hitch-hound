@@ -4,4 +4,4 @@ from django.http import HttpResponse
 # Create your views here.
 
 def list_reports(request):
-    return HttpResponse("This is the report list page")
+    return render(request, 'reports.html', {'active_page': 'reports'})

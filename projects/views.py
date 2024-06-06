@@ -4,10 +4,10 @@ from django.http import HttpResponse
 # Create your views here.
 
 def list_projects(request):
-    return HttpResponse("This is the project list page")
+    return render(request, 'projects.html', {'active_page': 'projects'})
 
 def new_project(request):
-    return HttpResponse("This is the create a new project page")
+    return render(request, 'newproject.html', {'active_page': 'projects'})
 
 def edit_project(request):
-    return HttpResponse("This is the edit project page")
+    return render(request, 'editproject.html', {'active_page': 'projects'})

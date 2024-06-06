@@ -46,7 +46,7 @@ nav li i {
 }
 
 .nav-item.active .nav-link {
-    border-bottom: 2px groove #86B3A6;
+    border-bottom: 3px groove #86B3A6;
 }
 
 /* MEDIA QUERIES */
