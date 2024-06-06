@@ -1,0 +1,70 @@
+/* GENERAL STYLES */
+
+h1 {
+    font-family: 'Signika Negative', sans-serif;
+    color: #414644;
+}
+
+p {
+    font-family: 'Raleway', sans-serif;
+}
+
+body {
+    background-color: #B5D1C8;
+}
+
+/* HEADER */
+
+.navbar {
+    background-color: #F6F9F8;
+}
+
+#second-nav {
+    background-color: #86B3A6;
+}
+
+.nav-item {
+    padding: 0.5rem;
+}
+
+nav i {
+    color: #508072;
+    font-size: 3.5rem;
+}
+
+nav h1 {
+    font-size: 3rem;
+}
+
+nav li {
+    font-size: 1.5rem;
+}
+
+nav li i {
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.nav-item.active .nav-link {
+    border-bottom: 3px groove #86B3A6;
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 436px) {
+    .navbar-brand h1 {
+        font-size: 2rem;
+    }
+    .navbar-brand i {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 350px) {
+    .navbar-brand h1 {
+        font-size: 1.8rem;
+    }
+    .navbar-brand i {
+        font-size: 1.8rem;
+    }
+}
