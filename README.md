@@ -206,54 +206,7 @@ Each user *must* be assigned a role-based type and *may* also be assigned the su
 
 The following Entity Relationship Diagram (ERD) illustrates the key entities and relationships in Hitch Hound. It defines the relationships between Issues and all other entities.
 
-```mermaid
-erDiagram
-    USER }|--o{ ISSUE : raises
-    USER {
-        integer userID PK
-        string firstName
-        string lastName
-        string emailAddress
-        string password
-        enum role
-        boolean superuser
-    }
-    PROJECT ||--o{ ISSUE : contains
-    ISSUE { 
-        integer issueID PK
-        string title
-        string description
-        enum severity
-        string project FK "title from PROJECT"
-        enum type
-        enum status
-        integer reporter FK "userID from USER"
-        integer developer FK "userID from USER"
-        integer qualityAssurance FK "userID from USER"
-        integer productManager FK "userID from USER"
-    }
-    PROJECT {
-        string title PK
-    }
-    ISSUE ||--o{ COMMENT : contains
-    COMMENT {
-        integer commentID PK
-        string commentText
-        integer userID FK "userID from USER"
-        integer issueID FK "issueID from ISSUE"
-        timestamp commentTimestamp
-    }
-    ISSUE ||--o{ CHANGE : has
-    CHANGE {
-        integer changeID PK
-        integer issueID FK "issueID from ISSUE"
-        integer userID FK "userID from USER"
-        timestamp changeTimestamp
-        enum fieldChanged
-        string oldValue
-        string newValue
-    }
-```
+![erd](documentation/erd.png)
 
 ### Data Manipulation
 
