@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-4uxlu@c(b@^3ls37-_jxnmv&(flidccg*z)=6xiwh0kcq45ds#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['8000-evitaknits-hitchhound-69v294c8trk.ws.codeinstitute-ide.net', '.herokuapp.com',]
 
@@ -88,6 +88,10 @@ DATABASES = {
         dj_database_url.parse(os.environ.get("DATABASE_URL"))
     }
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://8000-evitaknits-hitchhound-69v294c8trk.ws.codeinstitute-ide.net",
+    "https://hitchhound-15272de0eee9.herokuapp.com/",  
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -132,3 +136,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users.User'
