@@ -20,7 +20,6 @@ class User(AbstractUser):
         ('product_manager', 'Product Manager'),
     )
     role = models.CharField(max_length=20, null=False, choices=ROLE_CHOICES, default='developer')
-    superuser = models.BooleanField(default=False, null=False)
 
     objects = UserManager() 
 
