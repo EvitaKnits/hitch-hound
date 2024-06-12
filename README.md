@@ -509,18 +509,43 @@ These are the steps I took to set up my infrastructure and deploy my app:
 ## Agile Methodology
 I set this project up in GitHub projects using agile methodology. This facilitated my prioritisation and time management. I added all the user stories as issues and then divided them into 'MVP'(Minimum Viable Product) and 'Future Enhancements' to signify what I intend to complete for my assessed project and what could come later. Those MVP stories were then stack-ranked. I added three one-week sprints to the project and filled my first sprint with my intended work according to the MoSCoW prioritisation system. 
 
-### Sprint One: 10/06 to 16/06
+### Sprint One: 05/06 to 11/06
 ![Sprint One](documentation/sprint1.png)
 
 #### Sprint Planning
 Sprint planning involved taking the highest priority issues from the top of the stack and assigning them to the first sprint. I marked the first three as 'Must Have' for this sprint, the next one 'Should Have' and the last two 'Could Have'. This gave me a breakdown of 50% for must, 16.6% for should and 33.4% for could. If I achieve all of these user stories in the first sprint, I will have completed my first epic: User Management.
 
 #### Sprint Retrospective
-- Placeholder 
 
-### Sprint Two: 17/06 to 23/06
+Sprint Overview: 
+During my initial one-week sprint, I completed the user story for 'Create basic front-end'. This task involved laying much of the foundational work for my project.
 
-### Sprint Three: 24/06 to 30/06
+Achievements: 
+- Successfully created the basic front-end.
+- Established the groundwork for future development.
+
+Progress:
+- Began working on 'User Registration' user story
+- Completed the setup of the database schema and models
+- Integrated the database with the project
+
+Challenges: 
+- Time constraints were more significant than anticipated, affecting my ability to complete all planned tasks
+
+Action Items for Next Sprint: 
+- Improve time estimation, including buffer time for unforeseen challenges
+- Aim to complete the first epic
+
+### Sprint Two: 12/06 to 18/06
+![Sprint Two](documentation/sprint2.png)
+
+#### Sprint Planning
+For the second sprint, I carried over the same stories I had planned for the first sprint but not finished. I did not include any more because experience has shown me that I am unlikely to get all these stories finished. Therefore only 40% of the stories are must have, 20% should have and 40% could have. With more time this sprint, I should be able to complete the must have stories at a minimum. 
+
+#### Sprint Retrospective
+
+
+### Sprint Three: 19/06 to 25/06
 
 ### Future Development
 Likely to be, at a minimum:
