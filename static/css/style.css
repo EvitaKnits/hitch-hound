@@ -13,8 +13,9 @@ body {
     background-color: #B5D1C8;
 }
 
-.mt-5 {
-    margin-top: 0 !important;
+.form-container {
+    margin-top: 2rem;  
+    margin-bottom: 2rem; 
 }
 
 /* HEADER */
@@ -53,7 +54,7 @@ nav li i {
     border-bottom: 3px groove #86B3A6;
 }
 
-#login {
+#login, #signup {
     text-decoration: underline;
 }
 
