@@ -13,6 +13,10 @@ body {
     background-color: #B5D1C8;
 }
 
+.mt-5 {
+    margin-top: 0 !important;
+}
+
 /* HEADER */
 
 .navbar {
@@ -47,6 +51,21 @@ nav li i {
 
 .nav-item.active .nav-link {
     border-bottom: 3px groove #86B3A6;
+}
+
+#login {
+    text-decoration: underline;
+}
+
+/* FORM STYLING */
+.card {
+    background-color: #F6F9F8;
+    color:#414644;
+}
+
+.btn {
+    background-color: #508072;
+    color:#F6F9F8;
 }
 
 /* MEDIA QUERIES */

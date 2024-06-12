@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'projects',
     'notifications',
     'reporting',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -76,6 +78,8 @@ TEMPLATES = [
         },
     },
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 WSGI_APPLICATION = 'hitchhound.wsgi.application'
 
