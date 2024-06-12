@@ -68,6 +68,16 @@ nav li i {
     color:#F6F9F8;
 }
 
+.btn:hover, .btn:disabled {
+    background-color: #5e726c;
+    border-color: #5e726c;
+}
+
+.btn:active, .btn:focus {
+    background-color: #86B3A6;
+    border-color: #86B3A6;
+}
+
 /* MEDIA QUERIES */
 
 @media (max-width: 436px) {
