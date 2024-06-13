@@ -1,4 +1,8 @@
 /* GENERAL STYLES */
+.btn {
+    --bs-btn-active-bg: #86B3A6;
+    --bs-btn-active-border-color: #86B3A6;
+}
 
 h1 {
     font-family: 'Signika Negative', sans-serif;
@@ -66,17 +70,13 @@ nav li i {
 
 .btn {
     background-color: #508072;
+    border-color: #508072;
     color:#F6F9F8;
 }
 
 .btn:hover, .btn:disabled {
     background-color: #5e726c;
     border-color: #5e726c;
-}
-
-.btn:active, .btn:focus {
-    background-color: #86B3A6;
-    border-color: #86B3A6;
 }
 
 /* MEDIA QUERIES */
