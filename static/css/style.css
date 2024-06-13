@@ -1,9 +1,4 @@
 /* GENERAL STYLES */
-.btn {
-    --bs-btn-active-bg: #86B3A6;
-    --bs-btn-active-border-color: #86B3A6;
-}
-
 h1 {
     font-family: 'Signika Negative', sans-serif;
     color: #414644;
@@ -15,11 +10,6 @@ p {
 
 body {
     background-color: #B5D1C8;
-}
-
-.form-container {
-    margin-top: 2rem;  
-    margin-bottom: 2rem; 
 }
 
 /* HEADER */
@@ -68,7 +58,22 @@ nav li i {
     color:#414644;
 }
 
+form {
+    font-family: 'Raleway', sans-serif;
+}
+
+.form-container {
+    margin-top: 2rem;  
+    margin-bottom: 2rem; 
+}
+
+.card-header {
+    font-family: 'Signika Negative', sans-serif;
+}
+
 .btn {
+    --bs-btn-active-bg: #86B3A6;
+    --bs-btn-active-border-color: #86B3A6;
     background-color: #508072;
     border-color: #508072;
     color:#F6F9F8;
