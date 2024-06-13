@@ -4,12 +4,9 @@ h1 {
     color: #414644;
 }
 
-p {
-    font-family: 'Raleway', sans-serif;
-}
-
 body {
     background-color: #B5D1C8;
+    font-family: 'Raleway', sans-serif;
 }
 
 /* HEADER */
@@ -53,13 +50,9 @@ nav li i {
 }
 
 /* FORM STYLING */
-.card {
+.card, .toast {
     background-color: #F6F9F8;
     color:#414644;
-}
-
-form {
-    font-family: 'Raleway', sans-serif;
 }
 
 .form-container {

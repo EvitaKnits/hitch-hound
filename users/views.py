@@ -29,6 +29,7 @@ def user_signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
+            request.session['registration_success'] = True
             return redirect('home')
     else:
         form = CustomUserCreationForm()

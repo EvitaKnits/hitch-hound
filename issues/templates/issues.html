@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block nav-icons %}
 <li class="nav-item">
     <a class="nav-link" href="#"><i class="fa-solid fa-plus"></i></a>
-  </li>
-  <li class="nav-item">
+</li>
+<li class="nav-item">
     <a class="nav-link" href="{% url 'notifications' %}"><i class="fa-regular fa-bell"></i></a>
-  </li>
+</li>
 {% endblock %}
 
 {% block nav %}
@@ -30,4 +31,22 @@
 {% block content %}
 <h1>All Issues</h1>
 <p>This is the home page where all issues will be shown.</p>
+<!-- Toast -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 11">
+    <div id="registrationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Registration Successful</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            You have successfully registered and are now logged in.
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{% if show_toast %}
+<script src="{% static 'js/toast.js' %}"></script>
+{% endif %}
 {% endblock %}
