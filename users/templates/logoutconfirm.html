@@ -32,10 +32,10 @@
                 </div>
                 <div class="card-body">
                     <h4 class="mb-4">Are you sure you want to log out?</h4>
-                    <form method="post" action="{% url 'logout' %}" class="d-flex justify-content-center">
+                    <form method="post" action="{% url 'logout' %}" class="d-flex justify-content-start">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-danger mx-2">Yes, Log Out</button>
-                        <a href="{% url 'home' %}" class="btn btn-secondary mx-2">No, Cancel</a>
+                        <button type="submit" class="btn btn-danger me-2">Yes, Log Out</button>
+                        <a href="{% url 'home' %}" class="btn btn-secondary">No, Cancel</a>
                     </form>
                 </div>
             </div>
