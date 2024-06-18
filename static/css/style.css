@@ -77,6 +77,11 @@ nav li i {
     border-color: #5e726c;
 }
 
+#forgot {
+    color: #414644;
+    font-size: 90%;
+}
+
 /* MEDIA QUERIES */
 
 @media (max-width: 436px) {

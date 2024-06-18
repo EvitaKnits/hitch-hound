@@ -564,7 +564,8 @@ I referred back to the Code Institute set up videos to remind me how to set up t
 - I manipulated my base colour to figure out my colour palette using [MDigi Tools](https://mdigi.tools/desaturate-color/#508072).
 - I visually represented my colour palette using [Adobe Colour](https://color.adobe.com/create/color-wheel).
 - I sourced my icons from [Font Awesome](https://fontawesome.com/search?q=dog&o=r&m=free)
-- I used [Chat GPT](https://chatgpt.com) to explain error messages and research the best way to go about some of my implementation.
+- I created all my favicons with [Real Favicon Generator](https://realfavicongenerator.net/)
+- I used [Chat GPT](https://chatgpt.com) to explain error messages and research the best way to go about my implementation.
 
 I also used the documentation of all the elements included in this project: 
 - [Django](https://docs.djangoproject.com/en/4.2/)
