@@ -21,15 +21,14 @@ from users import views as users_views
 from projects import views as project_views
 from notifications import views as notification_views
 from reporting import views as reporting_views
-from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', issues_views.list_issues, name='home'),
     path('issues', issues_views.list_issues, name='issues'),
     path('login/', users_views.user_login, name='login'),
-    path('logout/', users_views.user_logout, name='logout'),
+    path('logout/', users_views.user_logout_confirm, name='logoutconfirm'),
     path('signup/', users_views.user_signup, name='signup'),
-    path('reset/', include('django.contrib.auth.urls')),
+    path('password_reset/', users_views.password_reset, name='reset'),
     path('profile/', users_views.user_profile, name='profile'),
     path('newissue/', issues_views.create_issue, name='newissue'),
     path('editissue/', issues_views.edit_issue, name='editissue'),
@@ -41,4 +40,5 @@ urlpatterns = [
     path('changehistory/', notification_views.change_history, name='changehistory'),
     path('reports/', reporting_views.list_reports, name='reports'),
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

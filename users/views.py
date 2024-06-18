@@ -20,8 +20,8 @@ def user_login(request):
     else:
         return render(request, 'login.html')
 
-def user_logout(request):
-    return render(request, 'logout.html', {'active_page': 'logout'})
+def user_logout_confirm(request):
+    return render(request, 'logoutconfirm.html', {'active_page': 'logout'})
 
 def user_signup(request):
     if request.method == 'POST':

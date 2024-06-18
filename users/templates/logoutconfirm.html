@@ -17,11 +17,29 @@
     <a class="nav-link" href="{% url 'profile' %}">Profile{% if active_page == 'profile' %}<span class="sr-only">(current)</span>{% endif %}</a>
 </li>
 <li class="nav-item {% if active_page == 'logout' %}active{% endif %}">
-    <a class="nav-link" href="{% url 'logout' %}">Logout{% if active_page == 'logout' %}<span class="sr-only">(current)</span>{% endif %}</a>
+    <a class="nav-link" href="{% url 'logoutconfirm' %}">Logout{% if active_page == 'logout' %}<span class="sr-only">(current)</span>{% endif %}</a>
 </li>
 {% endblock %}
 
+
 {% block content %}
-<h1>Logout</h1>
-<p>This is the logout page.</p>
+<div class="container">
+    <div class="row justify-content-center my-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Logout</h2>
+                </div>
+                <div class="card-body">
+                    <h4 class="mb-4">Are you sure you want to log out?</h4>
+                    <form method="post" action="{% url 'logout' %}" class="d-flex justify-content-center">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger mx-2">Yes, Log Out</button>
+                        <a href="{% url 'home' %}" class="btn btn-secondary mx-2">No, Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

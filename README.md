@@ -566,6 +566,7 @@ I referred back to the Code Institute set up videos to remind me how to set up t
 - I sourced my icons from [Font Awesome](https://fontawesome.com/search?q=dog&o=r&m=free)
 - I created all my favicons with [Real Favicon Generator](https://realfavicongenerator.net/)
 - I used [Chat GPT](https://chatgpt.com) to explain error messages and research the best way to go about my implementation.
+- I used [Learn Django](https://learndjango.com/tutorials/django-login-and-logout-tutorial) to help me set up login/logout etc.
 
 I also used the documentation of all the elements included in this project: 
 - [Django](https://docs.djangoproject.com/en/4.2/)

@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-{% block nav-icons %}
-{% endblock %}
-
 {% block nav %}
 <li class="nav-item">
     <a class="nav-link" href="{% url 'signup' %}">Not registered? <span id="signup">Register</span></a>
@@ -19,13 +16,6 @@
                     <h2>Login</h2>
                 </div>
                 <div class="card-body">
-                    {% if messages %}
-                        {% for message in messages %}
-                            <div class="alert alert-warning" role="alert">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
                     <form method="post" action="{% url 'login' %}">
                         {% csrf_token %}
                         <div class="form-group">
