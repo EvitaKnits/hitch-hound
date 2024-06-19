@@ -565,6 +565,7 @@ Action Items for Next Sprint:
 For the third sprint, I carried over one story and put back another story, towards the bottom of the backlog as I realised I would not be able to sort out all the permissions until I had the bulk of the reset of the development complete. 50% of my stories for sprint 3 are must have, 25% should have and 25% could have. If I manage to complete these, I can always pull in some more stories. 
 
 #### Sprint Retrospective
+I realised after the sprint had begun, that I needed a user story for creating the user profile page. I'd missed it when initially writing up my user stories. This has a list of issues assigned to the user on it however, so needs to be done later on in the project. I created it and put it further down the backlog. 
 
 
 ### Future Development
