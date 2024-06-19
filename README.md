@@ -543,9 +543,29 @@ Action Items for Next Sprint:
 For the second sprint, I carried over the same stories I had planned for the first sprint but not finished. I did not include any more because experience has shown me that I am unlikely to get all these stories finished. Therefore only 40% of the stories are must have, 20% should have and 40% could have. With more time this sprint, I should be able to complete the must have stories at a minimum. 
 
 #### Sprint Retrospective
+Achievements: 
+- Successfully created the user registration, login and logout.
+
+Progress:
+- Began working on 'Password Reset' user story
+- Continued learning about Django and how to set up different elements
+
+Challenges: 
+- Configuration was not as straightforward as I hoped, so there were a couple of times it felt like 2 steps forward, 1 step back. 
+
+Action Items for Next Sprint: 
+- Complete the first epic. Just half a user story left.
+- Make a good dent in Epic 2: Issue Management.
 
 
 ### Sprint Three: 19/06 to 25/06
+![Sprint Three](documentation/sprint3.png)
+
+#### Sprint Planning
+For the third sprint, I carried over one story and put back another story, towards the bottom of the backlog as I realised I would not be able to sort out all the permissions until I had the bulk of the reset of the development complete. 50% of my stories for sprint 3 are must have, 25% should have and 25% could have. If I manage to complete these, I can always pull in some more stories. 
+
+#### Sprint Retrospective
+
 
 ### Future Development
 Likely to be, at a minimum:
