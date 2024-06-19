@@ -21,7 +21,7 @@ def create_issue(request):
             issue = form.save(commit=False)
             issue.reporter = request.user
             issue.save()
-            return redirect('issue_list')  # Redirect to a list view of issues or any other appropriate view
+            return redirect('issues')  
     else:
         form = IssueForm()
     
