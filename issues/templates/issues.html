@@ -53,12 +53,42 @@
     <table class="table table-hover table-bordered">
         <thead>
             <tr class="table-secondary">
-                <th scope="col">Issue ID</th>
-                <th scope="col">Title</th>
-                <th scope="col">Severity</th>
-                <th scope="col" class="d-none d-md-table-cell">Type</th>
-                <th scope="col" class="d-none d-md-table-cell">Project</th>
-                <th scope="col" class="d-none d-md-table-cell">Status</th>
+                <th scope="col">
+                    <a href="?sort_by=issue_id&order={{ toggle_order }}" class="text-dark text-decoration-none">
+                        Issue ID
+                        <i class="fa {% if sort_by == 'issue_id' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                    </a>
+                </th>
+                <th scope="col">
+                    <a href="?sort_by=title&order={{ toggle_order }}" class="text-dark text-decoration-none">
+                        Title
+                        <i class="fa {% if sort_by == 'title' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                    </a>
+                </th>
+                <th scope="col">
+                    <a href="?sort_by=severity&order={{ toggle_order }}" class="text-dark text-decoration-none">
+                        Severity
+                        <i class="fa {% if sort_by == 'severity' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                    </a>
+                </th>
+                <th scope="col" class="d-none d-md-table-cell">
+                    <a href="?sort_by=type&order={{ toggle_order }}" class="text-dark text-decoration-none">
+                        Type
+                        <i class="fa {% if sort_by == 'type' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                    </a>
+                </th>
+                <th scope="col" class="d-none d-md-table-cell">
+                    <a href="?sort_by=project_title&order={{ toggle_order }}" class="text-dark text-decoration-none">
+                        Project
+                        <i class="fa {% if sort_by == 'project_title' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                    </a>
+                </th>
+                <th scope="col" class="d-none d-md-table-cell">
+                    <a href="?sort_by=status&order={{ toggle_order }}" class="text-dark text-decoration-none">
+                        Status
+                        <i class="fa {% if sort_by == 'status' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                    </a>
+                </th>
             </tr>
         </thead>
         <tbody>
