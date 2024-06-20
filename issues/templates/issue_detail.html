@@ -72,4 +72,6 @@
         <td>{{ issue.product_manager }}</td>
     </tr>
 </table>
+
+<a href="{% url 'edit_issue' issue.issue_id %}" class="btn btn-primary">Edit Issue</a>
 {% endblock %}

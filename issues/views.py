@@ -45,5 +45,13 @@ def create_issue(request):
     
     return render(request, 'create_issue.html', {'form': form})
 
-def edit_issue(request):
-    return render(request, 'editissue.html', {'active_page': 'issues'})
+def edit_issue(request, issue_id):
+    issue = get_object_or_404(Issue, pk=issue_id)
+    if request.method == 'POST':
+        form = IssueForm(request.POST, instance=issue)
+        if form.is_valid():
+            form.save()
+            return redirect('issue_detail', issue_id=issue.issue_id)
+    else:
+        form = IssueForm(instance=issue)
+    return render(request, 'edit_issue.html', {'form': form, 'issue': issue})
