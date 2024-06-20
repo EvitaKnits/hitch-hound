@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from issues.forms import IssueForm
@@ -26,6 +26,10 @@ def list_issues(request):
     }
     
     return render(request, 'issues.html', context)
+
+def issue_detail(request, issue_id):
+    issue = get_object_or_404(Issue, pk=issue_id)
+    return render(request, 'issue_detail.html', {'issue': issue})
 
 # @login_required - uncomment this at the end if I want to restrict to logged in users only. 
 def create_issue(request):

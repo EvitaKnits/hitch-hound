@@ -34,6 +34,7 @@ urlpatterns = [
     path('reset/done/', users_views.password_reset_complete, name='password_reset_complete'),
     path('profile/', users_views.user_profile, name='profile'),
     path('newissue/', issues_views.create_issue, name='newissue'),
+    path('issues/<int:issue_id>/', issues_views.issue_detail, name='issue_detail'),
     path('editissue/', issues_views.edit_issue, name='editissue'),
     path('projects/', project_views.list_projects, name='projects'),
     path('newproject/', project_views.new_project, name='newproject'),
