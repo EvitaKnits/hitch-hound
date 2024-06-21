@@ -1,8 +1,5 @@
 {% extends 'base.html' %}
 
-{% block nav-icons %}
-{% endblock %}
-
 {% block nav %}
 <li class="nav-item {% if active_page == 'issues' %}active{% endif %}">
     <a class="nav-link" href="{% url 'issues' %}">Issues{% if active_page == 'issues' %}<span class="sr-only">(current)</span>{% endif %}</a>
