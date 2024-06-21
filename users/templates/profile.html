@@ -12,25 +12,21 @@
 {% endblock %}
 
 {% block nav %}
-<li class="nav-item {% if active_page == 'issues' %}active{% endif %}">
-    <a class="nav-link" href="{% url 'issues' %}">Issues{% if active_page == 'issues' %}<span
-            class="sr-only">(current)</span>{% endif %}</a>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'issues' %}">Issues</a>
 </li>
-<li class="nav-item {% if active_page == 'projects' %}active{% endif %}">
-    <a class="nav-link" href="{% url 'projects' %}">Projects{% if active_page == 'projects' %}<span
-            class="sr-only">(current)</span>{% endif %}</a>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'projects' %}">Projects</a>
 </li>
-<li class="nav-item {% if active_page == 'reports' %}active{% endif %}">
-    <a class="nav-link" href="{% url 'reports' %}">Reports{% if active_page == 'reports' %}<span
-            class="sr-only">(current)</span>{% endif %}</a>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'reports' %}">Reports</a>
 </li>
-<li class="nav-item {% if active_page == 'profile' %}active{% endif %}">
-    <a class="nav-link" href="{% url 'profile' %}">Profile{% if active_page == 'profile' %}<span
-            class="sr-only">(current)</span>{% endif %}</a>
+<li class="nav-item active">
+    <a class="nav-link" href="{% url 'profile' %}">Profile<span
+        class="sr-only">(current)</span></a>
 </li>
-<li class="nav-item {% if active_page == 'logout' %}active{% endif %}">
-    <a class="nav-link" href="{% url 'logoutconfirm' %}">Logout{% if active_page == 'logout' %}<span
-            class="sr-only">(current)</span>{% endif %}</a>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'logoutconfirm' %}">Logout</a>
 </li>
 {% endblock %}
 
