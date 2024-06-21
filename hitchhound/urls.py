@@ -37,6 +37,7 @@ urlpatterns = [
     path('issues/<int:issue_id>/', issues_views.issue_detail, name='issue_detail'),
     path('issues/<int:issue_id>/edit/', issues_views.edit_issue, name='edit_issue'),
     path('projects/', project_views.list_projects, name='projects'),
+    path('projects/<str:project_title>/issues/', project_views.view_all_issues, name='view_all_issues'),
     path('create_project/', project_views.create_project, name='create_project'),
     path('edit_project/', project_views.edit_project, name='edit_project'),
     path('not_found/', notification_views.not_found, name='not_found' ),

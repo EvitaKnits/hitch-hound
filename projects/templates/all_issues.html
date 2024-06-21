@@ -6,8 +6,7 @@
     <button class="btn btn-primary nav-icons" id="openModalBtn"><i class="fa-solid fa-plus"></i></button>
 </li>
 <li class="nav-item">
-    <button class="btn btn-primary nav-icons" href="{% url 'notifications' %}"><i
-            class="fa-regular fa-bell"></i></button>
+    <button class="btn btn-primary nav-icons" href="{% url 'notifications' %}"><i class="fa-regular fa-bell"></i></button>
 </li>
 {% endblock %}
 
@@ -16,7 +15,7 @@
     <a class="nav-link" href="{% url 'issues' %}">Issues</a>
 </li>
 <li class="nav-item active">
-    <a class="nav-link" href="{% url 'projects' %}">Projects<span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'projects' %}">Projects</a>
 </li>
 <li class="nav-item">
     <a class="nav-link" href="{% url 'reports' %}">Reports</a>
@@ -30,10 +29,8 @@
 {% endblock %}
 
 {% block content %}
-<h1>Latest Issues by Project</h1>
+<h1>All Issues for: {{ project.title }}</h1>
 
-{% for project in projects %}
-<h2 class="project-title">{{ project.title }}</h2>
 <div class="table-responsive">
     <table class="table table-hover table-bordered">
         <thead>
@@ -46,9 +43,8 @@
             </tr>
         </thead>
         <tbody>
-            {% for issue in project.latest_issues %}
-            <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.issue_id %}'"
-                style="cursor: pointer;">
+            {% for issue in issues %}
+            <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.issue_id %}'" style="cursor: pointer;">
                 <td class="col-2">#{{ issue.issue_id }}</td>
                 <td class="col-4">{{ issue.title|truncatechars:50 }}</td>
                 <td class="col-2">{{ issue.severity }}</td>
@@ -63,10 +59,6 @@
         </tbody>
     </table>
 </div>
-<div class="mb-4">
-    <a href="{% url 'view_all_issues' project.title %}" class="btn btn-primary">View All Issues</a>
-</div>
-{% endfor %}
 
 <!-- Modal -->
 <div class="modal-custom" id="myModal">
@@ -83,8 +75,8 @@
 
 {% block extra_js %}
 <script>
-    const createIssueUrl = "{% url 'create_issue' %}"
-    const createProjectUrl = "{% url 'create_project' %}"
+    const createIssueUrl = "{% url 'create_issue' %}";
+    const createProjectUrl = "{% url 'create_project' %}";
 </script>
 <script src="{% static 'js/modal.js' %}"></script>
 {% endblock %}
