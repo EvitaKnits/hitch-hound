@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from issues.forms import IssueForm
 from issues.models import Issue
 from projects.models import Project
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -13,7 +14,7 @@ def list_issues(request):
     sort_by = request.GET.get('sort_by', 'title')
     order = request.GET.get('order', 'asc')
     project_id = request.GET.get('project_id')
-
+    
     if project_id:
         project = get_object_or_404(Project, id=project_id)
         issues = Issue.objects.filter(project_title=project)
@@ -25,13 +26,18 @@ def list_issues(request):
 
     issues = issues.order_by(sort_by)
 
+    # Pagination
+    paginator = Paginator(issues, 12)  # 12 issues per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     def toggle_order(current_order):
         return 'asc' if current_order == 'desc' else 'desc'
 
     context = {
         'active_page': 'issues',
         'show_toast': show_toast,
-        'issues': issues,
+        'page_obj': page_obj,  # Use page_obj instead of issues
         'project': project if project_id else None,
         'sort_by': sort_by.strip('-'),
         'order': order,
