@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block nav-icons %}
 <li class="nav-item">
-    <a class="nav-link" href="#"><i class="fa-solid fa-plus"></i></a>
+    <button class="btn btn-primary nav-icons" id="openModalBtn"><i class="fa-solid fa-plus"></i></button>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="{% url 'notifications' %}"><i class="fa-regular fa-bell"></i></a>
+    <button class="btn btn-primary nav-icons" href="{% url 'notifications' %}"><i
+            class="fa-regular fa-bell"></i></button>
 </li>
 {% endblock %}
 
@@ -35,4 +37,24 @@
 {% block content %}
 <h1>New Project</h1>
 <p>This is the new project page.</p>
+
+<!-- Modal -->
+<div class="modal-custom" id="myModal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h5 class="modal-title mb-4">Would you like to create a new issue or new project?</h5>
+        <div class="modal-buttons">
+            <button id="createIssueBtn" class="btn btn-outline-primary">New Issue</button>
+            <button id="createProjectBtn" class="btn btn-outline-success">New Project</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const createIssueUrl = "{% url 'create_issue' %}"
+    const createProjectUrl = "{% url 'create_project' %}"
+</script>
+<script src="{% static 'js/modal.js' %}"></script>
 {% endblock %}
