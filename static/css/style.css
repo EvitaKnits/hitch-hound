@@ -145,6 +145,12 @@ nav li i {
     background-color: #B5D1C8;
 }
 
+/* PROJECT STYLING */
+
+.project-title {
+    margin-top: 2rem;
+}
+
 /* MEDIA QUERIES */
 
 @media (max-width: 436px) {

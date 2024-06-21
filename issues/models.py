@@ -36,6 +36,7 @@ class Issue(models.Model):
     developer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, limit_choices_to={'role': 'developer'}, related_name='developer_issues')
     quality_assurance = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, limit_choices_to={'role': 'quality_assurance'}, related_name='qa_issues')
     product_manager = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, limit_choices_to={'role': 'product_manager'}, related_name='pm_issues')
+    created_at = models.DateTimeField(auto_now_add=True)
 
 class UserIssue(models.Model):
     ROLE_CHOICES = (

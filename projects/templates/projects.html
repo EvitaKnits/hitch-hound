@@ -31,8 +31,40 @@
 {% endblock %}
 
 {% block content %}
-<h1>All Projects</h1>
-<p>This is the projects page where all projects will be shown.</p>
+<h1>Latest Issues by Project</h1>
+
+{% for project in projects %}
+    <h2 class="project-title">{{ project.title }}</h2>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr class="table-secondary">
+                    <th scope="col" class="col-2">Issue ID</th>
+                    <th scope="col" class="col-4">Title</th>
+                    <th scope="col" class="col-2">Severity</th>
+                    <th scope="col" class="col-2 d-none d-md-table-cell">Type</th>
+                    <th scope="col" class="col-2 d-none d-md-table-cell">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for issue in project.latest_issues %}
+                <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.issue_id %}'" style="cursor: pointer;">
+                    <td class="col-2">#{{ issue.issue_id }}</td>
+                    <td class="col-4">{{ issue.title|truncatechars:50 }}</td>
+                    <td class="col-2">{{ issue.severity }}</td>
+                    <td class="col-2 d-none d-md-table-cell">{{ issue.type }}</td>
+                    <td class="col-2 d-none d-md-table-cell">{{ issue.status }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No issues found for this project.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endfor %}
+
 <!-- Modal -->
 <div class="modal-custom" id="myModal">
     <div class="modal-content">

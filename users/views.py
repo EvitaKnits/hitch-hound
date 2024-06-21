@@ -31,7 +31,7 @@ def user_login(request):
         return render(request, 'login.html')
 
 def user_logout_confirm(request):
-    return render(request, 'logoutconfirm.html', {'active_page': 'logout'})
+    return render(request, 'logoutconfirm.html')
 
 def user_signup(request):
     if request.method == 'POST':
@@ -91,4 +91,4 @@ def password_reset_complete(request):
     return render(request, 'registration/password_reset_complete.html')
 
 def user_profile(request):
-    return render(request, 'profile.html', {'active_page': 'profile'})
+    return render(request, 'profile.html')
