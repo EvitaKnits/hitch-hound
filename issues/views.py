@@ -8,7 +8,7 @@ from django.core.paginator import Paginator
 
 # Create your views here.
 
-# @login_required - uncomment this at the end if I want to restrict to logged in users only. 
+@login_required 
 def list_issues(request):
     show_toast = request.session.pop('registration_success', False)
     sort_by = request.GET.get('sort_by', 'title')
