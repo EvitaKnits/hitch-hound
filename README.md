@@ -567,6 +567,8 @@ For the third sprint, I carried over one story and put back another story, towar
 #### Sprint Retrospective
 I realised after the sprint had begun, that I needed a user story for creating the user profile page. I'd missed it when initially writing up my user stories. This has a list of issues assigned to the user on it however, so needs to be done later on in the project. I created it and put it further down the backlog. 
 
+I also picked up speed this sprint and completed all four of the planned user stories by the middle of the sprint. I pulled in four more, labelling two of them 'Should Have' and the other two 'Could Have' as I had already met my sprint commitments. 
+
 
 ### Future Development
 Likely to be, at a minimum:

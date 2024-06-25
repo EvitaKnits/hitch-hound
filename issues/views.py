@@ -74,3 +74,11 @@ def edit_issue(request, issue_id):
     else:
         form = IssueForm(instance=issue)
     return render(request, 'edit_issue.html', {'form': form, 'issue': issue})
+
+@login_required
+def delete_issue(request, pk):
+    issue = get_object_or_404(Issue, pk=pk)
+    if request.method == 'POST':
+        issue.delete()
+        return redirect('issues')
+    return redirect('issue_detail', pk=pk)

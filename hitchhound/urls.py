@@ -36,6 +36,7 @@ urlpatterns = [
     path('create_issue/', issues_views.create_issue, name='create_issue'),
     path('issues/<int:issue_id>/', issues_views.issue_detail, name='issue_detail'),
     path('issues/<int:issue_id>/edit/', issues_views.edit_issue, name='edit_issue'),
+    path('issues/<int:pk>/delete/', issues_views.delete_issue, name='delete_issue'),
     path('projects/', project_views.list_projects, name='projects'),
     path('projects/<str:project_title>/issues/', project_views.view_all_issues, name='view_all_issues'),
     path('create_project/', project_views.create_project, name='create_project'),
