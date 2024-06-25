@@ -44,6 +44,7 @@
                         {% csrf_token %}
                         {{ form|crispy }}
                         <button type="submit" class="btn btn-primary btn-block">Create Issue</button>
+                        <button type="button" class="btn btn-primary" onclick="window.history.back();">Cancel</button>
                     </form>
                 </div>
             </div>
@@ -69,5 +70,5 @@
     const createIssueUrl = "{% url 'create_issue' %}"
     const createProjectUrl = "{% url 'create_project' %}"
 </script>
-<script src="{% static 'js/modal.js' %}"></script>
+<script src="{% static 'js/new_item_modal.js' %}"></script>
 {% endblock %}

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
 
 {% block nav-icons %}
@@ -31,8 +32,25 @@
 {% endblock %}
 
 {% block content %}
-<h1>New Project</h1>
-<p>This is the new project page.</p>
+<div class="container form-container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Create New Project</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-primary btn-block">Create Project</button>
+                        <button type="button" class="btn btn-primary" onclick="window.history.back();">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Modal -->
 <div class="modal-custom" id="myModal">
@@ -52,5 +70,5 @@
     const createIssueUrl = "{% url 'create_issue' %}"
     const createProjectUrl = "{% url 'create_project' %}"
 </script>
-<script src="{% static 'js/modal.js' %}"></script>
+<script src="{% static 'js/new_item_modal.js' %}"></script>
 {% endblock %}

@@ -1,8 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from projects.models import Project
 from issues.models import Issue
 from django.core.paginator import Paginator
+from .forms import ProjectForm
 
 # Create your views here.
 
@@ -43,7 +44,15 @@ def view_all_issues(request, project_title):
     return render(request, 'all_issues.html', context)
 
 def create_project(request):
-    return render(request, 'create_project.html')
+    if request.method == 'POST':
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('projects') 
+    else:
+        form = ProjectForm()
+
+    return render(request, 'create_project.html', {'form': form})
 
 def edit_project(request):
     return render(request, 'edit_project.html')
