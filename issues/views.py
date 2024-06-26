@@ -15,9 +15,11 @@ def list_issues(request):
     order = request.GET.get('order', 'asc')
     project_id = request.GET.get('project_id')
     
+    project = None
+
     if project_id:
         project = get_object_or_404(Project, id=project_id)
-        issues = Issue.objects.filter(project_title=project)
+        issues = Issue.objects.filter(project=project)
     else:
         issues = Issue.objects.all()
 
@@ -37,8 +39,8 @@ def list_issues(request):
     context = {
         'active_page': 'issues',
         'show_toast': show_toast,
-        'page_obj': page_obj,  # Use page_obj instead of issues
-        'project': project if project_id else None,
+        'page_obj': page_obj, 
+        'project': project,
         'sort_by': sort_by.strip('-'),
         'order': order,
         'toggle_order': toggle_order(order)

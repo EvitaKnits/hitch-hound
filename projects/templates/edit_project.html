@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
+
 
 {% block nav-icons %}
 <li class="nav-item">
@@ -31,8 +33,26 @@
 {% endblock %}
 
 {% block content %}
-<h1>Edit Project</h1>
-<p>This is the edit project page.</p>
+<div class="container form-container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Edit Project</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                        <button type="button" class="btn btn-primary" onclick="window.history.back();">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Modal -->
 <div class="modal-custom" id="myModal">
     <div class="modal-content">

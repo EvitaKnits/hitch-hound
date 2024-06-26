@@ -208,6 +208,9 @@ The following Entity Relationship Diagram (ERD) illustrates the key entities and
 
 ![erd](documentation/erd.png)
 
+*Added mid-development: 
+A 'Project ID' to be the primary key for the Projects table. This was required because at the time of designing my database, I didn't realise that it is not possible to edit a primary key. Therefore the title could not be the primary key because the title needs to be editable by users. 
+
 ### Data Manipulation
 
 Hitch Hound uses CRUD principles to guide all data manipulation. 
@@ -244,6 +247,7 @@ The following data validation rules ensure the accuracy and reliability of infor
 - superuser: Must be a boolean value
 
 #### Projects
+- projectID: Must be a unique integer (*Added mid-development. See note below ERD for more information)
 - title: Must be a unique, non-empty string
 
 #### Issues
@@ -481,13 +485,17 @@ I ensured I had set alternative text for the only image on my site: the logo.
 
 ## Bugs
 
-Here is the list of bugs found towards the end of development when I encountered functionality not working as intended that I had previously thought did. I don't believe I have left any unresolved bugs. 
+Here is the list of bugs mostly found towards the end of development when I encountered functionality not working as intended that I had previously thought did. I don't believe I have left any unresolved bugs. 
 
 ### Bug One
 
 #### Issue
+About halfway through development, I tried to change the primary key of my 'Project' model from the 'Title' field to a new 'Project ID' field. This was because I had discovered that it is not possible to edit a primary key, so if a user wanted to change the title of their project, they would not be able to do so. Whilst making this change, I also found that Django automatically assigns an auto-incrementing ID to every model you create. I may have learnt this at some point, but because this auto-assignment is implicit and not actually visible in the files I was working on, I did not realise. 
+
+I had to delete the ID fields from all my models and recreate my database. The issue this ultimately created was that I had been working for quite some time on the original data models and they were intertwined throughout my functionality. Making this change broke most of my existing functionality. 
 
 #### Solution
+The solution to this was going through systematically, encountering errors and resolving them until all references to IDs had either been removed or switched to the auto-assigned ones in Django. 
 
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
@@ -568,6 +576,16 @@ For the third sprint, I carried over one story and put back another story, towar
 I realised after the sprint had begun, that I needed a user story for creating the user profile page. I'd missed it when initially writing up my user stories. This has a list of issues assigned to the user on it however, so needs to be done later on in the project. I created it and put it further down the backlog. 
 
 I also picked up speed this sprint and completed all four of the planned user stories by the middle of the sprint. I pulled in four more, labelling two of them 'Should Have' and the other two 'Could Have' as I had already met my sprint commitments. 
+
+### Sprint Four: 26/06 to 02/07
+![Sprint Four](documentation/sprint4.png)
+
+#### Sprint Planning
+For my fourth sprint, I carried over two of the four I pulled in half way through, and added five more stories for a total of 7. I've got 3 must haves, 2 should haves and 2 could haves. I do have quite a large issue to deal with first but I feel as though I am into the flow of how Django works and what my project should do to be able to work with this split. 
+
+#### Sprint Retrospective
+
+### Sprint Five: 03/07 to 09/07
 
 
 ### Future Development

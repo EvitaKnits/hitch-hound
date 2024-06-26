@@ -17,7 +17,6 @@ class Change(models.Model):
         ('product_manager', 'Product Manager'),
     )
 
-    change_id = models.AutoField(primary_key=True)
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     changed_at = models.DateTimeField(auto_now_add=True)

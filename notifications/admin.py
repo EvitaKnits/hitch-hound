@@ -3,7 +3,7 @@ from .models import Change
 
 class ChangeAdmin(admin.ModelAdmin):
     list_display = ('issue', 'user', 'changed_at', 'field_changed', 'old_value', 'new_value')
-    readonly_fields = ('change_id', 'changed_at')
+    readonly_fields = ('changed_at',)
     fields = ('issue', 'user', 'field_changed', 'old_value', 'new_value')
     
     def save_model(self, request, obj, form, change):

@@ -25,11 +25,10 @@ class Issue(models.Model):
         ('cancelled', 'Cancelled'),
     )
 
-    issue_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255, null=False)
     description = models.TextField()
     severity = models.CharField(max_length=20, choices=SEVERITY_CHOICES, default='low')
-    project_title = models.ForeignKey(Project, on_delete=models.CASCADE, null=False)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=False)
     type = models.CharField(max_length=20, choices=TYPE_CHOICES, default='bug')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='open')
     reporter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reported_issues')
@@ -52,7 +51,7 @@ class UserIssue(models.Model):
         unique_together = ('user', 'issue', 'role')
 
 class Comment(models.Model):
-    comment_id = models.AutoField(primary_key=True)
+
     comment_text = models.TextField()
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     issue_id = models.ForeignKey(Issue, on_delete=models.CASCADE)

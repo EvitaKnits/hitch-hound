@@ -2,10 +2,10 @@ from django.contrib import admin
 from .models import Issue, UserIssue, Comment
 
 class IssueAdmin(admin.ModelAdmin):
-    list_display = ('title', 'severity', 'type', 'status', 'reporter', 'project_title', 'developer', 'quality_assurance', 'product_manager')
-    fields = ('title', 'description', 'severity', 'type', 'status', 'reporter', 'project_title', 'developer', 'quality_assurance', 'product_manager')
-    search_fields = ('title', 'reporter__username', 'project_title__name')
-    list_filter = ('severity', 'type', 'status', 'project_title')
+    list_display = ('title', 'severity', 'type', 'status', 'reporter', 'project', 'developer', 'quality_assurance', 'product_manager')
+    fields = ('title', 'description', 'severity', 'type', 'status', 'reporter', 'project', 'developer', 'quality_assurance', 'product_manager')
+    search_fields = ('title', 'reporter__username', 'project')
+    list_filter = ('severity', 'type', 'status', 'project')
 
     def save_model(self, request, obj, form, change):
         if not obj.reporter:
@@ -15,7 +15,7 @@ class IssueAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('comment_text', 'user_id', 'issue_id', 'commented_at')
     fields = ('comment_text', 'user_id', 'issue_id')
-    readonly_fields = ('comment_id', 'commented_at')
+    readonly_fields = ('commented_at',)
 
     def save_model(self, request, obj, form, change):
         if not obj.user_id:
