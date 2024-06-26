@@ -9,14 +9,14 @@ from django.urls import reverse
 # Create your views here.
 
 def list_projects(request):
-    projects = Project.objects.all()
+    projects = Project.objects.all().order_by('title')
     for project in projects:
         project.latest_issues = Issue.objects.filter(project=project).order_by('-created_at')[:3]
 
     return render(request, 'projects.html', {'projects': projects})
 
-def view_all_issues(request, project_title):
-    project = get_object_or_404(Project, title=project_title)
+def view_all_issues(request, project_id):
+    project = get_object_or_404(Project, id=project_id)
     issues = Issue.objects.filter(project=project)
 
     # Sorting
@@ -55,8 +55,8 @@ def create_project(request):
 
     return render(request, 'create_project.html', {'form': form})
 
-def edit_project(request, title):
-    project = get_object_or_404(Project, title=title)
+def edit_project(request, id):
+    project = get_object_or_404(Project, id=id)
     if request.method == 'POST':
         form = ProjectForm(request.POST, instance=project)
         if form.is_valid():

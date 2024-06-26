@@ -492,7 +492,7 @@ Here is the list of bugs mostly found towards the end of development when I enco
 #### Issue
 About halfway through development, I tried to change the primary key of my 'Project' model from the 'Title' field to a new 'Project ID' field. This was because I had discovered that it is not possible to edit a primary key, so if a user wanted to change the title of their project, they would not be able to do so. Whilst making this change, I also found that Django automatically assigns an auto-incrementing ID to every model you create. I may have learnt this at some point, but because this auto-assignment is implicit and not actually visible in the files I was working on, I did not realise. 
 
-I had to delete the ID fields from all my models and recreate my database. The issue this ultimately created was that I had been working for quite some time on the original data models and they were intertwined throughout my functionality. Making this change broke most of my existing functionality. 
+I had to delete the ID fields from all my models and recreate my database. The issue this ultimately created was that I had been working for quite some time on the original data models and they were intertwined throughout my functionality. Making this change broke a significant portion of my existing functionality. 
 
 #### Solution
 The solution to this was going through systematically, encountering errors and resolving them until all references to IDs had either been removed or switched to the auto-assigned ones in Django. 

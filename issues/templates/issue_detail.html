@@ -47,7 +47,7 @@
     </tr>
     <tr>
         <th>Project</th>
-        <td>{{ issue.project_title }}</td>
+        <td>{{ issue.project.title }}</td>
     </tr>
     <tr>
         <th>Type</th>
@@ -71,9 +71,9 @@
     </tr>
 </table>
 
-<a href="{% url 'edit_issue' issue.issue_id %}" class="btn btn-primary">Edit Issue</a>
+<a href="{% url 'edit_issue' issue.id %}" class="btn btn-primary">Edit Issue</a>
 <button type="button" class="btn btn-danger" id="deleteButton">Delete Issue</button>
-<form id="deleteForm" action="{% url 'delete_issue' issue.issue_id %}" method="post" style="display: none;">
+<form id="deleteForm" action="{% url 'delete_issue' issue.id %}" method="post" style="display: none;">
     {% csrf_token %}
 </form>
 

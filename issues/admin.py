@@ -4,7 +4,7 @@ from .models import Issue, UserIssue, Comment
 class IssueAdmin(admin.ModelAdmin):
     list_display = ('title', 'severity', 'type', 'status', 'reporter', 'project', 'developer', 'quality_assurance', 'product_manager')
     fields = ('title', 'description', 'severity', 'type', 'status', 'reporter', 'project', 'developer', 'quality_assurance', 'product_manager')
-    search_fields = ('title', 'reporter__username', 'project')
+    search_fields = ('title', 'reporter__username', 'project_title')
     list_filter = ('severity', 'type', 'status', 'project')
 
     def save_model(self, request, obj, form, change):
@@ -13,13 +13,13 @@ class IssueAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('comment_text', 'user_id', 'issue_id', 'commented_at')
-    fields = ('comment_text', 'user_id', 'issue_id')
+    list_display = ('comment_text', 'user', 'issue', 'commented_at')
+    fields = ('comment_text', 'user', 'issue')
     readonly_fields = ('commented_at',)
 
     def save_model(self, request, obj, form, change):
-        if not obj.user_id:
-            obj.user_id = request.user
+        if not obj.user:
+            obj.user = request.user
         super().save_model(request, obj, form, change)
 
 # Register your models here.

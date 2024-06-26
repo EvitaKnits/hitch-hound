@@ -53,8 +53,8 @@ class UserIssue(models.Model):
 class Comment(models.Model):
 
     comment_text = models.TextField()
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    issue_id = models.ForeignKey(Issue, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
     commented_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

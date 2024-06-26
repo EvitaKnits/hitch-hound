@@ -37,10 +37,10 @@
         <thead>
             <tr class="table-secondary">
                 <th scope="col">
-                    <a href="?sort_by=issue_id&order={{ toggle_order }}" class="text-dark text-decoration-none">
+                    <a href="?sort_by=id&order={{ toggle_order }}" class="text-dark text-decoration-none">
                         Issue ID
                         <i
-                            class="fa {% if sort_by == 'issue_id' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                            class="fa {% if sort_by == 'id' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
                     </a>
                 </th>
                 <th scope="col">
@@ -75,9 +75,9 @@
         </thead>
         <tbody>
             {% for issue in page_obj %}
-            <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.issue_id %}'"
+            <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.id %}'"
                 style="cursor: pointer;">
-                <td class="col-2">#{{ issue.issue_id }}</td>
+                <td class="col-2">#{{ issue.id }}</td>
                 <td class="col-4">{{ issue.title|truncatechars:50 }}</td>
                 <td class="col-2">{{ issue.severity }}</td>
                 <td class="col-2 d-none d-md-table-cell">{{ issue.type }}</td>

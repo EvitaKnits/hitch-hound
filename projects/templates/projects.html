@@ -47,9 +47,9 @@
         </thead>
         <tbody>
             {% for issue in project.latest_issues %}
-            <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.issue_id %}'"
+            <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.id %}'"
                 style="cursor: pointer;">
-                <td class="col-2">#{{ issue.issue_id }}</td>
+                <td class="col-2">#{{ issue.id }}</td>
                 <td class="col-4">{{ issue.title|truncatechars:50 }}</td>
                 <td class="col-2">{{ issue.severity }}</td>
                 <td class="col-2 d-none d-md-table-cell">{{ issue.type }}</td>
@@ -64,8 +64,8 @@
     </table>
 </div>
 <div class="mb-4">
-    <a href="{% url 'view_all_issues' project.title %}" class="btn btn-primary">View All Issues</a>
-    <a href="{% url 'edit_project' project.title %}" class="btn btn-secondary">Edit Project</a>
+    <a href="{% url 'view_all_issues' project.id %}" class="btn btn-primary">View All Issues</a>
+    <a href="{% url 'edit_project' project.id %}" class="btn btn-secondary">Edit Project</a>
 </div>
 {% endfor %}
 

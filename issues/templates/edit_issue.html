@@ -46,7 +46,7 @@
                         <button type="button" class="btn btn-danger" id="deleteButton">Delete Issue</button>
                         <button type="button" class="btn btn-primary" onclick="window.history.back();">Cancel</button>
                     </form>
-                    <form id="deleteForm" action="{% url 'delete_issue' issue.issue_id %}" method="post" style="display: none;">
+                    <form id="deleteForm" action="{% url 'delete_issue' issue.id %}" method="post" style="display: none;">
                         {% csrf_token %}
                     </form>
                 </div>

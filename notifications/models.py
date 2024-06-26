@@ -9,7 +9,7 @@ class Change(models.Model):
         ('title', 'Title'),
         ('description', 'Description'),
         ('severity', 'Severity'),
-        ('project_title', 'Project Title'),
+        ('project', 'Project'),
         ('type', 'Type'),
         ('status', 'Status'),
         ('developer', 'Developer'),

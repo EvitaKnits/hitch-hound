@@ -50,10 +50,10 @@
         <thead>
             <tr class="table-secondary">
                 <th scope="col">
-                    <a href="?sort_by=issue_id&order={{ toggle_order }}" class="text-dark text-decoration-none">
+                    <a href="?sort_by=id&order={{ toggle_order }}" class="text-dark text-decoration-none">
                         Issue ID
                         <i
-                            class="fa {% if sort_by == 'issue_id' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                            class="fa {% if sort_by == 'id' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
                     </a>
                 </th>
                 <th scope="col">
@@ -78,10 +78,10 @@
                     </a>
                 </th>
                 <th scope="col" class="d-none d-md-table-cell">
-                    <a href="?sort_by=project_title&order={{ toggle_order }}" class="text-dark text-decoration-none">
+                    <a href="?sort_by=project.title&order={{ toggle_order }}" class="text-dark text-decoration-none">
                         Project
                         <i
-                            class="fa {% if sort_by == 'project_title' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                            class="fa {% if sort_by == 'project.title' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
                     </a>
                 </th>
                 <th scope="col" class="d-none d-md-table-cell">
@@ -95,13 +95,13 @@
         </thead>
         <tbody>
             {% for issue in page_obj %}
-            <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.issue_id %}'"
+            <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.id %}'"
                 style="cursor: pointer;">
-                <td>#{{ issue.issue_id }}</td>
+                <td>#{{ issue.id }}</td>
                 <td>{{ issue.title|truncatechars:50 }}</td>
                 <td>{{ issue.severity }}</td>
                 <td class="d-none d-md-table-cell">{{ issue.type }}</td>
-                <td class="d-none d-md-table-cell">{{ issue.project_title }}</td>
+                <td class="d-none d-md-table-cell">{{ issue.project.title }}</td>
                 <td class="d-none d-md-table-cell">{{ issue.status }}</td>
             </tr>
             {% endfor %}

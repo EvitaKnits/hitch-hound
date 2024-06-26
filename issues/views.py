@@ -48,8 +48,8 @@ def list_issues(request):
 
     return render(request, 'issues.html', context)
 
-def issue_detail(request, issue_id):
-    issue = get_object_or_404(Issue, pk=issue_id)
+def issue_detail(request, id):
+    issue = get_object_or_404(Issue, id=id)
     return render(request, 'issue_detail.html', {'issue': issue})
 
 # @login_required - uncomment this at the end if I want to restrict to logged in users only. 
@@ -66,21 +66,21 @@ def create_issue(request):
     
     return render(request, 'create_issue.html', {'form': form})
 
-def edit_issue(request, issue_id):
-    issue = get_object_or_404(Issue, pk=issue_id)
+def edit_issue(request, id):
+    issue = get_object_or_404(Issue, id=id)
     if request.method == 'POST':
         form = IssueForm(request.POST, instance=issue)
         if form.is_valid():
             form.save()
-            return redirect('issue_detail', issue_id=issue.issue_id)
+            return redirect('issue_detail', id=issue.id)
     else:
         form = IssueForm(instance=issue)
     return render(request, 'edit_issue.html', {'form': form, 'issue': issue})
 
 @login_required
-def delete_issue(request, pk):
-    issue = get_object_or_404(Issue, pk=pk)
+def delete_issue(request, id):
+    issue = get_object_or_404(Issue, id=id)
     if request.method == 'POST':
         issue.delete()
         return redirect('issues')
-    return redirect('issue_detail', pk=pk)
+    return redirect('issue_detail', id=id)
