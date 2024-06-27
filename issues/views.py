@@ -5,6 +5,7 @@ from issues.forms import IssueForm
 from issues.models import Issue
 from projects.models import Project
 from django.core.paginator import Paginator
+from django.contrib import messages
 
 # Create your views here.
 

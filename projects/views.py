@@ -5,6 +5,7 @@ from issues.models import Issue
 from django.core.paginator import Paginator
 from .forms import ProjectForm
 from django.urls import reverse
+from django.contrib import messages
 
 # Create your views here.
 
@@ -65,3 +66,11 @@ def edit_project(request, id):
     else:
         form = ProjectForm(instance=project)
     return render(request, 'edit_project.html', {'form': form})
+
+def delete_project(request, id):
+    project = get_object_or_404(Project, id=id)
+    if request.method == 'POST':
+        project.delete()
+        messages.success(request, 'Project deleted successfully')
+        return redirect('projects') 
+    return redirect('project_detail', id=id)

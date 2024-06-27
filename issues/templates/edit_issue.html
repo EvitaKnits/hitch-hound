@@ -43,10 +43,12 @@
                         {% csrf_token %}
                         {{ form|crispy }}
                         <button type="submit" class="btn btn-primary">Save Changes</button>
-                        <button type="button" class="btn btn-danger" id="deleteButton">Delete Issue</button>
+                        <button type="button" class="btn btn-danger delete-issue-button" data-id="{{ issue.id }}">Delete
+                            Issue</button>
                         <button type="button" class="btn btn-primary" onclick="window.history.back();">Cancel</button>
                     </form>
-                    <form id="deleteForm" action="{% url 'delete_issue' issue.id %}" method="post" style="display: none;">
+                    <form id="deleteIssueForm_{{ issue.id }}" action="{% url 'delete_issue' issue.id %}" method="post"
+                        style="display: none;">
                         {% csrf_token %}
                     </form>
                 </div>
@@ -59,7 +61,7 @@
 <div class="modal-custom" id="myModal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <h5 class="modal-title mb-4">Would you like to create a new issue or new project?</h5>
+        <h5 id="deleteModalTitle" class="modal-title mb-4">Would you like to create a new issue or new project?</h5>
         <div class="modal-buttons">
             <button id="createIssueBtn" class="btn btn-outline-primary">New Issue</button>
             <button id="createProjectBtn" class="btn btn-outline-success">New Project</button>

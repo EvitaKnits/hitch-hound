@@ -162,7 +162,7 @@
     </ul>
 </nav>
 
-<!-- Modal -->
+<!-- New Item Modal -->
 <div class="modal-custom" id="myModal">
     <div class="modal-content">
         <span class="close">&times;</span>
@@ -173,6 +173,19 @@
         </div>
     </div>
 </div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal-custom" id="confirmDeleteModal">
+    <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <h5 id="deleteModalTitle" class="modal-title mb-4">Are you sure you want to delete this issue?</h5>
+        <div class="modal-buttons">
+            <button id="confirmDeleteBtn" class="btn btn-outline-danger">Yes, Delete</button>
+            <button id="cancelDeleteBtn" class="btn btn-outline-secondary">Cancel</button>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block extra_js %}
@@ -184,4 +197,5 @@
     const createProjectUrl = "{% url 'create_project' %}";
 </script>
 <script src="{% static 'js/new_item_modal.js' %}"></script>
+<script src="{% static 'js/confirm_delete_modal.js' %}"></script>
 {% endblock %}

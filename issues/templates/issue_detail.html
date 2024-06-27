@@ -13,8 +13,7 @@
 
 {% block nav %}
 <li class="nav-item active">
-    <a class="nav-link" href="{% url 'issues' %}">Issues<span
-            class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'issues' %}">Issues<span class="sr-only">(current)</span></a>
 </li>
 <li class="nav-item">
     <a class="nav-link" href="{% url 'projects' %}">Projects</a>
@@ -72,8 +71,9 @@
 </table>
 
 <a href="{% url 'edit_issue' issue.id %}" class="btn btn-primary">Edit Issue</a>
-<button type="button" class="btn btn-danger" id="deleteButton">Delete Issue</button>
-<form id="deleteForm" action="{% url 'delete_issue' issue.id %}" method="post" style="display: none;">
+<button type="button" class="btn btn-danger delete-issue-button" data-id="{{ issue.id }}">Delete Issue</button>
+<form id="deleteIssueForm_{{ issue.id }}" action="{% url 'delete_issue' issue.id %}" method="post"
+    style="display: none;">
     {% csrf_token %}
 </form>
 
@@ -93,7 +93,7 @@
 <div class="modal-custom" id="confirmDeleteModal">
     <div class="modal-content">
         <span class="close" id="closeModal">&times;</span>
-        <h5 class="modal-title mb-4">Are you sure you want to delete this issue?</h5>
+        <h5 id="deleteModalTitle" class="modal-title mb-4">Are you sure you want to delete this issue?</h5>
         <div class="modal-buttons">
             <button id="confirmDeleteBtn" class="btn btn-outline-danger">Yes, Delete</button>
             <button id="cancelDeleteBtn" class="btn btn-outline-secondary">Cancel</button>
