@@ -32,6 +32,9 @@
 {% block content %}
 <h1>All Issues</h1>
 
+<!-- Alert Placeholder -->
+<div id="liveAlertPlaceholder"></div>
+
 <!-- Toast -->
 <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 11">
     <div id="registrationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -198,4 +201,5 @@
 </script>
 <script src="{% static 'js/new_item_modal.js' %}"></script>
 <script src="{% static 'js/confirm_delete_modal.js' %}"></script>
+<script src="{% static 'js/alert.js' %}"></script>
 {% endblock %}

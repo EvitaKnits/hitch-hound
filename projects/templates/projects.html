@@ -31,6 +31,8 @@
 
 {% block content %}
 <h1>Latest Issues by Project</h1>
+<!-- Alert Placeholder -->
+<div id="liveAlertPlaceholder"></div>
 
 {% for project in projects %}
 <h2 class="project-title">{{ project.title }}</h2>
@@ -105,4 +107,5 @@
 </script>
 <script src="{% static 'js/new_item_modal.js' %}"></script>
 <script src="{% static 'js/confirm_delete_modal.js' %}"></script>
+<script src="{% static 'js/alert.js' %}"></script>
 {% endblock %}
