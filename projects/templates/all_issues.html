@@ -91,12 +91,6 @@
         </tbody>
     </table>
 </div>
-<a href="{% url 'edit_project' project.id %}" class="btn btn-secondary">Edit Project</a>
-
-<button type="button" class="btn btn-danger delete-project-button" data-id="{{ project.id }}">Delete Project</button>
-<form id="deleteProjectForm_{{ project.id }}" method="post" action="{% url 'delete_project' project.id %}"
-    style="display: none;">
-    {% csrf_token %}
 </form>
 
 <!-- Pagination -->

@@ -65,13 +65,19 @@
         </tbody>
     </table>
 </div>
-<div class="mb-4">
-    <a href="{% url 'view_all_issues' project.id %}" class="btn btn-primary">View All Issues</a>
-    <a href="{% url 'edit_project' project.id %}" class="btn btn-secondary">Edit Project</a>
-    <button type="button" class="btn btn-danger delete-project-button" data-id="{{ project.id }}">Delete Project</button>
-    <form id="deleteProjectForm_{{ project.id }}" action="{% url 'delete_project' project.id %}" method="post" style="display: none;">
-        {% csrf_token %}
-    </form>
+<div class="row mb-4">
+    <div class="col-12 col-md-4 mb-2 mb-md-0">
+        <a href="{% url 'view_all_issues' project.id %}" class="btn btn-primary w-100">View All Issues</a>
+    </div>
+    <div class="col-12 col-md-4 mb-2 mb-md-0">
+        <a href="{% url 'edit_project' project.id %}" class="btn btn-secondary w-100">Edit Project</a>
+    </div>
+    <div class="col-12 col-md-4">
+        <button type="button" class="btn btn-danger w-100 delete-project-button" data-id="{{ project.id }}">Delete Project</button>
+        <form id="deleteProjectForm_{{ project.id }}" action="{% url 'delete_project' project.id %}" method="post" style="display: none;">
+            {% csrf_token %}
+        </form>
+    </div>
 </div>
 {% endfor %}
 
