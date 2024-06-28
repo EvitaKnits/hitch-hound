@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load crispy_forms_tags %}
 
 {% block nav %}
@@ -15,6 +16,8 @@
                 <div class="card-header">
                     <h2>Login</h2>
                 </div>
+                <!-- Alert Placeholder -->
+                <div id="liveAlertPlaceholder"></div>
                 <div class="card-body">
                     <form method="post" action="{% url 'login' %}">
                         {% csrf_token %}
@@ -31,7 +34,8 @@
                                 <button type="submit" class="btn btn-primary w-100">Login</button>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <a href="{% url 'password_reset' %}" class="btn btn-secondary w-100" id="forgot">Forgot your password?</a>
+                                <a href="{% url 'password_reset' %}" class="btn btn-secondary w-100" id="forgot">Forgot
+                                    your password?</a>
                             </div>
                         </div>
                     </form>
@@ -40,4 +44,14 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/alert.js' %}"></script>
+<script>
+    const error = '{{ error_message }}';
+    if (error != '') {
+        appendAlert(error,'danger')
+    } 
+</script>
 {% endblock %}

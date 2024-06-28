@@ -25,7 +25,7 @@ from reporting import views as reporting_views
 urlpatterns = [
     path('', issues_views.list_issues, name='home'),
     path('issues', issues_views.list_issues, name='issues'),
-    path('login/', users_views.user_login, name='login'),
+    path('accounts/login/', users_views.user_login, name='login'),
     path('logout/', users_views.user_logout_confirm, name='logoutconfirm'),
     path('signup/', users_views.user_signup, name='signup'),
     path('password_reset/', users_views.password_reset, name='reset'),
