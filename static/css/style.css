@@ -83,6 +83,9 @@ nav li i {
 #forgot {
     color: #414644;
     font-size: 90%;
+    background-color: #F6F9F8;
+    border: #F6F9F8;
+    text-decoration: underline;
 }
 
 /* MODAL STYLING */
