@@ -11,7 +11,7 @@ class CustomUserCreationFormTest(TestCase):
             'last_name': 'User',
             'username': 'testuser',
             'email': 'testuser@example.com',
-            'role': 'developer',  # Ensure this matches ROLE_CHOICES
+            'role': 'developer',  
             'password1': 'testpassword123',
             'password2': 'testpassword123',
         }
@@ -23,7 +23,7 @@ class CustomUserCreationFormTest(TestCase):
     def test_custom_user_creation_form_no_data(self):
         form = CustomUserCreationForm(data={})
         self.assertFalse(form.is_valid())
-        self.assertEqual(len(form.errors), 7)  # Adjust based on the number of required fields
+        self.assertEqual(len(form.errors), 7)  
 
     def test_custom_user_creation_form_missing_required_fields(self):
         data = self.valid_data.copy()

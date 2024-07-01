@@ -29,9 +29,6 @@ def user_login(request):
     else:
         return render(request, 'login.html')
 
-def user_logout_confirm(request):
-    return render(request, 'logoutconfirm.html')
-
 def user_signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)

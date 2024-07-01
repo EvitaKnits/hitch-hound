@@ -26,7 +26,6 @@ class IssueFormTest(TestCase):
             'quality_assurance': self.quality_assurance.id,
             'product_manager': self.product_manager.id,
         })
-        print(form.errors)  # Print form errors to debug
         self.assertTrue(form.is_valid())
 
     def test_issue_form_no_data(self):
