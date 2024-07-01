@@ -225,8 +225,7 @@ Hitch Hound uses CRUD principles to guide all data manipulation.
 - Create: start a new project, filling in the title. 
 - Read: retrieve a project via the projects page.
 - Update: change the title of a project. 
-<br>
-- Deletion of 'Projects is not allowed in order to retain accurate records and protect data integrity.
+- Delete: delete a project and all of its issues. 
 
 #### Other Data
 
@@ -608,6 +607,7 @@ I referred back to the Code Institute set up videos to remind me how to set up t
 - I created all my favicons with [Real Favicon Generator](https://realfavicongenerator.net/)
 - I used [Chat GPT](https://chatgpt.com) to explain error messages and research the best way to go about my implementation.
 - I used [Learn Django](https://learndjango.com/tutorials/django-login-and-logout-tutorial) to help me set up login/logout etc.
+- I used [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Testing) to walk me through testing a Django web app.
 
 I also used the documentation of all the elements included in this project: 
 - [Django](https://docs.djangoproject.com/en/4.2/)

@@ -42,13 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'issues',
     'users',
     'projects',
     'notifications',
     'reporting',
     'crispy_forms',
     'crispy_bootstrap5',
+    'issues.apps.IssuesConfig',
 ]
 
 MIDDLEWARE = [
@@ -89,11 +89,18 @@ WSGI_APPLICATION = 'hitchhound.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    'default':
-        dj_database_url.parse(os.environ.get("DATABASE_URL"))
+if os.environ.get('DEV') == 'TRUE':
+    DATABASES = {
+        'default' : {
+            'ENGINE' : 'django.db.backends.sqlite3',
+            'NAME' : BASE_DIR / 'db.sqlite3',
+        }
     }
+else:
+    DATABASES = {
+        'default':
+            dj_database_url.parse(os.environ.get("DATABASE_URL"))
+        }
 
 CSRF_TRUSTED_ORIGINS = [
     "https://8000-evitaknits-hitchhound-69v294c8trk.ws.codeinstitute-ide.net",
