@@ -30,68 +30,69 @@
 {% endblock %}
 
 {% block content %}
-<h1>All Issues for: {{ project.title }}</h1>
-
-<div class="table-responsive">
-    <table class="table table-hover table-bordered">
-        <thead>
-            <tr class="table-secondary">
-                <th scope="col">
-                    <a href="?sort_by=id&order={{ toggle_order }}" class="text-dark text-decoration-none">
-                        Issue ID
-                        <i
-                            class="fa {% if sort_by == 'id' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
-                    </a>
-                </th>
-                <th scope="col">
-                    <a href="?sort_by=title&order={{ toggle_order }}" class="text-dark text-decoration-none">
-                        Title
-                        <i
-                            class="fa {% if sort_by == 'title' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
-                    </a>
-                </th>
-                <th scope="col">
-                    <a href="?sort_by=severity&order={{ toggle_order }}" class="text-dark text-decoration-none">
-                        Severity
-                        <i
-                            class="fa {% if sort_by == 'severity' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
-                    </a>
-                </th>
-                <th scope="col" class="d-none d-md-table-cell">
-                    <a href="?sort_by=type&order={{ toggle_order }}" class="text-dark text-decoration-none">
-                        Type
-                        <i
-                            class="fa {% if sort_by == 'type' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
-                    </a>
-                </th>
-                <th scope="col" class="d-none d-md-table-cell">
-                    <a href="?sort_by=status&order={{ toggle_order }}" class="text-dark text-decoration-none">
-                        Status
-                        <i
-                            class="fa {% if sort_by == 'status' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
-                    </a>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for issue in page_obj %}
-            <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.id %}'"
-                style="cursor: pointer;">
-                <td class="col-2">#{{ issue.id }}</td>
-                <td class="col-4">{{ issue.title|truncatechars:50 }}</td>
-                <td class="col-2">{{ issue.severity }}</td>
-                <td class="col-2 d-none d-md-table-cell">{{ issue.type }}</td>
-                <td class="col-2 d-none d-md-table-cell">{{ issue.status }}</td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="5">No issues found for this project.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="container mt-4">
+    <h1>All Issues for: {{ project.title }}</h1>
+    
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr class="table-secondary">
+                    <th scope="col">
+                        <a href="?sort_by=id&order={{ toggle_order }}" class="text-dark text-decoration-none">
+                            Issue ID
+                            <i
+                                class="fa {% if sort_by == 'id' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a href="?sort_by=title&order={{ toggle_order }}" class="text-dark text-decoration-none">
+                            Title
+                            <i
+                                class="fa {% if sort_by == 'title' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                        </a>
+                    </th>
+                    <th scope="col">
+                        <a href="?sort_by=severity&order={{ toggle_order }}" class="text-dark text-decoration-none">
+                            Severity
+                            <i
+                                class="fa {% if sort_by == 'severity' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                        </a>
+                    </th>
+                    <th scope="col" class="d-none d-md-table-cell">
+                        <a href="?sort_by=type&order={{ toggle_order }}" class="text-dark text-decoration-none">
+                            Type
+                            <i
+                                class="fa {% if sort_by == 'type' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                        </a>
+                    </th>
+                    <th scope="col" class="d-none d-md-table-cell">
+                        <a href="?sort_by=status&order={{ toggle_order }}" class="text-dark text-decoration-none">
+                            Status
+                            <i
+                                class="fa {% if sort_by == 'status' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for issue in page_obj %}
+                <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.id %}'"
+                    style="cursor: pointer;">
+                    <td class="col-2">#{{ issue.id }}</td>
+                    <td class="col-4">{{ issue.title|truncatechars:50 }}</td>
+                    <td class="col-2">{{ issue.severity }}</td>
+                    <td class="col-2 d-none d-md-table-cell">{{ issue.type }}</td>
+                    <td class="col-2 d-none d-md-table-cell">{{ issue.status }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No issues found for this project.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
-</form>
 
 <!-- Pagination -->
 <nav aria-label="Page navigation">

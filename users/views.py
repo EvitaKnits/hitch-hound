@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from .forms import CustomUserCreationForm
 from django.contrib import messages
@@ -13,6 +13,13 @@ from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.conf import settings
 from django.contrib.auth.views import PasswordResetConfirmView
+from django.contrib.auth.decorators import login_required
+from issues.models import Issue
+from django.db import models
+from django.core.paginator import Paginator
+from users.forms import UserProfileForm
+from django.db.models.functions import Lower
+from django.db.models import F
 
 # Create your views here.
 
@@ -86,5 +93,48 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
 def password_reset_complete(request):
     return render(request, 'registration/password_reset_complete.html')
 
+@login_required
 def user_profile(request):
-    return render(request, 'profile.html')
+    user = request.user
+    sort_by = request.GET.get('sort_by', 'id')
+    order = request.GET.get('order', 'asc')
+    toggle_order = 'desc' if order == 'asc' else 'asc'
+
+    # Determine the sorting field and annotation
+    if sort_by == 'title':
+        issues = Issue.objects.filter(
+            models.Q(reporter=user) |
+            models.Q(developer=user) |
+            models.Q(quality_assurance=user) |
+            models.Q(product_manager=user)
+        ).distinct().annotate(lower_title=Lower('title')).order_by(f"{'' if order == 'asc' else '-'}lower_title")
+    else:
+        issues = Issue.objects.filter(
+            models.Q(reporter=user) |
+            models.Q(developer=user) |
+            models.Q(quality_assurance=user) |
+            models.Q(product_manager=user)
+        ).distinct().order_by(f"{'' if order == 'asc' else '-'}{sort_by}")
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = UserProfileForm(instance=user)
+
+    # Pagination
+    paginator = Paginator(issues, 12)  # 12 issues per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'form': form,
+        'username': user.username,
+        'page_obj': page_obj,
+        'sort_by': sort_by,
+        'order': order,
+        'toggle_order': toggle_order,
+    }
+    return render(request, 'profile.html', context)

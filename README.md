@@ -405,15 +405,12 @@ There were also a few other options for use throughout the program: <br>
 ### Test Plan
 
 **Continuous Testing**
-I developed this program using the 'red, green, refactor' approach
 
-Through a combination of automated testing written using Jest for JavaScript and Unittest for Python, and manual testing from the front-end, I achieved a good coverage of test cases. The code I wrote was also passed through validators/linters at the end to ensure adherance to coding standards and best practices, ultimately aiming for robust and maintainable code.
+Through a combination of automated testing written using Unittest for Python, and manual testing from the front-end, I achieved a good coverage of test cases. The code I wrote was also passed through validators/linters at the end to ensure adherance to coding standards and best practices, ultimately aiming for robust and maintainable code. I considered using Jest to test my JavaScript files but on balance decided that it was not worth doing because the amount of JavaScript was quite small and the functions quite simple. I will be completing a fifth project with advanced front-end frameworks such as React which is better suited to Jest testing, so I will apply it more valuably there. 
 
 ### Automated Testing
 
-Jest Testing:
 
-Unittest Testing:
 
 ### Manual Testing
 

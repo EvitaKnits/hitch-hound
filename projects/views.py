@@ -6,6 +6,8 @@ from django.core.paginator import Paginator
 from .forms import ProjectForm
 from django.urls import reverse
 from django.contrib import messages
+from django.db.models.functions import Lower
+from django.db.models import F
 
 # Create your views here.
 
@@ -23,10 +25,12 @@ def view_all_issues(request, project_id):
     # Sorting
     sort_by = request.GET.get('sort_by', 'created_at')
     order = request.GET.get('order', 'desc')
-    if order == 'asc':
-        issues = issues.order_by(sort_by)
+
+    # Determine the sorting field and annotation
+    if sort_by == 'title':
+        issues = issues.annotate(lower_title=Lower('title')).order_by(f"{'' if order == 'asc' else '-'}lower_title")
     else:
-        issues = issues.order_by(f'-{sort_by}')
+        issues = issues.order_by(f"{'' if order == 'asc' else '-'}{sort_by}")
 
     # Pagination
     paginator = Paginator(issues, 10)  # Show 10 issues per page

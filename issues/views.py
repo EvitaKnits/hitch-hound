@@ -6,16 +6,18 @@ from issues.models import Issue
 from projects.models import Project
 from django.core.paginator import Paginator
 from django.contrib import messages
+from django.db.models.functions import Lower
+from django.db.models import F
 
 # Create your views here.
 
-@login_required 
+@login_required
 def list_issues(request):
     show_toast = request.session.pop('registration_success', False)
     sort_by = request.GET.get('sort_by', 'title')
     order = request.GET.get('order', 'asc')
     project_id = request.GET.get('project_id')
-    
+
     project = None
 
     if project_id:
@@ -24,10 +26,11 @@ def list_issues(request):
     else:
         issues = Issue.objects.all()
 
-    if order == 'desc':
-        sort_by = '-' + sort_by
-
-    issues = issues.order_by(sort_by)
+    # Determine the sorting field and annotation
+    if sort_by == 'title':
+        issues = issues.annotate(lower_title=Lower('title')).order_by(f"{'' if order == 'asc' else '-'}lower_title")
+    else:
+        issues = issues.order_by(f"{'' if order == 'asc' else '-'}{sort_by}")
 
     # Pagination
     paginator = Paginator(issues, 12)  # 12 issues per page
@@ -40,11 +43,11 @@ def list_issues(request):
     context = {
         'active_page': 'issues',
         'show_toast': show_toast,
-        'page_obj': page_obj, 
+        'page_obj': page_obj,
         'project': project,
-        'sort_by': sort_by.strip('-'),
+        'sort_by': sort_by,
         'order': order,
-        'toggle_order': toggle_order(order)
+        'toggle_order': toggle_order(order),
     }
 
     return render(request, 'issues.html', context)
