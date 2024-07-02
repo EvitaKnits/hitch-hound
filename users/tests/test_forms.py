@@ -1,6 +1,7 @@
 from django.test import TestCase
 from users.forms import CustomUserCreationForm
 from users.models import User
+from django.urls import reverse 
 
 # Create your tests here.
 
@@ -45,3 +46,8 @@ class CustomUserCreationFormTest(TestCase):
         form = CustomUserCreationForm(data=data)
         self.assertFalse(form.is_valid())
         self.assertIn('email', form.errors)
+
+    def test_user_creation_on_signup(self):
+        response = self.client.post(reverse('signup'), data=self.valid_data)
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(User.objects.filter(username='testuser').exists())
