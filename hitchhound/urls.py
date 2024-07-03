@@ -39,6 +39,7 @@ urlpatterns = [
     path('issues/<int:id>/', issues_views.issue_detail, name='issue_detail'),
     path('issues/<int:id>/edit/', issues_views.edit_issue, name='edit_issue'),
     path('issues/<int:id>/delete/', issues_views.delete_issue, name='delete_issue'),
+    path('issues/<int:issue_id>/add_comment/', issues_views.add_comment, name='add_comment'),
     path('projects/', project_views.list_projects, name='projects'),
     path('projects/<int:project_id>/issues/', project_views.view_all_issues, name='view_all_issues'),
     path('create_project/', project_views.create_project, name='create_project'),

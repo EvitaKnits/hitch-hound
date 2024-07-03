@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from issues.forms import IssueForm
-from issues.models import Issue
+from issues.forms import IssueForm, CommentForm
+from issues.models import Issue, Comment
 from projects.models import Project
 from django.core.paginator import Paginator
 from django.contrib import messages
@@ -52,11 +52,29 @@ def list_issues(request):
 
     return render(request, 'issues.html', context)
 
+@login_required
 def issue_detail(request, id):
     issue = get_object_or_404(Issue, id=id)
-    return render(request, 'issue_detail.html', {'issue': issue})
+    comments = Comment.objects.filter(issue=issue).order_by('-commented_at')
+    form = CommentForm()
+    return render(request, 'issue_detail.html', {'issue': issue, 'comments': comments, 'form': form})
 
-# @login_required - uncomment this at the end if I want to restrict to logged in users only. 
+@login_required
+def add_comment(request, issue_id):
+    issue = get_object_or_404(Issue, id=issue_id)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.issue = issue
+            comment.user = request.user
+            comment.save()
+            return redirect('issue_detail', id=issue.id)
+    else:
+        form = CommentForm()
+    return render(request, 'issue_detail.html', {'issue': issue, 'form': form, 'comments': issue.comments.all()})
+
+@login_required  
 def create_issue(request):
     if request.method == 'POST':
         form = IssueForm(request.POST)

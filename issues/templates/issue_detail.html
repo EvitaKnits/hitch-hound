@@ -31,7 +31,7 @@
 
 {% block content %}
 <h1>Issue Detail</h1>
-<table class="table table-bordered">
+<table class="table table-bordered" id="issue-table">
     <tr>
         <th>Title</th>
         <td>{{ issue.title }}</td>
@@ -76,6 +76,29 @@
     style="display: none;">
     {% csrf_token %}
 </form>
+
+<!-- Add Comment Form -->
+<h3 class="mt-5">Add a Comment</h3>
+<form action="{% url 'add_comment' issue.id %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <textarea class="form-control" name="comment_text" rows="3" placeholder="Enter your comment here..."></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Add Comment</button>
+</form>
+
+<!-- Comments Section -->
+<h2 class="mt-5">Comments</h2>
+<div id="comments" class="mb-5">
+    {% for comment in comments %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <p><strong>{{ comment.user.username }}</strong> <em>{{ comment.commented_at }}</em></p>
+            <p>{{ comment.comment_text }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 
 <!-- New Item Modal -->
 <div class="modal-custom" id="myModal">

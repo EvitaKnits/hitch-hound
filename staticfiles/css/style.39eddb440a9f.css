@@ -1,11 +1,7 @@
 /* GENERAL STYLES */
-
-* {
-    color: #414644;
-}
-
 h1 {
     font-family: 'Signika Negative', sans-serif;
+    color: #414644;
 }
 
 body {
@@ -202,23 +198,20 @@ nav li i {
 }
 
 /* TABLE STYLING */
-#issue-table {
+.table {
     width: 100%;
     table-layout: auto;
 }
 
-#issue-table th:first-child, 
-#issue-table td:first-child {
+.table th:first-child, 
+.table td:first-child {
     white-space: nowrap;
     width: 1%;
-    padding-left: 1rem;
-    padding-right: 1rem;
 }
 
-#issue-table th:last-child, 
-#issue-table td:last-child {
+.table th:last-child, 
+.table td:last-child {
     width: 99%;
-    padding-left: 1rem;
 }
 
 /* MEDIA QUERIES */
