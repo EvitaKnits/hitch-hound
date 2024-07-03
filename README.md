@@ -622,6 +622,7 @@ I referred back to the Code Institute set up videos to remind me how to set up t
 - I used [Chat GPT](https://chatgpt.com) to explain error messages and research the best way to go about my implementation.
 - I used [Learn Django](https://learndjango.com/tutorials/django-login-and-logout-tutorial) to help me set up login/logout etc.
 - I used [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Testing) to walk me through testing a Django web app.
+- The image of the sad pug on the custom 404 page is from [Unsplash](https://unsplash.com/photos/fawn-pug-lying-on-floor-6x-hVXXiBxs).
 
 I also used the documentation of all the elements included in this project: 
 - [Django](https://docs.djangoproject.com/en/4.2/)

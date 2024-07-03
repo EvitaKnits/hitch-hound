@@ -16,11 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import handler404
 from issues import views as issues_views
 from users import views as users_views
 from projects import views as project_views
 from notifications import views as notification_views
 from reporting import views as reporting_views
+from hitchhound import views as hitchhound_views
 
 urlpatterns = [
     path('', issues_views.list_issues, name='home'),
@@ -49,3 +51,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
+
+handler404 = hitchhound_views.custom_404
