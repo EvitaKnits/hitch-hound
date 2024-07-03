@@ -32,6 +32,7 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', users_views.password_reset_done, name='password_reset_confirm'),
     path('reset/done/', users_views.password_reset_complete, name='password_reset_complete'),
     path('profile/', users_views.user_profile, name='profile'),
+    path('change_password/', users_views.change_password, name='change_password'),
     path('create_issue/', issues_views.create_issue, name='create_issue'),
     path('issues/<int:id>/', issues_views.issue_detail, name='issue_detail'),
     path('issues/<int:id>/edit/', issues_views.edit_issue, name='edit_issue'),

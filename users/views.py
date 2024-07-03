@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, update_session_auth_hash
 from .forms import CustomUserCreationForm
 from django.contrib import messages
 from django.http import HttpResponse
-from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.forms import PasswordResetForm, PasswordChangeForm
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -117,12 +117,13 @@ def user_profile(request):
         ).distinct().order_by(f"{'' if order == 'asc' else '-'}{sort_by}")
 
     if request.method == 'POST':
-        form = UserProfileForm(request.POST, instance=user)
-        if form.is_valid():
-            form.save()
-            return redirect('profile')
+        profile_form = UserProfileForm(request.POST, instance=user)
+        if 'save_profile' in request.POST:
+            if profile_form.is_valid():
+                profile_form.save()
+                return redirect('profile')
     else:
-        form = UserProfileForm(instance=user)
+        profile_form = UserProfileForm(instance=user)
 
     # Pagination
     paginator = Paginator(issues, 12)  # 12 issues per page
@@ -130,7 +131,7 @@ def user_profile(request):
     page_obj = paginator.get_page(page_number)
 
     context = {
-        'form': form,
+        'form': profile_form,
         'username': user.username,
         'page_obj': page_obj,
         'sort_by': sort_by,
@@ -138,3 +139,16 @@ def user_profile(request):
         'toggle_order': toggle_order,
     }
     return render(request, 'profile.html', context)
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        password_change_form = PasswordChangeForm(user=request.user, data=request.POST)
+        if password_change_form.is_valid():
+            user = password_change_form.save()
+            update_session_auth_hash(request, user)
+            return redirect('profile')
+    else:
+        password_change_form = PasswordChangeForm(user=request.user)
+
+    return render(request, 'change_password.html', {'password_change_form': password_change_form})

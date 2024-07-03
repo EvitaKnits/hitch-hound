@@ -580,12 +580,21 @@ I also picked up speed this sprint and completed all four of the planned user st
 For my fourth sprint, I carried over two of the four I pulled in half way through, and added five more stories for a total of 7. I've got 3 must haves, 2 should haves and 2 could haves. I do have quite a large issue to deal with first but I feel as though I am into the flow of how Django works and what my project should do to be able to work with this split. 
 
 #### Sprint Retrospective
-
+I nearly achieved all of my must haves but had to pause to add automated testing to the whole project so far, as I had not added any up to this point. I was very close to finishing the final must have but I had implemented two independent forms on the same page and they were interfering with each other. I think I'll need to split them up so they can be on different pages and not influence each other as they currently do. I also had to replace my database due to having assigned IDs to my models and not realising that Django does this automatically for you. There were significant delays this sprint. 
+ 
 ### Sprint Five: 03/07 to 09/07
+![Sprint Five](documentation/sprint5.png) 
+
+#### Sprint Planning
+I have planned the remainder of my stories into sprint five with 3 must haves, 2 should haves and 2 could haves. If I need a sixth sprint, I will of course carry over any that were not completed this sprint. 
+
+#### Sprint Retrospective
 
 
 ### Future Development
-Likely to be, at a minimum:
+These three stories were nice to haves if I found I had enough time to implement them. They are under Epic 4: Enhanced Issue Management. In the end, I only had enough time to implement the first story in this epic: 'Provide a Change History Log'. I completed all other stories in all other epics. 
+
+- Attach Files to Issues
 - Connect 2+ Issues as Related
 - Search for Issues by Keyword
 
