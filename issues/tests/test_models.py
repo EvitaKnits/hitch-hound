@@ -133,12 +133,26 @@ class CommentModelTest(TestCase):
     def setUp(self):
         self.project = Project.objects.create(title='Test Project')
         self.reporter = User.objects.create_user(username='reporter', password='test')
+        self.user = User.objects.create_user(username='commenter', password='test')
         self.issue = Issue.objects.create(
             title='Test Issue',
             description='This is a test issue',
             project=self.project,
             reporter=self.reporter,
         )
+
+    def test_create_comment(self):
+        comment = Comment.objects.create(comment_text='This is a test comment', user=self.user, issue=self.issue)
+        self.assertEqual(comment.comment_text, 'This is a test comment')
+        self.assertEqual(comment.user, self.user)
+        self.assertEqual(comment.issue, self.issue)
+        self.assertIsNotNone(comment.commented_at)
+
+    def test_comment_text_cannot_be_blank(self):
+        comment = Comment(comment_text='', user=self.user, issue=self.issue)
+        with self.assertRaises(ValidationError):
+            comment.full_clean()
+            comment.save()
 
     def test_str_method(self):
         comment = Comment.objects.create(
