@@ -2,10 +2,9 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.core import mail
-from users.forms import CustomUserCreationForm
-from django.contrib.auth.forms import PasswordResetForm
-
-# Create your tests here.
+from users.forms import CustomUserCreationForm, UserProfileForm
+from django.contrib.auth.forms import PasswordResetForm, PasswordChangeForm
+from issues.models import Issue, Project 
 
 User = get_user_model()
 
@@ -14,7 +13,10 @@ class UserViewsTest(TestCase):
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create_user(username='testuser', email='testuser@example.com', password='password')
-        
+        self.project = Project.objects.create(title='Test Project')  # Create a Project instance
+        self.issue1 = Issue.objects.create(title='Issue 1', reporter=self.user, project=self.project)
+        self.issue2 = Issue.objects.create(title='Issue 2', reporter=self.user, project=self.project)
+
     def test_user_login_get(self):
         response = self.client.get(reverse('login'))
         self.assertEqual(response.status_code, 200)
@@ -79,8 +81,6 @@ class UserViewsTest(TestCase):
 
     def test_password_reset_post_failure(self):
         response = self.client.post(reverse('password_reset'), {'email': 'nonexistent@example.com'})
-        if response.status_code != 302:
-            print(response.context['form'].errors)
         self.assertEqual(response.status_code, 302)  # Expecting a redirect
         self.assertEqual(len(mail.outbox), 0)
 
@@ -99,3 +99,50 @@ class UserViewsTest(TestCase):
         response = self.client.get(reverse('profile'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'profile.html')
+        self.assertIsInstance(response.context['form'], UserProfileForm)
+
+    def test_change_password_get(self):
+        self.client.login(username='testuser', password='password')
+        response = self.client.get(reverse('change_password'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'change_password.html')
+        self.assertIsInstance(response.context['password_change_form'], PasswordChangeForm)
+
+    def test_change_password_post_success(self):
+        self.client.login(username='testuser', password='password')
+        response = self.client.post(reverse('change_password'), {
+            'old_password': 'password',
+            'new_password1': 'new_complex_password_123',
+            'new_password2': 'new_complex_password_123'
+        })
+        self.assertRedirects(response, reverse('profile'))
+        self.user.refresh_from_db()
+        self.assertTrue(self.user.check_password('new_complex_password_123'))
+
+    def test_change_password_post_failure(self):
+        self.client.login(username='testuser', password='password')
+        response = self.client.post(reverse('change_password'), {
+            'old_password': 'password',
+            'new_password1': 'new_complex_password_123',
+            'new_password2': 'different_password'
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'change_password.html')
+        self.assertIsInstance(response.context['password_change_form'], PasswordChangeForm)
+
+    def test_user_profile_sort_by_title(self):
+        self.client.login(username='testuser', password='password')
+        response = self.client.get(reverse('profile'), {'sort_by': 'title', 'order': 'asc'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'profile.html')
+        self.assertEqual(response.context['page_obj'].object_list[0].title, 'Issue 1')
+        self.assertEqual(response.context['page_obj'].object_list[1].title, 'Issue 2')
+
+    def test_user_profile_pagination(self):
+        self.client.login(username='testuser', password='password')
+        for i in range(15):  
+            Issue.objects.create(title=f'Issue {i+3}', reporter=self.user, project=self.project)
+        response = self.client.get(reverse('profile'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'profile.html')
+        self.assertEqual(len(response.context['page_obj']), 12) 
