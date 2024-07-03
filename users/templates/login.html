@@ -17,7 +17,11 @@
                     <h2>Login</h2>
                 </div>
                 <!-- Alert Placeholder -->
-                <div id="liveAlertPlaceholder"></div>
+                {% if error_message %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error_message }}
+                    </div>
+                {% endif %}
                 <div class="card-body">
                     <form method="post" action="{% url 'login' %}">
                         {% csrf_token %}
@@ -48,10 +52,4 @@
 
 {% block extra_js %}
 <script src="{% static 'js/alert.js' %}"></script>
-<script>
-    const error = '{{ error_message }}';
-    if (error != '') {
-        appendAlert(error,'danger')
-    } 
-</script>
 {% endblock %}

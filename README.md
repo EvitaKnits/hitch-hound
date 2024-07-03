@@ -493,6 +493,14 @@ I had to delete the ID fields from all my models and recreate my database. The i
 #### Solution
 The solution to this was going through systematically, encountering errors and resolving them until all references to IDs had either been removed or switched to the auto-assigned ones in Django. 
 
+### Bug Two
+
+#### Issue
+I noticed that the error message on my login page wasn't working anymore. When incorrect login credentials are entered, the page simply reloads without displaying any error message, leaving the user unaware of why they haven't been logged in. 
+
+#### Solution
+The solution involved modifying the template to properly handle and display error messaging when login credentials are incorrect. I previously had a small bit of Javascript at the bottom of the page to handle this, but as it wasn't working, I changed to using Django templating language in the body of the template and it started working again. See related commit for the code change.
+
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
 
