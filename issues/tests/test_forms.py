@@ -1,6 +1,6 @@
 from django.test import TestCase
-from issues.forms import IssueForm
-from issues.models import Issue
+from issues.forms import IssueForm, CommentForm
+from issues.models import Issue, Comment
 from projects.models import Project
 from users.models import User
 
@@ -47,4 +47,43 @@ class IssueFormTest(TestCase):
         })
         self.assertFalse(form.is_valid())
         self.assertIn('title', form.errors)
+        self.assertIn('severity', form.errors) 
+
+    def test_issue_form_invalid_choices(self):
+        form = IssueForm(data={
+            'title': 'Test Issue',
+            'description': 'Test Description',
+            'severity': 'invalid_choice',
+            'project': self.project.id,
+            'type': 'invalid_choice',
+            'status': 'invalid_choice',
+            'developer': self.developer.id,
+            'quality_assurance': self.quality_assurance.id,
+            'product_manager': self.product_manager.id,
+        })
+        self.assertFalse(form.is_valid())
         self.assertIn('severity', form.errors)
+        self.assertIn('type', form.errors)
+        self.assertIn('status', form.errors)
+
+class CommentFormTest(TestCase):
+    def setUp(self):
+        self.project = Project.objects.create(title="Test Project")
+        self.reporter = User.objects.create_user(username='reporter', password='test')
+        self.issue = Issue.objects.create(
+            title='Test Issue',
+            description='This is a test issue',
+            project=self.project,
+            reporter=self.reporter,
+        )
+
+    def test_comment_form_valid_data(self):
+        form = CommentForm(data={
+            'comment_text': 'This is a comment.',
+        })
+        self.assertTrue(form.is_valid())
+
+    def test_comment_form_no_data(self):
+        form = CommentForm(data={})
+        self.assertFalse(form.is_valid())
+        self.assertIn('comment_text', form.errors)

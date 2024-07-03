@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
-from issues.models import Issue, UserIssue
+from issues.models import Issue, UserIssue, Comment
 from projects.models import Project
 from django.core.exceptions import ValidationError
 
@@ -73,6 +73,24 @@ class IssueModelTest(TestCase):
             )
             issue.full_clean()
 
+    def test_related_objects_deletion(self):
+        issue = Issue.objects.create(
+            title='Test Issue',
+            description='This is a test issue',
+            project=self.project,
+            reporter=self.reporter,
+        )
+        comment = Comment.objects.create(
+            comment_text='This is a comment',
+            user=self.reporter,
+            issue=issue,
+        )
+        issue_id = issue.id
+        comment_id = comment.id
+        issue.delete()
+        self.assertFalse(Issue.objects.filter(id=issue_id).exists())
+        self.assertFalse(Comment.objects.filter(id=comment_id).exists())
+
 class UserIssueModelTest(TestCase):
     def setUp(self):
         self.project = Project.objects.create(title='Test Project')
@@ -109,4 +127,23 @@ class UserIssueModelTest(TestCase):
                 issue=self.issue,
                 role='developer',
             )
-            duplicate_user_issue.full_clean()  
+            duplicate_user_issue.full_clean()
+
+class CommentModelTest(TestCase):
+    def setUp(self):
+        self.project = Project.objects.create(title='Test Project')
+        self.reporter = User.objects.create_user(username='reporter', password='test')
+        self.issue = Issue.objects.create(
+            title='Test Issue',
+            description='This is a test issue',
+            project=self.project,
+            reporter=self.reporter,
+        )
+
+    def test_str_method(self):
+        comment = Comment.objects.create(
+            comment_text='This is a comment that is longer than 20 characters',
+            user=self.reporter,
+            issue=self.issue,
+        )
+        self.assertEqual(str(comment), 'This is a comment th')

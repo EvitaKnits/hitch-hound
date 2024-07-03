@@ -72,7 +72,7 @@ def add_comment(request, issue_id):
             return redirect('issue_detail', id=issue.id)
     else:
         form = CommentForm()
-    return render(request, 'issue_detail.html', {'issue': issue, 'form': form, 'comments': issue.comments.all()})
+    return render(request, 'issue_detail.html', {'issue': issue, 'form': form, 'comments': issue.comment_set.all()})
 
 @login_required  
 def create_issue(request):

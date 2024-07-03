@@ -1,9 +1,9 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-from issues.models import Issue
+from issues.models import Issue, Comment
 from projects.models import Project
-from issues.forms import IssueForm
+from issues.forms import IssueForm, CommentForm
 
 # Create your tests here.
 User = get_user_model()
@@ -45,6 +45,15 @@ class IssueViewsTest(TestCase):
         self.assertTemplateUsed(response, 'issues.html')
         self.assertIn('page_obj', response.context)
         self.assertEqual(len(response.context['page_obj']), 2)
+
+    def test_list_issues_sorting(self):
+        response = self.client.get(reverse('issues') + '?sort_by=title&order=desc')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'issues.html')
+        self.assertIn('page_obj', response.context)
+        issues = list(response.context['page_obj'])
+        self.assertEqual(issues[0], self.issue2)
+        self.assertEqual(issues[1], self.issue1)
         
     def test_issue_detail_view(self):
         response = self.client.get(reverse('issue_detail', args=[self.issue1.id]))
@@ -99,3 +108,21 @@ class IssueViewsTest(TestCase):
         response = self.client.post(reverse('delete_issue', args=[self.issue1.id]))
         self.assertEqual(response.status_code, 302)  # Redirects to 'issues'
         self.assertFalse(Issue.objects.filter(id=self.issue1.id).exists())
+
+    def test_add_comment_view(self):
+        data = {
+            'comment_text': 'This is a test comment.',
+        }
+        response = self.client.post(reverse('add_comment', args=[self.issue1.id]), data)
+        self.assertEqual(response.status_code, 302)  # Redirects to 'issue_detail'
+        self.assertTrue(Comment.objects.filter(comment_text='This is a test comment.', issue=self.issue1).exists())
+
+    def test_add_comment_view_invalid(self):
+        data = {
+            'comment_text': '',
+        }
+        response = self.client.post(reverse('add_comment', args=[self.issue1.id]), data)
+        self.assertEqual(response.status_code, 200)  # Stays on the same page
+        self.assertIn('form', response.context)
+        self.assertIsInstance(response.context['form'], CommentForm)
+        self.assertFalse(Comment.objects.filter(comment_text='', issue=self.issue1).exists())
