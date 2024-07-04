@@ -88,12 +88,13 @@ def create_issue(request):
     
     return render(request, 'create_issue.html', {'form': form})
 
+@login_required
 def edit_issue(request, id):
     issue = get_object_or_404(Issue, id=id)
     if request.method == 'POST':
         form = IssueForm(request.POST, instance=issue)
         if form.is_valid():
-            form.save()
+            form.save(user=request.user)  # Pass the user to the save method
             return redirect('issue_detail', id=issue.id)
     else:
         form = IssueForm(instance=issue)

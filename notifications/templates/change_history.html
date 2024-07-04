@@ -1,19 +1,18 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block nav-icons %}
 <li class="nav-item">
     <button class="btn btn-primary nav-icons" id="openModalBtn"><i class="fa-solid fa-plus"></i></button>
 </li>
 <li class="nav-item">
-    <button class="btn btn-primary nav-icons" href="{% url 'notifications' %}"><i
-            class="fa-regular fa-bell"></i></button>
+    <button class="btn btn-primary nav-icons" href="{% url 'notifications' %}"><i class="fa-regular fa-bell"></i></button>
 </li>
 {% endblock %}
 
 {% block nav %}
 <li class="nav-item active">
-    <a class="nav-link" href="{% url 'issues' %}">Issues<span
-            class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'issues' %}">Issues<span class="sr-only">(current)</span></a>
 </li>
 <li class="nav-item">
     <a class="nav-link" href="{% url 'projects' %}">Projects</a>
@@ -31,7 +30,53 @@
 
 {% block content %}
 <h1>Change History</h1>
-<p>This is the change history page.</p>
+
+<div class="d-none d-md-block table-responsive">
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr class="table-secondary">
+                <th scope="col">Issue ID</th>
+                <th scope="col">Field Changed</th>
+                <th scope="col">Old Value</th>
+                <th scope="col">New Value</th>
+                <th scope="col">Changed By</th>
+                <th scope="col">Changed At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for change in changes %}
+            <tr class="table-light">
+                <td>#{{ change.issue.id }}</td>
+                <td>{{ change.get_field_changed_display }}</td>
+                <td>{{ change.old_value }}</td>
+                <td>{{ change.new_value }}</td>
+                <td>{{ change.user.username }}</td>
+                <td>{{ change.changed_at }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No changes found for this issue.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="d-block d-md-none">
+    {% for change in changes %}
+    <div class="card mb-3">
+        <div class="card-header d-flex justify-content-between">
+            <span>{{ change.user.username }}</span>
+            <span class="text-muted">{{ change.changed_at }}</span>
+        </div>
+        <div class="card-body">
+            <p class="card-text"><strong>Field Changed:</strong> {{ change.get_field_changed_display }}</p>
+            <p class="card-text"><strong>Old Value:</strong> {{ change.old_value }}</p>
+            <p class="card-text"><strong>New Value:</strong> {{ change.new_value }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 
 <!-- New Item Modal -->
 <div class="modal-custom" id="myModal">

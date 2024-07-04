@@ -36,6 +36,12 @@ class Issue(models.Model):
     quality_assurance = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, limit_choices_to={'role': 'quality_assurance'}, related_name='qa_issues')
     product_manager = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, limit_choices_to={'role': 'product_manager'}, related_name='pm_issues')
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='updated_issues')
+    
+    def save(self, *args, **kwargs):
+        if 'user' in kwargs:
+            self.updated_by = kwargs.pop('user')
+        super().save(*args, **kwargs)
 
 class UserIssue(models.Model):
     ROLE_CHOICES = (

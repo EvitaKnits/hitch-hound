@@ -33,6 +33,10 @@
 <h1>Issue Detail</h1>
 <table class="table table-bordered" id="issue-table">
     <tr>
+        <th>ID</th>
+        <td>#{{ issue.id }}</td>
+    </tr>
+    <tr>
         <th>Title</th>
         <td>{{ issue.title }}</td>
     </tr>
@@ -76,6 +80,7 @@
     style="display: none;">
     {% csrf_token %}
 </form>
+<a href="{% url 'issue_change_history' issue.id %}" class="btn btn-secondary">Change History</a>
 
 <!-- Add Comment Form -->
 <h3 class="mt-5">Add a Comment</h3>

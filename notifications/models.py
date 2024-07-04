@@ -21,5 +21,8 @@ class Change(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     changed_at = models.DateTimeField(auto_now_add=True)
     field_changed = models.CharField(max_length=50, choices=FIELD_CHOICES)
-    old_value = models.CharField(max_length=255)
-    new_value = models.CharField(max_length=255)
+    old_value = models.TextField()
+    new_value = models.TextField()
+
+    def __str__(self):
+        return f'{self.field_changed} changed from {self.old_value} to {self.new_value} by {self.user}'
