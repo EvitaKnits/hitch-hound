@@ -30,18 +30,23 @@
 {% endblock %}
 
 {% block content %}
-<h1 class="text-center">Notifications</h1>
+<h1 class="text-center">Notifications</h1> 
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row justify-content-center"> 
+        <div class="col-md-8"> 
             {% for notification in page_obj %}
             <a href="{% url 'issue_detail' notification.issue.id %}" class="card-link">
-                <div class="card mb-3 mx-auto notification-card">
+                <div class="card mb-3 mx-auto notification-card"> 
                     <div class="card-body">
                         <h5 class="card-title">Issue #{{ notification.issue.id }} "{{ notification.issue.title }}"</h5>
                         {% if notification.user %}
                         <p class="card-text">
                             {{ notification.user.username }} changed {{ notification.field_changed }} on issue #{{ notification.issue.id }} "{{ notification.issue.title }}" from "{{ notification.old_value }}" to "{{ notification.new_value }}".
+                        </p>
+                        <p class="card-text"><small class="text-muted">{{ notification.changed_at }}</small></p>
+                        {% elif notification.old_value == request.user.username %}
+                        <p class="card-text">
+                            You were removed from the role of {{ notification.field_changed }} on issue #{{ notification.issue.id }} "{{ notification.issue.title }}".
                         </p>
                         <p class="card-text"><small class="text-muted">{{ notification.changed_at }}</small></p>
                         {% else %}
