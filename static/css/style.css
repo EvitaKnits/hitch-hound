@@ -201,6 +201,26 @@ nav li i {
     padding: 1rem;
 }
 
+/* NOTIFICATION CARD STYLING */
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.card-link:hover .notification-card {
+    background-color: #e2e3e5; 
+}
+
+.notification-card {
+    transition: background-color 0.3s ease;
+}
+
+.card-link:hover {
+    text-decoration: none;
+}
+
 /* TABLE STYLING */
 #issue-table {
     width: 100%;
