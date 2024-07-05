@@ -6,8 +6,7 @@
     <button class="btn btn-primary nav-icons" id="openModalBtn"><i class="fa-solid fa-plus"></i></button>
 </li>
 <li class="nav-item">
-    <button class="btn btn-primary nav-icons" href="{% url 'notifications' %}"><i
-            class="fa-regular fa-bell"></i></button>
+    <a class="btn btn-primary nav-icons" href="{% url 'notifications' %}"><i class="fa-regular fa-bell"></i></a>
 </li>
 {% endblock %}
 
@@ -39,21 +38,10 @@
                 <div class="card mb-3 mx-auto notification-card"> 
                     <div class="card-body">
                         <h5 class="card-title">Issue #{{ notification.issue.id }} "{{ notification.issue.title }}"</h5>
-                        {% if notification.user %}
                         <p class="card-text">
-                            {{ notification.user.username }} changed {{ notification.field_changed }} on issue #{{ notification.issue.id }} "{{ notification.issue.title }}" from "{{ notification.old_value }}" to "{{ notification.new_value }}".
+                            {{ notification.user.username }} changed {{ notification.get_field_changed_display }} from "{{ notification.old_value }}" to "{{ notification.new_value }}".
                         </p>
                         <p class="card-text"><small class="text-muted">{{ notification.changed_at }}</small></p>
-                        {% elif notification.old_value == request.user.username %}
-                        <p class="card-text">
-                            You were removed from the role of {{ notification.field_changed }} on issue #{{ notification.issue.id }} "{{ notification.issue.title }}".
-                        </p>
-                        <p class="card-text"><small class="text-muted">{{ notification.changed_at }}</small></p>
-                        {% else %}
-                        <p class="card-text">
-                            You were added to the issue as {{ notification.get_role_display }}.
-                        </p>
-                        {% endif %}
                     </div>
                 </div>
             </a>

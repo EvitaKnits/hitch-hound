@@ -20,16 +20,9 @@ def list_notifications(request):
         Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
     ).exclude(user=current_user)
 
-    # Fetch notifications for user being added or removed from an issue
-    added_issues = UserIssue.objects.filter(user=current_user, role__in=['developer', 'quality_assurance', 'product_manager'])
-    removed_issues = Change.objects.filter(
-        Q(field_changed='developer', old_value=current_user.username) |
-        Q(field_changed='quality_assurance', old_value=current_user.username) |
-        Q(field_changed='product_manager', old_value=current_user.username)
-    )
-
-    # Combine all notifications into a single list and paginate them
-    notifications = list(changes) + list(added_issues) + list(removed_issues)
+    # Combine all notifications into a single list and sort by date
+    notifications = list(changes)
+    notifications.sort(key=lambda x: x.changed_at if isinstance(x, Change) else x.created_at, reverse=True)
 
     paginator = Paginator(notifications, 12)  # 12 notifications per page
     page_number = request.GET.get('page')
