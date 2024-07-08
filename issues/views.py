@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from issues.forms import IssueForm, CommentForm
-from issues.models import Issue, Comment
+from issues.models import Issue, Comment, UserIssue
 from projects.models import Project
+from notifications.models import Change
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.db.models.functions import Lower
-from django.db.models import F
+from django.db.models import F, Q
+from django.utils import timezone
 
 # Create your views here.
 
@@ -40,6 +42,21 @@ def list_issues(request):
     def toggle_order(current_order):
         return 'asc' if current_order == 'desc' else 'desc'
 
+    # Calculate new notifications
+    current_user = request.user
+    last_visited = current_user.last_visited_notifications or timezone.now()
+
+    # Fetch issues the user is assigned to
+    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
+
+    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
+    changes = Change.objects.filter(
+        Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
+    ).exclude(user=current_user)
+
+    # Determine if there are new notifications
+    new_notifications = changes.filter(changed_at__gt=last_visited).exists()
+
     context = {
         'active_page': 'issues',
         'show_toast': show_toast,
@@ -48,6 +65,7 @@ def list_issues(request):
         'sort_by': sort_by,
         'order': order,
         'toggle_order': toggle_order(order),
+        'new_notifications': new_notifications,
     }
 
     return render(request, 'issues.html', context)
@@ -57,7 +75,29 @@ def issue_detail(request, id):
     issue = get_object_or_404(Issue, id=id)
     comments = Comment.objects.filter(issue=issue).order_by('-commented_at')
     form = CommentForm()
-    return render(request, 'issue_detail.html', {'issue': issue, 'comments': comments, 'form': form})
+
+    # Calculate new notifications
+    current_user = request.user
+    last_visited = current_user.last_visited_notifications or timezone.now()
+
+    # Fetch issues the user is assigned to
+    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
+
+    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
+    changes = Change.objects.filter(
+        Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
+    ).exclude(user=current_user)
+
+    # Determine if there are new notifications
+    new_notifications = changes.filter(changed_at__gt=last_visited).exists()
+
+    context = {
+        'issue': issue, 
+        'comments': comments,
+        'form': form, 
+        'new_notifications': new_notifications,
+    }
+    return render(request, 'issue_detail.html', context)
 
 @login_required
 def add_comment(request, issue_id):
@@ -86,7 +126,27 @@ def create_issue(request):
     else:
         form = IssueForm()
     
-    return render(request, 'create_issue.html', {'form': form})
+    # Calculate new notifications
+    current_user = request.user
+    last_visited = current_user.last_visited_notifications or timezone.now()
+
+    # Fetch issues the user is assigned to
+    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
+
+    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
+    changes = Change.objects.filter(
+        Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
+    ).exclude(user=current_user)
+
+    # Determine if there are new notifications
+    new_notifications = changes.filter(changed_at__gt=last_visited).exists()
+
+    context = {
+        'form': form, 
+        'new_notifications': new_notifications,
+    }
+
+    return render(request, 'create_issue.html', context)
 
 @login_required
 def edit_issue(request, id):
@@ -98,7 +158,28 @@ def edit_issue(request, id):
             return redirect('issue_detail', id=issue.id)
     else:
         form = IssueForm(instance=issue)
-    return render(request, 'edit_issue.html', {'form': form, 'issue': issue})
+
+    # Calculate new notifications
+    current_user = request.user
+    last_visited = current_user.last_visited_notifications or timezone.now()
+
+    # Fetch issues the user is assigned to
+    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
+
+    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
+    changes = Change.objects.filter(
+        Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
+    ).exclude(user=current_user)
+
+    # Determine if there are new notifications
+    new_notifications = changes.filter(changed_at__gt=last_visited).exists()
+
+    context = {
+        'form': form, 
+        'issue': issue, 
+        'new_notifications': new_notifications,
+    }
+    return render(request, 'edit_issue.html', context)
 
 @login_required
 def delete_issue(request, id):
@@ -106,4 +187,5 @@ def delete_issue(request, id):
     if request.method == 'POST':
         issue.delete()
         return redirect('issues')
+
     return redirect('issue_detail', id=id)

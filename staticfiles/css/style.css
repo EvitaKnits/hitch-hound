@@ -201,7 +201,7 @@ nav li i {
     padding: 1rem;
 }
 
-/* NOTIFICATION CARD STYLING */
+/* NOTIFICATIONS STYLING */
 
 .card-link {
     text-decoration: none;
@@ -219,6 +219,10 @@ nav li i {
 
 .card-link:hover {
     text-decoration: none;
+}
+
+.bell-notification {
+   color: #FDB73E;
 }
 
 /* TABLE STYLING */

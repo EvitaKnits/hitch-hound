@@ -14,12 +14,15 @@ from django.urls import reverse_lazy
 from django.conf import settings
 from django.contrib.auth.views import PasswordResetConfirmView
 from django.contrib.auth.decorators import login_required
-from issues.models import Issue
+from issues.models import Issue, UserIssue
 from django.db import models
 from django.core.paginator import Paginator
 from users.forms import UserProfileForm
 from django.db.models.functions import Lower
-from django.db.models import F
+from django.db.models import F, Q
+from notifications.models import Change
+from django.utils import timezone
+
 
 # Create your views here.
 
@@ -130,6 +133,21 @@ def user_profile(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
+    # Calculate new notifications
+    current_user = request.user
+    last_visited = current_user.last_visited_notifications or timezone.now()
+
+    # Fetch issues the user is assigned to
+    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
+
+    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
+    changes = Change.objects.filter(
+        Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
+    ).exclude(user=current_user)
+
+    # Determine if there are new notifications
+    new_notifications = changes.filter(changed_at__gt=last_visited).exists()
+
     context = {
         'form': profile_form,
         'username': user.username,
@@ -137,6 +155,7 @@ def user_profile(request):
         'sort_by': sort_by,
         'order': order,
         'toggle_order': toggle_order,
+        'new_notifications': new_notifications,
     }
     return render(request, 'profile.html', context)
 
@@ -150,5 +169,25 @@ def change_password(request):
             return redirect('profile')
     else:
         password_change_form = PasswordChangeForm(user=request.user)
+    
+    # Calculate new notifications
+    current_user = request.user
+    last_visited = current_user.last_visited_notifications or timezone.now()
 
-    return render(request, 'change_password.html', {'password_change_form': password_change_form})
+    # Fetch issues the user is assigned to
+    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
+
+    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
+    changes = Change.objects.filter(
+        Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
+    ).exclude(user=current_user)
+
+    # Determine if there are new notifications
+    new_notifications = changes.filter(changed_at__gt=last_visited).exists()
+
+    context = {
+        'password_change_form': password_change_form,
+        'new_notifications': new_notifications,
+    }
+
+    return render(request, 'change_password.html', context)
