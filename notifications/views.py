@@ -66,7 +66,15 @@ def change_history(request, issue_id):
     # Determine if there are new notifications
     new_notifications = all_changes.filter(changed_at__gt=last_visited).exists()
 
+    # Pagination
+    paginator = Paginator(changes, 12)  # 12 changes per page
+
+    page_number = request.GET.get('page')
+
+    page_obj = paginator.get_page(page_number)
+
     context = {
+        'page_obj': page_obj,
         'changes': changes,
         'new_notifications': new_notifications,
         'issue': issue,
