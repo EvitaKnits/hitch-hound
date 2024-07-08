@@ -1,11 +1,23 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from .models import Change
 
 class ChangeAdmin(admin.ModelAdmin):
-    list_display = ('issue', 'user', 'changed_at', 'field_changed', 'old_value', 'new_value')
-    readonly_fields = ('changed_at',)
-    fields = ('issue', 'user', 'field_changed', 'old_value', 'new_value')
-    
+    list_display = ('id', 'get_issue_id', 'get_issue_title', 'user', 'field_changed', 'old_value', 'new_value', 'changed_at')
+    readonly_fields = ('changed_at', 'id')
+    fields = ('id', 'issue', 'user', 'field_changed', 'old_value', 'new_value')
+    search_fields = ('issue__title', 'user__username', 'field_changed', 'old_value', 'new_value')
+    list_filter = ('field_changed', 'changed_at', 'user')
+    ordering = ('id',)
+
+    def get_issue_id(self, obj):
+        return format_html('<a href="/admin/issues/issue/{}/change/">{}</a>', obj.issue.id, obj.issue.id)
+    get_issue_id.short_description = 'Issue ID'
+
+    def get_issue_title(self, obj):
+        return obj.issue.title
+    get_issue_title.short_description = 'Issue Title'
+
     def save_model(self, request, obj, form, change):
         if not obj.user:
             obj.user = request.user
