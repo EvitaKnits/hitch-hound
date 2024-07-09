@@ -15,6 +15,17 @@ class IssueModelTest(TestCase):
         self.developer = User.objects.create_user(username='developer', password='test', role='developer')
         self.qa = User.objects.create_user(username='qa', password='test', role='quality_assurance')
         self.pm = User.objects.create_user(username='pm', password='test', role='product_manager')
+        self.superuser = User.objects.create_superuser(username='superuser', password='test123')
+
+        self.issue = Issue.objects.create(
+            title='Test Issue',
+            description='This is a test issue',
+            severity='low',
+            project=self.project,
+            type='bug',
+            status='open',
+            reporter=self.reporter
+        )
 
     def test_create_issue(self):
         issue = Issue.objects.create(
@@ -91,43 +102,36 @@ class IssueModelTest(TestCase):
         self.assertFalse(Issue.objects.filter(id=issue_id).exists())
         self.assertFalse(Comment.objects.filter(id=comment_id).exists())
 
-class UserIssueModelTest(TestCase):
-    def setUp(self):
-        self.project = Project.objects.create(title='Test Project')
-        self.reporter = User.objects.create_user(username='reporter', password='test')
-        self.issue = Issue.objects.create(
-            title='Test Issue',
-            description='This is a test issue',
-            project=self.project,
-            reporter=self.reporter,
-        )
-        self.user = User.objects.create_user(username='developer', password='test')
+    # New tests for permission system
+    def test_can_user_update_status(self):
+        # Developer can only move to 'in_progress'
+        self.assertTrue(self.issue.can_user_update_status(self.developer, 'in_progress'))
+        self.assertFalse(self.issue.can_user_update_status(self.developer, 'closed'))
 
-    def test_create_user_issue(self):
-        user_issue = UserIssue.objects.create(
-            user=self.user,
-            issue=self.issue,
-            role='developer',
-        )
-        self.assertEqual(user_issue.user, self.user)
-        self.assertEqual(user_issue.issue, self.issue)
-        self.assertEqual(user_issue.role, 'developer')
+        # QA can only move to 'testing'
+        self.assertTrue(self.issue.can_user_update_status(self.qa, 'testing'))
+        self.assertFalse(self.issue.can_user_update_status(self.qa, 'approved'))
 
-    def test_unique_together_constraint(self):
-        # Create a UserIssue instance
-        UserIssue.objects.create(
-            user=self.user,
-            issue=self.issue,
-            role='developer',
-        )
-        # Attempt to create a duplicate UserIssue instance
-        with self.assertRaises(ValidationError):
-            duplicate_user_issue = UserIssue(
-                user=self.user,
-                issue=self.issue,
-                role='developer',
-            )
-            duplicate_user_issue.full_clean()
+        # Product Manager can move to 'approved', 'closed', and 'cancelled'
+        self.assertTrue(self.issue.can_user_update_status(self.pm, 'approved'))
+        self.assertTrue(self.issue.can_user_update_status(self.pm, 'closed'))
+        self.assertTrue(self.issue.can_user_update_status(self.pm, 'cancelled'))
+        self.assertFalse(self.issue.can_user_update_status(self.pm, 'testing'))
+
+        # Superuser can move to any status
+        self.assertTrue(self.issue.can_user_update_status(self.superuser, 'closed'))
+        self.assertTrue(self.issue.can_user_update_status(self.superuser, 'in_progress'))
+
+    def test_save_method_permissions(self):
+        self.issue.status = 'in_progress'
+        self.issue.save(user=self.developer)
+        self.assertEqual(self.issue.status, 'in_progress')
+
+        self.issue.status = 'closed'
+        success = self.issue.save(user=self.developer)
+        self.assertFalse(success)
+        self.issue.refresh_from_db()  # Ensure we get the latest status from the database
+        self.assertNotEqual(self.issue.status, 'closed')
 
 class CommentModelTest(TestCase):
     def setUp(self):
