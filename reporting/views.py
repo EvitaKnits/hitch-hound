@@ -4,7 +4,9 @@ from django.utils import timezone
 from django.db.models import Q
 from notifications.models import Change
 from issues.models import UserIssue
-
+from django.db.models import Count
+from issues.models import Issue
+from projects.models import Project
 
 
 # Create your views here.
@@ -31,3 +33,29 @@ def list_reports(request):
     }
 
     return render(request, 'reports.html', context)
+
+def issue_listing_by_status(request):
+    status_choices = Issue.STATUS_CHOICES
+    project_choices = Project.objects.all()
+    
+    # Get selected statuses and projects from the request
+    selected_statuses = request.GET.getlist('status')
+    selected_project_ids = request.GET.getlist('project_id')
+    
+    # Filter issues based on the selected statuses and projects
+    issues = Issue.objects.all()
+    
+    if selected_statuses:
+        issues = issues.filter(status__in=selected_statuses)
+    
+    if selected_project_ids:
+        issues = issues.filter(project_id__in=selected_project_ids)
+    
+    context = {
+        'issues': issues,
+        'status_choices': status_choices,
+        'project_choices': project_choices,
+        'selected_statuses': selected_statuses,
+        'selected_project_ids': selected_project_ids,
+    }
+    return render(request, 'issue_listing_by_status.html', context)

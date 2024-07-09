@@ -48,6 +48,10 @@ urlpatterns = [
     path('notifications/', notification_views.list_notifications, name='notifications'),
     path('change_history/<int:issue_id>/', notification_views.change_history, name='issue_change_history'),
     path('reports/', reporting_views.list_reports, name='reports'),
+    path('reports/issue_listing_by_status/', reporting_views.issue_listing_by_status, name='issue_listing_by_status'),
+    path('reports/issue_status_summary/', reporting_views.issue_status_summary, name='issue_status_summary'),
+    path('reports/issue_severity_summary/', reporting_views.issue_severity_summary, name='issue_severity_summary'),
+    path('reports/issue_assignee_summary/', reporting_views.issue_assignee_summary, name='issue_assignee_summary'),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
