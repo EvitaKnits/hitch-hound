@@ -37,11 +37,42 @@ class Issue(models.Model):
     product_manager = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, limit_choices_to={'role': 'product_manager'}, related_name='pm_issues')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='updated_issues')
-    
+
+    def get_allowed_statuses_for_role(self, role):
+        if role == 'developer':
+            return ['open', 'in_progress']
+        elif role == 'quality_assurance':
+            return ['open', 'testing']
+        elif role == 'product_manager':
+            return ['open', 'approved', 'closed', 'cancelled']
+        elif role == 'superuser':
+            return ['open', 'in_progress', 'testing', 'approved', 'closed', 'cancelled']
+        return ['open']
+
+    def can_user_update_status(self, user, new_status):
+        if user is None:
+            return False
+        if user.is_superuser:
+            return True
+        role = user.role
+        allowed_statuses = self.get_allowed_statuses_for_role(role)
+        print(f"User Role: {role}, Attempted Status: {new_status}, Allowed Statuses: {allowed_statuses}")
+        return new_status in allowed_statuses
+
     def save(self, *args, **kwargs):
-        if 'user' in kwargs:
-            self.updated_by = kwargs.pop('user')
+        user = kwargs.pop('user', None)
+        if user:
+            self.updated_by = user
+
+        # Only enforce permissions if the status is being changed
+        if self.pk:
+            old_issue = Issue.objects.get(pk=self.pk)
+            if old_issue.status != self.status:
+                if not self.can_user_update_status(user, self.status):
+                    return False  # Return False if permission is denied
+
         super().save(*args, **kwargs)
+        return True  # Return True if save is successful
 
 class UserIssue(models.Model):
     ROLE_CHOICES = (

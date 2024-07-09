@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, UserManager as DefaultUserManager
+from django.contrib.auth.models import AbstractUser, UserManager as DefaultUserManager, Group
 from django.utils import timezone
 
 # Create your models here.
@@ -27,3 +27,15 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        role_group_map = {
+            'developer': 'Developers',
+            'quality_assurance': 'Quality Assurance',
+            'product_manager': 'Product Managers'
+        }
+        group_name = role_group_map.get(self.role)
+        if group_name:
+            group, created = Group.objects.get_or_create(name=group_name)
+            self.groups.set([group])

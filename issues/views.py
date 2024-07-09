@@ -154,8 +154,15 @@ def edit_issue(request, id):
     if request.method == 'POST':
         form = IssueForm(request.POST, instance=issue)
         if form.is_valid():
-            form.save(user=request.user)  # Pass the user to the save method
-            return redirect('issue_detail', id=issue.id)
+            success = form.save(user=request.user)  # Pass the user to the save method
+            if not success:
+                messages.error(
+                    request, 
+                    f"As a {request.user.role.replace('_', ' ')}, you do not have permission to change the issue status to {issue.status}. "
+                    f"You may only change it to {', '.join(issue.get_allowed_statuses_for_role(request.user.role))}."
+                )
+            else:
+                return redirect('issue_detail', id=issue.id)
     else:
         form = IssueForm(instance=issue)
 
@@ -175,11 +182,32 @@ def edit_issue(request, id):
     new_notifications = changes.filter(changed_at__gt=last_visited).exists()
 
     context = {
-        'form': form, 
-        'issue': issue, 
+        'form': form,
+        'issue': issue,
         'new_notifications': new_notifications,
     }
     return render(request, 'edit_issue.html', context)
+
+@login_required
+def change_issue_status(request, pk):
+    issue = get_object_or_404(Issue, pk=pk)
+    if request.method == 'POST':
+        new_status = request.POST.get('status')
+        user_role = request.user.role
+        allowed_statuses = issue.get_allowed_statuses_for_role(user_role)
+
+        if issue.can_user_update_status(request.user, new_status):
+            issue.status = new_status
+            issue.save(user=request.user)
+            return redirect('issue_detail', pk=pk)
+        else:
+            request.session['alert_message'] = (
+                f"As a {user_role.replace('_', ' ')}, you do not have permission to change the issue status to {new_status}. "
+                f"You may only change it to {', '.join(allowed_statuses)}."
+            )
+            request.session['alert_type'] = 'danger'
+            return redirect('issue_detail', pk=pk)
+    return render(request, 'issues/change_status.html', {'issue': issue})
 
 @login_required
 def delete_issue(request, id):

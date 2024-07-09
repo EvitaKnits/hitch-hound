@@ -1,9 +1,6 @@
 from django import forms
 from issues.models import Issue, Comment
 
-from django import forms
-from .models import Issue
-
 class IssueForm(forms.ModelForm):
     class Meta:
         model = Issue
@@ -14,7 +11,8 @@ class IssueForm(forms.ModelForm):
         if user:
             issue.updated_by = user
         if commit:
-            issue.save()
+            success = issue.save(user=user)
+            return success
         return issue
 
 class CommentForm(forms.ModelForm):

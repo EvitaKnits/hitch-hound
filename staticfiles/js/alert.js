@@ -12,17 +12,25 @@ document.addEventListener('DOMContentLoaded', () => {
         alertPlaceholder.append(wrapper);
     };
 
-    const alertType = sessionStorage.getItem('Alert Type');
-    if (alertType) {
-        if (alertType === 'Issue Deleted') {
+    const alertMessage = sessionStorage.getItem('alert_message');
+    const alertType = sessionStorage.getItem('alert_type');
+    if (alertMessage && alertType) {
+        appendAlert(alertMessage, alertType);
+        sessionStorage.removeItem('alert_message');
+        sessionStorage.removeItem('alert_type');
+    }
+
+    const predefinedAlertType = sessionStorage.getItem('Alert Type');
+    if (predefinedAlertType) {
+        if (predefinedAlertType === 'Issue Deleted') {
             appendAlert('You deleted this issue.', 'danger');
-        } else if (alertType === 'Project Deleted') {
+        } else if (predefinedAlertType === 'Project Deleted') {
             appendAlert('You deleted this project.', 'danger');
-        } else if (alertType === 'Issue Created') {
+        } else if (predefinedAlertType === 'Issue Created') {
             appendAlert('You created a new issue.', 'success');
-        } else if (alertType === 'Project Created') {
+        } else if (predefinedAlertType === 'Project Created') {
             appendAlert('You created a new project.', 'success');
-        } else if (alertType === 'Password Changed') {
+        } else if (predefinedAlertType === 'Password Changed') {
             appendAlert('You successfully changed your password.', 'success');
         }
         sessionStorage.removeItem('Alert Type');
