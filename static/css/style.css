@@ -245,6 +245,13 @@ nav li i {
     padding-left: 1rem;
 }
 
+/* CHART STYLING */
+
+.chart-container {
+    background-color: #F6F9F8; 
+    padding: 20px; 
+    border-radius: 8px;
+}
 /* MEDIA QUERIES */
 
 @media (max-width: 436px) {

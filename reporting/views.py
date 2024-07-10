@@ -98,3 +98,29 @@ def issue_listing_by_assignee(request):
     }
     
     return render(request, 'issue_listing_by_assignee.html', context)
+
+def issue_status_summary(request):
+    selected_projects = request.GET.getlist('project')
+    include_all = 'all' in selected_projects
+    projects = Project.objects.all()
+    
+    if include_all or not selected_projects:
+        issues = Issue.objects.all()
+        selected_project_title = "All Projects"
+    else:
+        issues = Issue.objects.filter(project__id__in=selected_projects)
+        selected_project_title = projects.get(id=selected_projects[0]).title if len(selected_projects) == 1 else "Multiple Projects"
+    
+    status_summary = issues.values('status').annotate(count=Count('status'))
+    labels = [status['status'] for status in status_summary]
+    data = [status['count'] for status in status_summary]
+    
+    context = {
+        'labels': labels,
+        'data': data,
+        'project_choices': projects,
+        'selected_projects': selected_projects,
+        'selected_project_title': selected_project_title,
+    }
+    
+    return render(request, 'issue_status_summary.html', context)

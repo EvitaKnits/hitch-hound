@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block nav-icons %}
+<li class="nav-item">
+    <button class="btn btn-primary nav-icons" id="openModalBtn"><i class="fa-solid fa-plus"></i></button>
+</li>
+<li class="nav-item">
+    <a class="btn btn-primary nav-icons position-relative" href="{% url 'notifications' %}">
+        <i class="fa-solid fa-bell {% if new_notifications %}bell-notification{% endif %}"></i>
+    </a>
+</li>
+{% endblock %}
+
+{% block nav %}
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'issues' %}">Issues</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'projects' %}">Projects</a>
+</li>
+<li class="nav-item active">
+    <a class="nav-link" href="{% url 'reports' %}">Reports<span
+        class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" id="openLogoutModalBtn">Logout</a>
+</li>
+{% endblock %}
+
+{% block content %}
+<h1>Issue Status Summary</h1>
+<p>This report shows a summary of all issues' statuses by project. Select a project in the section below to show that project's chart.</p>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    <form method="get" action="{% url 'issue_status_summary' %}">
+                        <div class="form-group">
+                            <label for="projectFilter" class="fw-bold">Select Project:</label>
+                            <div id="projectFilter" class="d-flex flex-wrap mt-2 justify-content-around">
+                                <button type="submit" class="btn btn-secondary m-1" name="project" value="all" {% if 'all' in selected_projects %}class="active"{% endif %}>All Projects</button>
+                                {% for project in project_choices %}
+                                <button type="submit" class="btn btn-secondary m-1" name="project" value="{{ project.id }}" {% if project.id|stringformat:"s" in selected_projects %}class="active"{% endif %}>{{ project.title }}</button>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row justify-content-center mt-4">
+        <div class="col-12 col-md-6">
+            <div class="chart-container">
+                {% if not labels %}
+                <p class="text-center">No issues found for this project.</p>
+                {% else %}
+                <canvas id="statusPieChart"></canvas>
+                <h3 id="chartTitle" class="text-center mt-3">{{ selected_project_title }}</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- New Item Modal -->
+<div class="modal-custom" id="myModal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h5 class="modal-title mb-4">Would you like to create a new issue or new project?</h5>
+        <div class="modal-buttons">
+            <button id="createIssueBtn" class="btn btn-outline-primary">New Issue</button>
+            <button id="createProjectBtn" class="btn btn-outline-success">New Project</button>
+        </div>
+    </div>
+</div>
+
+<!-- Logout Confirmation Modal -->
+<div class="modal-custom" id="logoutConfirmModal">
+    <div class="modal-content">
+        <span class="close" id="closeLogoutModal">&times;</span>
+        <h5 class="modal-title mb-4">Are you sure you want to log out?</h5>
+        <div class="modal-buttons">
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger">Yes, Log Out</button>
+                <button type="button" class="btn btn-outline-secondary" id="cancelLogoutBtn">No, Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const createIssueUrl = "{% url 'create_issue' %}"
+    const createProjectUrl = "{% url 'create_project' %}"
+</script>
+<script src="{% static 'js/new_item_modal.js' %}"></script>
+<script src="{% static 'js/confirm_logout_modal.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<script src="{% static 'js/reports.js' %}"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const ctx = document.getElementById('statusPieChart').getContext('2d');
+        const labels = {{ labels|safe }};
+        const data = {{ data|safe }};
+
+        if (labels.length > 0) {
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            '#B5D1C8',
+                            '#86B3A6',
+                            '#508072',
+                            '#7AA49C', 
+                            '#9FC4B7',
+                            '#A8D0C1'
+                        ],
+                        borderColor: [
+                            '#B5D1C8',
+                            '#86B3A6',
+                            '#508072',
+                            '#7AA49C', 
+                            '#9FC4B7',
+                            '#A8D0C1'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    // Construct the label with the raw data value
+                                    let label = context.label + ': ' + context.raw;
+                                    return label;
+                                },
+                                title: function() {
+                                    // Return an empty array to omit the default title
+                                    return '';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    });
+</script>
+
+{% endblock %}
