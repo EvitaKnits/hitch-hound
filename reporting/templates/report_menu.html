@@ -1,0 +1,18 @@
+<div class="report-menu mb-4 d-flex align-items-center">
+    <span class="report-label mr-3">Select a report:</span>
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link btn {% if request.resolver_match.url_name == 'issue_listing_by_status' %}active{% endif %}" href="{% url 'issue_listing_by_status' %}">Issue Listing by Status</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn {% if request.resolver_match.url_name == 'issue_listing_by_assignee' %}active{% endif %}" href="{% url 'issue_listing_by_assignee' %}">Issue Listing by Assignee</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn {% if request.resolver_match.url_name == 'issue_status_summary' %}active{% endif %}" href="{% url 'issue_status_summary' %}">Issue Status Summary</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn {% if request.resolver_match.url_name == 'issue_severity_summary' %}active{% endif %}" href="{% url 'issue_severity_summary' %}">Issue Severity Summary</a>
+        </li>
+    </ul>
+</div>
+<hr>

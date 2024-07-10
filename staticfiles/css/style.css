@@ -245,6 +245,32 @@ nav li i {
     padding-left: 1rem;
 }
 
+/* REPORT STYLING */
+
+.chart-container {
+    background-color: #F6F9F8; 
+    padding: 20px; 
+    border-radius: 8px;
+}
+
+.report-label {
+    font-size: 1.25rem; /* Adjust the size as needed */
+    font-weight: bold;
+}
+
+.nav-pills .nav-link.btn {
+    margin-right: 0.5rem;
+    color: #F6F9F8; 
+    background-color: #508072; 
+    border-radius: 0.25rem;
+}
+
+.nav-pills .nav-link.btn.active {
+    background-color: #F6F9F8; 
+    border-color: #508072; 
+    color: #414644;
+}
+
 /* MEDIA QUERIES */
 
 @media (max-width: 436px) {

@@ -21,7 +21,7 @@
     <a class="nav-link" href="{% url 'projects' %}">Projects</a>
 </li>
 <li class="nav-item active">
-    <a class="nav-link" href="{% url 'reports' %}">Reports<span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{% url 'issue_listing_by_status' %}">Reports<span class="sr-only">(current)</span></a>
 </li>
 <li class="nav-item">
     <a class="nav-link" href="{% url 'profile' %}">Profile</a>
@@ -33,6 +33,7 @@
 
 {% block content %}
 <div class="container mt-4">
+    {% include 'report_menu.html' %}
     <h1>Issues by Assignee</h1>
     <p>This report displays issues by assignees. Select your filters in the section below and they will be automatically applied to the table.</p>
     

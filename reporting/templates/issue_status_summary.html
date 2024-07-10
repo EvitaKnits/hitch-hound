@@ -20,7 +20,7 @@
     <a class="nav-link" href="{% url 'projects' %}">Projects</a>
 </li>
 <li class="nav-item active">
-    <a class="nav-link" href="{% url 'reports' %}">Reports<span
+    <a class="nav-link" href="{% url 'issue_listing_by_status' %}">Reports<span
         class="sr-only">(current)</span></a>
 </li>
 <li class="nav-item">
@@ -32,6 +32,7 @@
 {% endblock %}
 
 {% block content %}
+{% include 'report_menu.html' %}
 <h1>Issue Status Summary</h1>
 <p>This report shows a summary of all issues' statuses by project. Select a project in the section below to show that project's chart.</p>
 
