@@ -124,3 +124,29 @@ def issue_status_summary(request):
     }
     
     return render(request, 'issue_status_summary.html', context)
+
+def issue_severity_summary(request):
+    selected_projects = request.GET.getlist('project')
+    include_all = 'all' in selected_projects
+    projects = Project.objects.all()
+    
+    if include_all or not selected_projects:
+        issues = Issue.objects.all()
+        selected_project_title = "All Projects"
+    else:
+        issues = Issue.objects.filter(project__id__in=selected_projects)
+        selected_project_title = projects.get(id=selected_projects[0]).title if len(selected_projects) == 1 else "Multiple Projects"
+    
+    severity_summary = issues.values('severity').annotate(count=Count('severity'))
+    labels = [severity['severity'] for severity in severity_summary]
+    data = [severity['count'] for severity in severity_summary]
+    
+    context = {
+        'labels': labels,
+        'data': data,
+        'project_choices': projects,
+        'selected_projects': selected_projects,
+        'selected_project_title': selected_project_title,
+    }
+    
+    return render(request, 'issue_severity_summary.html', context)
