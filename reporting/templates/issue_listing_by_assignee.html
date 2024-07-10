@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load project_filters %}
 {% load crispy_forms_tags %}
 
 {% block nav-icons %}
@@ -34,38 +33,29 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h1>Issues by Status and Project</h1>
-    <p>This report displays issues by any combination of statuses and projects. Select your filters in the section below and they will be automatically applied to the table.</p>
+    <h1>Issues by Assignee</h1>
+    <p>This report displays issues by assignees. Select your filters in the section below and they will be automatically applied to the table.</p>
     
     <div class="row mt-5">
         <div class="col-lg-6 col-md-8 col-12">
             <div class="card h-100">
                 <div class="card-body">
-                    <form method="get" action="{% url 'issue_listing_by_status' %}">
+                    <form method="get" action="{% url 'issue_listing_by_assignee' %}">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
-                                    <label for="status" class="fw-bold">Select Status(es):</label>
-                                    <div id="status" class="form-check mt-2">
-                                        {% for value, display in status_choices %}
+                                    <label for="assignee" class="fw-bold">Select Assignee(s):</label>
+                                    <div id="assignee" class="form-check mt-2">
+                                        {% for user in user_choices %}
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="status" id="status-{{ value }}" value="{{ value }}" {% if value in selected_statuses %}checked{% endif %} onchange="this.form.submit()">
-                                            <label class="form-check-label" for="status-{{ value }}">{{ display }}</label>
+                                            <input class="form-check-input" type="checkbox" name="assignee" id="assignee-{{ user.username }}" value="{{ user.username }}" {% if user.username in selected_assignees %}checked{% endif %} onchange="this.form.submit()">
+                                            <label class="form-check-label" for="assignee-{{ user.username }}">{{ user.username }}</label>
                                         </div>
                                         {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="form-group">
-                                    <label for="project_id" class="fw-bold">Select Project(s):</label>
-                                    <div id="project_id" class="form-check mt-2">
-                                        {% for project in project_choices %}
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="project_id" id="project-{{ project.id }}" value="{{ project.id }}" {% if project.id|stringformat:"s" in selected_project_ids %}checked{% endif %} onchange="this.form.submit()">
-                                            <label class="form-check-label" for="project-{{ project.id }}">{{ project.title }}</label>
+                                        <div class="form-check mt-3">
+                                            <input class="form-check-input" type="checkbox" name="include_unassigned" id="include_unassigned" {% if include_unassigned %}checked{% endif %} onchange="this.form.submit()">
+                                            <label class="form-check-label" for="include_unassigned">View Unassigned Issues</label>
                                         </div>
-                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +76,7 @@
                     <th scope="col" class="d-none d-md-table-cell">Type</th>
                     <th scope="col" class="d-none d-md-table-cell">Project</th>
                     <th scope="col" class="d-none d-md-table-cell">Status</th>
-                    <th scope="col" class="d-none d-md-table-cell">Reporter</th>
+                    <th scope="col" class="d-none d-md-table-cell">Assignee(s)</th>
                 </tr>
             </thead>
             <tbody>
@@ -98,7 +88,20 @@
                     <td class="d-none d-md-table-cell">{{ issue.type }}</td>
                     <td class="d-none d-md-table-cell">{{ issue.project.title }}</td>
                     <td class="d-none d-md-table-cell">{{ issue.get_status_display }}</td>
-                    <td class="d-none d-md-table-cell">{{ issue.reporter.username }}</td>
+                    <td class="d-none d-md-table-cell">
+                        {% if issue.developer %}
+                            Developer: {{ issue.developer.username }}<br>
+                        {% endif %}
+                        {% if issue.product_manager %}
+                            Product Manager: {{ issue.product_manager.username }}<br>
+                        {% endif %}
+                        {% if issue.quality_assurance %}
+                            QA: {{ issue.quality_assurance.username }}<br>
+                        {% endif %}
+                        {% if not issue.developer and not issue.product_manager and not issue.quality_assurance %}
+                            Unassigned
+                        {% endif %}
+                    </td>
                 </tr>
                 {% empty %}
                 <tr>
@@ -114,12 +117,12 @@
         <ul class="pagination justify-content-center custom-pagination">
             {% if page_obj.has_previous %}
             <li class="page-item">
-                <a class="page-link" href="?{% if request.GET.status %}status={{ request.GET.status|join:"," }}&{% endif %}{% if request.GET.project_id %}project_id={{ request.GET.project_id|join:"," }}&{% endif %}page=1" aria-label="First">
+                <a class="page-link" href="?page=1" aria-label="First">
                     <span aria-hidden="true">&laquo;&laquo;</span>
                 </a>
             </li>
             <li class="page-item">
-                <a class="page-link" href="?{% if request.GET.status %}status={{ request.GET.status|join:"," }}&{% endif %}{% if request.GET.project_id %}project_id={{ request.GET.project_id|join:"," }}&{% endif %}page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
@@ -136,18 +139,18 @@
             {% if page_obj.number == num %}
             <li class="page-item active"><span class="page-link">{{ num }}</span></li>
             {% elif num > page_obj.number|add:-3 and num < page_obj.number|add:3 %}
-            <li class="page-item"><a class="page-link" href="?{% if request.GET.status %}status={{ request.GET.status|join:"," }}&{% endif %}{% if request.GET.project_id %}project_id={{ request.GET.project_id|join:"," }}&{% endif %}page={{ num }}">{{ num }}</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
             {% endif %}
             {% endfor %}
 
             {% if page_obj.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?{% if request.GET.status %}status={{ request.GET.status|join:"," }}&{% endif %}{% if request.GET.project_id %}project_id={{ request.GET.project_id|join:"," }}&{% endif %}page={{ page_obj.next_page_number }}" aria-label="Next">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
             <li class="page-item">
-                <a class="page-link" href="?{% if request.GET.status %}status={{ request.GET.status|join:"," }}&{% endif %}{% if request.GET.project_id %}project_id={{ request.GET.project_id|join:"," }}&{% endif %}page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
                     <span aria-hidden="true">&raquo;&raquo;</span>
                 </a>
             </li>

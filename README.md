@@ -597,7 +597,15 @@ I nearly achieved all of my must haves but had to pause to add automated testing
 I have planned the remainder of my stories into sprint five with 3 must haves, 2 should haves and 2 could haves. If I need a sixth sprint, I will of course carry over any that were not completed this sprint. 
 
 #### Sprint Retrospective
+I got through a tremendous amount in this sprint, finishing all but one of my user stories. I could really see how much I had improved from the start of the project as things took me less time to figure out. 
 
+### Sprint Six: 10/07 to 16/07
+![Sprint Six](documentation/sprint6.png)
+
+#### Sprint Planning
+I have moved my final story over to this sprint, plus added one more 'Add breadcrumbs' as I realise I need them for effective navigation. I will also be refactoring my code, adding more comments and docstrings, as well as finishing off my README this sprint. The goal is to complete my project by the end of it. As such, both the stories in this sprint have been marked as must haves. 
+
+#### Sprint Retrospective
 
 ### Future Development
 These three stories were nice to haves if I found I had enough time to implement them. They are under Epic 4: Enhanced Issue Management. In the end, I only had enough time to implement the first story in this epic: 'Provide a Change History Log'. I completed all other stories in all other epics. 

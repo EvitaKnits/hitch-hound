@@ -7,6 +7,8 @@ from issues.models import UserIssue
 from django.db.models import Count
 from issues.models import Issue
 from projects.models import Project
+from django.core.paginator import Paginator
+from users.models import User
 
 
 # Create your views here.
@@ -51,11 +53,48 @@ def issue_listing_by_status(request):
     if selected_project_ids:
         issues = issues.filter(project_id__in=selected_project_ids)
     
+    # Pagination
+    paginator = Paginator(issues, 12)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
     context = {
-        'issues': issues,
+        'issues': page_obj,
         'status_choices': status_choices,
         'project_choices': project_choices,
         'selected_statuses': selected_statuses,
         'selected_project_ids': selected_project_ids,
+        'page_obj': page_obj,
     }
     return render(request, 'issue_listing_by_status.html', context)
+
+def issue_listing_by_assignee(request):
+    selected_assignees = request.GET.getlist('assignee')
+    include_unassigned = request.GET.get('include_unassigned', 'off') == 'on'
+    
+    issues = Issue.objects.all()
+    
+    if selected_assignees or include_unassigned:
+        query = Q()
+        if selected_assignees:
+            for assignee in selected_assignees:
+                query |= Q(developer__username=assignee) | Q(product_manager__username=assignee) | Q(quality_assurance__username=assignee)
+        if include_unassigned:
+            query |= Q(developer__isnull=True, product_manager__isnull=True, quality_assurance__isnull=True)
+        issues = issues.filter(query).distinct()
+    
+    paginator = Paginator(issues, 12)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    user_choices = User.objects.all()
+    
+    context = {
+        'issues': page_obj,
+        'user_choices': user_choices,
+        'selected_assignees': selected_assignees,
+        'include_unassigned': include_unassigned,
+        'page_obj': page_obj,
+    }
+    
+    return render(request, 'issue_listing_by_assignee.html', context)

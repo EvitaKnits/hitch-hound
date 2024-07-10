@@ -51,7 +51,7 @@ urlpatterns = [
     path('reports/issue_listing_by_status/', reporting_views.issue_listing_by_status, name='issue_listing_by_status'),
     path('reports/issue_status_summary/', reporting_views.issue_status_summary, name='issue_status_summary'),
     path('reports/issue_severity_summary/', reporting_views.issue_severity_summary, name='issue_severity_summary'),
-    path('reports/issue_assignee_summary/', reporting_views.issue_assignee_summary, name='issue_assignee_summary'),
+    path('reports/issue_listing_by_assignee/', reporting_views.issue_listing_by_assignee, name='issue_listing_by_assignee'),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
