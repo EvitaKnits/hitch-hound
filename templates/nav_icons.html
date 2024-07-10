@@ -1,0 +1,8 @@
+<li class="nav-item">
+    <button class="btn btn-primary nav-icons" id="openModalBtn"><i class="fa-solid fa-plus"></i></button>
+</li>
+<li class="nav-item">
+    <a class="btn btn-primary nav-icons position-relative" href="{% url 'notifications' %}">
+        <i class="fa-solid fa-bell {% if new_notifications %}bell-notification{% endif %}"></i>
+    </a>
+</li>
