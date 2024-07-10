@@ -66,6 +66,7 @@ def list_issues(request):
         'order': order,
         'toggle_order': toggle_order(order),
         'new_notifications': new_notifications,
+        'show_navbar': True,
     }
 
     return render(request, 'issues.html', context)
@@ -96,6 +97,8 @@ def issue_detail(request, id):
         'comments': comments,
         'form': form, 
         'new_notifications': new_notifications,
+        'active_page': 'issues',
+        'show_navbar': True,
     }
     return render(request, 'issue_detail.html', context)
 
@@ -144,6 +147,8 @@ def create_issue(request):
     context = {
         'form': form, 
         'new_notifications': new_notifications,
+        'active_page': 'issues',
+        'show_navbar': True,
     }
 
     return render(request, 'create_issue.html', context)
@@ -185,6 +190,8 @@ def edit_issue(request, id):
         'form': form,
         'issue': issue,
         'new_notifications': new_notifications,
+        'active_page': 'issues',
+        'show_navbar': True,
     }
     return render(request, 'edit_issue.html', context)
 

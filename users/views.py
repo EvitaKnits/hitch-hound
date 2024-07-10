@@ -27,17 +27,20 @@ from django.utils import timezone
 # Create your views here.
 
 def user_login(request):
+    context = {'show_register_navbar': True}
+
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
+        
         if user is not None:
             login(request, user)
             return redirect('home')  
         else:
-            return render(request, 'login.html', {'error_message': 'Invalid username or password.'})
-    else:
-        return render(request, 'login.html')
+            context['error_message'] = 'Invalid username or password.'
+
+    return render(request, 'login.html', context)
 
 def user_signup(request):
     if request.method == 'POST':
@@ -156,6 +159,8 @@ def user_profile(request):
         'order': order,
         'toggle_order': toggle_order,
         'new_notifications': new_notifications,
+        'active_page': 'profile',
+        'show_navbar': True,
     }
     return render(request, 'profile.html', context)
 
@@ -188,6 +193,8 @@ def change_password(request):
     context = {
         'password_change_form': password_change_form,
         'new_notifications': new_notifications,
+        'active_page': 'profile',
+        'show_navbar': True,
     }
 
     return render(request, 'change_password.html', context)

@@ -36,6 +36,8 @@ def list_projects(request):
     context = {
         'projects': projects,
         'new_notifications': new_notifications,
+        'active_page': 'projects',
+        'show_navbar': True,
     }
 
     return render(request, 'projects.html', context)
@@ -84,6 +86,8 @@ def view_all_issues(request, project_id):
         'order': order,
         'toggle_order': toggle_order,
         'new_notifications': new_notifications,
+        'active_page': 'projects',
+        'show_navbar': True,
     }
     return render(request, 'all_issues.html', context)
 
@@ -114,6 +118,8 @@ def create_project(request):
     context = {
         'form': form, 
         'new_notifications': new_notifications,
+        'active_page': 'projects',
+        'show_navbar': True,
     }
 
     return render(request, 'create_project.html', context)
@@ -146,6 +152,8 @@ def edit_project(request, id):
     context = {
         'form': form, 
         'new_notifications': new_notifications,
+        'active_page': 'projects',
+        'show_navbar': True,
     }
     return render(request, 'edit_project.html', context)
 

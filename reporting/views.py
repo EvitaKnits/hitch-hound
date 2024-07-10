@@ -42,6 +42,8 @@ def issue_listing_by_status(request):
         'selected_statuses': selected_statuses,
         'selected_project_ids': selected_project_ids,
         'page_obj': page_obj,
+        'active_page': 'reports',
+        'show_navbar': True,
     }
     return render(request, 'issue_listing_by_status.html', context)
 
@@ -72,6 +74,8 @@ def issue_listing_by_assignee(request):
         'selected_assignees': selected_assignees,
         'include_unassigned': include_unassigned,
         'page_obj': page_obj,
+        'active_page': 'reports',
+        'show_navbar': True,
     }
     
     return render(request, 'issue_listing_by_assignee.html', context)
@@ -98,6 +102,8 @@ def issue_status_summary(request):
         'project_choices': projects,
         'selected_projects': selected_projects,
         'selected_project_title': selected_project_title,
+        'active_page': 'reports',
+        'show_navbar': True,
     }
     
     return render(request, 'issue_status_summary.html', context)
@@ -124,6 +130,8 @@ def issue_severity_summary(request):
         'project_choices': projects,
         'selected_projects': selected_projects,
         'selected_project_title': selected_project_title,
+        'active_page': 'reports',
+        'show_navbar': True,
     }
     
     return render(request, 'issue_severity_summary.html', context)

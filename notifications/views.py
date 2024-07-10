@@ -39,6 +39,7 @@ def list_notifications(request):
     context = {
         'page_obj': page_obj,
         'new_notifications': new_notifications,
+        'show_navbar': True,
     }
 
     return render(request, 'notifications.html', context)
@@ -78,6 +79,8 @@ def change_history(request, issue_id):
         'changes': changes,
         'new_notifications': new_notifications,
         'issue': issue,
+        'active_page': 'issues',
+        'show_navbar': True,
     }
 
     return render(request, 'change_history.html', context)

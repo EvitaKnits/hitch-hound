@@ -21,6 +21,7 @@ body {
 
 #second-nav {
     background-color: #86B3A6;
+    justify-content: end;
 }
 
 .nav-item {

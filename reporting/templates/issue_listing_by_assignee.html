@@ -3,33 +3,16 @@
 {% load crispy_forms_tags %}
 
 {% block nav_icons %}
-    {% include 'nav_icons.html' %}
-{% endblock %}
-
-{% block nav %}
-<li class="nav-item">
-    <a class="nav-link" href="{% url 'issues' %}">Issues</a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="{% url 'projects' %}">Projects</a>
-</li>
-<li class="nav-item active">
-    <a class="nav-link" href="{% url 'issue_listing_by_status' %}">Reports<span class="sr-only">(current)</span></a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" id="openLogoutModalBtn">Logout</a>
-</li>
+{% include 'nav_icons.html' %}
 {% endblock %}
 
 {% block content %}
 <div class="container mt-4">
     {% include 'report_menu.html' %}
     <h1>Issues by Assignee</h1>
-    <p>This report displays issues by assignees. Select your filters in the section below and they will be automatically applied to the table.</p>
-    
+    <p>This report displays issues by assignees. Select your filters in the section below and they will be automatically
+        applied to the table.</p>
+
     <div class="row mt-5">
         <div class="col-lg-6 col-md-8 col-12">
             <div class="card h-100">
@@ -42,24 +25,31 @@
                                     <div id="assignee" class="form-check mt-2">
                                         {% for user in user_choices %}
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="assignee" id="assignee-{{ user.username }}" value="{{ user.username }}" {% if user.username in selected_assignees %}checked{% endif %} onchange="this.form.submit()">
-                                            <label class="form-check-label" for="assignee-{{ user.username }}">{{ user.username }}</label>
+                                            <input class="form-check-input" type="checkbox" name="assignee"
+                                                id="assignee-{{ user.username }}" value="{{ user.username }}"
+                                                {% if user.username in selected_assignees %}checked{% endif %}
+                                                onchange="this.form.submit()">
+                                            <label class="form-check-label"
+                                                for="assignee-{{ user.username }}">{{ user.username }}</label>
                                         </div>
                                         {% endfor %}
                                         <div class="form-check mt-3">
-                                            <input class="form-check-input" type="checkbox" name="include_unassigned" id="include_unassigned" {% if include_unassigned %}checked{% endif %} onchange="this.form.submit()">
-                                            <label class="form-check-label" for="include_unassigned">View Unassigned Issues</label>
+                                            <input class="form-check-input" type="checkbox" name="include_unassigned"
+                                                id="include_unassigned" {% if include_unassigned %}checked{% endif %}
+                                                onchange="this.form.submit()">
+                                            <label class="form-check-label" for="include_unassigned">View Unassigned
+                                                Issues</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </form>                    
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div class="table-responsive mt-4">
         <table class="table table-hover table-bordered">
             <thead>
@@ -75,7 +65,8 @@
             </thead>
             <tbody>
                 {% for issue in issues %}
-                <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.id %}'" style="cursor: pointer;">
+                <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.id %}'"
+                    style="cursor: pointer;">
                     <td>#{{ issue.id }}</td>
                     <td>{{ issue.title|truncatechars:50 }}</td>
                     <td>{{ issue.get_severity_display }}</td>
@@ -84,16 +75,16 @@
                     <td class="d-none d-md-table-cell">{{ issue.get_status_display }}</td>
                     <td class="d-none d-md-table-cell">
                         {% if issue.developer %}
-                            Developer: {{ issue.developer.username }}<br>
+                        Developer: {{ issue.developer.username }}<br>
                         {% endif %}
                         {% if issue.product_manager %}
-                            Product Manager: {{ issue.product_manager.username }}<br>
+                        Product Manager: {{ issue.product_manager.username }}<br>
                         {% endif %}
                         {% if issue.quality_assurance %}
-                            QA: {{ issue.quality_assurance.username }}<br>
+                        QA: {{ issue.quality_assurance.username }}<br>
                         {% endif %}
                         {% if not issue.developer and not issue.product_manager and not issue.quality_assurance %}
-                            Unassigned
+                        Unassigned
                         {% endif %}
                     </td>
                 </tr>
@@ -159,42 +150,18 @@
         </ul>
     </nav>
 
-    <!-- New Item Modal -->
-    <div class="modal-custom" id="myModal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h5 class="modal-title mb-4">Would you like to create a new issue or new project?</h5>
-            <div class="modal-buttons">
-                <button id="createIssueBtn" class="btn btn-outline-primary">New Issue</button>
-                <button id="createProjectBtn" class="btn btn-outline-success">New Project</button>
-            </div>
-        </div>
-    </div>
+    {% include 'new_item_modal.html' %}
+    {% include 'logout_modal.html' %}
 
-    <!-- Logout Confirmation Modal -->
-    <div class="modal-custom" id="logoutConfirmModal">
-        <div class="modal-content">
-            <span class="close" id="closeLogoutModal">&times;</span>
-            <h5 class="modal-title mb-4">Are you sure you want to log out?</h5>
-            <div class="modal-buttons">
-                <form method="post" action="{% url 'logout' %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-outline-danger">Yes, Log Out</button>
-                    <button type="button" class="btn btn-outline-secondary" id="cancelLogoutBtn">No, Cancel</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock %}
+    {% endblock %}
 
-{% block extra_js %}
-<script> 
+    {% block extra_js %}
+    <script>
         const createIssueUrl = "{% url 'create_issue' %}";
         const createProjectUrl = "{% url 'create_project' %}";
-</script>
-<script src="{% static 'js/new_item_modal.js' %}"></script>
-<script src="{% static 'js/confirm_logout_modal.js' %}"></script>
-<script src="{% static 'js/reports.js' %}"></script>
+    </script>
+    <script src="{% static 'js/new_item_modal.js' %}"></script>
+    <script src="{% static 'js/confirm_logout_modal.js' %}"></script>
+    <script src="{% static 'js/reports.js' %}"></script>
 
-{% endblock %}
+    {% endblock %}
