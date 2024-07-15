@@ -606,6 +606,18 @@ I got through a tremendous amount in this sprint, finishing all but one of my us
 I have moved my final story over to this sprint, plus added one more 'Add breadcrumbs' as I realise I need them for effective navigation. I will also be refactoring my code, adding more comments and docstrings, as well as finishing off my README this sprint. The goal is to complete my project by the end of it. As such, both the stories in this sprint have been marked as must haves. 
 
 #### Sprint Retrospective
+I finished the reporting feature early in the sprint and moved onto the final story: the breadcrumbs. 
+
+As I was implementing the breadcrumb feature, I thought about the breadcrumbs I actually wanted to implement. All top levels of the breadcrumbs could be accessed via the navigation bar, then all but one of the breacrumbs were just two pages deep. They would be mostly duplicating my existing navbar and therefore be presenting duplicate information on the page. I thought this could be confusing for the user and look messy, so I reverted my changes and decided against breadcrumbs after all. 
+
+During this sprint I also concentrated on getting my project to be as non-repetitive as possible. This involved using the django templating more effectively, now that I understood it better. 
+
+I also did a tidy up which included fixing bugs (see dedicated bug section above) and implementing small bits of functionality that I had missed in my main run through of the project: 
+
+- Making the project field on the issue detail clickable to go to that project. 
+- Adding a 'You don't have any issues assigned to you.' message on the Profile page. 
+- Adding a 'You don't have any notifications yet.' message on the Notifications page. 
+- Making a change so that creating an issue from a project auto-populates the project field, and upon saving, returns you to the project you were on. In this scenario if the issue created is ultimately from a different project than the one the user was on, then they are redirected to the issues listing page. 
 
 ### Future Development
 These three stories were nice to haves if I found I had enough time to implement them. They are under Epic 4: Enhanced Issue Management. In the end, I only had enough time to implement the first story in this epic: 'Provide a Change History Log'. I completed all other stories in all other epics. 
