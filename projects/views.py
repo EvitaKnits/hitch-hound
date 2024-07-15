@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from projects.models import Project
 from issues.models import Issue, UserIssue
-from django.core.paginator import Paginator
+from hitchhound.utils import paginate
 from .forms import ProjectForm
 from django.urls import reverse
 from django.contrib import messages
@@ -56,10 +56,8 @@ def view_all_issues(request, project_id):
     else:
         issues = issues.order_by(f"{'' if order == 'asc' else '-'}{sort_by}")
 
-    # Pagination
-    paginator = Paginator(issues, 10)  # Show 10 issues per page
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    # Use the paginate utility function
+    page_obj = paginate(request, issues)
 
     # Toggle order for sorting links
     toggle_order = 'asc' if order == 'desc' else 'desc'

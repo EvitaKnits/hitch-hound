@@ -7,7 +7,7 @@ from issues.models import UserIssue
 from django.db.models import Count
 from issues.models import Issue
 from projects.models import Project
-from django.core.paginator import Paginator
+from hitchhound.utils import paginate
 from users.models import User
 
 
@@ -30,10 +30,8 @@ def issue_listing_by_status(request):
     if selected_project_ids:
         issues = issues.filter(project_id__in=selected_project_ids)
     
-    # Pagination
-    paginator = Paginator(issues, 12)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    # Use the paginate utility function
+    page_obj = paginate(request, issues)
     
     context = {
         'issues': page_obj,
@@ -62,9 +60,8 @@ def issue_listing_by_assignee(request):
             query |= Q(developer__isnull=True, product_manager__isnull=True, quality_assurance__isnull=True)
         issues = issues.filter(query).distinct()
     
-    paginator = Paginator(issues, 12)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    # Use the paginate utility function
+    page_obj = paginate(request, issues)
     
     user_choices = User.objects.all()
     

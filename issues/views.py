@@ -5,7 +5,7 @@ from issues.forms import IssueForm, CommentForm
 from issues.models import Issue, Comment, UserIssue
 from projects.models import Project
 from notifications.models import Change
-from django.core.paginator import Paginator
+from hitchhound.utils import paginate 
 from django.contrib import messages
 from django.db.models.functions import Lower
 from django.db.models import F, Q
@@ -34,10 +34,8 @@ def list_issues(request):
     else:
         issues = issues.order_by(f"{'' if order == 'asc' else '-'}{sort_by}")
 
-    # Pagination
-    paginator = Paginator(issues, 12)  # 12 issues per page
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    # Use the paginate utility function
+    page_obj = paginate(request, issues)
 
     def toggle_order(current_order):
         return 'asc' if current_order == 'desc' else 'desc'

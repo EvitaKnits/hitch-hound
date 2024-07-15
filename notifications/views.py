@@ -4,7 +4,7 @@ from notifications.models import Change
 from issues.models import Issue, UserIssue
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.core.paginator import Paginator
+from hitchhound.utils import paginate
 from django.utils import timezone
 
 # Create your views here.
@@ -28,9 +28,8 @@ def list_notifications(request):
     # Combine all notifications into a single list and sort by date
     notifications = changes.order_by('-changed_at')
 
-    paginator = Paginator(notifications, 12)  # 12 notifications per page
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    # Use the paginate utility function
+    page_obj = paginate(request, notifications)
 
     # Update the last visited timestamp after checking for new notifications
     current_user.last_visited_notifications = timezone.now()
@@ -67,12 +66,8 @@ def change_history(request, issue_id):
     # Determine if there are new notifications
     new_notifications = all_changes.filter(changed_at__gt=last_visited).exists()
 
-    # Pagination
-    paginator = Paginator(changes, 12)  # 12 changes per page
-
-    page_number = request.GET.get('page')
-
-    page_obj = paginator.get_page(page_number)
+     # Use the paginate utility function
+    page_obj = paginate(request, changes)
 
     context = {
         'page_obj': page_obj,
