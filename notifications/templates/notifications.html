@@ -23,6 +23,12 @@
                     </div>
                 </div>
             </a>
+            {% empty %}
+            <div class="card mb-3 mx-auto notification-card">
+                <div class="card-body text-center">
+                    <p class="card-text">You don't have any notifications yet.</p>
+                </div>
+            </div>
             {% endfor %}
         </div>
     </div>
