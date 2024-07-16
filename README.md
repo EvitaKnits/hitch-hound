@@ -526,6 +526,16 @@ This is what they looked like after the change:
 ![Bug 4 Issue Fix](documentation/bug4-fix.png)
 ![Bug 4 History Fix](documentation/bug4-fix2.png)
 
+### Bug Five
+
+#### Issue
+A separate issue caused by a large amount of text that persisted after the fix for bug four, was the throwing off of the header row on the Change History table. See solution images in bug four above. 
+
+#### Solution
+I added Bootstrap's utility that prevents text wrapping to the whole table heading row. 
+
+![Bug 5 fix](documentation/bug5.png)
+
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
 
