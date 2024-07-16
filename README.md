@@ -618,7 +618,6 @@ I also did a tidy up which included fixing bugs (see dedicated bug section above
 - Adding a 'You don't have any issues assigned to you.' message on the Profile page. 
 - Adding a 'You don't have any notifications yet.' message on the Notifications page. 
 - Making a change so that creating an issue from a project auto-populates the project field, and upon saving, returns you to the project you were on. In this scenario if the issue created is ultimately from a different project than the one the user was on, then they are redirected to the issues listing page. 
-- Changing issue severity sorting from A-Z to numeric
 - Removing the role dropdown and making the field read-only on the Profile page. 
 - Removing the status field from the Create Issue page and auto-populating this value to 'Open'. 
 

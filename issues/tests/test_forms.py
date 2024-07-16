@@ -21,7 +21,6 @@ class IssueFormTest(TestCase):
             'severity': 'high',  
             'project': self.project.id,
             'type': 'bug', 
-            'status': 'open',  
             'developer': self.developer.id,
             'quality_assurance': self.quality_assurance.id,
             'product_manager': self.product_manager.id,
@@ -31,7 +30,7 @@ class IssueFormTest(TestCase):
     def test_issue_form_no_data(self):
         form = IssueForm(data={})
         self.assertFalse(form.is_valid())
-        self.assertEqual(len(form.errors), 6) 
+        self.assertEqual(len(form.errors), 5) 
 
     def test_issue_form_missing_required_fields(self):
         form = IssueForm(data={
@@ -56,7 +55,6 @@ class IssueFormTest(TestCase):
             'severity': 'invalid_choice',
             'project': self.project.id,
             'type': 'invalid_choice',
-            'status': 'invalid_choice',
             'developer': self.developer.id,
             'quality_assurance': self.quality_assurance.id,
             'product_manager': self.product_manager.id,
@@ -64,7 +62,6 @@ class IssueFormTest(TestCase):
         self.assertFalse(form.is_valid())
         self.assertIn('severity', form.errors)
         self.assertIn('type', form.errors)
-        self.assertIn('status', form.errors)
 
 class CommentFormTest(TestCase):
     def setUp(self):

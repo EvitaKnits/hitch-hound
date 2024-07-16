@@ -66,7 +66,6 @@ class UserProfileFormTest(TestCase):
             'first_name': 'Updated',
             'last_name': 'User',
             'email': 'updateduser@example.com',
-            'role': 'product_manager',
         }
 
     def test_user_profile_form_valid_data(self):
@@ -78,7 +77,7 @@ class UserProfileFormTest(TestCase):
     def test_user_profile_form_no_data(self):
         form = UserProfileForm(data={}, instance=self.user)
         self.assertFalse(form.is_valid())
-        self.assertEqual(len(form.errors), 4)
+        self.assertEqual(len(form.errors), 3)
 
     def test_user_profile_form_missing_required_fields(self):
         data = self.valid_data.copy()
