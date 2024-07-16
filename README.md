@@ -510,6 +510,22 @@ Sorting by project or reporter on the Issues Listing page causes a FieldError: "
 
 For both of these, I discovered that in Django, you need to use double underscores instead of dots to traverse relationships between models. So because 'Projects' and 'Users' are two separate models from the 'Issue' model which is the main one being used in this table, I needed to use underscores for them, not dots. For example, 'project__title' not 'project.title'.
 
+### Bug Four
+
+#### Issue
+When a large amount of text is added to the Issue Description field, it causes the table on the Issue Detail page to go off the right edge of the page.
+![Bug 4 Issue Detail](documentation/bug4-issue.png)
+
+It also causes there to be a scroll bar on the Change History page.
+![Bug 4 Change History](documentation/bug4-history.png)
+
+#### Solution
+I added Bootstrap's text wrapping and word break utilities on the offending table columns. 
+
+This is what they looked like after the change: 
+![Bug 4 Issue Fix](documentation/bug4-fix.png)
+![Bug 4 History Fix](documentation/bug4-fix2.png)
+
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
 
