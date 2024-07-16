@@ -32,6 +32,21 @@ def issue_listing_by_status(request):
     
     # Use the paginate utility function
     page_obj = paginate(request, issues)
+
+    # Calculate new notifications
+    current_user = request.user
+    last_visited = current_user.last_visited_notifications or timezone.now()
+
+    # Fetch issues the user is assigned to
+    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
+
+    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
+    changes = Change.objects.filter(
+        Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
+    ).exclude(user=current_user)
+
+    # Determine if there are new notifications
+    new_notifications = changes.filter(changed_at__gt=last_visited).exists()
     
     context = {
         'issues': page_obj,
@@ -42,6 +57,7 @@ def issue_listing_by_status(request):
         'page_obj': page_obj,
         'active_page': 'reports',
         'show_navbar': True,
+        'new_notifications': new_notifications,
     }
     return render(request, 'issue_listing_by_status.html', context)
 
@@ -62,6 +78,21 @@ def issue_listing_by_assignee(request):
     
     # Use the paginate utility function
     page_obj = paginate(request, issues)
+
+    # Calculate new notifications
+    current_user = request.user
+    last_visited = current_user.last_visited_notifications or timezone.now()
+
+    # Fetch issues the user is assigned to
+    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
+
+    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
+    changes = Change.objects.filter(
+        Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
+    ).exclude(user=current_user)
+
+    # Determine if there are new notifications
+    new_notifications = changes.filter(changed_at__gt=last_visited).exists()
     
     user_choices = User.objects.all()
     
@@ -73,6 +104,7 @@ def issue_listing_by_assignee(request):
         'page_obj': page_obj,
         'active_page': 'reports',
         'show_navbar': True,
+        'new_notifications': new_notifications,
     }
     
     return render(request, 'issue_listing_by_assignee.html', context)
@@ -92,6 +124,21 @@ def issue_status_summary(request):
     status_summary = issues.values('status').annotate(count=Count('status'))
     labels = [status['status'] for status in status_summary]
     data = [status['count'] for status in status_summary]
+
+    # Calculate new notifications
+    current_user = request.user
+    last_visited = current_user.last_visited_notifications or timezone.now()
+
+    # Fetch issues the user is assigned to
+    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
+
+    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
+    changes = Change.objects.filter(
+        Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
+    ).exclude(user=current_user)
+
+    # Determine if there are new notifications
+    new_notifications = changes.filter(changed_at__gt=last_visited).exists()
     
     context = {
         'labels': labels,
@@ -101,6 +148,7 @@ def issue_status_summary(request):
         'selected_project_title': selected_project_title,
         'active_page': 'reports',
         'show_navbar': True,
+        'new_notifications': new_notifications,
     }
     
     return render(request, 'issue_status_summary.html', context)
@@ -120,6 +168,21 @@ def issue_severity_summary(request):
     severity_summary = issues.values('severity').annotate(count=Count('severity'))
     labels = [severity['severity'] for severity in severity_summary]
     data = [severity['count'] for severity in severity_summary]
+
+    # Calculate new notifications
+    current_user = request.user
+    last_visited = current_user.last_visited_notifications or timezone.now()
+
+    # Fetch issues the user is assigned to
+    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
+
+    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
+    changes = Change.objects.filter(
+        Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
+    ).exclude(user=current_user)
+
+    # Determine if there are new notifications
+    new_notifications = changes.filter(changed_at__gt=last_visited).exists()
     
     context = {
         'labels': labels,
@@ -129,6 +192,7 @@ def issue_severity_summary(request):
         'selected_project_title': selected_project_title,
         'active_page': 'reports',
         'show_navbar': True,
+        'new_notifications': new_notifications,
     }
     
     return render(request, 'issue_severity_summary.html', context)
