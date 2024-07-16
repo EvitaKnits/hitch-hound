@@ -4,7 +4,7 @@ from notifications.models import Change
 from issues.models import Issue, UserIssue
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from hitchhound.utils import paginate
+from hitchhound.utils import paginate, get_new_notifications
 from django.utils import timezone
 
 # Create your views here.
@@ -12,6 +12,9 @@ from django.utils import timezone
 @login_required
 def list_notifications(request):
     current_user = request.user
+    
+    # Check if there are new notifications
+    new_notifications = get_new_notifications(current_user)
 
     # Fetch issues the user is assigned to
     user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
@@ -20,10 +23,6 @@ def list_notifications(request):
     changes = Change.objects.filter(
         Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
     ).exclude(user=current_user)
-
-    # Determine if there are new notifications
-    last_visited = current_user.last_visited_notifications or timezone.now()
-    new_notifications = changes.filter(changed_at__gt=last_visited).exists()
 
     # Combine all notifications into a single list and sort by date
     notifications = changes.order_by('-changed_at')
@@ -52,19 +51,7 @@ def change_history(request, issue_id):
     changes = Change.objects.filter(issue=issue).order_by('-changed_at')
 
     # Calculate new notifications
-    current_user = request.user
-    last_visited = current_user.last_visited_notifications or timezone.now()
-
-    # Fetch issues the user is assigned to
-    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
-
-    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
-    all_changes = Change.objects.filter(
-        Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
-    ).exclude(user=current_user)
-
-    # Determine if there are new notifications
-    new_notifications = all_changes.filter(changed_at__gt=last_visited).exists()
+    new_notifications = get_new_notifications(request.user)
 
      # Use the paginate utility function
     page_obj = paginate(request, changes)

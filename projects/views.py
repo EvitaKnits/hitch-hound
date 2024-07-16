@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from projects.models import Project
 from issues.models import Issue, UserIssue
-from hitchhound.utils import paginate
+from hitchhound.utils import paginate, get_new_notifications
 from .forms import ProjectForm
 from django.urls import reverse
 from django.contrib import messages
@@ -19,19 +19,7 @@ def list_projects(request):
         project.latest_issues = Issue.objects.filter(project=project).order_by('-created_at')[:3]
 
     # Calculate new notifications
-    current_user = request.user
-    last_visited = current_user.last_visited_notifications or timezone.now()
-
-    # Fetch issues the user is assigned to
-    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
-
-    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
-    changes = Change.objects.filter(
-        Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
-    ).exclude(user=current_user)
-
-    # Determine if there are new notifications
-    new_notifications = changes.filter(changed_at__gt=last_visited).exists()
+    new_notifications = get_new_notifications(request.user)
 
     context = {
         'projects': projects,
@@ -62,20 +50,8 @@ def view_all_issues(request, project_id):
     # Toggle order for sorting links
     toggle_order = 'asc' if order == 'desc' else 'desc'
 
-     # Calculate new notifications
-    current_user = request.user
-    last_visited = current_user.last_visited_notifications or timezone.now()
-
-    # Fetch issues the user is assigned to
-    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
-
-    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
-    changes = Change.objects.filter(
-        Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
-    ).exclude(user=current_user)
-
-    # Determine if there are new notifications
-    new_notifications = changes.filter(changed_at__gt=last_visited).exists()
+    # Calculate new notifications
+    new_notifications = get_new_notifications(request.user)
 
     context = {
         'project': project,
@@ -99,19 +75,7 @@ def create_project(request):
         form = ProjectForm()
 
     # Calculate new notifications
-    current_user = request.user
-    last_visited = current_user.last_visited_notifications or timezone.now()
-
-    # Fetch issues the user is assigned to
-    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
-
-    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
-    changes = Change.objects.filter(
-        Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
-    ).exclude(user=current_user)
-
-    # Determine if there are new notifications
-    new_notifications = changes.filter(changed_at__gt=last_visited).exists()
+    new_notifications = get_new_notifications(request.user)
 
     context = {
         'form': form, 
@@ -133,19 +97,7 @@ def edit_project(request, id):
         form = ProjectForm(instance=project)
 
     # Calculate new notifications
-    current_user = request.user
-    last_visited = current_user.last_visited_notifications or timezone.now()
-
-    # Fetch issues the user is assigned to
-    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
-
-    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
-    changes = Change.objects.filter(
-        Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
-    ).exclude(user=current_user)
-
-    # Determine if there are new notifications
-    new_notifications = changes.filter(changed_at__gt=last_visited).exists()
+    new_notifications = get_new_notifications(request.user)
 
     context = {
         'form': form, 

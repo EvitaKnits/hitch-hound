@@ -7,7 +7,7 @@ from issues.models import UserIssue
 from django.db.models import Count
 from issues.models import Issue
 from projects.models import Project
-from hitchhound.utils import paginate
+from hitchhound.utils import paginate, get_new_notifications
 from users.models import User
 
 
@@ -34,19 +34,7 @@ def issue_listing_by_status(request):
     page_obj = paginate(request, issues)
 
     # Calculate new notifications
-    current_user = request.user
-    last_visited = current_user.last_visited_notifications or timezone.now()
-
-    # Fetch issues the user is assigned to
-    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
-
-    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
-    changes = Change.objects.filter(
-        Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
-    ).exclude(user=current_user)
-
-    # Determine if there are new notifications
-    new_notifications = changes.filter(changed_at__gt=last_visited).exists()
+    new_notifications = get_new_notifications(request.user)
     
     context = {
         'issues': page_obj,
@@ -80,20 +68,8 @@ def issue_listing_by_assignee(request):
     page_obj = paginate(request, issues)
 
     # Calculate new notifications
-    current_user = request.user
-    last_visited = current_user.last_visited_notifications or timezone.now()
+    new_notifications = get_new_notifications(request.user)
 
-    # Fetch issues the user is assigned to
-    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
-
-    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
-    changes = Change.objects.filter(
-        Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
-    ).exclude(user=current_user)
-
-    # Determine if there are new notifications
-    new_notifications = changes.filter(changed_at__gt=last_visited).exists()
-    
     user_choices = User.objects.all()
     
     context = {
@@ -126,19 +102,7 @@ def issue_status_summary(request):
     data = [status['count'] for status in status_summary]
 
     # Calculate new notifications
-    current_user = request.user
-    last_visited = current_user.last_visited_notifications or timezone.now()
-
-    # Fetch issues the user is assigned to
-    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
-
-    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
-    changes = Change.objects.filter(
-        Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
-    ).exclude(user=current_user)
-
-    # Determine if there are new notifications
-    new_notifications = changes.filter(changed_at__gt=last_visited).exists()
+    new_notifications = get_new_notifications(request.user)
     
     context = {
         'labels': labels,
@@ -170,19 +134,7 @@ def issue_severity_summary(request):
     data = [severity['count'] for severity in severity_summary]
 
     # Calculate new notifications
-    current_user = request.user
-    last_visited = current_user.last_visited_notifications or timezone.now()
-
-    # Fetch issues the user is assigned to
-    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
-
-    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
-    changes = Change.objects.filter(
-        Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
-    ).exclude(user=current_user)
-
-    # Determine if there are new notifications
-    new_notifications = changes.filter(changed_at__gt=last_visited).exists()
+    new_notifications = get_new_notifications(request.user)
     
     context = {
         'labels': labels,
