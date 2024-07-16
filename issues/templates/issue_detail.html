@@ -24,9 +24,9 @@
         <th>Severity</th>
         <td>{{ issue.severity }}</td>
     </tr>
-    <tr>
+    <tr class="clickable-row" onclick="window.location.href='{% url 'view_all_issues' issue.project.id %}'">
         <th>Project</th>
-        <td>{{ issue.project.title }}</td>
+        <td id="project-row">{{ issue.project.title }}</td>
     </tr>
     <tr>
         <th>Type</th>

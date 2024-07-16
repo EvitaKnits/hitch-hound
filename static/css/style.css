@@ -246,6 +246,11 @@ nav li i {
     padding-left: 1rem;
 }
 
+#project-row {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 /* REPORT STYLING */
 
 .chart-container {
