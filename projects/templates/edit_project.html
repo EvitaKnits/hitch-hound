@@ -39,11 +39,6 @@
 {% endblock %}
 
 {% block extra_js %}
-<script>
-    const createIssueUrl = "{% url 'create_issue' %}"
-    const createProjectUrl = "{% url 'create_project' %}"
-</script>
-<script src="{% static 'js/new_item_modal.js' %}"></script>
+{% include 'base_extra_js.html' %}
 <script src="{% static 'js/confirm_delete_modal.js' %}"></script>
-<script src="{% static 'js/confirm_logout_modal.js' %}"></script>
 {% endblock %}
