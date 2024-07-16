@@ -536,6 +536,16 @@ I added Bootstrap's utility that prevents text wrapping to the whole table headi
 
 ![Bug 5 fix](documentation/bug5.png)
 
+### Bug Six
+
+#### Issue
+I noticed that instead of values such as 'In Progress' - I could see values formatted as 'in_progress' on the UI. I took a look at my models and I had ordered my choice sets correctly, with the stored value first, then the display value. So it meant that I was showing the stored database values rather than the corresponding display values. Here, the Severity, Type and Status columns are using the stored values as evidence by the lowercase words and underscores.
+![Bug 6](documentation/bug6.png)
+
+#### Solution
+The solution was to go through the site and find all the places I am displaying such fields and ensure I am using the display values. For example, where I had used `issue.status`, I now used `issue.get_status_display`. This ensured all the display values were being shown on the UI. Here is the same table using the display values: 
+![Bug 6 fix](documentation/bug6-fix.png)
+
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
 

@@ -70,7 +70,7 @@
                     <td>#{{ issue.id }}</td>
                     <td>{{ issue.title|truncatechars:50 }}</td>
                     <td>{{ issue.get_severity_display }}</td>
-                    <td class="d-none d-md-table-cell">{{ issue.type }}</td>
+                    <td class="d-none d-md-table-cell">{{ issue.get_type_display }}</td>
                     <td class="d-none d-md-table-cell">{{ issue.project.title }}</td>
                     <td class="d-none d-md-table-cell">{{ issue.get_status_display }}</td>
                     <td class="d-none d-md-table-cell">

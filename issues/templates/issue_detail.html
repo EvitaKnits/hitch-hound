@@ -22,7 +22,7 @@
     </tr>
     <tr>
         <th>Severity</th>
-        <td>{{ issue.severity }}</td>
+        <td>{{ issue.get_severity_display }}</td>
     </tr>
     <tr class="clickable-row" onclick="window.location.href='{% url 'view_all_issues' issue.project.id %}'">
         <th>Project</th>
@@ -30,11 +30,11 @@
     </tr>
     <tr>
         <th>Type</th>
-        <td>{{ issue.type }}</td>
+        <td>{{ issue.get_type_display }}</td>
     </tr>
     <tr>
         <th>Status</th>
-        <td>{{ issue.status }}</td>
+        <td>{{ issue.get_status_display }}</td>
     </tr>
     <tr>
         <th>Reporter</th>
