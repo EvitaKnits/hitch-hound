@@ -19,6 +19,11 @@
                     <form method="post" id="profile-form" class="h-100 d-flex flex-column">
                         {% csrf_token %}
                         {{ form|crispy }}
+                        <div class="form-group mb-4">
+                            <label for="id_role">Role:</label>
+                            <span class="form-control-plaintext" style="display: inline;">{{ form.instance.get_role_display }}</span>
+                            <small class="form-text text-muted" style="display: block;">If you need to change your role, please contact an admin.</small>
+                        </div>
                         <div class="mt-auto">
                             <div class="d-flex justify-content-between" id="static-buttons">
                                 <button type="button" class="btn btn-custom w-50 me-1" id="edit-btn" onclick="toggleProfileEditMode()">Edit</button>

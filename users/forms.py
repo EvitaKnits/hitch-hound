@@ -15,15 +15,14 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ('first_name', 'last_name', 'username', 'email', 'role', 'password1', 'password2')
 
 class UserProfileForm(forms.ModelForm):
-    first_name = forms.CharField(max_length=30, required=True,  widget=forms.TextInput(attrs={'autofocus': 'autofocus'}))
+    first_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'autofocus': 'autofocus'}))
     last_name = forms.CharField(max_length=30, required=True)
     email = forms.EmailField(required=True)
-    role = forms.ChoiceField(choices=User.ROLE_CHOICES, required=True)
-    
+
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'role']
-    
+        fields = ['first_name', 'last_name', 'email']
+
     def __init__(self, *args, **kwargs):
         super(UserProfileForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
