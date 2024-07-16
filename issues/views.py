@@ -28,11 +28,18 @@ def list_issues(request):
     else:
         issues = Issue.objects.all()
 
-    # Determine the sorting field and annotation
+    # Determine the ordering
+    ordering = f"{'' if order == 'asc' else '-'}{sort_by.replace('.', '__')}"
+    
     if sort_by == 'title':
         issues = issues.annotate(lower_title=Lower('title')).order_by(f"{'' if order == 'asc' else '-'}lower_title")
+    elif sort_by == 'project.title':
+        issues = issues.annotate(project_title=Lower('project__title')).order_by(f"{'' if order == 'asc' else '-'}project_title")
     else:
-        issues = issues.order_by(f"{'' if order == 'asc' else '-'}{sort_by}")
+        try:
+            issues = issues.order_by(ordering)
+        except FieldError:
+            issues = issues.order_by('title')  # fallback to default ordering if invalid field
 
     # Use the paginate utility function
     page_obj = paginate(request, issues)

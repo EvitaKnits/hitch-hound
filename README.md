@@ -501,6 +501,15 @@ I noticed that the error message on my login page wasn't working anymore. When i
 #### Solution
 The solution involved modifying the template to properly handle and display error messaging when login credentials are incorrect. I previously had a small bit of Javascript at the bottom of the page to handle this, but as it wasn't working, I changed to using Django templating language in the body of the template and it started working again. See related commit for the code change.
 
+### Bug Three
+
+#### Issue
+Sorting by project or reporter on the Issues Listing page causes a FieldError: "Cannot resolve keyword 'project.title' into field" and "Cannot resolve keyword 'reporter.username' into field." 
+
+#### Solution
+
+For both of these, I discovered that in Django, you need to use double underscores instead of dots to traverse relationships between models. So because 'Projects' and 'Users' are two separate models from the 'Issue' model which is the main one being used in this table, I needed to use underscores for them, not dots. For example, 'project__title' not 'project.title'.
+
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
 
@@ -617,7 +626,6 @@ I also did a tidy up which included fixing bugs (see dedicated bug section above
 - Making the project field on the issue detail clickable to go to that project. 
 - Adding a 'You don't have any issues assigned to you.' message on the Profile page. 
 - Adding a 'You don't have any notifications yet.' message on the Notifications page. 
-- Making a change so that creating an issue from a project auto-populates the project field, and upon saving, returns you to the project you were on. In this scenario if the issue created is ultimately from a different project than the one the user was on, then they are redirected to the issues listing page. 
 - Removing the role dropdown and making the field read-only on the Profile page. 
 - Removing the status field from the Create Issue page and auto-populating this value to 'Open'. 
 
