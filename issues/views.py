@@ -10,6 +10,8 @@ from django.contrib import messages
 from django.db.models.functions import Lower
 from django.db.models import F, Q
 from django.utils import timezone
+from django.core.exceptions import FieldError
+
 
 # Create your views here.
 
@@ -35,6 +37,9 @@ def list_issues(request):
         issues = issues.annotate(lower_title=Lower('title')).order_by(f"{'' if order == 'asc' else '-'}lower_title")
     elif sort_by == 'project.title':
         issues = issues.annotate(project_title=Lower('project__title')).order_by(f"{'' if order == 'asc' else '-'}project_title")
+    elif sort_by == 'severity':
+        ordering = 'severity' if order == 'asc' else '-severity'
+        issues = issues.order_by(ordering)
     else:
         try:
             issues = issues.order_by(ordering)

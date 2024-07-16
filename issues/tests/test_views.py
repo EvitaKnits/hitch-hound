@@ -25,7 +25,7 @@ class IssueViewsTest(TestCase):
             description='Description 1', 
             project=self.project, 
             reporter=self.user,
-            severity='high',
+            severity= 2,
             type='bug',
             status='open'
         )
@@ -34,7 +34,7 @@ class IssueViewsTest(TestCase):
             description='Description 2', 
             project=self.project, 
             reporter=self.user,
-            severity='medium',
+            severity= 3,
             type='other',
             status='closed'
         )
@@ -72,7 +72,7 @@ class IssueViewsTest(TestCase):
             'title': 'New Issue',
             'description': 'New Issue Description',
             'project': self.project.id,
-            'severity': 'high',
+            'severity': 2,
             'type': 'bug',
             'status': 'open'
         }
@@ -93,7 +93,7 @@ class IssueViewsTest(TestCase):
             'title': 'Updated Issue',
             'description': 'Updated Description',
             'project': self.project.id,
-            'severity': 'high',
+            'severity': 2,
             'type': 'bug',
             'status': 'open'
         }

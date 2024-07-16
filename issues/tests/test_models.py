@@ -20,7 +20,7 @@ class IssueModelTest(TestCase):
         self.issue = Issue.objects.create(
             title='Test Issue',
             description='This is a test issue',
-            severity='low',
+            severity= 4,
             project=self.project,
             type='bug',
             status='open',
@@ -31,7 +31,7 @@ class IssueModelTest(TestCase):
         issue = Issue.objects.create(
             title='Test Issue',
             description='This is a test issue',
-            severity='high',
+            severity=2,
             project=self.project,
             type='bug',
             status='open',
@@ -42,7 +42,7 @@ class IssueModelTest(TestCase):
         )
         self.assertEqual(issue.title, 'Test Issue')
         self.assertEqual(issue.description, 'This is a test issue')
-        self.assertEqual(issue.severity, 'high')
+        self.assertEqual(issue.severity, 2)
         self.assertEqual(issue.project, self.project)
         self.assertEqual(issue.type, 'bug')
         self.assertEqual(issue.status, 'open')
@@ -58,7 +58,7 @@ class IssueModelTest(TestCase):
             project=self.project,
             reporter=self.reporter,
         )
-        self.assertEqual(issue.severity, 'low')
+        self.assertEqual(issue.severity, 4)
         self.assertEqual(issue.type, 'bug')
         self.assertEqual(issue.status, 'open')
         self.assertIsNone(issue.developer)

@@ -130,7 +130,9 @@ def issue_severity_summary(request):
         selected_project_title = projects.get(id=selected_projects[0]).title if len(selected_projects) == 1 else "Multiple Projects"
     
     severity_summary = issues.values('severity').annotate(count=Count('severity'))
-    labels = [severity['severity'] for severity in severity_summary]
+    
+    severity_mapping = dict(Issue.SEVERITY_CHOICES)
+    labels = [severity_mapping[severity['severity']] for severity in severity_summary]
     data = [severity['count'] for severity in severity_summary]
 
     # Calculate new notifications

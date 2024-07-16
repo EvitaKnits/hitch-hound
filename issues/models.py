@@ -6,10 +6,10 @@ from users.models import User
 
 class Issue(models.Model):
     SEVERITY_CHOICES = (   
-        ('critical', '1 - Critical'),
-        ('high', '2 - High'),
-        ('medium', '3 - Medium'),
-        ('low', '4 - Low'),
+        (1, '1 - Critical'),
+        (2, '2 - High'),
+        (3, '3 - Medium'),
+        (4, '4 - Low'),
     )
     TYPE_CHOICES = (
         ('bug', 'Bug'),
@@ -27,7 +27,7 @@ class Issue(models.Model):
 
     title = models.CharField(max_length=255, null=False)
     description = models.TextField()
-    severity = models.CharField(max_length=20, choices=SEVERITY_CHOICES, default='low')
+    severity = models.IntegerField(choices=SEVERITY_CHOICES, default=4)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, null=False)
     type = models.CharField(max_length=20, choices=TYPE_CHOICES, default='bug')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='open')

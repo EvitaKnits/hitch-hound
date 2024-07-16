@@ -41,7 +41,7 @@
                     </a>
                 </th>
                 <th scope="col">
-                    <a href="?sort_by=severity&order={{ toggle_order }}" class="text-dark text-decoration-none">
+                    <a href="?sort_by=severity&order={% if sort_by == 'severity' and order == 'asc' %}desc{% else %}asc{% endif %}" class="text-dark text-decoration-none">
                         Severity
                         <i class="fa {% if sort_by == 'severity' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
                     </a>

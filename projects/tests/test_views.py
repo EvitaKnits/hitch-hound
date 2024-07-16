@@ -27,7 +27,7 @@ class ProjectViewsTest(TestCase):
             description='Description 1', 
             project=self.project1, 
             reporter=self.user,
-            severity='high', 
+            severity= 2, 
             type='bug',       
             status='open'
         )
@@ -36,7 +36,7 @@ class ProjectViewsTest(TestCase):
             description='Description 2', 
             project=self.project1, 
             reporter=self.user,
-            severity='medium',  
+            severity= 3,  
             type='other',       
             status='closed'    
         )

@@ -546,6 +546,14 @@ I noticed that instead of values such as 'In Progress' - I could see values form
 The solution was to go through the site and find all the places I am displaying such fields and ensure I am using the display values. For example, where I had used `issue.status`, I now used `issue.get_status_display`. This ensured all the display values were being shown on the UI. Here is the same table using the display values: 
 ![Bug 6 fix](documentation/bug6-fix.png)
 
+### Bug Seven
+
+#### Issue
+The sorting by Severity on tables like the Issue Listing page, was not working as expected. The column was being sorted alphabetically rather than by severity. 
+
+#### Solution
+I changed the Issue Model's 'Severity' choices to integers and sorted by those instead of the previous names, so the display names remain in the format '1-Critical' but the stored values are just integers, e.g. 1. This solved the issue and allowed the sorting by severity to be accurate. 
+
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
 
@@ -671,6 +679,8 @@ These three stories were nice to haves if I found I had enough time to implement
 - Attach Files to Issues
 - Connect 2+ Issues as Related
 - Search for Issues by Keyword
+
+I also looked into the possibility of retaining the formatting and line breaks in the Comments, as my program currently removes them upon saving. However, I decided against making any changes because my research indicated that to preserve formatting and lines breaks, the comment text would need to be rendered as HTML. Django automatically escapes HTML to prevent Cross-Site Scripting attacks as a security measure. I don't want to make changes that override Django's security protocols, especially as I don't believe preservation of formatting justifies compromising security measures. 
 
 ## Credits
 

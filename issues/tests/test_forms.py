@@ -18,7 +18,7 @@ class IssueFormTest(TestCase):
         form = IssueForm(data={
             'title': 'Test Issue',
             'description': 'Test Description',
-            'severity': 'high',  
+            'severity': 2,  
             'project': self.project.id,
             'type': 'bug', 
             'developer': self.developer.id,
