@@ -565,6 +565,14 @@ I found that I had a block of code implementing alerts on this page. I removed t
 
 ![Bug 8 Fix](documentation/bug8-fix.png)
 
+### Bug Nine
+
+#### Issue
+When I finished the main coding of my project and started to go through my files to tidy them all up, I came across my secret ket in my settings file. I had overlooked this throughout development and therefore committed it to GitHub. It was therefore no longer secret. 
+
+#### Solution 
+I used [Djecrety](https://djecrety.ir/) to generate a new secret key, placed this in the env file and hooked it up to the settings. This reinstated this security setting correctly. 
+
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
 
