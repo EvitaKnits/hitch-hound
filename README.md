@@ -554,6 +554,17 @@ The sorting by Severity on tables like the Issue Listing page, was not working a
 #### Solution
 I changed the Issue Model's 'Severity' choices to integers and sorted by those instead of the previous names, so the display names remain in the format '1-Critical' but the stored values are just integers, e.g. 1. This solved the issue and allowed the sorting by severity to be accurate. 
 
+### Bug Eight
+![Bug 8](documentation/bug8.png)
+
+#### Issue
+There was an alert on the Password Reset form page indicating the deletion of a project, which is irrelevant to the scenario. 
+
+#### Solution
+I found that I had a block of code implementing alerts on this page. I removed this and that removed the project deletion alert. 
+
+![Bug 8 Fix](documentation/bug8-fix.png)
+
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
 
