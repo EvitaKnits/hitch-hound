@@ -71,16 +71,8 @@
         // Get the context of the canvas element where the chart will be displayed
         const ctx = document.getElementById('status-pie-chart').getContext('2d');
         // Assign the labels and data passed from the view 
-        const labels = {
-            {
-                labels | safe
-            }
-        };
-        const data = {
-            {
-                data | safe
-            }
-        };
+        const labels = {{ labels | safe }};
+        const data = {{ data | safe }};
         // Checks if there are any labels to display
         if (labels.length > 0) {
             // Creates a new Chart instance

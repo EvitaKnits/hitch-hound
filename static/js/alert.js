@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // If predefined alert type exists, append the corresponding alert and remove the item from session storage
     if (predefinedAlertType) {
-    if (predefinedAlertType) {
         if (predefinedAlertType === 'Issue Deleted') {
             appendAlert('You deleted this issue.', 'danger');
         } else if (predefinedAlertType === 'Project Deleted') {

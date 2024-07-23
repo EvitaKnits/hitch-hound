@@ -573,6 +573,21 @@ When I finished the main coding of my project and started to go through my files
 #### Solution 
 I used [Djecrety](https://djecrety.ir/) to generate a new secret key, placed this in the env file and hooked it up to the settings. This reinstated this security setting correctly. 
 
+### Bug Ten
+
+#### Issue
+After I had finished going through and adding my docstrings and comments, as well as ensuring consistent quote marks and naming across all files, I had accidentally made changes that meant my pie charts and alerts were no longer displaying. 
+
+#### Solution
+I found that I had used my IDE to do an automatic format (right-click/format document) and that this had thrown the data and labels off in the code snippet below. Restoring them to this state made my pie charts reappear.
+
+`const labels = {{ labels | safe }};`<br>
+`const data = {{ data | safe }};`
+
+I also found that I had somehow duplicated the line below in my alerts.js file. Deleting this made my alerts reappear.
+
+`if (predefinedAlertType) {`
+
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
 
