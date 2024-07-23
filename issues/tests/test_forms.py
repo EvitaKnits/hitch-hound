@@ -12,7 +12,7 @@ class IssueFormTest(TestCase):
         Set up the test data for Issue Form tests.
         Create instances of related models to be used in the form.
         """
-        self.project = Project.objects.create(title="Test Project")
+        self.project = Project.objects.create(title='Test Project')
         self.developer = User.objects.create_user(username='developer', password='password', role='developer')
         self.quality_assurance = User.objects.create_user(username='qa', password='password', role='quality_assurance')
         self.product_manager = User.objects.create_user(username='pm', password='password', role='product_manager')
@@ -90,7 +90,7 @@ class CommentFormTest(TestCase):
         Set up the test data for Comment Form tests.
         Create instances of related models to be used in the form.
         """
-        self.project = Project.objects.create(title="Test Project")
+        self.project = Project.objects.create(title='Test Project')
         self.reporter = User.objects.create_user(username='reporter', password='test')
         self.issue = Issue.objects.create(
             title='Test Issue',

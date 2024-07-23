@@ -40,9 +40,9 @@ def view_all_issues(request, project_id):
 
     # Determine the sorting field and annotation
     if sort_by == 'title':
-        issues = issues.annotate(lower_title=Lower('title')).order_by(f"{'' if order == 'asc' else '-'}lower_title")
+        issues = issues.annotate(lower_title=Lower('title')).order_by(f'{'' if order == 'asc' else '-'}lower_title')
     else:
-        issues = issues.order_by(f"{'' if order == 'asc' else '-'}{sort_by}")
+        issues = issues.order_by(f'{'' if order == 'asc' else '-'}{sort_by}')
 
     # Use the paginate utility function for pagination
     page_obj = paginate(request, issues)

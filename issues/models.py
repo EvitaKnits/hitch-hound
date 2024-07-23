@@ -59,7 +59,7 @@ class Issue(models.Model):
             return True
         role = user.role
         allowed_statuses = self.get_allowed_statuses_for_role(role)
-        print(f"User Role: {role}, Attempted Status: {new_status}, Allowed Statuses: {allowed_statuses}")
+        print(f'User Role: {role}, Attempted Status: {new_status}, Allowed Statuses: {allowed_statuses}')
         return new_status in allowed_statuses
 
     def save(self, *args, **kwargs):

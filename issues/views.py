@@ -37,13 +37,13 @@ def list_issues(request):
         issues = Issue.objects.all()
 
     # Determine the ordering of issues
-    ordering = f"{'' if order == 'asc' else '-'}{sort_by.replace('.', '__')}"
+    ordering = f'{'' if order == 'asc' else '-'}{sort_by.replace('.', '__')}'
     
     # Annotate and order issues based on sorting parameters
     if sort_by == 'title':
-        issues = issues.annotate(lower_title=Lower('title')).order_by(f"{'' if order == 'asc' else '-'}lower_title")
+        issues = issues.annotate(lower_title=Lower('title')).order_by(f'{'' if order == 'asc' else '-'}lower_title')
     elif sort_by == 'project.title':
-        issues = issues.annotate(project_title=Lower('project__title')).order_by(f"{'' if order == 'asc' else '-'}project_title")
+        issues = issues.annotate(project_title=Lower('project__title')).order_by(f'{'' if order == 'asc' else '-'}project_title')
     elif sort_by == 'severity':
         ordering = 'severity' if order == 'asc' else '-severity'
         issues = issues.order_by(ordering)
@@ -153,8 +153,8 @@ def edit_issue(request, id):
             if not success:
                 messages.error(
                     request, 
-                    f"As a {request.user.role.replace('_', ' ')}, you do not have permission to change the issue status to {issue.status}. "
-                    f"You may only change it to {', '.join(issue.get_allowed_statuses_for_role(request.user.role))}."
+                    f'As a {request.user.role.replace('_', ' ')}, you do not have permission to change the issue status to {issue.status}.'
+                    f'You may only change it to {', '.join(issue.get_allowed_statuses_for_role(request.user.role))}.'
                 )
             else:
                 return redirect('issue_detail', id=issue.id)
@@ -188,8 +188,8 @@ def change_issue_status(request, pk):
             return redirect('issue_detail', pk=pk)
         else:
             request.session['alert_message'] = (
-                f"As a {user_role.replace('_', ' ')}, you do not have permission to change the issue status to {new_status}. "
-                f"You may only change it to {', '.join(allowed_statuses)}."
+                f'As a {user_role.replace('_', ' ')}, you do not have permission to change the issue status to {new_status}.'
+                f'You may only change it to {', '.join(allowed_statuses)}.'
             )
             request.session['alert_type'] = 'danger'
             return redirect('issue_detail', pk=pk)

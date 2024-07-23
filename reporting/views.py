@@ -99,10 +99,10 @@ def issue_status_summary(request):
     # Determine which issues to include based on selected projects
     if include_all or not selected_projects:
         issues = Issue.objects.all()
-        selected_project_title = "All Projects"
+        selected_project_title = 'All Projects'
     else:
         issues = Issue.objects.filter(project__id__in=selected_projects)
-        selected_project_title = projects.get(id=selected_projects[0]).title if len(selected_projects) == 1 else "Multiple Projects"
+        selected_project_title = projects.get(id=selected_projects[0]).title if len(selected_projects) == 1 else 'Multiple Projects'
     
     # Summarise issues by status
     status_summary = issues.values('status').annotate(count=Count('status'))
@@ -135,10 +135,10 @@ def issue_severity_summary(request):
     # Determine which issues to include based on selected projects
     if include_all or not selected_projects:
         issues = Issue.objects.all()
-        selected_project_title = "All Projects"
+        selected_project_title = 'All Projects'
     else:
         issues = Issue.objects.filter(project__id__in=selected_projects)
-        selected_project_title = projects.get(id=selected_projects[0]).title if len(selected_projects) == 1 else "Multiple Projects"
+        selected_project_title = projects.get(id=selected_projects[0]).title if len(selected_projects) == 1 else 'Multiple Projects'
     
     # Summarise issues by severity
     severity_summary = issues.values('severity').annotate(count=Count('severity'))

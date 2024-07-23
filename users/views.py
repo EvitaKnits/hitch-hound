@@ -55,7 +55,7 @@ def user_signup(request):
 
 def password_reset(request):
     """ View to handle password reset functionality """
-    if request.method == "POST":
+    if request.method == 'POST':
         form = PasswordResetForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
@@ -117,14 +117,14 @@ def user_profile(request):
             models.Q(developer=user) |
             models.Q(quality_assurance=user) |
             models.Q(product_manager=user)
-        ).distinct().annotate(lower_title=Lower('title')).order_by(f"{'' if order == 'asc' else '-'}lower_title")
+        ).distinct().annotate(lower_title=Lower('title')).order_by(f'{'' if order == 'asc' else '-'}lower_title')
     else:
         issues = Issue.objects.filter(
             models.Q(reporter=user) |
             models.Q(developer=user) |
             models.Q(quality_assurance=user) |
             models.Q(product_manager=user)
-        ).distinct().order_by(f"{'' if order == 'asc' else '-'}{sort_by}")
+        ).distinct().order_by(f'{'' if order == 'asc' else '-'}{sort_by}')
 
     if request.method == 'POST':
         profile_form = UserProfileForm(request.POST, instance=user)

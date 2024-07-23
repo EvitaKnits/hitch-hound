@@ -18,7 +18,7 @@ from django.contrib.messages import constants as messages
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -76,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 WSGI_APPLICATION = 'hitchhound.wsgi.application'
@@ -94,12 +94,12 @@ if os.environ.get('DEV') == 'TRUE':
 else:
     DATABASES = {
         'default':
-            dj_database_url.parse(os.environ.get("DATABASE_URL"))
+            dj_database_url.parse(os.environ.get('DATABASE_URL'))
         }
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://8000-evitaknits-hitchhound-69v294c8trk.ws.codeinstitute-ide.net",
-    "https://hitchhound-15272de0eee9.herokuapp.com/",  
+    'https://8000-evitaknits-hitchhound-69v294c8trk.ws.codeinstitute-ide.net',
+    'https://hitchhound-15272de0eee9.herokuapp.com/',  
 ]
 
 # Password validation
@@ -144,18 +144,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
 
 # Log in/out settings
-LOGIN_URL= "/accounts/login/"
-LOGIN_REDIRECT_URL = "issues"
-LOGOUT_REDIRECT_URL = "login"
+LOGIN_URL= '/accounts/login/'
+LOGIN_REDIRECT_URL = 'issues'
+LOGOUT_REDIRECT_URL = 'login'
 
 # Email Settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 
 # Message Tags
 MESSAGE_TAGS = {

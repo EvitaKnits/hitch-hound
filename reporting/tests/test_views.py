@@ -18,10 +18,10 @@ class ViewsTestCase(TestCase):
         self.user = User.objects.create_user(username='testuser', password='12345')
         self.client.login(username='testuser', password='12345')
 
-        self.project = Project.objects.create(title="Test Project")
+        self.project = Project.objects.create(title='Test Project')
         self.issue = Issue.objects.create(
-            title="Test Issue",
-            status="Open",
+            title='Test Issue',
+            status='Open',
             project=self.project,
             reporter=self.user 
         )
