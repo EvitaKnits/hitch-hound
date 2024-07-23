@@ -2,12 +2,13 @@
 {% load static %}
 
 {% block nav_icons %}
-    {% include 'nav_icons.html' %}
+{% include 'nav_icons.html' %}
 {% endblock %}
 
 {% block content %}
 <h1>Change History</h1>
 
+<!-- Table for displaying change history on larger screens -->
 <div class="d-none d-md-block table-responsive">
     <table class="table table-hover table-bordered">
         <thead>
@@ -21,6 +22,7 @@
             </tr>
         </thead>
         <tbody>
+            <!-- Loop through each change object and display its details -->
             {% for change in changes %}
             <tr class="table-light">
                 <td>#{{ change.issue.id }}</td>
@@ -30,6 +32,7 @@
                 <td>{{ change.user.username }}</td>
                 <td>{{ change.changed_at }}</td>
             </tr>
+            <!-- Message displayed if no changes are found -->
             {% empty %}
             <tr>
                 <td colspan="6">No changes found for this issue.</td>
@@ -39,6 +42,7 @@
     </table>
 </div>
 
+<!-- Card layout for displaying change history on smaller screens -->
 <div class="d-block d-md-none">
     {% for change in changes %}
     <div class="card mb-3">
@@ -56,8 +60,6 @@
 </div>
 
 {% include 'pagination.html' %}
-
-</div>
 
 {% include 'new_item_modal.html' %}
 {% include 'logout_modal.html' %}

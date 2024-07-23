@@ -13,11 +13,12 @@
                 </div>
                 <!-- Alert Placeholder -->
                 {% if error_message %}
-                    <div class="alert alert-danger" role="alert">
-                        {{ error_message }}
-                    </div>
+                <div class="alert alert-danger" role="alert">
+                    {{ error_message }}
+                </div>
                 {% endif %}
                 <div class="card-body">
+                    <!-- Form for logging in -->
                     <form method="post" action="{% url 'login' %}">
                         {% csrf_token %}
                         <div class="form-group">

@@ -1,6 +1,7 @@
+// Wait for the DOM content to be fully loaded before running the script
 document.addEventListener("DOMContentLoaded", function() {
 
-    // Get the modal
+    // Get the modal element
     var modal = document.getElementById("myModal");
 
     // Get the button that opens the modal
@@ -34,7 +35,8 @@ document.addEventListener("DOMContentLoaded", function() {
     createIssueBtn.onclick = function() {
         window.location.href = createIssueUrl || "/";
     }
-
+    
+    // Redirect based on user choice when create project button is clicked
     createProjectBtn.onclick = function() {
         window.location.href = createProjectUrl || "/";
     }

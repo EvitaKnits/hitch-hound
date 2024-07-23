@@ -13,26 +13,33 @@ from django.utils import timezone
 from django.core.exceptions import FieldError
 
 
-# Create your views here.
-
 @login_required
 def list_issues(request):
+    """
+    View to list all issues, optionally filtered by project and sorted by various fields.
+    Handles pagination and sorting, and includes user notifications.
+    """
+    # Retrieve and handle session flag for showing a success toast message when user just registered
     show_toast = request.session.pop('registration_success', False)
+    
+    # Get sorting and filtering parameters from the request
     sort_by = request.GET.get('sort_by', 'title')
     order = request.GET.get('order', 'asc')
     project_id = request.GET.get('project_id')
 
     project = None
 
+    # Filter issues by project if project_id is provided
     if project_id:
         project = get_object_or_404(Project, id=project_id)
         issues = Issue.objects.filter(project=project)
     else:
         issues = Issue.objects.all()
 
-    # Determine the ordering
+    # Determine the ordering of issues
     ordering = f"{'' if order == 'asc' else '-'}{sort_by.replace('.', '__')}"
     
+    # Annotate and order issues based on sorting parameters
     if sort_by == 'title':
         issues = issues.annotate(lower_title=Lower('title')).order_by(f"{'' if order == 'asc' else '-'}lower_title")
     elif sort_by == 'project.title':
@@ -44,15 +51,18 @@ def list_issues(request):
         try:
             issues = issues.order_by(ordering)
         except FieldError:
-            issues = issues.order_by('title')  # fallback to default ordering if invalid field
+            issues = issues.order_by('title')  
 
-    # Use the paginate utility function
+    # Use the paginate utility function to handle pagination
     page_obj = paginate(request, issues)
 
     def toggle_order(current_order):
+        """ 
+        Utility function to toggle sorting order between ascending and descending.
+        """
         return 'asc' if current_order == 'desc' else 'desc'
 
-    # Calculate new notifications
+    # Calculate whether there are new notifications for the current user
     new_notifications = get_new_notifications(request.user)
 
     context = {
@@ -71,11 +81,14 @@ def list_issues(request):
 
 @login_required
 def issue_detail(request, id):
+    """
+    View to display the details of a specific issue, including its comments.
+    """
     issue = get_object_or_404(Issue, id=id)
     comments = Comment.objects.filter(issue=issue).order_by('-commented_at')
     form = CommentForm()
 
-    # Calculate new notifications
+    # Calculate whether there are new notifications for the current user
     new_notifications = get_new_notifications(request.user)
 
     context = {
@@ -90,6 +103,7 @@ def issue_detail(request, id):
 
 @login_required
 def add_comment(request, issue_id):
+    """ View to add a comment to a specific issue """
     issue = get_object_or_404(Issue, id=issue_id)
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -105,6 +119,7 @@ def add_comment(request, issue_id):
 
 @login_required  
 def create_issue(request):
+    """ View to create a new issue """
     if request.method == 'POST':
         form = IssueForm(request.POST)
         if form.is_valid():
@@ -115,7 +130,7 @@ def create_issue(request):
     else:
         form = IssueForm()
     
-    # Calculate new notifications
+    # Calculate whether there are new notifications for the current user
     new_notifications = get_new_notifications(request.user)
 
     context = {
@@ -129,11 +144,12 @@ def create_issue(request):
 
 @login_required
 def edit_issue(request, id):
+    """ View to edit an existing issue """
     issue = get_object_or_404(Issue, id=id)
     if request.method == 'POST':
         form = IssueForm(request.POST, instance=issue)
         if form.is_valid():
-            success = form.save(user=request.user)  # Pass the user to the save method
+            success = form.save(user=request.user)
             if not success:
                 messages.error(
                     request, 
@@ -145,7 +161,7 @@ def edit_issue(request, id):
     else:
         form = IssueForm(instance=issue)
 
-    # Calculate new notifications
+    # Calculate whether there are new notifications for the current user
     new_notifications = get_new_notifications(request.user)
 
     context = {
@@ -159,6 +175,7 @@ def edit_issue(request, id):
 
 @login_required
 def change_issue_status(request, pk):
+    """ View to change the status of an issue """
     issue = get_object_or_404(Issue, pk=pk)
     if request.method == 'POST':
         new_status = request.POST.get('status')
@@ -180,6 +197,7 @@ def change_issue_status(request, pk):
 
 @login_required
 def delete_issue(request, id):
+    """ View to delete an issue """
     issue = get_object_or_404(Issue, id=id)
     if request.method == 'POST':
         issue.delete()

@@ -2,9 +2,11 @@ from django.db import models
 from issues.models import Issue
 from users.models import User
 
-# Create your models here.
-
 class Change(models.Model):
+    """
+    Model to represent changes made to issues.
+    Each instance records a change to a specific field of an issue by a user.
+    """
     FIELD_CHOICES = (
         ('title', 'Title'),
         ('description', 'Description'),
@@ -25,4 +27,7 @@ class Change(models.Model):
     new_value = models.TextField()
 
     def __str__(self):
+        """
+        Return a string representation of the change.
+        """
         return f'{self.field_changed} changed from {self.old_value} to {self.new_value} by {self.user}'

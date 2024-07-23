@@ -4,12 +4,12 @@ from issues.models import Issue, UserIssue, Comment
 from projects.models import Project
 from django.core.exceptions import ValidationError
 
-# Create your tests here.
-
 User = get_user_model()
 
 class IssueModelTest(TestCase):
+    """ Test case for the Issue model """
     def setUp(self):
+        """ Set up the test data for Issue model tests """
         self.project = Project.objects.create(title='Test Project')
         self.reporter = User.objects.create_user(username='reporter', password='test')
         self.developer = User.objects.create_user(username='developer', password='test', role='developer')
@@ -28,6 +28,7 @@ class IssueModelTest(TestCase):
         )
 
     def test_create_issue(self):
+        """ Test creating an Issue instance with valid data """
         issue = Issue.objects.create(
             title='Test Issue',
             description='This is a test issue',
@@ -52,6 +53,7 @@ class IssueModelTest(TestCase):
         self.assertEqual(issue.product_manager, self.pm)
 
     def test_issue_default_values(self):
+        """ Test the default values for an Issue instance """
         issue = Issue.objects.create(
             title='Test Issue',
             description='This is a test issue',
@@ -66,18 +68,26 @@ class IssueModelTest(TestCase):
         self.assertIsNone(issue.product_manager)
 
     def test_missing_required_field(self):
+        """
+        Test creating an Issue instance with a missing required field - the title.
+        Should raise a ValidationError.
+        """
         with self.assertRaises(ValidationError):
             issue = Issue(
-                description='This is a test issue',  # Missing title
+                description='This is a test issue',  
                 project=self.project,
                 reporter=self.reporter,
             )
             issue.full_clean()
 
     def test_title_max_length(self):
+        """
+        Test the maximum length of the title field.
+        Should raise a ValidationError because max length is exceeded.
+        """
         with self.assertRaises(ValidationError):
             issue = Issue(
-                title='T' * 256,  # Title exceeds max length
+                title='T' * 256,
                 description='This is a test issue',
                 project=self.project,
                 reporter=self.reporter,
@@ -85,6 +95,10 @@ class IssueModelTest(TestCase):
             issue.full_clean()
 
     def test_related_objects_deletion(self):
+        """
+        Test the cascading deletion of related objects.
+        Deleting an Issue should delete related Comments.
+        """
         issue = Issue.objects.create(
             title='Test Issue',
             description='This is a test issue',
@@ -102,8 +116,13 @@ class IssueModelTest(TestCase):
         self.assertFalse(Issue.objects.filter(id=issue_id).exists())
         self.assertFalse(Comment.objects.filter(id=comment_id).exists())
 
-    # New tests for permission system
+    # Permission system tests
+
     def test_can_user_update_status(self):
+        """
+        Test the permission system for updating the status of an Issue.
+        Different roles have different permissions for changing status.
+        """
         # Developer can only move to 'in_progress'
         self.assertTrue(self.issue.can_user_update_status(self.developer, 'in_progress'))
         self.assertFalse(self.issue.can_user_update_status(self.developer, 'closed'))
@@ -117,12 +136,13 @@ class IssueModelTest(TestCase):
         self.assertTrue(self.issue.can_user_update_status(self.pm, 'closed'))
         self.assertTrue(self.issue.can_user_update_status(self.pm, 'cancelled'))
         self.assertFalse(self.issue.can_user_update_status(self.pm, 'testing'))
-
+                                        
         # Superuser can move to any status
         self.assertTrue(self.issue.can_user_update_status(self.superuser, 'closed'))
         self.assertTrue(self.issue.can_user_update_status(self.superuser, 'in_progress'))
 
     def test_save_method_permissions(self):
+        """ Test the custom save method for permissions when updating status """
         self.issue.status = 'in_progress'
         self.issue.save(user=self.developer)
         self.assertEqual(self.issue.status, 'in_progress')
@@ -130,11 +150,13 @@ class IssueModelTest(TestCase):
         self.issue.status = 'closed'
         success = self.issue.save(user=self.developer)
         self.assertFalse(success)
-        self.issue.refresh_from_db()  # Ensure we get the latest status from the database
+        self.issue.refresh_from_db()
         self.assertNotEqual(self.issue.status, 'closed')
 
 class CommentModelTest(TestCase):
+    """ Test case for the Comment model """
     def setUp(self):
+        """ Set up the test data for Comment model tests """
         self.project = Project.objects.create(title='Test Project')
         self.reporter = User.objects.create_user(username='reporter', password='test')
         self.user = User.objects.create_user(username='commenter', password='test')
@@ -146,6 +168,7 @@ class CommentModelTest(TestCase):
         )
 
     def test_create_comment(self):
+        """ Test creating a Comment instance with valid data """
         comment = Comment.objects.create(comment_text='This is a test comment', user=self.user, issue=self.issue)
         self.assertEqual(comment.comment_text, 'This is a test comment')
         self.assertEqual(comment.user, self.user)
@@ -153,12 +176,20 @@ class CommentModelTest(TestCase):
         self.assertIsNotNone(comment.commented_at)
 
     def test_comment_text_cannot_be_blank(self):
+        """
+        Test that the comment_text field cannot be blank.
+        Should raise a ValidationError.
+        """
         comment = Comment(comment_text='', user=self.user, issue=self.issue)
         with self.assertRaises(ValidationError):
             comment.full_clean()
             comment.save()
 
     def test_str_method(self):
+        """
+        Test the __str__ method of the Comment model.
+        Should return the first 20 characters of the comment_text.
+        """
         comment = Comment.objects.create(
             comment_text='This is a comment that is longer than 20 characters',
             user=self.reporter,

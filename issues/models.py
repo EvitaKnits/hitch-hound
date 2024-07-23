@@ -2,9 +2,10 @@ from django.db import models
 from projects.models import Project
 from users.models import User 
 
-# Create your models here.
-
 class Issue(models.Model):
+    """
+    This model represents an issue with various attributes, which is assigned to a project.
+    """
     SEVERITY_CHOICES = (   
         (1, '1 - Critical'),
         (2, '2 - High'),
@@ -39,6 +40,7 @@ class Issue(models.Model):
     updated_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='updated_issues')
 
     def get_allowed_statuses_for_role(self, role):
+        """ Return a list of allowed statuses for a given role to power permissions """
         if role == 'developer':
             return ['open', 'in_progress']
         elif role == 'quality_assurance':
@@ -50,6 +52,7 @@ class Issue(models.Model):
         return ['open']
 
     def can_user_update_status(self, user, new_status):
+        """ Check if a user has permission to update the issue status """
         if user is None:
             return False
         if user.is_superuser:
@@ -60,6 +63,14 @@ class Issue(models.Model):
         return new_status in allowed_statuses
 
     def save(self, *args, **kwargs):
+        """
+        Override the save method to include custom logic for updating the issue.
+        
+        If a user is provided via kwargs, set the `updated_by` field to that user.
+        Before saving, if the status of the issue is being changed, verify that the 
+        user has the necessary permissions to change to the new status. If the user 
+        lacks the required permissions, the save operation is aborted.
+        """
         user = kwargs.pop('user', None)
         if user:
             self.updated_by = user
@@ -69,12 +80,15 @@ class Issue(models.Model):
             old_issue = Issue.objects.get(pk=self.pk)
             if old_issue.status != self.status:
                 if not self.can_user_update_status(user, self.status):
-                    return False  # Return False if permission is denied
+                    return False
 
         super().save(*args, **kwargs)
-        return True  # Return True if save is successful
+        return True
 
 class UserIssue(models.Model):
+    """
+    Intermediate model to link users to specific roles on specific issues.
+    """
     ROLE_CHOICES = (
         ('developer', 'Developer'),
         ('quality_assurance', 'Quality Assurance'),
@@ -85,15 +99,17 @@ class UserIssue(models.Model):
     role = models.CharField(max_length=20, choices=ROLE_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    # Ensure unique assignments of user to issue with a specific role
     class Meta:
         unique_together = ('user', 'issue', 'role')
 
 class Comment(models.Model):
-
+    """ This model represents a comment made on an issue """
     comment_text = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
     commented_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
+        """ Return a truncated string representation of the comment """
         return self.comment_text[:20]

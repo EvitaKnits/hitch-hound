@@ -23,11 +23,12 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-evitaknits-hitchhound-69v294c8trk.ws.codeinstitute-ide.net', '.herokuapp.com',]
-
+ALLOWED_HOSTS = [
+    '8000-evitaknits-hitchhound-69v294c8trk.ws.codeinstitute-ide.net',
+    '.herokuapp.com',
+]
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -35,12 +36,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
+    'crispy_bootstrap5',
+
+    # My Apps
     'users',
     'projects',
     'notifications',
     'reporting',
-    'crispy_forms',
-    'crispy_bootstrap5',
     'issues.apps.IssuesConfig',
 ]
 
@@ -74,14 +77,13 @@ TEMPLATES = [
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 WSGI_APPLICATION = 'hitchhound.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+# Using sqlite3 for testing to avoid running a separate Postgres DB
 if os.environ.get('DEV') == 'TRUE':
     DATABASES = {
         'default' : {
@@ -118,18 +120,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -141,16 +138,17 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Custom user model
 AUTH_USER_MODEL = 'users.User'
 
+# Log in/out settings
 LOGIN_URL= "/accounts/login/"
 LOGIN_REDIRECT_URL = "issues"
 LOGOUT_REDIRECT_URL = "login"
 
-# Gmail Settings
+# Email Settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
@@ -159,6 +157,7 @@ EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.environ.get("EMAIL_HOST_USER")
 
+# Message Tags
 MESSAGE_TAGS = {
     messages.DEBUG: 'debug',
     messages.INFO: 'info',

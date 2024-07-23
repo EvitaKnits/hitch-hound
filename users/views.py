@@ -23,10 +23,8 @@ from django.db.models import F, Q
 from notifications.models import Change
 from django.utils import timezone
 
-
-# Create your views here.
-
 def user_login(request):
+    """ View to handle user login functionality """
     context = {'show_register_navbar': True}
 
     if request.method == 'POST':
@@ -43,6 +41,7 @@ def user_login(request):
     return render(request, 'login.html', context)
 
 def user_signup(request):
+    """ View to handle user signup functionality """
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
@@ -55,6 +54,7 @@ def user_signup(request):
     return render(request, 'signup.html', {'form': form})
 
 def password_reset(request):
+    """ View to handle password reset functionality """
     if request.method == "POST":
         form = PasswordResetForm(request.POST)
         if form.is_valid():
@@ -90,17 +90,21 @@ def password_reset(request):
 
 
 def password_reset_done(request):
+    """ Render the password reset done view """
     return render(request, 'registration/password_reset_done.html')
 
 class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    """ Custom view for confirming password reset """
     template_name = 'registration/password_reset_confirm.html'
     success_url = reverse_lazy('password_reset_complete')
 
 def password_reset_complete(request):
+    """ Render the password reset complete view """
     return render(request, 'registration/password_reset_complete.html')
 
 @login_required
 def user_profile(request):
+    """ Handle user profile view, form submission, and issue sorting """
     user = request.user
     sort_by = request.GET.get('sort_by', 'id')
     order = request.GET.get('order', 'asc')
@@ -131,10 +135,10 @@ def user_profile(request):
     else:
         profile_form = UserProfileForm(instance=user)
 
-    # Use the paginate utility function
+    # Use the paginate utility function to handle pagination
     page_obj = paginate(request, issues)
 
-    # Calculate new notifications
+    # Calculate new notifications for the current user
     new_notifications = get_new_notifications(request.user)
 
     context = {
@@ -152,6 +156,7 @@ def user_profile(request):
 
 @login_required
 def change_password(request):
+    """ Handle password change functionality """
     if request.method == 'POST':
         password_change_form = PasswordChangeForm(user=request.user, data=request.POST)
         if password_change_form.is_valid():
@@ -161,7 +166,7 @@ def change_password(request):
     else:
         password_change_form = PasswordChangeForm(user=request.user)
     
-    # Calculate new notifications
+    # Calculate new notifications for current user
     new_notifications = get_new_notifications(request.user)
 
     context = {

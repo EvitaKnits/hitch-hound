@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block nav_icons %}
-    {% include 'nav_icons.html' %}
+{% include 'nav_icons.html' %}
 {% endblock %}
 
 {% block content %}
@@ -10,6 +10,7 @@
 <!-- Alert Placeholder -->
 <div id="liveAlertPlaceholder"></div>
 
+<!-- Loop through each project to display its latest issues-->
 {% for project in projects %}
 <h2 class="project-title">{{ project.title }}</h2>
 <div class="table-responsive">
@@ -24,6 +25,7 @@
             </tr>
         </thead>
         <tbody>
+            <!-- Loop through each issue in the latest issues of the project -->
             {% for issue in project.latest_issues %}
             <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.id %}'"
                 style="cursor: pointer;">
@@ -35,6 +37,7 @@
             </tr>
             {% empty %}
             <tr>
+                <!-- Message displayed if there are no issues for the project -->
                 <td colspan="5">No issues found for this project.</td>
             </tr>
             {% endfor %}
@@ -43,14 +46,20 @@
 </div>
 <div class="row mb-4">
     <div class="col-12 col-md-4 mb-2 mb-md-0">
+        <!-- Button to view all issues for the project -->
         <a href="{% url 'view_all_issues' project.id %}" class="btn btn-primary w-100">View All Issues</a>
     </div>
     <div class="col-12 col-md-4 mb-2 mb-md-0">
+        <!-- Button to edit the project -->
         <a href="{% url 'edit_project' project.id %}" class="btn btn-secondary w-100">Edit Project</a>
     </div>
     <div class="col-12 col-md-4">
-        <button type="button" class="btn btn-danger w-100 delete-project-button" data-id="{{ project.id }}">Delete Project</button>
-        <form id="deleteProjectForm_{{ project.id }}" action="{% url 'delete_project' project.id %}" method="post" style="display: none;">
+        <!-- Button to delete the project -->
+        <button type="button" class="btn btn-danger w-100 delete-project-button" data-id="{{ project.id }}">Delete
+            Project</button>
+            <!-- Hidden form to handle project deletion -->
+        <form id="deleteProjectForm_{{ project.id }}" action="{% url 'delete_project' project.id %}" method="post"
+            style="display: none;">
             {% csrf_token %}
         </form>
     </div>

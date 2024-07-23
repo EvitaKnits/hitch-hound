@@ -1,7 +1,13 @@
+// The extra JavaScript included in most pages 
+
 {% load static %}
 <script>
+    // Define the URLs for creating an issue and a project
     const createIssueUrl = "{% url 'create_issue' %}"
     const createProjectUrl = "{% url 'create_project' %}"
 </script>
+
+<!-- Include JavaScript file for handling the new item modal -->
 <script src="{% static 'js/new_item_modal.js' %}"></script>
+<!-- Include JavaScript file for handling the confirm logout modal -->
 <script src="{% static 'js/confirm_logout_modal.js' %}"></script>

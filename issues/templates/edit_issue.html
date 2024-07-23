@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block nav_icons %}
-    {% include 'nav_icons.html' %}
+{% include 'nav_icons.html' %}
 {% endblock %}
 
 {% block content %}
@@ -16,17 +16,7 @@
                     <h2>Edit Issue</h2>
                 </div>
                 <div class="card-body">
-                    <!-- Alert Placeholder -->
-                    {% if messages %}
-                    <div id="liveAlertPlaceholder">
-                        {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
-                            {{ message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
+                    <!-- Form for editing the details of an issue -->
                     <form method="post" id="editForm">
                         {% csrf_token %}
                         {{ form|crispy }}
@@ -44,6 +34,7 @@
                             </div>
                         </div>
                     </form>
+                    <!-- Hidden form for deleting the issue if the 'Delete Issue' button is used -->
                     <form id="deleteIssueForm_{{ issue.id }}" action="{% url 'delete_issue' issue.id %}" method="post"
                         style="display: none;">
                         {% csrf_token %}

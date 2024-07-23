@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block nav_icons %}
-    {% include 'nav_icons.html' %}
+{% include 'nav_icons.html' %}
 {% endblock %}
 
 {% block content %}
@@ -15,6 +15,7 @@
                     <h2>Edit Project</h2>
                 </div>
                 <div class="card-body">
+                    <!-- Form to edit a project -->
                     <form method="post" id="editForm">
                         {% csrf_token %}
                         {{ form|crispy }}
@@ -23,7 +24,8 @@
                                 <button type="submit" class="btn btn-primary w-100">Save Changes</button>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <button type="button" class="btn btn-secondary w-100" onclick="window.history.back();">Cancel</button>
+                                <button type="button" class="btn btn-secondary w-100"
+                                    onclick="window.history.back();">Cancel</button>
                             </div>
                         </div>
                     </form>

@@ -5,25 +5,37 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Row, Column
 
 class CustomUserCreationForm(UserCreationForm):
+    """
+    Custom form for creating new users. Extends the default UserCreationForm
+    and includes additional fields for first name, last name, email, and role.
+    """
     first_name = forms.CharField(max_length=30, required=True,  widget=forms.TextInput(attrs={'autofocus': 'autofocus'}))
     last_name = forms.CharField(max_length=30, required=True)
     email = forms.EmailField(required=True)
     role = forms.ChoiceField(choices=User.ROLE_CHOICES, required=True)
 
     class Meta:
+        """ Meta class to specify the model and fields to include in the form """
         model = User
         fields = ('first_name', 'last_name', 'username', 'email', 'role', 'password1', 'password2')
 
 class UserProfileForm(forms.ModelForm):
+    """
+    Form for updating user profiles. Includes fields for first name, last name, and email.
+    """
     first_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'autofocus': 'autofocus'}))
     last_name = forms.CharField(max_length=30, required=True)
     email = forms.EmailField(required=True)
 
     class Meta:
+        """ Meta class to specify the model and fields to include in the form """
         model = User
         fields = ['first_name', 'last_name', 'email']
 
     def __init__(self, *args, **kwargs):
+        """
+        Initialize the form and set up the Crispy Forms helper for better form layout.
+        """
         super(UserProfileForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = 'post'

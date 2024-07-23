@@ -2,18 +2,19 @@
 {% load static %}
 
 {% block nav_icons %}
-    {% include 'nav_icons.html' %}
+{% include 'nav_icons.html' %}
 {% endblock %}
 
 {% block content %}
 <div class="container mt-4">
     <h1>All Issues for: {{ project.title }}</h1>
-    
+    <!-- Responsive table displaying issues -->
     <div class="table-responsive">
         <table class="table table-hover table-bordered">
             <thead>
                 <tr class="table-secondary">
                     <th scope="col">
+                        <!-- Sort by Issue ID -->
                         <a href="?sort_by=id&order={{ toggle_order }}" class="text-dark text-decoration-none">
                             Issue ID
                             <i
@@ -21,6 +22,7 @@
                         </a>
                     </th>
                     <th scope="col">
+                        <!-- Sort by Title -->
                         <a href="?sort_by=title&order={{ toggle_order }}" class="text-dark text-decoration-none">
                             Title
                             <i
@@ -28,6 +30,7 @@
                         </a>
                     </th>
                     <th scope="col">
+                        <!-- Sort by Severity -->
                         <a href="?sort_by=severity&order={{ toggle_order }}" class="text-dark text-decoration-none">
                             Severity
                             <i
@@ -35,6 +38,7 @@
                         </a>
                     </th>
                     <th scope="col" class="d-none d-md-table-cell">
+                        <!-- Sort by Type -->
                         <a href="?sort_by=type&order={{ toggle_order }}" class="text-dark text-decoration-none">
                             Type
                             <i
@@ -42,6 +46,7 @@
                         </a>
                     </th>
                     <th scope="col" class="d-none d-md-table-cell">
+                        <!-- Sort by Status -->
                         <a href="?sort_by=status&order={{ toggle_order }}" class="text-dark text-decoration-none">
                             Status
                             <i
@@ -51,6 +56,7 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- Loop through each issue in the paginated object -->
                 {% for issue in page_obj %}
                 <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.id %}'"
                     style="cursor: pointer;">
@@ -62,6 +68,7 @@
                 </tr>
                 {% empty %}
                 <tr>
+                    <!-- Message displayed if there are no issues -->
                     <td colspan="5">No issues found for this project.</td>
                 </tr>
                 {% endfor %}

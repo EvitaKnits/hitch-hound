@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block nav_icons %}
-    {% include 'nav_icons.html' %}
+{% include 'nav_icons.html' %}
 {% endblock %}
 
 {% block content %}
@@ -11,7 +11,7 @@
 <!-- Alert Placeholder -->
 <div id="liveAlertPlaceholder"></div>
 
-<!-- Toast -->
+<!-- Toast notification for successful registration (registration redirects here) -->
 <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 11">
     <div id="registrationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
@@ -24,6 +24,7 @@
     </div>
 </div>
 
+<!-- Table of all issues with header row and sorting icons-->
 <div class="table-responsive">
     <table class="table table-hover table-bordered">
         <thead>
@@ -31,48 +32,58 @@
                 <th scope="col">
                     <a href="?sort_by=id&order={{ toggle_order }}" class="text-dark text-decoration-none">
                         Issue ID
-                        <i class="fa {% if sort_by == 'id' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                        <i
+                            class="fa {% if sort_by == 'id' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
                     </a>
                 </th>
                 <th scope="col">
                     <a href="?sort_by=title&order={{ toggle_order }}" class="text-dark text-decoration-none">
                         Title
-                        <i class="fa {% if sort_by == 'title' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                        <i
+                            class="fa {% if sort_by == 'title' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
                     </a>
                 </th>
                 <th scope="col">
-                    <a href="?sort_by=severity&order={% if sort_by == 'severity' and order == 'asc' %}desc{% else %}asc{% endif %}" class="text-dark text-decoration-none">
+                    <a href="?sort_by=severity&order={% if sort_by == 'severity' and order == 'asc' %}desc{% else %}asc{% endif %}"
+                        class="text-dark text-decoration-none">
                         Severity
-                        <i class="fa {% if sort_by == 'severity' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                        <i
+                            class="fa {% if sort_by == 'severity' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
                     </a>
                 </th>
                 <th scope="col" class="d-none d-md-table-cell">
                     <a href="?sort_by=type&order={{ toggle_order }}" class="text-dark text-decoration-none">
                         Type
-                        <i class="fa {% if sort_by == 'type' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                        <i
+                            class="fa {% if sort_by == 'type' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
                     </a>
                 </th>
                 <th scope="col" class="d-none d-md-table-cell">
                     <a href="?sort_by=project.title&order={{ toggle_order }}" class="text-dark text-decoration-none">
                         Project
-                        <i class="fa {% if sort_by == 'project.title' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                        <i
+                            class="fa {% if sort_by == 'project.title' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
                     </a>
                 </th>
                 <th scope="col" class="d-none d-md-table-cell">
                     <a href="?sort_by=status&order={{ toggle_order }}" class="text-dark text-decoration-none">
                         Status
-                        <i class="fa {% if sort_by == 'status' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                        <i
+                            class="fa {% if sort_by == 'status' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
                     </a>
                 </th>
                 <th scope="col" class="d-none d-md-table-cell">
-                    <a href="?sort_by=reporter.username&order={{ toggle_order }}" class="text-dark text-decoration-none">
+                    <a href="?sort_by=reporter.username&order={{ toggle_order }}"
+                        class="text-dark text-decoration-none">
                         Reporter
-                        <i class="fa {% if sort_by == 'reporter.username' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                        <i
+                            class="fa {% if sort_by == 'reporter.username' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
                     </a>
                 </th>
             </tr>
         </thead>
         <tbody>
+            <!-- Loop through each issue and display its details in a table row -->
             {% for issue in page_obj %}
             <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.id %}'"
                 style="cursor: pointer;">
@@ -97,6 +108,7 @@
 {% endblock %}
 
 {% block extra_js %}
+<!-- Conditionally include JavaScript for toast notifications -->
 {% if show_toast %}
 <script src="{% static 'js/toast.js' %}"></script>
 {% endif %}

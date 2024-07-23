@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block nav_icons %}
-    {% include 'nav_icons.html' %}
+{% include 'nav_icons.html' %}
 {% endblock %}
 
 {% block content %}
@@ -17,12 +17,14 @@
         <div class="col-lg-6 col-md-8 col-12">
             <div class="card h-100">
                 <div class="card-body">
+                    <!-- Form for selecting assignees -->
                     <form method="get" action="{% url 'issue_listing_by_assignee' %}">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label for="assignee" class="fw-bold">Select Assignee(s):</label>
                                     <div id="assignee" class="form-check mt-2">
+                                        <!-- Loop through user choices to create checkboxes for assignees -->
                                         {% for user in user_choices %}
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" name="assignee"
@@ -33,6 +35,7 @@
                                                 for="assignee-{{ user.username }}">{{ user.username }}</label>
                                         </div>
                                         {% endfor %}
+                                        <!-- Checkbox for including unassigned issues -->
                                         <div class="form-check mt-3">
                                             <input class="form-check-input" type="checkbox" name="include_unassigned"
                                                 id="include_unassigned" {% if include_unassigned %}checked{% endif %}
@@ -50,6 +53,7 @@
         </div>
     </div>
 
+    <!-- Table for displaying issues -->
     <div class="table-responsive mt-4">
         <table class="table table-hover table-bordered">
             <thead>
@@ -64,6 +68,7 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- Loop through issues to create table rows -->
                 {% for issue in issues %}
                 <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.id %}'"
                     style="cursor: pointer;">
@@ -74,6 +79,7 @@
                     <td class="d-none d-md-table-cell">{{ issue.project.title }}</td>
                     <td class="d-none d-md-table-cell">{{ issue.get_status_display }}</td>
                     <td class="d-none d-md-table-cell">
+                        <!-- Display assignees if any exist -->
                         {% if issue.developer %}
                         Developer: {{ issue.developer.username }}<br>
                         {% endif %}
@@ -83,6 +89,7 @@
                         {% if issue.quality_assurance %}
                         QA: {{ issue.quality_assurance.username }}<br>
                         {% endif %}
+                        <!-- Display 'Unassigned' if there are no assignees -->
                         {% if not issue.developer and not issue.product_manager and not issue.quality_assurance %}
                         Unassigned
                         {% endif %}
@@ -90,6 +97,7 @@
                 </tr>
                 {% empty %}
                 <tr>
+                    <!-- Message displayed if there are no issues found for the selected filters -->
                     <td colspan="7" class="text-left">No issues found for this combination of filters.</td>
                 </tr>
                 {% endfor %}
@@ -98,8 +106,6 @@
     </div>
 
     {% include 'pagination.html' %}
-
-    </nav>
 
     {% include 'new_item_modal.html' %}
     {% include 'logout_modal.html' %}

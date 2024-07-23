@@ -10,10 +10,11 @@ from projects.models import Project
 from hitchhound.utils import paginate, get_new_notifications
 from users.models import User
 
-
-# Create your views here.
-
 def issue_listing_by_status(request):
+    """
+    View to list issues filtered by their status and project.
+    """
+    # Retrieve status choices and all projects
     status_choices = Issue.STATUS_CHOICES
     project_choices = Project.objects.all()
     
@@ -30,10 +31,10 @@ def issue_listing_by_status(request):
     if selected_project_ids:
         issues = issues.filter(project_id__in=selected_project_ids)
     
-    # Use the paginate utility function
+    # Use the paginate utility function to handle pagination
     page_obj = paginate(request, issues)
 
-    # Calculate new notifications
+    # Calculate new notifications for the current user
     new_notifications = get_new_notifications(request.user)
     
     context = {
@@ -50,9 +51,12 @@ def issue_listing_by_status(request):
     return render(request, 'issue_listing_by_status.html', context)
 
 def issue_listing_by_assignee(request):
+    """ View to list issues filtered by their assignee """
+    # Get selected assignees and whether to include unassigned issues from the request
     selected_assignees = request.GET.getlist('assignee')
     include_unassigned = request.GET.get('include_unassigned', 'off') == 'on'
     
+    # Start with all issues
     issues = Issue.objects.all()
     
     if selected_assignees or include_unassigned:
@@ -64,10 +68,10 @@ def issue_listing_by_assignee(request):
             query |= Q(developer__isnull=True, product_manager__isnull=True, quality_assurance__isnull=True)
         issues = issues.filter(query).distinct()
     
-    # Use the paginate utility function
+    # Use the paginate utility function to handle pagination
     page_obj = paginate(request, issues)
 
-    # Calculate new notifications
+    # Calculate new notifications for the current user
     new_notifications = get_new_notifications(request.user)
 
     user_choices = User.objects.all()
@@ -86,10 +90,13 @@ def issue_listing_by_assignee(request):
     return render(request, 'issue_listing_by_assignee.html', context)
 
 def issue_status_summary(request):
+    """ View to display a summary of issue statuses by project """
+    # Get selected projects from the request
     selected_projects = request.GET.getlist('project')
     include_all = 'all' in selected_projects
     projects = Project.objects.all()
     
+    # Determine which issues to include based on selected projects
     if include_all or not selected_projects:
         issues = Issue.objects.all()
         selected_project_title = "All Projects"
@@ -97,11 +104,12 @@ def issue_status_summary(request):
         issues = Issue.objects.filter(project__id__in=selected_projects)
         selected_project_title = projects.get(id=selected_projects[0]).title if len(selected_projects) == 1 else "Multiple Projects"
     
+    # Summarise issues by status
     status_summary = issues.values('status').annotate(count=Count('status'))
     labels = [status['status'] for status in status_summary]
     data = [status['count'] for status in status_summary]
 
-    # Calculate new notifications
+    # Calculate new notifications for the current user
     new_notifications = get_new_notifications(request.user)
     
     context = {
@@ -118,10 +126,13 @@ def issue_status_summary(request):
     return render(request, 'issue_status_summary.html', context)
 
 def issue_severity_summary(request):
+    """ View to display a summary of issue severities by project """
+    # Get selected projects from the request
     selected_projects = request.GET.getlist('project')
     include_all = 'all' in selected_projects
     projects = Project.objects.all()
     
+    # Determine which issues to include based on selected projects
     if include_all or not selected_projects:
         issues = Issue.objects.all()
         selected_project_title = "All Projects"
@@ -129,13 +140,14 @@ def issue_severity_summary(request):
         issues = Issue.objects.filter(project__id__in=selected_projects)
         selected_project_title = projects.get(id=selected_projects[0]).title if len(selected_projects) == 1 else "Multiple Projects"
     
+    # Summarise issues by severity
     severity_summary = issues.values('severity').annotate(count=Count('severity'))
     
     severity_mapping = dict(Issue.SEVERITY_CHOICES)
     labels = [severity_mapping[severity['severity']] for severity in severity_summary]
     data = [severity['count'] for severity in severity_summary]
 
-    # Calculate new notifications
+    # Calculate new notifications for the current user
     new_notifications = get_new_notifications(request.user)
     
     context = {

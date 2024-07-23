@@ -8,6 +8,11 @@ User = get_user_model()
 
 @receiver(post_save, sender=Issue)
 def manage_user_issue(sender, instance, created, **kwargs):
+    """
+    Signal handler to manage UserIssue entries after an Issue is saved.
+    This function ensures that the UserIssue entries are updated to reflect 
+    the current assignments for the developer, quality assurance, and product manager roles.
+    """
     # Clear existing UserIssue entries for this issue
     UserIssue.objects.filter(issue=instance).delete()
 
@@ -21,16 +26,24 @@ def manage_user_issue(sender, instance, created, **kwargs):
 
 @receiver(pre_save, sender=Issue)
 def create_change_record(sender, instance, **kwargs):
+    """
+    Signal handler to create a Change record before an Issue is saved.
+    This function tracks changes to specified fields and logs them in the Change model.
+    """
+    # Skip creation if the instance is new and does not have a primary key yet
     if not instance.pk:
-        return  # Skip creation
+        return
 
+    # Get the existing issue from the database
     old_issue = Issue.objects.get(pk=instance.pk)
     fields_to_track = [field[0] for field in Change.FIELD_CHOICES]
 
+    # Compare old and new values for each tracked field
     for field in fields_to_track:
         old_value = getattr(old_issue, field)
         new_value = getattr(instance, field)
 
+        # Create a Change record if the value has changed
         if old_value != new_value:
             Change.objects.create(
                 issue=instance,

@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block nav_icons %}
-    {% include 'nav_icons.html' %}
+{% include 'nav_icons.html' %}
 {% endblock %}
 
 {% block content %}
@@ -16,25 +16,35 @@
         <div class="col-lg-6 col-md-8 col-12">
             <div class="card h-100">
                 <div class="card-body d-flex flex-column justify-content-between">
+                    <!-- User details form -->
                     <form method="post" id="profile-form" class="h-100 d-flex flex-column">
                         {% csrf_token %}
                         {{ form|crispy }}
+                        <!-- Display the user's role -->
                         <div class="form-group mb-4">
                             <label for="id_role">Role:</label>
-                            <span class="form-control-plaintext" style="display: inline;">{{ form.instance.get_role_display }}</span>
-                            <small class="form-text text-muted" style="display: block;">If you need to change your role, please contact an admin.</small>
+                            <span class="form-control-plaintext"
+                                style="display: inline;">{{ form.instance.get_role_display }}</span>
+                            <small class="form-text text-muted" style="display: block;">If you need to change your role,
+                                please contact an admin.</small>
                         </div>
                         <div class="mt-auto">
+                            <!-- Buttons for editing profile and changing password -->
                             <div class="d-flex justify-content-between" id="static-buttons">
-                                <button type="button" class="btn btn-custom w-50 me-1" id="edit-btn" onclick="toggleProfileEditMode()">Edit</button>
-                                <a href="{% url 'change_password' %}" class="btn btn-primary w-50 ms-1" id="change-password-btn">Change Password</a>
+                                <button type="button" class="btn btn-custom w-50 me-1" id="edit-btn"
+                                    onclick="toggleProfileEditMode()">Edit</button>
+                                <a href="{% url 'change_password' %}" class="btn btn-primary w-50 ms-1"
+                                    id="change-password-btn">Change Password</a>
                             </div>
+                            <!-- Buttons for saving and cancelling when in edit mode -->
                             <div id="edit-mode-buttons" class="row d-none mt-3">
                                 <div class="col-6 mb-2">
-                                    <button type="submit" class="btn btn-success w-100" id="save-btn" name="save_profile">Save Changes</button>
+                                    <button type="submit" class="btn btn-success w-100" id="save-btn"
+                                        name="save_profile">Save Changes</button>
                                 </div>
                                 <div class="col-6">
-                                    <button type="button" class="btn btn-secondary w-100" id="cancel-btn" onclick="toggleProfileEditMode()">Cancel</button>
+                                    <button type="button" class="btn btn-secondary w-100" id="cancel-btn"
+                                        onclick="toggleProfileEditMode()">Cancel</button>
                                 </div>
                             </div>
                         </div>
@@ -45,6 +55,7 @@
     </div>
 </div>
 
+<!-- User's issues section -->
 <div class="row mt-5">
     <div class="col-12">
         <h1>Your Issues</h1>
@@ -52,47 +63,56 @@
             <table class="table table-hover table-bordered">
                 <thead>
                     <tr class="table-secondary">
+                        <!-- Column headers with sorting links -->
                         <th scope="col">
                             <a href="?sort_by=id&order={{ toggle_order }}" class="text-dark text-decoration-none">
                                 Issue ID
-                                <i class="fa {% if sort_by == 'id' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                                <i
+                                    class="fa {% if sort_by == 'id' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
                             </a>
                         </th>
                         <th scope="col">
                             <a href="?sort_by=title&order={{ toggle_order }}" class="text-dark text-decoration-none">
                                 Title
-                                <i class="fa {% if sort_by == 'title' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                                <i
+                                    class="fa {% if sort_by == 'title' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
                             </a>
                         </th>
                         <th scope="col">
                             <a href="?sort_by=severity&order={{ toggle_order }}" class="text-dark text-decoration-none">
                                 Severity
-                                <i class="fa {% if sort_by == 'severity' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                                <i
+                                    class="fa {% if sort_by == 'severity' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
                             </a>
                         </th>
                         <th scope="col" class="d-none d-md-table-cell">
                             <a href="?sort_by=type&order={{ toggle_order }}" class="text-dark text-decoration-none">
                                 Type
-                                <i class="fa {% if sort_by == 'type' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                                <i
+                                    class="fa {% if sort_by == 'type' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
                             </a>
                         </th>
                         <th scope="col" class="d-none d-md-table-cell">
                             <a href="?sort_by=project&order={{ toggle_order }}" class="text-dark text-decoration-none">
                                 Project
-                                <i class="fa {% if sort_by == 'project' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                                <i
+                                    class="fa {% if sort_by == 'project' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
                             </a>
                         </th>
                         <th scope="col" class="d-none d-md-table-cell">
                             <a href="?sort_by=status&order={{ toggle_order }}" class="text-dark text-decoration-none">
                                 Status
-                                <i class="fa {% if sort_by == 'status' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
+                                <i
+                                    class="fa {% if sort_by == 'status' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
                             </a>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Loop through the user's issues -->
                     {% for issue in page_obj %}
-                    <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.id %}'" style="cursor: pointer;">
+                    <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.id %}'"
+                        style="cursor: pointer;">
                         <td>#{{ issue.id }}</td>
                         <td>{{ issue.title|truncatechars:50 }}</td>
                         <td>{{ issue.get_severity_display }}</td>
@@ -102,6 +122,7 @@
                     </tr>
                     {% empty %}
                     <tr>
+                        <!-- Message displayed if there are no issues -->
                         <td colspan="6">You don't have any issues assigned to you.</td>
                     </tr>
                     {% endfor %}

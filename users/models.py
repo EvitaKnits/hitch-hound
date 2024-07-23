@@ -2,9 +2,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager as DefaultUserManager, Group
 from django.utils import timezone
 
-# Create your models here.
-
 class UserManager(DefaultUserManager):
+    """
+    Custom manager for User model with methods to filter users by role.
+    """
     def developers(self):
         return self.filter(role='developer')
 
@@ -15,6 +16,10 @@ class UserManager(DefaultUserManager):
         return self.filter(role='product_manager')
 
 class User(AbstractUser):
+    """
+    Custom user model extending Django's AbstractUser.
+    Adds a role field and last_visited_notifications field.
+    """
     ROLE_CHOICES = (
         ('developer', 'Developer'),
         ('quality_assurance', 'Quality Assurance'),
@@ -26,9 +31,15 @@ class User(AbstractUser):
     objects = UserManager() 
 
     def __str__(self):
+        """
+        Return the string representation of the user, which is the username.
+        """
         return self.username
 
     def save(self, *args, **kwargs):
+        """
+        Override the save method to assign the user to a group based on their role.
+        """
         super().save(*args, **kwargs)
         role_group_map = {
             'developer': 'Developers',

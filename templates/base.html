@@ -36,6 +36,7 @@
 </head>
 
 <body>
+    <!-- Main navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <a class="navbar-brand" href="{% url 'issues' %}">
@@ -47,21 +48,23 @@
             </ul>
         </div>
     </nav>
-
+    
+    <!-- Secondary navigation bar -->
     <nav class="navbar navbar-expand-lg" id="second-nav">
         <div class="container-fluid">
             <div class="ms-auto">
-            {% if show_navbar %}
+                {% if show_navbar %}
                 {% include 'navbar.html' %}
-            {% elif show_register_navbar %}
+                {% elif show_register_navbar %}
                 {% include 'register_navbar.html' %}
-            {% else %}
+                {% else %}
                 {% include 'logged_out_navbar.html' %}
-            {% endif %}
+                {% endif %}
             </div>
         </div>
     </nav>
-    
+
+    <!-- Main content area -->
     <div class="container mt-5">
         {% block content %}
         {% endblock %}

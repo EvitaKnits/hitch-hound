@@ -1,5 +1,6 @@
 /* GENERAL STYLES */
 
+/* Set the default text colour for all elements */
 * {
     color: #414644;
 }
@@ -15,10 +16,12 @@ body {
 
 /* HEADER */
 
+/* Style for the main navigation bar */
 .navbar {
     background-color: #F6F9F8;
 }
 
+/* Style for the secondary navigation bar */
 #second-nav {
     background-color: #86B3A6;
     justify-content: end;
@@ -95,6 +98,7 @@ nav li i {
 
 /* MODAL STYLING */
 
+/* General style for custom modals */
 .modal-custom {
     display: none;
     position: fixed;
