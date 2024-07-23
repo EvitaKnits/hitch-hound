@@ -6,14 +6,14 @@ document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById('myModal');
 
     // Get the button that opens the modal
-    var btn = document.getElementById('openModalBtn');
+    var btn = document.getElementById('open-modal-btn');
 
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName('close')[0];
 
     // Get the buttons inside the modal
-    var createIssueBtn = document.getElementById('createIssueBtn');
-    var createProjectBtn = document.getElementById('createProjectBtn');
+    var createIssueBtn = document.getElementById('create-issue-btn');
+    var createProjectBtn = document.getElementById('create-project-btn');
 
     // When the user clicks the button, open the modal 
     btn.onclick = function() {
@@ -45,23 +45,23 @@ document.addEventListener('DOMContentLoaded', function() {
 // Confirm Delete Modal
 
 document.getElementById('deleteButton').addEventListener('click', function() {
-    document.getElementById('confirmDeleteModal').style.display = 'block';
+    document.getElementById('confirm-delete-modal').style.display = 'block';
 });
 
-document.getElementById('closeModal').addEventListener('click', function() {
-    document.getElementById('confirmDeleteModal').style.display = 'none';
+document.getElementById('close-modal').addEventListener('click', function() {
+    document.getElementById('confirm-delete-modal').style.display = 'none';
 });
 
-document.getElementById('cancelDeleteBtn').addEventListener('click', function() {
-    document.getElementById('confirmDeleteModal').style.display = 'none';
+document.getElementById('cancel-delete-btn').addEventListener('click', function() {
+    document.getElementById('confirm-delete-modal').style.display = 'none';
 });
 
-document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+document.getElementById('confirm-delete-btn').addEventListener('click', function() {
     document.getElementById('deleteForm').submit();
 });
 
 window.onclick = function(event) {
-    if (event.target == document.getElementById('confirmDeleteModal')) {
-        document.getElementById('confirmDeleteModal').style.display = 'none';
+    if (event.target == document.getElementById('confirm-delete-modal')) {
+        document.getElementById('confirm-delete-modal').style.display = 'none';
     }
 }

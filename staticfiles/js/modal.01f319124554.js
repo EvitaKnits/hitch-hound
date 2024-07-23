@@ -56,7 +56,7 @@ document.getElementById('cancelDeleteBtn').addEventListener('click', function() 
     document.getElementById('confirmDeleteModal').style.display = 'none';
 });
 
-document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+document.getElementById('confirm-delete-btn').addEventListener('click', function() {
     document.getElementById('deleteForm').submit();
 });
 

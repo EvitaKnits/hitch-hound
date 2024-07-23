@@ -1,7 +1,7 @@
 // Wait for the DOM content to be fully loaded before running the script
 document.addEventListener('DOMContentLoaded', () => {
     // Get the alert placeholder element by its ID
-    const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+    const alertPlaceholder = document.getElementById('live-alert-placeholder');
     // Function to create and append an alert to the alert placeholder
     const appendAlert = (message, type) => {
         const wrapper = document.createElement('div');

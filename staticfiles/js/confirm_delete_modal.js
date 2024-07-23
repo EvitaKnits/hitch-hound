@@ -2,8 +2,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Get references to the delete confirmation modal, modal title, and confirm delete button
     const confirmDeleteModal = document.getElementById('confirmDeleteModal');
-    const deleteModalTitle = document.getElementById('deleteModalTitle');
-    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+    const deleteModalTitle = document.getElementById('delete-modal-title');
+    const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
     
     // Variable to store the ID of the item to be deleted
     let deleteId = '';
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Add event listener to cancel the deletion when the cancel button is clicked
-    document.getElementById('cancelDeleteBtn').addEventListener('click', function() {
+    document.getElementById('cancel-delete-btn').addEventListener('click', function() {
         confirmDeleteModal.style.display = 'none';
     });
 

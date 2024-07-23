@@ -16,7 +16,7 @@
                 </div>
                 <div class="card-body">
                     <!-- Form to edit a project -->
-                    <form method="post" id="editForm">
+                    <form method="post">
                         {% csrf_token %}
                         {{ form|crispy }}
                         <div class="row">

@@ -1,13 +1,13 @@
 <!-- Modal for confirming or cancelling logging out -->
-<div class="modal-custom" id="logoutConfirmModal">
+<div class="modal-custom" id="logout-confirm-modal">
     <div class="modal-content">
-        <span class="close" id="closeLogoutModal">&times;</span>
+        <span class="close" id="close-logout-modal">&times;</span>
         <h5 class="modal-title mb-4">Are you sure you want to log out?</h5>
         <div class="modal-buttons">
             <form method="post" action="{% url 'logout' %}">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-outline-danger">Yes, Log Out</button>
-                <button type="button" class="btn btn-outline-secondary" id="cancelLogoutBtn">No, Cancel</button>
+                <button type="button" class="btn btn-outline-secondary" id="cancel-logout-btn">No, Cancel</button>
             </form>
         </div>
     </div>

@@ -19,8 +19,8 @@
                     <!-- Form to filter Issues by Project -->
                     <form method="get" action="{% url 'issue_status_summary' %}">
                         <div class="form-group">
-                            <label for="projectFilter" class="fw-bold">Select Project:</label>
-                            <div id="projectFilter" class="d-flex flex-wrap mt-2 justify-content-around">
+                            <label for="project-filter" class="fw-bold">Select Project:</label>
+                            <div id="project-filter" class="d-flex flex-wrap mt-2 justify-content-around">
                                 <button type="submit" class="btn btn-secondary m-1" name="project" value="all"
                                     {% if 'all' in selected_projects %}class="active" {% endif %}>All Projects</button>
                                 <!-- Loop through each project to create a button -->
@@ -45,8 +45,8 @@
                 {% if not labels %}
                 <p class="text-center">No issues found for this project.</p>
                 {% else %}
-                <canvas id="statusPieChart"></canvas>
-                <h3 id="chartTitle" class="text-center mt-3">{{ selected_project_title }}</h3>
+                <canvas id="status-pie-chart"></canvas>
+                <h3 class="text-center mt-3">{{ selected_project_title }}</h3>
                 {% endif %}
             </div>
         </div>
@@ -69,7 +69,7 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         // Get the context of the canvas element where the chart will be displayed
-        const ctx = document.getElementById('statusPieChart').getContext('2d');
+        const ctx = document.getElementById('status-pie-chart').getContext('2d');
         // Assign the labels and data passed from the view 
         const labels = {
             {

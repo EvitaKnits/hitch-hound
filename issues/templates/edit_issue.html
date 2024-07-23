@@ -17,7 +17,7 @@
                 </div>
                 <div class="card-body">
                     <!-- Form for editing the details of an issue -->
-                    <form method="post" id="editForm">
+                    <form method="post">
                         {% csrf_token %}
                         {{ form|crispy }}
                         <div class="row">
@@ -35,7 +35,7 @@
                         </div>
                     </form>
                     <!-- Hidden form for deleting the issue if the 'Delete Issue' button is used -->
-                    <form id="deleteIssueForm_{{ issue.id }}" action="{% url 'delete_issue' issue.id %}" method="post"
+                    <form id="delete-issue-form-{{ issue.id }}" action="{% url 'delete_issue' issue.id %}" method="post"
                         style="display: none;">
                         {% csrf_token %}
                     </form>

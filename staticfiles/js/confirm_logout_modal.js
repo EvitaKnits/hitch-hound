@@ -1,10 +1,10 @@
 // Wait for the DOM content to be fully loaded before running the script
 document.addEventListener('DOMContentLoaded', function () {
     // Get references to the logout confirmation modal, open modal button, close modal button, and cancel button
-    var logoutModal = document.getElementById('logoutConfirmModal');
-    var openLogoutModalBtn = document.getElementById('openLogoutModalBtn');
-    var closeLogoutModal = document.getElementById('closeLogoutModal');
-    var cancelLogoutBtn = document.getElementById('cancelLogoutBtn');
+    var logoutModal = document.getElementById('logout-confirm-modal');
+    var openLogoutModalBtn = document.getElementById('open-logout-modal-btn');
+    var closeLogoutModal = document.getElementById('close-logout-modal');
+    var cancelLogoutBtn = document.getElementById('cancel-logout-btn');
 
     // Add event listener to Logout button to open the modal
     openLogoutModalBtn.addEventListener('click', function () {
