@@ -3,7 +3,7 @@
 # Hitch Hound: a lightweight issue-tracker
 
 'Hitch Hound' is built using Django, Python, Bootstrap, JavaScript and PostgreSQL. It is hosted on Heroku.
-Automated testing is done with Jest (JavaScript) and Unittest (Python).
+Automated testing is done with Unittest for Python.
 
 (Add responsive screenshot here)
 
@@ -400,8 +400,7 @@ And this dog was perfect for my favicon:<br>
 Through a combination of automated testing written using Unittest for Python, and manual testing from the front-end, I achieved a good coverage of test cases. The code I wrote was also passed through validators/linters at the end to ensure adherance to coding standards and best practices, ultimately aiming for robust and maintainable code. I considered using Jest to test my JavaScript files but on balance decided that it was not worth doing because the amount of JavaScript was quite small and the functions quite simple. I will be completing a fifth project with advanced front-end frameworks such as React which is better suited to Jest testing, so I will apply it more valuably there. 
 
 ### Automated Testing
-
-
+When I was sufficiently through my project to have a stable enough codebase, I started adding automated tests incrementally for each area. The tests for views, forms and models were added to each app. 
 
 ### Manual Testing
 
@@ -426,26 +425,22 @@ Pixel references for each of the screen sizes:
 
 | Browser | Screen Size | Appearance | Responsiveness |
 |-------|-----|-----|-----|
-| Chrome | Mobile |   | |
-| | Tablet |  |  |
-| | Computer |  |  |
-| | Transition Points |  |  |
-| Firefox | Mobile |  |  |
-| | Tablet |  |  |
-| | Computer |  |  |
-| | Transition Points |  |  |
-| Safari | Mobile |   |   |
-| | Tablet | |   |
-| | Computer |   |  |
-| | Transition Points | |  |
-| Edge | Mobile |  |  |
-| | Tablet |  |  |
-| | Computer |  |  |
-| | Transition Points |  |  |
-
-#### Key Responsiveness Differences
-
-The 
+| Chrome | Mobile | Bug 19  | Good |
+| | Tablet | Bug 20  | Good  |
+| | Computer | Good | Good |
+| | Transition Points | Good | Good |
+| Firefox | Mobile | Bug 19  | Good |
+| | Tablet | Bug 20 | Good |
+| | Computer | Good | Good |
+| | Transition Points | Good | Good |
+| Safari | Mobile | Bug 19 | Good  |
+| | Tablet | Bug 20 | Good  |
+| | Computer |  Good |Good  |
+| | Transition Points | Good | Good |
+| Edge | Mobile | Bug 19 | Good |
+| | Tablet | Bug 20  | Good |
+| | Computer | Good | Good |
+| | Transition Points | Good | Good |
 
 ### Code Validation
 
@@ -621,6 +616,14 @@ The Edit Issue page does not show an alert to explain to the user why they canno
 
 #### Solution
 I looked back at the changes I made when I first implemented it and I saw that at some point along the way I had lost the section in my Edit Issue template, which displays the alerts. Adding this back in fixed the issue. I also realised that I had duplicate and redundant code in the 'Change Issue Status' view. It was redundant because I had incorporated the functionality into the main 'Edit Issue' view, so I deleted the other view. Also, related to this bug, I saw that in my message to the user about why they couldn't change the status to a particular value, I was showing the internal status values rather than the intended display values, so I changed this too. 
+
+### Bug Sixteen
+
+#### Issue
+When a user clicks 'Add a Comment' on an Issue Detail page, without entering any text into the box, the page refreshes and the navbar contains only a link to 'Login' despite the user already being logged in and it having no relevance to the task at hand. 
+
+#### Solution
+I made a change so that the 'Add a Comment' button is disabled when there is no text in the comment box. This solves the issue.
 
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
