@@ -606,6 +606,14 @@ I made a change that removed the 'Status' field from the form used to create a n
 #### Solution
 As the same form is used for creating and editing issues, I needed to include the 'Status' field conditionally. So I added the 'Status' field back into the list of fields for this form, then made sure it only appears on the edit issue form by checking whether the issue instance already exists or not. If it does not exist already, this means its a new issue and the status field should not appear, therefore it is removed from the list of fields. 
 
+### Bug Fourteen
+
+#### Issue
+The 404 page shows 'Login' in the navbar rather than the full menu that the user needs to use to navigate away from the 404 page. 
+
+#### Solution
+When I changed the way my navbar was coded in order to remove repetition whilst ensuring the correct version of the navbar is included in each page, I overlooked the 404 page. I just had to add the correct context to the custom_404 view and this reinstated the full navbar. 
+
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
 

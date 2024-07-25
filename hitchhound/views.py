@@ -22,6 +22,7 @@ def custom_404(request, exception):
 
     context = {
         'new_notifications': new_notifications,
+        'show_navbar': True,
     }
 
     return render(request, '404.html', context, status=404)
