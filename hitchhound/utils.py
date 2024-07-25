@@ -47,5 +47,5 @@ def get_new_notifications(user):
 
     # Check if any changes made by another user since the user's last visit
     new_notifications = changes.filter(changed_at__gt=last_visited).exists()
-    
+
     return new_notifications

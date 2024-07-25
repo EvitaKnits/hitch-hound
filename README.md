@@ -23,7 +23,7 @@ Automated testing is done with Jest (JavaScript) and Unittest (Python).
     a. [Computer Wireframes](#computer-wireframes)<br>
     b. [Mobile Wireframes](#mobile-wireframes)<br>
     c. [Colour Scheme](#colour-scheme) <br>
-    d. [Icons](#icons) <br>
+    d. [Logo](#logo) <br>
 5. [Testing](#testing) <br>
     a. [Test Plan](#test-plan) <br>
     b. [Automated Testing](#automated-testing) <br>
@@ -383,22 +383,13 @@ I wanted to pick a muted palette to reflect the business nature of my program. I
 
 ![colourscheme](documentation/colourscheme.png)
 
-### Icons
+### Logo + Favicon
 
-As I had chosen the name 'Hitch Hound' for my program, I thought it would provide visual interest and be a fun twist, to include dog imagery in my logo and icons.
-
-#### Logo
-
-This dog in a shield was perfect for my logo:<br> 
+As I had chosen the name 'Hitch Hound' for my program, I thought this dog in a shield was perfect for my logo:<br> 
 ![shield](documentation/shield.png)
 
-#### Other
-
-There were also a few other options for use throughout the program: <br>
+And this dog was perfect for my favicon:<br>
 ![dog](documentation/dog.png)
-![paw](documentation/paw.png)
-![bone](documentation/bone.png)
-
 
 ## Testing
 
@@ -587,6 +578,14 @@ I found that I had used my IDE to do an automatic format (right-click/format doc
 I also found that I had somehow duplicated the line below in my alerts.js file. Deleting this made my alerts reappear.
 
 `if (predefinedAlertType) {`
+
+### Bug Eleven
+
+#### Issue
+The user details form on the Profile page is not working as expected: the Cancel button saves the form rather than cancelling any changes. 
+
+#### Solution
+I made a change so that the Cancel button simply refreshes the Profile page, thus effectively removing any changes and setting the form back to non-edit mode. 
 
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 

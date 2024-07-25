@@ -27,4 +27,10 @@ document.addEventListener('DOMContentLoaded', function() {
     profileFormElements.forEach(el => {
         el.disabled = true;
     });
+
+    // Attach event listener to the cancel button to refresh the page
+    document.getElementById('cancel-btn').addEventListener('click', function(event) {
+        event.preventDefault();
+        window.location.reload();
+    });
 });
