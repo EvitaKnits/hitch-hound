@@ -587,6 +587,17 @@ The user details form on the Profile page is not working as expected: the Cancel
 #### Solution
 I made a change so that the Cancel button simply refreshes the Profile page, thus effectively removing any changes and setting the form back to non-edit mode. 
 
+### Bug Twelve
+
+#### Issue
+Alerts are eroneously showing up in three different scenarios: 
+1. When a user goes to the 'Change Password' form from the Profile page and clicks the 'Save' button, the 'successfully changed password' alert appears on the next page the user accesses that has an alert placeholder on it, regardless of if they actually changed their password or not. 
+2. When a user uses the 'Create Issue' form without adding all mandatory information and clicks the 'Save' button, receives validation errors, then decides not to create a new issue and cancels, the 'created a new issue' alert appears anyway. 
+3. When a user uses the 'Create Project' form without filling the field in and clicks the 'Save' button, receives a validation error, then decides not to create a new project and cancels, the 'created a new project' alert appears anyway. 
+
+#### Solution
+I found that I had set up the alerts to be triggered when clicking the button, rather than when the new item is actually saved. I removed this behaviour from the buttons and switched to setting the session variable in the view when the new item is saved successfully. This meant that I moved the session variable to the server side and therefore needed to pass it to the client side via the context on each page that displays the alerts. This solved all three scenarios. 
+
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
 

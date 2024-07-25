@@ -65,6 +65,9 @@ def list_issues(request):
     # Calculate whether there are new notifications for the current user
     new_notifications = get_new_notifications(request.user)
 
+    # Check if there's an alert type in the session and add it to the context
+    alert_type = request.session.pop('Alert Type', None)
+
     context = {
         'active_page': 'issues',
         'show_toast': show_toast,
@@ -75,6 +78,7 @@ def list_issues(request):
         'toggle_order': toggle_order(order),
         'new_notifications': new_notifications,
         'show_navbar': True,
+        'alert_type': alert_type,
     }
 
     return render(request, 'issues.html', context)
@@ -126,6 +130,7 @@ def create_issue(request):
             issue = form.save(commit=False)
             issue.reporter = request.user
             issue.save()
+            request.session['Alert Type'] = 'Issue Created'
             return redirect('issues')  
     else:
         form = IssueForm()

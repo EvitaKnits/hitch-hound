@@ -141,6 +141,9 @@ def user_profile(request):
     # Calculate new notifications for the current user
     new_notifications = get_new_notifications(request.user)
 
+    # Check if there's an alert type in the session and add it to the context
+    alert_type = request.session.pop('Alert Type', None)
+
     context = {
         'form': profile_form,
         'username': user.username,
@@ -151,6 +154,7 @@ def user_profile(request):
         'new_notifications': new_notifications,
         'active_page': 'profile',
         'show_navbar': True,
+        'alert_type': alert_type,
     }
     return render(request, 'profile.html', context)
 
@@ -162,6 +166,7 @@ def change_password(request):
         if password_change_form.is_valid():
             user = password_change_form.save()
             update_session_auth_hash(request, user)
+            request.session['Alert Type'] = 'Password Changed'
             return redirect('profile')
     else:
         password_change_form = PasswordChangeForm(user=request.user)

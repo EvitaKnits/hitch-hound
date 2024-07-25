@@ -20,11 +20,15 @@ def list_projects(request):
     # Calculate new notifications
     new_notifications = get_new_notifications(request.user)
 
+    # Check if there's an alert type in the session and add it to the context
+    alert_type = request.session.pop('Alert Type', None)
+
     context = {
         'projects': projects,
         'new_notifications': new_notifications,
         'active_page': 'projects',
         'show_navbar': True,
+        'alert_type': alert_type,
     }
 
     return render(request, 'projects.html', context)
@@ -71,6 +75,7 @@ def create_project(request):
         form = ProjectForm(request.POST)
         if form.is_valid():
             form.save()
+            request.session['Alert Type'] = 'Project Created'
             return redirect('projects') 
     else:
         form = ProjectForm()

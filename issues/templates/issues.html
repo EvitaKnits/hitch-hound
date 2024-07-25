@@ -113,5 +113,10 @@
 <script src="{% static 'js/toast.js' %}"></script>
 {% endif %}
 {% include 'base_extra_js.html' %}
+{% if alert_type %}
+<script>
+    sessionStorage.setItem('Alert Type', '{{ alert_type }}');
+</script>
+{% endif %}
 <script src="{% static 'js/alert.js' %}"></script>
 {% endblock %}

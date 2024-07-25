@@ -75,5 +75,10 @@
 {% block extra_js %}
 {% include 'base_extra_js.html' %}
 <script src="{% static 'js/confirm_delete_modal.js' %}"></script>
+{% if alert_type %}
+<script>
+    sessionStorage.setItem('Alert Type', '{{ alert_type }}');
+</script>
+{% endif %}
 <script src="{% static 'js/alert.js' %}"></script>
 {% endblock %}
