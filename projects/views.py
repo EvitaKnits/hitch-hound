@@ -119,6 +119,5 @@ def delete_project(request, id):
     project = get_object_or_404(Project, id=id)
     if request.method == 'POST':
         project.delete()
-        messages.success(request, 'Project deleted successfully')
         return redirect('projects') 
     return redirect('project_detail', id=id)

@@ -637,7 +637,15 @@ For the Change History page, this needed a more in-depth solution in my Change m
 
 ![Bug Seventeen Fixed](documentation/bug17-fix.png)
 
+#### Bug Eighteen
 
+#### Issue
+After deleting a project, an alert appears on the 'Edit Issue' page when the user next accesses it informing them 'Project Deleted Successfully'. Firstly, a similar alert will have been seen on the Projects page when the user is directed back there after project deletion. Secondly, this alert is not relevant to the Edit Issue page.
+
+![Bug Eighteen](documentation/bug18.png)
+
+#### Solution
+I found that I had accidentally left a line of code in my 'Delete Project' view from a previous version of my alerting system that was causing this message to appear. I removed this line and the bug was fixed.
 
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
