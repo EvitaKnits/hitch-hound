@@ -156,10 +156,12 @@ def edit_issue(request, id):
         if form.is_valid():
             success = form.save(user=request.user)
             if not success:
+                # Construct the message using display status names
+                allowed_statuses = [dict(Issue.STATUS_CHOICES).get(status) for status in issue.get_allowed_statuses_for_role(request.user.role)]
                 messages.error(
                     request, 
-                    f'As a {request.user.role.replace('_', ' ')}, you do not have permission to change the issue status to {issue.status}.'
-                    f'You may only change it to {', '.join(issue.get_allowed_statuses_for_role(request.user.role))}.'
+                    f'As a {request.user.role.replace("_", " ")}, you do not have permission to change the issue status to {issue.get_status_display()}. '
+                    f'You may only change it to {", ".join(allowed_statuses)}.'
                 )
             else:
                 return redirect('issue_detail', id=issue.id)
@@ -178,27 +180,27 @@ def edit_issue(request, id):
     }
     return render(request, 'edit_issue.html', context)
 
-@login_required
-def change_issue_status(request, pk):
-    """ View to change the status of an issue """
-    issue = get_object_or_404(Issue, pk=pk)
-    if request.method == 'POST':
-        new_status = request.POST.get('status')
-        user_role = request.user.role
-        allowed_statuses = issue.get_allowed_statuses_for_role(user_role)
+# @login_required
+# def change_issue_status(request, pk):
+#     """ View to change the status of an issue """
+#     issue = get_object_or_404(Issue, pk=pk)
+#     if request.method == 'POST':
+#         new_status = request.POST.get('status')
+#         user_role = request.user.role
+#         allowed_statuses = issue.get_allowed_statuses_for_role(user_role)
 
-        if issue.can_user_update_status(request.user, new_status):
-            issue.status = new_status
-            issue.save(user=request.user)
-            return redirect('issue_detail', pk=pk)
-        else:
-            request.session['alert_message'] = (
-                f'As a {user_role.replace('_', ' ')}, you do not have permission to change the issue status to {new_status}.'
-                f'You may only change it to {', '.join(allowed_statuses)}.'
-            )
-            request.session['alert_type'] = 'danger'
-            return redirect('issue_detail', pk=pk)
-    return render(request, 'issues/change_status.html', {'issue': issue})
+#         if issue.can_user_update_status(request.user, new_status):
+#             issue.status = new_status
+#             issue.save(user=request.user)
+#             return redirect('issue_detail', pk=pk)
+#         else:
+#             request.session['alert_message'] = (
+#                 f'As a {user_role.replace('_', ' ')}, you do not have permission to change the issue status to {new_status}.'
+#                 f'You may only change it to {', '.join(allowed_statuses)}.'
+#             )
+#             request.session['alert_type'] = 'danger'
+#             return redirect('issue_detail', pk=pk)
+#     return render(request, 'issues/change_status.html', {'issue': issue})
 
 @login_required
 def delete_issue(request, id):
