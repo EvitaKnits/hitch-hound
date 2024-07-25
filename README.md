@@ -625,6 +625,20 @@ When a user clicks 'Add a Comment' on an Issue Detail page, without entering any
 #### Solution
 I made a change so that the 'Add a Comment' button is disabled when there is no text in the comment box. This solves the issue.
 
+### Bug Seventeen
+
+#### Issue
+On the Change History page of an Issue, and on the Issue Status Summary report, I was showing the stored database values rather than the corresponding display values. This is the same type of issue as Bug Six. 
+
+![Bug Seventeen](documentation/bug17.png)
+
+#### Solution
+For the Change History page, this needed a more in-depth solution in my Change model, where I implemented methods to dynamically fetch and show the display values for various fields based on their defined choices. For the Report, I updated the view to map the status values to their display names before passing them to the pie chart so it could display them correctly. 
+
+![Bug Seventeen Fixed](documentation/bug17-fix.png)
+
+
+
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
 

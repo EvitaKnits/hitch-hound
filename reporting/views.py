@@ -95,7 +95,7 @@ def issue_status_summary(request):
     selected_projects = request.GET.getlist('project')
     include_all = 'all' in selected_projects
     projects = Project.objects.all()
-    
+
     # Determine which issues to include based on selected projects
     if include_all or not selected_projects:
         issues = Issue.objects.all()
@@ -103,10 +103,13 @@ def issue_status_summary(request):
     else:
         issues = Issue.objects.filter(project__id__in=selected_projects)
         selected_project_title = projects.get(id=selected_projects[0]).title if len(selected_projects) == 1 else 'Multiple Projects'
-    
+
     # Summarise issues by status
     status_summary = issues.values('status').annotate(count=Count('status'))
-    labels = [status['status'] for status in status_summary]
+    
+    # Map status values to their display names
+    status_dict = dict(Issue.STATUS_CHOICES)
+    labels = [status_dict[status['status']] for status in status_summary]
     data = [status['count'] for status in status_summary]
 
     # Calculate new notifications for the current user

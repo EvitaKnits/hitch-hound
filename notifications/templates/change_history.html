@@ -27,8 +27,8 @@
             <tr class="table-light">
                 <td>#{{ change.issue.id }}</td>
                 <td>{{ change.get_field_changed_display }}</td>
-                <td>{{ change.old_value }}</td>
-                <td class="text-wrap text-break">{{ change.new_value }}</td>
+                <td>{{ change.get_old_value_display }}</td>
+                <td class="text-wrap text-break">{{ change.get_new_value_display }}</td>
                 <td>{{ change.user.username }}</td>
                 <td>{{ change.changed_at }}</td>
             </tr>
@@ -52,8 +52,8 @@
         </div>
         <div class="card-body">
             <p class="card-text"><strong>Field Changed:</strong> {{ change.get_field_changed_display }}</p>
-            <p class="card-text"><strong>Old Value:</strong> {{ change.old_value }}</p>
-            <p class="card-text"><strong>New Value:</strong> {{ change.new_value }}</p>
+            <p class="card-text"><strong>Old Value:</strong> {{ change.get_old_value_display }}</p>
+            <p class="card-text"><strong>New Value:</strong> {{ change.get_new_value_display }}</p>
         </div>
     </div>
     {% endfor %}

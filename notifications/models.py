@@ -31,3 +31,29 @@ class Change(models.Model):
         Return a string representation of the change.
         """
         return f'{self.field_changed} changed from {self.old_value} to {self.new_value} by {self.user}'
+
+    def get_field_changed_display(self):
+        return dict(self.FIELD_CHOICES).get(self.field_changed, self.field_changed)
+
+    def get_display_value(self, value, field_name):
+        # Fetch the Issue model field choices dynamically
+        issue_field_choices = {
+            'status': Issue.STATUS_CHOICES,
+            'severity': Issue.SEVERITY_CHOICES,
+            'type': Issue.TYPE_CHOICES,
+        }
+
+        # Check if the field has defined choices
+        if field_name in issue_field_choices:
+            choices_dict = dict(issue_field_choices[field_name])
+            # Convert value to int if the field is severity and value is a string
+            if field_name == 'severity' and isinstance(value, str):
+                value = int(value)
+            return choices_dict.get(value, value)
+        return value
+
+    def get_old_value_display(self):
+        return self.get_display_value(self.old_value, self.field_changed)
+
+    def get_new_value_display(self):
+        return self.get_display_value(self.new_value, self.field_changed)
