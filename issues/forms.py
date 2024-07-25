@@ -5,7 +5,13 @@ class IssueForm(forms.ModelForm):
     """ A form for creating and updating Issue instances """
     class Meta:
         model = Issue
-        fields = ['title', 'description', 'severity', 'project', 'type', 'developer', 'quality_assurance', 'product_manager']
+        fields = ['title', 'description', 'severity', 'project', 'type', 'status', 'developer', 'quality_assurance', 'product_manager']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if not self.instance.pk:
+            # If instance doesn't exist, its a new issue so status field shouldn't be available 
+            self.fields.pop('status')
 
     def save(self, commit=True, user=None):
         """ Custom save method to set the 'updated_by' field if a user is provided """

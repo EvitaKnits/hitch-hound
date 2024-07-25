@@ -598,6 +598,14 @@ Alerts are eroneously showing up in three different scenarios:
 #### Solution
 I found that I had set up the alerts to be triggered when clicking the button, rather than when the new item is actually saved. I removed this behaviour from the buttons and switched to setting the session variable in the view when the new item is saved successfully. This meant that I moved the session variable to the server side and therefore needed to pass it to the client side via the context on each page that displays the alerts. This solved all three scenarios. 
 
+### Bug Thirteen
+
+#### Issue
+I made a change that removed the 'Status' field from the form used to create a new issue. This is because when an issue is created it should automatically be set to 'Open' and not be changeable at this stage. It should however be changeable afterwards, when a user edits an issue. I realised I accidentally removed the 'Status' field from both the create and edit issue forms. 
+
+#### Solution
+As the same form is used for creating and editing issues, I needed to include the 'Status' field conditionally. So I added the 'Status' field back into the list of fields for this form, then made sure it only appears on the edit issue form by checking whether the issue instance already exists or not. If it does not exist already, this means its a new issue and the status field should not appear, therefore it is removed from the list of fields. 
+
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
 
