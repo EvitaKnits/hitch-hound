@@ -647,6 +647,33 @@ After deleting a project, an alert appears on the 'Edit Issue' page when the use
 #### Solution
 I found that I had accidentally left a line of code in my 'Delete Project' view from a previous version of my alerting system that was causing this message to appear. I removed this line and the bug was fixed.
 
+#### Bug Nineteen
+
+#### Issue
+This bug contains all the cosmetic issues found on mobile and tablet screens during browser and responsivity testing: 
+- a. Burger Menu is aligned right and looks odd.
+- b. Buttons on 'Issue Detail' page stuck together on two rows.
+- c. Issue Table header row is split across 2 rows when the title column has an entry longer than 15 characters.
+- d. 'Select a report' is split over 3 lines in the report area and looks untidy.
+- e. 'Edit' and 'Change Password' buttons should be stacked and full width on 'Profile' page when not in edit mode and 'Save Changes' and 'Cancel' buttons should also be stacked and full width when in edit mode, following convention set elsewhere. This should be on mobile screens. 
+- f. All buttons on the 'Edit Issue' page should be full width and stacked on tablets as it already is on mobile screens. 
+- g. On Chrome and Edge only: the dropdowns on forms have tiny text and float away from their field label.
+- h. The pie charts are too small on tablet screens and have a varying amount of padding underneath depending on the various screen sizes. This should be consistent.
+- i. The pie charts sometimes had no padding at the bottom of the screen and other times did have it, depending on screen size. This was despite me not specifying padding my screen size.
+
+#### Solution
+These have all been solved: 
+- a. The burger menu has been changed to an offcanvas navbar using Bootstrap.
+- b. The buttons on 'Issue Detail' pages have been converted to 100% width on mobile screens in the same way that other buttons on different pages were already.
+- c. The title column has been restricted to 15 characters maximum on smaller screens and left at 50 characters on larger screens. Two columns removed from tablet size screens for the Issue table to help with information spacing on this size screen too. 
+- d. This has been renamed 'Select Report'.
+- e. These buttons have all been made full width and stacked on mobile and tablet screens.
+- f. These buttons have all been made full width and stacked on tablet screens. 
+- g. This turned out to be a bug with the Chrome and Edge dev tools mobile emulators. When tested on an actual mobile device, the dropdowns appeared correctly. 
+- h. I changed the Bootstrap column settings to increase their sizes on the medium screens. 
+- i. I added a class to the appropriate container and added 30px of padding at the bottom of the chart regardless of screen size. 
+
+
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
 

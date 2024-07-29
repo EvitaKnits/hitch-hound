@@ -46,9 +46,6 @@ class Change(models.Model):
         # Check if the field has defined choices
         if field_name in issue_field_choices:
             choices_dict = dict(issue_field_choices[field_name])
-            # Convert value to int if the field is severity and value is a string
-            if field_name == 'severity' and isinstance(value, str):
-                value = int(value)
             return choices_dict.get(value, value)
         return value
 

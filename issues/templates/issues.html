@@ -51,7 +51,7 @@
                             class="fa {% if sort_by == 'severity' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
                     </a>
                 </th>
-                <th scope="col" class="d-none d-md-table-cell">
+                <th scope="col" class="d-none d-lg-table-cell">
                     <a href="?sort_by=type&order={{ toggle_order }}" class="text-dark text-decoration-none">
                         Type
                         <i
@@ -72,7 +72,7 @@
                             class="fa {% if sort_by == 'status' %}{% if order == 'asc' %}fa-arrow-up{% else %}fa-arrow-down{% endif %} text-dark{% else %}fa-arrow-up text-muted{% endif %}"></i>
                     </a>
                 </th>
-                <th scope="col" class="d-none d-md-table-cell">
+                <th scope="col" class="d-none d-lg-table-cell">
                     <a href="?sort_by=reporter.username&order={{ toggle_order }}"
                         class="text-dark text-decoration-none">
                         Reporter
@@ -88,14 +88,18 @@
             <tr class="table-light" onclick="window.location.href='{% url 'issue_detail' issue.id %}'"
                 style="cursor: pointer;">
                 <td>#{{ issue.id }}</td>
-                <td>{{ issue.title|truncatechars:50 }}</td>
+                <td>
+                    <span class="d-lg-none">{{ issue.title|truncatechars:15 }}</span>
+                    <span class="d-none d-lg-inline">{{ issue.title|truncatechars:50 }}</span>
+                </td>
                 <td>{{ issue.get_severity_display }}</td>
-                <td class="d-none d-md-table-cell">{{ issue.get_type_display }}</td>
+                <td class="d-none d-lg-table-cell">{{ issue.get_type_display }}</td>
                 <td class="d-none d-md-table-cell">{{ issue.project.title }}</td>
                 <td class="d-none d-md-table-cell">{{ issue.get_status_display }}</td>
-                <td class="d-none d-md-table-cell">{{ issue.reporter.username }}</td>
+                <td class="d-none d-lg-table-cell">{{ issue.reporter.username }}</td>
             </tr>
             {% endfor %}
+
         </tbody>
     </table>
 </div>

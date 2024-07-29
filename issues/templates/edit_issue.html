@@ -32,14 +32,14 @@
                         {% csrf_token %}
                         {{ form|crispy }}
                         <div class="row">
-                            <div class="col-12 col-sm-4 mb-2 mb-sm-0">
+                            <div class="col-12 col-lg-4 mb-2 mb-lg-0">
                                 <button type="submit" class="btn btn-primary w-100">Save Changes</button>
                             </div>
-                            <div class="col-12 col-sm-4 mb-2 mb-sm-0">
+                            <div class="col-12 col-lg-4 mb-2 mb-lg-0">
                                 <button type="button" class="btn btn-danger w-100 delete-issue-button"
                                     data-id="{{ issue.id }}">Delete Issue</button>
                             </div>
-                            <div class="col-12 col-sm-4">
+                            <div class="col-12 col-lg-4">
                                 <button type="button" class="btn btn-secondary w-100"
                                     onclick="window.history.back();">Cancel</button>
                             </div>

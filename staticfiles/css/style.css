@@ -263,6 +263,10 @@ nav li i {
     border-radius: 8px;
 }
 
+.greater-chart-container {
+    padding-bottom: 30px;
+}
+
 .report-label {
     font-size: 1.25rem; /* Adjust the size as needed */
     font-weight: bold;
@@ -282,6 +286,13 @@ nav li i {
 }
 
 /* MEDIA QUERIES */
+
+@media (max-width: 1240px) {
+    #severity-pie-chart {
+        width: 100%;
+    }
+}
+
 
 @media (max-width: 436px) {
     .navbar-brand h1 {

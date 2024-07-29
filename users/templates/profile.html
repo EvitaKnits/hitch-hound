@@ -23,27 +23,26 @@
                         <!-- Display the user's role -->
                         <div class="form-group mb-4">
                             <label for="id_role">Role:</label>
-                            <span class="form-control-plaintext"
-                                style="display: inline;">{{ form.instance.get_role_display }}</span>
-                            <small class="form-text text-muted" style="display: block;">If you need to change your role,
-                                please contact an admin.</small>
+                            <span class="form-control-plaintext" style="display: inline;">{{ form.instance.get_role_display }}</span>
+                            <small class="form-text text-muted" style="display: block;">If you need to change your role, please contact an admin.</small>
                         </div>
                         <div class="mt-auto">
                             <!-- Buttons for editing profile and changing password -->
-                            <div class="d-flex justify-content-between" id="static-buttons">
-                                <button type="button" class="btn btn-custom w-50 me-1" id="edit-btn"
-                                    onclick="toggleProfileEditMode()">Edit</button>
-                                <a href="{% url 'change_password' %}" class="btn btn-primary w-50 ms-1"
-                                    id="change-password-btn">Change Password</a>
+                            <div class="row mb-2" id="static-buttons">
+                                <div class="col-12 col-md-6 mb-2 mb-md-0">
+                                    <button type="button" class="btn btn-custom w-100" id="edit-btn" onclick="toggleProfileEditMode()">Edit</button>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <a href="{% url 'change_password' %}" class="btn btn-primary w-100" id="change-password-btn">Change Password</a>
+                                </div>
                             </div>
                             <!-- Buttons for saving and cancelling when in edit mode -->
                             <div id="edit-mode-buttons" class="row d-none mt-3">
-                                <div class="col-6 mb-2">
-                                    <button type="submit" class="btn btn-success w-100" id="save-btn"
-                                        name="save_profile">Save Changes</button>
+                                <div class="col-12 col-md-6 mb-2 mb-md-0">
+                                    <button type="submit" class="btn btn-success w-100" id="save-btn" name="save_profile">Save Changes</button>
                                 </div>
-                                <div class="col-6">
-                                    <button type="button" class="btn btn-secondary w-100" id="cancel-btn">Cancel</button>
+                                <div class="col-12 col-md-6">
+                                    <button type="button" class="btn btn-secondary w-100" id="cancel-btn" onclick="toggleProfileEditMode()">Cancel</button>
                                 </div>
                             </div>
                         </div>

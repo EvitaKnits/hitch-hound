@@ -55,14 +55,20 @@
     </tr>
 </table>
 
-<a href="{% url 'edit_issue' issue.id %}" class="btn btn-primary">Edit Issue</a>
-<button type="button" class="btn btn-danger delete-issue-button" data-id="{{ issue.id }}">Delete Issue</button>
-<form id="delete-issue-form-{{ issue.id }}" action="{% url 'delete_issue' issue.id %}" method="post"
-    style="display: none;">
-    {% csrf_token %}
-</form>
-<a href="{% url 'issue_change_history' issue.id %}" class="btn btn-secondary">Change History</a>
-
+<div class="row mb-4">
+    <div class="col-12 col-md-4 mb-2 mb-md-0">
+        <a href="{% url 'edit_issue' issue.id %}" class="btn btn-primary w-100">Edit Issue</a>
+    </div>
+    <div class="col-12 col-md-4 mb-2 mb-md-0">
+        <button type="button" class="btn btn-danger w-100 delete-issue-button" data-id="{{ issue.id }}">Delete Issue</button>
+        <form id="delete-issue-form-{{ issue.id }}" action="{% url 'delete_issue' issue.id %}" method="post" style="display: none;">
+            {% csrf_token %}
+        </form>
+    </div>
+    <div class="col-12 col-md-4">
+        <a href="{% url 'issue_change_history' issue.id %}" class="btn btn-secondary w-100">Change History</a>
+    </div>
+</div>
 <!-- Form for adding new comments -->
 <h3 class="mt-5">Add a Comment</h3>
 <form action="{% url 'add_comment' issue.id %}" method="post">
@@ -70,7 +76,7 @@
     <div class="form-group">
         <textarea class="form-control" id="comment-text" name="comment_text" rows="3" placeholder="Enter your comment here..."></textarea>
     </div>
-    <button type="submit" class="btn btn-primary mt-2" id="add-comment-btn" disabled>Add Comment</button>
+    <button type="submit" class="btn btn-primary mt-2 w-100" id="add-comment-btn" disabled>Add Comment</button>
 </form>
 
 <!-- Existing comments section -->
