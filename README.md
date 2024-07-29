@@ -426,19 +426,19 @@ Pixel references for each of the screen sizes:
 | Browser | Screen Size | Appearance | Responsiveness |
 |-------|-----|-----|-----|
 | Chrome | Mobile | Bug 19  | Good |
-| | Tablet | Bug 20  | Good  |
+| | Tablet | Bug 19  | Good  |
 | | Computer | Good | Good |
 | | Transition Points | Good | Good |
 | Firefox | Mobile | Bug 19  | Good |
-| | Tablet | Bug 20 | Good |
+| | Tablet | Bug 19 | Good |
 | | Computer | Good | Good |
 | | Transition Points | Good | Good |
 | Safari | Mobile | Bug 19 | Good  |
-| | Tablet | Bug 20 | Good  |
+| | Tablet | Bug 19 | Good  |
 | | Computer |  Good |Good  |
 | | Transition Points | Good | Good |
 | Edge | Mobile | Bug 19 | Good |
-| | Tablet | Bug 20  | Good |
+| | Tablet | Bug 19  | Good |
 | | Computer | Good | Good |
 | | Transition Points | Good | Good |
 
@@ -446,8 +446,8 @@ Pixel references for each of the screen sizes:
 
 | Language | Validation Method | Outcome |
 |---|----|----|
-| HTML | [W3C HTML Validator](https://validator.w3.org/) | X errors. All resolved.|
-| CSS | [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) | X errors. All resolved. |
+| HTML | Via direct input on [W3C HTML Validator](https://validator.w3.org/) | 9 errors across all pages. All resolved.|
+| CSS | Via direct input on [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) | No errors found. |
 | JavaScript | [JS Hint](https://jshint.com/) | X errors. All resolved.  |
 | Python | [PEP8 Code Institute Python Linter](https://pep8ci.herokuapp.com/) | X errors. All resolved. |
 

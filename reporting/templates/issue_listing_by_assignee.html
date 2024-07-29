@@ -9,7 +9,7 @@
 {% block content %}
 <div class="container mt-4">
     {% include 'report_menu.html' %}
-    <h1>Issues by Assignee</h1>
+    <h2>Issues by Assignee</h2>
     <p>This report displays issues by assignees. Select your filters in the section below and they will be automatically
         applied to the table.</p>
 
@@ -22,7 +22,7 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
-                                    <label for="assignee" class="fw-bold">Select Assignee(s):</label>
+                                    <label class="fw-bold">Select Assignee(s):</label>
                                     <div id="assignee" class="form-check mt-2">
                                         <!-- Loop through user choices to create checkboxes for assignees -->
                                         {% for user in user_choices %}
@@ -31,8 +31,7 @@
                                                 id="assignee-{{ user.username }}" value="{{ user.username }}"
                                                 {% if user.username in selected_assignees %}checked{% endif %}
                                                 onchange="this.form.submit()">
-                                            <label class="form-check-label"
-                                                for="assignee-{{ user.username }}">{{ user.username }}</label>
+                                            <label class="form-check-label">{{ user.username }}</label>
                                         </div>
                                         {% endfor %}
                                         <!-- Checkbox for including unassigned issues -->
@@ -40,7 +39,7 @@
                                             <input class="form-check-input" type="checkbox" name="include_unassigned"
                                                 {% if include_unassigned %}checked{% endif %}
                                                 onchange="this.form.submit()">
-                                            <label class="form-check-label" for="include_unassigned">View Unassigned
+                                            <label class="form-check-label">View Unassigned
                                                 Issues</label>
                                         </div>
                                     </div>
@@ -104,15 +103,16 @@
             </tbody>
         </table>
     </div>
+</div>
 
-    {% include 'pagination.html' %}
+{% include 'pagination.html' %}
 
-    {% include 'new_item_modal.html' %}
-    {% include 'logout_modal.html' %}
+{% include 'new_item_modal.html' %}
+{% include 'logout_modal.html' %}
 
-    {% endblock %}
+{% endblock %}
 
-    {% block extra_js %}
-    {% include 'base_extra_js.html' %}
-    <script src="{% static 'js/reports.js' %}"></script>
-    {% endblock %}
+{% block extra_js %}
+{% include 'base_extra_js.html' %}
+<script src="{% static 'js/reports.js' %}"></script>
+{% endblock %}

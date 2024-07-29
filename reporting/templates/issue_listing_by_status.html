@@ -10,7 +10,7 @@
 {% block content %}
 <div class="container mt-4">
     {% include 'report_menu.html' %}
-    <h1>Issues by Status and Project</h1>
+    <h2>Issues by Status and Project</h2>
     <p>This report displays issues by any combination of statuses and projects. Select your filters in the section below
         and they will be automatically applied to the table.</p>
 
@@ -18,12 +18,12 @@
         <div class="col-lg-6 col-md-8 col-12">
             <div class="card h-100">
                 <div class="card-body">
-                    <!-- Form for seelcting statuses and projects -->
+                    <!-- Form for selecting statuses and projects -->
                     <form method="get" action="{% url 'issue_listing_by_status' %}">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
-                                    <label for="status" class="fw-bold">Select Status(es):</label>
+                                    <label class="fw-bold">Select Status(es):</label>
                                     <div id="status" class="form-check mt-2">
                                         <!-- Loop through status choices to create checkboxes -->
                                         {% for value, display in status_choices %}
@@ -32,8 +32,7 @@
                                                 id="status-{{ value }}" value="{{ value }}"
                                                 {% if value in selected_statuses %}checked{% endif %}
                                                 onchange="this.form.submit()">
-                                            <label class="form-check-label"
-                                                for="status-{{ value }}">{{ display }}</label>
+                                            <label class="form-check-label">{{ display }}</label>
                                         </div>
                                         {% endfor %}
                                     </div>
@@ -41,7 +40,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
-                                    <label for="project_id" class="fw-bold">Select Project(s):</label>
+                                    <label class="fw-bold">Select Project(s):</label>
                                     <div id="project_id" class="form-check mt-2">
                                         <!-- Loop through project choices to create checkboxes -->
                                         {% for project in project_choices %}
@@ -50,8 +49,7 @@
                                                 id="project-{{ project.id }}" value="{{ project.id }}"
                                                 {% if project.id|stringformat:"s" in selected_project_ids %}checked{% endif %}
                                                 onchange="this.form.submit()">
-                                            <label class="form-check-label"
-                                                for="project-{{ project.id }}">{{ project.title }}</label>
+                                            <label class="form-check-label">{{ project.title }}</label>
                                         </div>
                                         {% endfor %}
                                     </div>

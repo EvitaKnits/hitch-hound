@@ -19,6 +19,11 @@ class CustomUserCreationForm(UserCreationForm):
         model = User
         fields = ('first_name', 'last_name', 'username', 'email', 'role', 'password1', 'password2')
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Remove autofocus from username field
+        self.fields['username'].widget.attrs.pop('autofocus', None)
+
 class UserProfileForm(forms.ModelForm):
     """
     Form for updating user profiles. Includes fields for first name, last name, and email.

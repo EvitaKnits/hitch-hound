@@ -9,7 +9,7 @@
 {% block content %}
 
 <div class="container mt-4">
-    <h1>User Profile for {{ username }}</h1>
+    <h2>User Profile for {{ username }}</h2>
     <!-- Alert Placeholder -->
     <div id="live-alert-placeholder"></div>
     <div class="row mt-5 justify-content-center">
@@ -22,7 +22,7 @@
                         {{ form|crispy }}
                         <!-- Display the user's role -->
                         <div class="form-group mb-4">
-                            <label for="id_role">Role:</label>
+                            <label>Role:</label>
                             <span class="form-control-plaintext" style="display: inline;">{{ form.instance.get_role_display }}</span>
                             <small class="form-text text-muted" style="display: block;">If you need to change your role, please contact an admin.</small>
                         </div>
@@ -56,7 +56,7 @@
 <!-- User's issues section -->
 <div class="row mt-5">
     <div class="col-12">
-        <h1>Your Issues</h1>
+        <h2>Your Issues</h2>
         <div class="table-responsive">
             <table class="table table-hover table-bordered">
                 <thead>

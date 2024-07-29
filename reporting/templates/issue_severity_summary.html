@@ -7,7 +7,7 @@
 
 {% block content %}
 {% include 'report_menu.html' %}
-<h1>Issue Severity Summary</h1>
+<h2>Issue Severity Summary</h2>
 <p>This report shows a summary of all issues' severity by project. Select a project in the section below to show that
     project's chart.</p>
 
@@ -19,7 +19,7 @@
                     <!-- Form to filter Issues by Project -->
                     <form method="get" action="{% url 'issue_severity_summary' %}">
                         <div class="form-group">
-                            <label for="project-filter" class="fw-bold">Select Project:</label>
+                            <label class="fw-bold">Select Project:</label>
                             <div id="project-filter" class="d-flex flex-wrap mt-2 justify-content-around">
                                 <button type="submit" class="btn btn-secondary m-1" name="project" value="all"
                                     {% if 'all' in selected_projects %}class="active" {% endif %}>All Projects</button>
