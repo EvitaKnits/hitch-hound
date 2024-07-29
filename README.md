@@ -673,6 +673,13 @@ These have all been solved:
 - h. I changed the Bootstrap column settings to increase their sizes on the medium screens. 
 - i. I added a class to the appropriate container and added 30px of padding at the bottom of the chart regardless of screen size. 
 
+#### Bug Twenty
+
+#### Issue
+It is currently possible to register for an account and use the same email address as an existing user.
+
+#### Solution
+I changed my user model to make sure that email addresses must be unique. 
 
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 

@@ -27,6 +27,7 @@ class User(AbstractUser):
     )
     role = models.CharField(max_length=20, null=False, choices=ROLE_CHOICES, default='developer')
     last_visited_notifications = models.DateTimeField(null=True, blank=True)
+    email = models.EmailField(unique=True)
 
     objects = UserManager() 
 
