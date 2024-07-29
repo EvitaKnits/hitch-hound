@@ -10,7 +10,9 @@ from django.db.models.functions import Lower
 from django.db.models import F, Q
 from notifications.models import Change
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def list_projects(request):
     """ View to list all Projects, along with their 3 latest issues """
     projects = Project.objects.all().order_by('title')
@@ -33,6 +35,7 @@ def list_projects(request):
 
     return render(request, 'projects.html', context)
 
+@login_required
 def view_all_issues(request, project_id):
     """ View to list all issues for a specific Project """
     project = get_object_or_404(Project, id=project_id)
@@ -69,6 +72,7 @@ def view_all_issues(request, project_id):
     }
     return render(request, 'all_issues.html', context)
 
+@login_required
 def create_project(request):
     """ View to create a new Project """
     if request.method == 'POST':
@@ -92,6 +96,7 @@ def create_project(request):
 
     return render(request, 'create_project.html', context)
 
+@login_required
 def edit_project(request, id):
     """ View to edit an existing Project """
     project = get_object_or_404(Project, id=id)
@@ -114,6 +119,7 @@ def edit_project(request, id):
     }
     return render(request, 'edit_project.html', context)
 
+@login_required
 def delete_project(request, id):
     """ View to delete a Project """
     project = get_object_or_404(Project, id=id)

@@ -35,7 +35,6 @@ urlpatterns = [
     # User app routes
     path('accounts/login/', users_views.user_login, name='login'),
     path('signup/', users_views.user_signup, name='signup'),
-    path('password_reset/', users_views.password_reset, name='reset'),
     path('password_reset/done/', users_views.password_reset_done, name='password_reset_done'),
     path('reset/<uidb64>/<token>/', users_views.password_reset_done, name='password_reset_confirm'),
     path('reset/done/', users_views.password_reset_complete, name='password_reset_complete'),
@@ -45,7 +44,7 @@ urlpatterns = [
 
     # Issue app routes
     path('', issues_views.list_issues, name='home'),
-    path('issues', issues_views.list_issues, name='issues'),
+    path('issues/', issues_views.list_issues, name='issues'),
     path('create_issue/', issues_views.create_issue, name='create_issue'),
     path('issues/<int:id>/', issues_views.issue_detail, name='issue_detail'),
     path('issues/<int:id>/edit/', issues_views.edit_issue, name='edit_issue'),

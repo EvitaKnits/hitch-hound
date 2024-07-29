@@ -9,7 +9,9 @@ from issues.models import Issue
 from projects.models import Project
 from hitchhound.utils import paginate, get_new_notifications
 from users.models import User
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def issue_listing_by_status(request):
     """
     View to list issues filtered by their status and project.
@@ -50,6 +52,7 @@ def issue_listing_by_status(request):
     }
     return render(request, 'issue_listing_by_status.html', context)
 
+@login_required
 def issue_listing_by_assignee(request):
     """ View to list issues filtered by their assignee """
     # Get selected assignees and whether to include unassigned issues from the request
@@ -89,6 +92,7 @@ def issue_listing_by_assignee(request):
     
     return render(request, 'issue_listing_by_assignee.html', context)
 
+@login_required
 def issue_status_summary(request):
     """ View to display a summary of issue statuses by project """
     # Get selected projects from the request
@@ -128,6 +132,7 @@ def issue_status_summary(request):
     
     return render(request, 'issue_status_summary.html', context)
 
+@login_required
 def issue_severity_summary(request):
     """ View to display a summary of issue severities by project """
     # Get selected projects from the request
