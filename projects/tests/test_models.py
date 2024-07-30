@@ -2,6 +2,7 @@ from django.test import TestCase
 from projects.models import Project
 from django.core.exceptions import ValidationError
 
+
 class ProjectModelTest(TestCase):
     """ Test case for the Project Model """
     def setUp(self):
@@ -20,4 +21,4 @@ class ProjectModelTest(TestCase):
         """ Test that a project cannot have a blank title """
         project = Project(title='')
         with self.assertRaises(ValidationError):
-            project.full_clean() 
+            project.full_clean()

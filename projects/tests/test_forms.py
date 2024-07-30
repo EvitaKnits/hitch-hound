@@ -2,6 +2,7 @@ from django.test import TestCase
 from projects.forms import ProjectForm
 from projects.models import Project
 
+
 class ProjectFormTest(TestCase):
     """ Test case for the Project Form """
     def test_project_form_valid_data(self):

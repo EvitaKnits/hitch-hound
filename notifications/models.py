@@ -2,6 +2,7 @@ from django.db import models
 from issues.models import Issue
 from users.models import User
 
+
 class Change(models.Model):
     """
     Model to represent changes made to issues.
@@ -30,10 +31,15 @@ class Change(models.Model):
         """
         Return a string representation of the change.
         """
-        return f'{self.field_changed} changed from {self.old_value} to {self.new_value} by {self.user}'
+        return (
+            f'{self.field_changed} changed from {self.old_value} to '
+            f'{self.new_value} by {self.user}'
+        )
 
     def get_field_changed_display(self):
-        return dict(self.FIELD_CHOICES).get(self.field_changed, self.field_changed)
+        return dict(self.FIELD_CHOICES).get(
+            self.field_changed, self.field_changed
+        )
 
     def get_display_value(self, value, field_name):
         # Fetch the Issue model field choices dynamically

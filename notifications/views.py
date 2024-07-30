@@ -7,6 +7,7 @@ from django.db.models import Q
 from hitchhound.utils import paginate, get_new_notifications
 from django.utils import timezone
 
+
 @login_required
 def list_notifications(request):
     """
@@ -15,14 +16,18 @@ def list_notifications(request):
     excluding changes made by the user themselves.
     """
     current_user = request.user
-    
+
     # Check if there are new notifications
     new_notifications = get_new_notifications(current_user)
 
     # Fetch issues the user is assigned to
-    user_issues = UserIssue.objects.filter(user=current_user).values_list('issue', flat=True)
+    user_issues = UserIssue.objects.filter(
+        user=current_user
+    ).values_list(
+        'issue', flat=True
+    )
 
-    # Fetch changes for issues the user is assigned to or where the user is the reporter, excluding changes made by the user
+    # Fetch changes for user's issues, excluding changes made by the user
     changes = Change.objects.filter(
         Q(issue_id__in=user_issues) | Q(issue__reporter=current_user)
     ).exclude(user=current_user)
@@ -45,6 +50,7 @@ def list_notifications(request):
 
     return render(request, 'notifications.html', context)
 
+
 @login_required
 def change_history(request, issue_id):
     """ View to display the change history of a specific issue """
@@ -57,7 +63,7 @@ def change_history(request, issue_id):
     # Calculate new notifications for the current user
     new_notifications = get_new_notifications(request.user)
 
-     # Use the paginate utility function to handle pagination
+    # Use the paginate utility function to handle pagination
     page_obj = paginate(request, changes)
 
     context = {
