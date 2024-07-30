@@ -448,7 +448,7 @@ Pixel references for each of the screen sizes:
 |---|----|----|
 | HTML | Via direct input on [W3C HTML Validator](https://validator.w3.org/) | 9 errors across all pages. All resolved.|
 | CSS | Via direct input on [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) | No errors found. |
-| JavaScript | [JS Hint](https://jshint.com/) | X errors. All resolved.  |
+| JavaScript | [JS Hint](https://jshint.com/) | 1 error: missing semicolons. All resolved.  |
 | Python | [PEP8 Code Institute Python Linter](https://pep8ci.herokuapp.com/) | X errors. All resolved. |
 
 ### Accessibility 
