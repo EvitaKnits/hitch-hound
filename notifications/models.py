@@ -37,12 +37,17 @@ class Change(models.Model):
         )
 
     def get_field_changed_display(self):
+        """
+        Return the display name of the changed field
+        """
         return dict(self.FIELD_CHOICES).get(
             self.field_changed, self.field_changed
         )
 
     def get_display_value(self, value, field_name):
-        # Fetch the Issue model field choices dynamically
+        """
+        Fetch the Issue model field choices dynamically
+        """
         issue_field_choices = {
             'status': Issue.STATUS_CHOICES,
             'severity': Issue.SEVERITY_CHOICES,
@@ -56,7 +61,13 @@ class Change(models.Model):
         return value
 
     def get_old_value_display(self):
+        """
+        Return the display name of the changed field's old value.
+        """
         return self.get_display_value(self.old_value, self.field_changed)
 
     def get_new_value_display(self):
+        """
+        Return the display name of the changed field's new value.
+        """
         return self.get_display_value(self.new_value, self.field_changed)

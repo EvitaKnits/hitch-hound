@@ -1,15 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.utils import timezone
 from django.db.models import Q
-from notifications.models import Change
-from issues.models import UserIssue
+from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from issues.models import Issue
 from projects.models import Project
 from hitchhound.utils import paginate, get_new_notifications
 from users.models import User
-from django.contrib.auth.decorators import login_required
 
 
 @login_required
@@ -63,8 +59,6 @@ def issue_listing_by_assignee(request):
 
     # Start with all issues
     issues = Issue.objects.all()
-
-    from django.db.models import Q
 
     if selected_assignees or include_unassigned:
         query = Q()

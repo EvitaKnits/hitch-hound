@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group
 from django.contrib.auth.models import UserManager as DefaultUserManager
-from django.utils import timezone
 
 
 class UserManager(DefaultUserManager):

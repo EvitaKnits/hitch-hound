@@ -5,6 +5,8 @@ from issues.models import Issue, Comment
 class IssueForm(forms.ModelForm):
     """ A form for creating and updating Issue instances """
     class Meta:
+        """ Specifies the model to be used with this form and the fields
+        that should be included in the form."""
         model = Issue
         fields = [
             'title', 'description', 'severity', 'project', 'type',
@@ -33,5 +35,7 @@ class IssueForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     """ A form for creating Comment instances """
     class Meta:
+        """ Specifies the model to be used with this form and the fields
+        that should be included in the form."""
         model = Comment
         fields = ['comment_text']

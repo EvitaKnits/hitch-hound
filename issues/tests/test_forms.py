@@ -99,8 +99,10 @@ class CommentFormTest(TestCase):
         Create instances of related models to be used in the form.
         """
         self.project = Project.objects.create(title='Test Project')
-        self.reporter = User.objects.create_user
-        (username='reporter', password='test')
+        self.reporter = User.objects.create_user(
+            username='reporter',
+            password='test'
+        )
         self.issue = Issue.objects.create(
             title='Test Issue',
             description='This is a test issue',

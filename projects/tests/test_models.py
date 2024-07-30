@@ -1,7 +1,6 @@
 from django.test import TestCase
-from projects.models import Project
 from django.core.exceptions import ValidationError
-
+from projects.models import Project
 
 class ProjectModelTest(TestCase):
     """ Test case for the Project Model """

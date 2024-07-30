@@ -1,16 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from issues.forms import IssueForm, CommentForm
-from issues.models import Issue, Comment, UserIssue
-from projects.models import Project
-from notifications.models import Change
-from hitchhound.utils import paginate, get_new_notifications
 from django.contrib import messages
 from django.db.models.functions import Lower
-from django.db.models import F, Q
-from django.utils import timezone
 from django.core.exceptions import FieldError
+from issues.forms import IssueForm, CommentForm
+from issues.models import Issue, Comment
+from projects.models import Project
+from hitchhound.utils import paginate, get_new_notifications
 
 
 @login_required

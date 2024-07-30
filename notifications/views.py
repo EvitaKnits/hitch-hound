@@ -1,11 +1,10 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-from notifications.models import Change
-from issues.models import Issue, UserIssue
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from hitchhound.utils import paginate, get_new_notifications
 from django.utils import timezone
+from hitchhound.utils import paginate, get_new_notifications
+from notifications.models import Change
+from issues.models import Issue, UserIssue
 
 
 @login_required

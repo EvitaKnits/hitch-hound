@@ -1,8 +1,6 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, update_session_auth_hash
-from .forms import CustomUserCreationForm
 from django.contrib import messages
-from django.http import HttpResponse
 from django.contrib.auth.forms import PasswordResetForm, PasswordChangeForm
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
@@ -14,14 +12,13 @@ from django.urls import reverse_lazy
 from django.conf import settings
 from django.contrib.auth.views import PasswordResetConfirmView
 from django.contrib.auth.decorators import login_required
-from issues.models import Issue, UserIssue
 from django.db import models
+from django.db.models.functions import Lower
+from django.db.models import Q
 from hitchhound.utils import paginate, get_new_notifications
 from users.forms import UserProfileForm
-from django.db.models.functions import Lower
-from django.db.models import F, Q
-from notifications.models import Change
-from django.utils import timezone
+from issues.models import Issue
+from .forms import CustomUserCreationForm
 
 
 def user_login(request):
@@ -137,9 +134,6 @@ def user_profile(request):
     sort_by = request.GET.get('sort_by', 'id')
     order = request.GET.get('order', 'asc')
     toggle_order = 'desc' if order == 'asc' else 'asc'
-
-    # Determine the sorting field and annotation
-    from django.db.models.functions import Lower
 
     if sort_by == 'title':
         issues = Issue.objects.filter(

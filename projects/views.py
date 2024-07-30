@@ -1,17 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
-from projects.models import Project
-from issues.models import Issue, UserIssue
-from hitchhound.utils import paginate, get_new_notifications
-from .forms import ProjectForm
-from django.urls import reverse
-from django.contrib import messages
 from django.db.models.functions import Lower
-from django.db.models import F, Q
-from notifications.models import Change
-from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-
+from .forms import ProjectForm
+from projects.models import Project
+from issues.models import Issue
+from hitchhound.utils import paginate, get_new_notifications
 
 @login_required
 def list_projects(request):

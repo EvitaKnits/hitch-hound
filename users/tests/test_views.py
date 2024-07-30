@@ -2,8 +2,8 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.core import mail
-from users.forms import CustomUserCreationForm, UserProfileForm
 from django.contrib.auth.forms import PasswordResetForm, PasswordChangeForm
+from users.forms import CustomUserCreationForm, UserProfileForm
 from issues.models import Issue, Project
 
 User = get_user_model()

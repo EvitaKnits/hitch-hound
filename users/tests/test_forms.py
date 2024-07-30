@@ -1,7 +1,7 @@
 from django.test import TestCase
+from django.urls import reverse
 from users.forms import CustomUserCreationForm, UserProfileForm
 from users.models import User
-from django.urls import reverse
 
 
 class CustomUserCreationFormTest(TestCase):

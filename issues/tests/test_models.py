@@ -1,8 +1,8 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
-from issues.models import Issue, UserIssue, Comment
-from projects.models import Project
 from django.core.exceptions import ValidationError
+from issues.models import Issue, Comment
+from projects.models import Project
 
 User = get_user_model()
 
