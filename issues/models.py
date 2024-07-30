@@ -1,12 +1,14 @@
 from django.db import models
 from projects.models import Project
-from users.models import User 
+from users.models import User
+
 
 class Issue(models.Model):
     """
-    This model represents an issue with various attributes, which is assigned to a project.
+    This model represents an issue with various attributes, which is assigned
+    to a project.
     """
-    SEVERITY_CHOICES = (   
+    SEVERITY_CHOICES = (
         (1, '1 - Critical'),
         (2, '2 - High'),
         (3, '3 - Medium'),
@@ -30,17 +32,38 @@ class Issue(models.Model):
     description = models.TextField()
     severity = models.IntegerField(choices=SEVERITY_CHOICES, default=4)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, null=False)
-    type = models.CharField(max_length=20, choices=TYPE_CHOICES, default='bug')
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='open')
-    reporter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reported_issues')
-    developer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, limit_choices_to={'role': 'developer'}, related_name='developer_issues')
-    quality_assurance = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, limit_choices_to={'role': 'quality_assurance'}, related_name='qa_issues')
-    product_manager = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, limit_choices_to={'role': 'product_manager'}, related_name='pm_issues')
+    type = models.CharField(
+        max_length=20, choices=TYPE_CHOICES, default='bug'
+    )
+    status = models.CharField(
+        max_length=20, choices=STATUS_CHOICES, default='open'
+    )
+    reporter = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='reported_issues'
+    )
+    developer = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True,
+        limit_choices_to={'role': 'developer'}, related_name='developer_issues'
+    )
+    quality_assurance = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True,
+        limit_choices_to={'role': 'quality_assurance'},
+        related_name='qa_issues'
+    )
+    product_manager = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True,
+        limit_choices_to={'role': 'product_manager'}, related_name='pm_issues'
+    )
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='updated_issues')
+    updated_by = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True,
+        related_name='updated_issues'
+    )
 
     def get_allowed_statuses_for_role(self, role):
-        """ Return a list of allowed statuses for a given role to power permissions """
+        """
+        Return a list of allowed statuses for a given role to power permissions
+        """
         if role == 'developer':
             return ['open', 'in_progress']
         elif role == 'quality_assurance':
@@ -48,7 +71,10 @@ class Issue(models.Model):
         elif role == 'product_manager':
             return ['open', 'approved', 'closed', 'cancelled']
         elif role == 'superuser':
-            return ['open', 'in_progress', 'testing', 'approved', 'closed', 'cancelled']
+            return [
+                'open', 'in_progress', 'testing',
+                'approved', 'closed', 'cancelled'
+            ]
         return ['open']
 
     def can_user_update_status(self, user, new_status):
@@ -59,17 +85,22 @@ class Issue(models.Model):
             return True
         role = user.role
         allowed_statuses = self.get_allowed_statuses_for_role(role)
-        print(f'User Role: {role}, Attempted Status: {new_status}, Allowed Statuses: {allowed_statuses}')
+        print(
+            f'User Role: {role}, Attempted Status: {new_status}, '
+            f'Allowed Statuses: {allowed_statuses}'
+        )
+
         return new_status in allowed_statuses
 
     def save(self, *args, **kwargs):
         """
-        Override the save method to include custom logic for updating the issue.
-        
-        If a user is provided via kwargs, set the `updated_by` field to that user.
-        Before saving, if the status of the issue is being changed, verify that the 
-        user has the necessary permissions to change to the new status. If the user 
-        lacks the required permissions, the save operation is aborted.
+        Override save method to include custom logic for updating the issue.
+
+        If a user is provided via kwargs, set the `updated_by` field to that
+        user. Before saving, if the status of the issue is being changed,
+        verify that the user has the necessary permissions to change to the new
+        status. If the user lacks the required permissions, the save operation
+        is aborted.
         """
         user = kwargs.pop('user', None)
         if user:
@@ -84,6 +115,7 @@ class Issue(models.Model):
 
         super().save(*args, **kwargs)
         return True
+
 
 class UserIssue(models.Model):
     """
@@ -102,6 +134,7 @@ class UserIssue(models.Model):
     # Ensure unique assignments of user to issue with a specific role
     class Meta:
         unique_together = ('user', 'issue', 'role')
+
 
 class Comment(models.Model):
     """ This model represents a comment made on an issue """

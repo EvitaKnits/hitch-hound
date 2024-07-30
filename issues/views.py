@@ -16,12 +16,13 @@ from django.core.exceptions import FieldError
 @login_required
 def list_issues(request):
     """
-    View to list all issues, optionally filtered by project and sorted by various fields.
-    Handles pagination and sorting, and includes user notifications.
+    View to list all issues, optionally filtered by project and sorted by
+    various fields.Handles pagination and sorting, and includes user
+    notifications.
     """
-    # Retrieve and handle session flag for showing a success toast message when user just registered
+    # Handle session flag to show a success toast when user just registered
     show_toast = request.session.pop('registration_success', False)
-    
+
     # Get sorting and filtering parameters from the request
     sort_by = request.GET.get('sort_by', 'title')
     order = request.GET.get('order', 'asc')
@@ -38,12 +39,18 @@ def list_issues(request):
 
     # Determine the ordering of issues
     ordering = f'{'' if order == 'asc' else '-'}{sort_by.replace('.', '__')}'
-    
+
     # Annotate and order issues based on sorting parameters
     if sort_by == 'title':
-        issues = issues.annotate(lower_title=Lower('title')).order_by(f'{'' if order == 'asc' else '-'}lower_title')
+        issues = issues.annotate(lower_title=Lower('title')).order_by(
+            f"{'' if order == 'asc' else '-'}lower_title"
+        )
     elif sort_by == 'project.title':
-        issues = issues.annotate(project_title=Lower('project__title')).order_by(f'{'' if order == 'asc' else '-'}project_title')
+        issues = issues.annotate(
+            project_title=Lower('project__title')
+        ).order_by(
+            f"{'' if order == 'asc' else '-'}project_title"
+        )
     elif sort_by == 'severity':
         ordering = 'severity' if order == 'asc' else '-severity'
         issues = issues.order_by(ordering)
@@ -51,14 +58,15 @@ def list_issues(request):
         try:
             issues = issues.order_by(ordering)
         except FieldError:
-            issues = issues.order_by('title')  
+            issues = issues.order_by('title')
 
     # Use the paginate utility function to handle pagination
     page_obj = paginate(request, issues)
 
     def toggle_order(current_order):
-        """ 
-        Utility function to toggle sorting order between ascending and descending.
+        """
+        Utility function to toggle sorting order between ascending and
+        descending.
         """
         return 'asc' if current_order == 'desc' else 'desc'
 
@@ -83,6 +91,7 @@ def list_issues(request):
 
     return render(request, 'issues.html', context)
 
+
 @login_required
 def issue_detail(request, id):
     """
@@ -96,14 +105,15 @@ def issue_detail(request, id):
     new_notifications = get_new_notifications(request.user)
 
     context = {
-        'issue': issue, 
+        'issue': issue,
         'comments': comments,
-        'form': form, 
+        'form': form,
         'new_notifications': new_notifications,
         'active_page': 'issues',
         'show_navbar': True,
     }
     return render(request, 'issue_detail.html', context)
+
 
 @login_required
 def add_comment(request, issue_id):
@@ -119,9 +129,18 @@ def add_comment(request, issue_id):
             return redirect('issue_detail', id=issue.id)
     else:
         form = CommentForm()
-    return render(request, 'issue_detail.html', {'issue': issue, 'form': form, 'comments': issue.comment_set.all()})
+    return render(
+        request,
+        'issue_detail.html',
+        {
+            'issue': issue,
+            'form': form,
+            'comments': issue.comment_set.all()
+        }
+    )
 
-@login_required  
+
+@login_required
 def create_issue(request):
     """ View to create a new issue """
     if request.method == 'POST':
@@ -131,21 +150,22 @@ def create_issue(request):
             issue.reporter = request.user
             issue.save()
             request.session['Alert Type'] = 'Issue Created'
-            return redirect('issues')  
+            return redirect('issues')
     else:
         form = IssueForm()
-    
+
     # Calculate whether there are new notifications for the current user
     new_notifications = get_new_notifications(request.user)
 
     context = {
-        'form': form, 
+        'form': form,
         'new_notifications': new_notifications,
         'active_page': 'issues',
         'show_navbar': True,
     }
 
     return render(request, 'create_issue.html', context)
+
 
 @login_required
 def edit_issue(request, id):
@@ -157,12 +177,23 @@ def edit_issue(request, id):
             success = form.save(user=request.user)
             if not success:
                 # Construct the message using display status names
-                allowed_statuses = [dict(Issue.STATUS_CHOICES).get(status) for status in issue.get_allowed_statuses_for_role(request.user.role)]
+                allowed_statuses = [
+                    dict(Issue.STATUS_CHOICES).get(status)
+                    for status in issue.get_allowed_statuses_for_role(
+                        request.user.role
+                    )
+                ]
                 messages.error(
-                    request, 
-                    f'As a {request.user.role.replace("_", " ")}, you do not have permission to change the issue status to {issue.get_status_display()}. '
-                    f'You may only change it to {", ".join(allowed_statuses)}.'
+                    request,
+                    (
+                        f'As a {request.user.role.replace("_", " ")}, you do '
+                        'not have permission to change '
+                        f'the issue status to {issue.get_status_display()}. '
+                        'You may only change it to '
+                        f'{", ".join(allowed_statuses)}.'
+                    )
                 )
+
             else:
                 return redirect('issue_detail', id=issue.id)
     else:
@@ -179,6 +210,7 @@ def edit_issue(request, id):
         'show_navbar': True,
     }
     return render(request, 'edit_issue.html', context)
+
 
 @login_required
 def delete_issue(request, id):

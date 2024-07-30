@@ -4,6 +4,7 @@ from issues.models import Issue, Comment
 from projects.models import Project
 from users.models import User
 
+
 class IssueFormTest(TestCase):
     """ Test case for the Issue Form """
 
@@ -13,9 +14,15 @@ class IssueFormTest(TestCase):
         Create instances of related models to be used in the form.
         """
         self.project = Project.objects.create(title='Test Project')
-        self.developer = User.objects.create_user(username='developer', password='password', role='developer')
-        self.quality_assurance = User.objects.create_user(username='qa', password='password', role='quality_assurance')
-        self.product_manager = User.objects.create_user(username='pm', password='password', role='product_manager')
+        self.developer = User.objects.create_user(
+            username='developer', password='password', role='developer'
+        )
+        self.quality_assurance = User.objects.create_user(
+            username='qa', password='password', role='quality_assurance'
+        )
+        self.product_manager = User.objects.create_user(
+            username='pm', password='password', role='product_manager'
+        )
 
     def test_issue_form_valid_data(self):
         """
@@ -25,9 +32,9 @@ class IssueFormTest(TestCase):
         form = IssueForm(data={
             'title': 'Test Issue',
             'description': 'Test Description',
-            'severity': 2,  
+            'severity': 2,
             'project': self.project.id,
-            'type': 'bug', 
+            'type': 'bug',
             'developer': self.developer.id,
             'quality_assurance': self.quality_assurance.id,
             'product_manager': self.product_manager.id,
@@ -41,7 +48,7 @@ class IssueFormTest(TestCase):
         """
         form = IssueForm(data={})
         self.assertFalse(form.is_valid())
-        self.assertEqual(len(form.errors), 5) 
+        self.assertEqual(len(form.errors), 5)
 
     def test_issue_form_missing_required_fields(self):
         """
@@ -61,7 +68,7 @@ class IssueFormTest(TestCase):
         })
         self.assertFalse(form.is_valid())
         self.assertIn('title', form.errors)
-        self.assertIn('severity', form.errors) 
+        self.assertIn('severity', form.errors)
 
     def test_issue_form_invalid_choices(self):
         """
@@ -82,6 +89,7 @@ class IssueFormTest(TestCase):
         self.assertIn('severity', form.errors)
         self.assertIn('type', form.errors)
 
+
 class CommentFormTest(TestCase):
     """ Test case for the Comment Form """
 
@@ -91,7 +99,8 @@ class CommentFormTest(TestCase):
         Create instances of related models to be used in the form.
         """
         self.project = Project.objects.create(title='Test Project')
-        self.reporter = User.objects.create_user(username='reporter', password='test')
+        self.reporter = User.objects.create_user
+        (username='reporter', password='test')
         self.issue = Issue.objects.create(
             title='Test Issue',
             description='This is a test issue',

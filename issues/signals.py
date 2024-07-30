@@ -6,29 +6,43 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 @receiver(post_save, sender=Issue)
 def manage_user_issue(sender, instance, created, **kwargs):
     """
     Signal handler to manage UserIssue entries after an Issue is saved.
-    This function ensures that the UserIssue entries are updated to reflect 
-    the current assignments for the developer, quality assurance, and product manager roles.
+    This function ensures that the UserIssue entries are updated to reflect
+    the current assignments for the developer, quality assurance, and product
+    manager roles.
     """
     # Clear existing UserIssue entries for this issue
     UserIssue.objects.filter(issue=instance).delete()
 
     # Create UserIssue entries for each assigned role
     if instance.developer:
-        UserIssue.objects.create(user=instance.developer, issue=instance, role='developer')
+        UserIssue.objects.create(
+            user=instance.developer, issue=instance, role='developer'
+        )
     if instance.quality_assurance:
-        UserIssue.objects.create(user=instance.quality_assurance, issue=instance, role='quality_assurance')
+        UserIssue.objects.create(
+            user=instance.quality_assurance,
+            issue=instance,
+            role='quality_assurance'
+        )
     if instance.product_manager:
-        UserIssue.objects.create(user=instance.product_manager, issue=instance, role='product_manager')
+        UserIssue.objects.create(
+            user=instance.product_manager,
+            issue=instance,
+            role='product_manager'
+        )
+
 
 @receiver(pre_save, sender=Issue)
 def create_change_record(sender, instance, **kwargs):
     """
     Signal handler to create a Change record before an Issue is saved.
-    This function tracks changes to specified fields and logs them in the Change model.
+    This function tracks changes to specified fields and logs them in the
+    Change model.
     """
     # Skip creation if the instance is new and does not have a primary key yet
     if not instance.pk:
@@ -47,7 +61,7 @@ def create_change_record(sender, instance, **kwargs):
         if old_value != new_value:
             Change.objects.create(
                 issue=instance,
-                user=instance.updated_by, 
+                user=instance.updated_by,
                 field_changed=field,
                 old_value=str(old_value),
                 new_value=str(new_value),

@@ -6,21 +6,32 @@ from django.core.exceptions import ValidationError
 
 User = get_user_model()
 
+
 class IssueModelTest(TestCase):
     """ Test case for the Issue model """
     def setUp(self):
         """ Set up the test data for Issue model tests """
         self.project = Project.objects.create(title='Test Project')
-        self.reporter = User.objects.create_user(username='reporter', password='test')
-        self.developer = User.objects.create_user(username='developer', password='test', role='developer')
-        self.qa = User.objects.create_user(username='qa', password='test', role='quality_assurance')
-        self.pm = User.objects.create_user(username='pm', password='test', role='product_manager')
-        self.superuser = User.objects.create_superuser(username='superuser', password='test123')
+        self.reporter = User.objects.create_user(
+            username='reporter', password='test'
+        )
+        self.developer = User.objects.create_user(
+            username='developer', password='test', role='developer'
+        )
+        self.qa = User.objects.create_user(
+            username='qa', password='test', role='quality_assurance'
+        )
+        self.pm = User.objects.create_user(
+            username='pm', password='test', role='product_manager'
+        )
+        self.superuser = User.objects.create_superuser(
+            username='superuser', password='test123'
+        )
 
         self.issue = Issue.objects.create(
             title='Test Issue',
             description='This is a test issue',
-            severity= 4,
+            severity=4,
             project=self.project,
             type='bug',
             status='open',
@@ -69,12 +80,12 @@ class IssueModelTest(TestCase):
 
     def test_missing_required_field(self):
         """
-        Test creating an Issue instance with a missing required field - the title.
+        Test creating an Issue instance with a missing required field (title).
         Should raise a ValidationError.
         """
         with self.assertRaises(ValidationError):
             issue = Issue(
-                description='This is a test issue',  
+                description='This is a test issue',
                 project=self.project,
                 reporter=self.reporter,
             )
@@ -123,26 +134,48 @@ class IssueModelTest(TestCase):
         Test the permission system for updating the status of an Issue.
         Different roles have different permissions for changing status.
         """
-        # Developer can only move to 'in_progress'
-        self.assertTrue(self.issue.can_user_update_status(self.developer, 'in_progress'))
-        self.assertFalse(self.issue.can_user_update_status(self.developer, 'closed'))
+    # Developer can only move to 'in_progress'
+    self.assertTrue(
+        self.issue.can_user_update_status(self.developer, 'in_progress')
+    )
+    self.assertFalse(
+        self.issue.can_user_update_status(self.developer, 'closed')
+    )
 
-        # QA can only move to 'testing'
-        self.assertTrue(self.issue.can_user_update_status(self.qa, 'testing'))
-        self.assertFalse(self.issue.can_user_update_status(self.qa, 'approved'))
+    # QA can only move to 'testing'
+    self.assertTrue(
+        self.issue.can_user_update_status(self.qa, 'testing')
+    )
+    self.assertFalse(
+        self.issue.can_user_update_status(self.qa, 'approved')
+    )
 
-        # Product Manager can move to 'approved', 'closed', and 'cancelled'
-        self.assertTrue(self.issue.can_user_update_status(self.pm, 'approved'))
-        self.assertTrue(self.issue.can_user_update_status(self.pm, 'closed'))
-        self.assertTrue(self.issue.can_user_update_status(self.pm, 'cancelled'))
-        self.assertFalse(self.issue.can_user_update_status(self.pm, 'testing'))
-                                        
-        # Superuser can move to any status
-        self.assertTrue(self.issue.can_user_update_status(self.superuser, 'closed'))
-        self.assertTrue(self.issue.can_user_update_status(self.superuser, 'in_progress'))
+    # Product Manager can move to 'approved', 'closed', and 'cancelled'
+    self.assertTrue(
+        self.issue.can_user_update_status(self.pm, 'approved')
+    )
+    self.assertTrue(
+        self.issue.can_user_update_status(self.pm, 'closed')
+    )
+    self.assertTrue(
+        self.issue.can_user_update_status(self.pm, 'cancelled')
+    )
+    self.assertFalse(
+        self.issue.can_user_update_status(self.pm, 'testing')
+    )
+
+    # Superuser can move to any status
+    self.assertTrue(
+        self.issue.can_user_update_status(self.superuser, 'closed')
+    )
+    self.assertTrue(
+        self.issue.can_user_update_status(self.superuser, 'in_progress')
+    )
 
     def test_save_method_permissions(self):
-        """ Test the custom save method for permissions when updating status """
+        """
+        Test the custom save method for permissions when updating status
+        """
         self.issue.status = 'in_progress'
         self.issue.save(user=self.developer)
         self.assertEqual(self.issue.status, 'in_progress')
@@ -153,13 +186,19 @@ class IssueModelTest(TestCase):
         self.issue.refresh_from_db()
         self.assertNotEqual(self.issue.status, 'closed')
 
+
 class CommentModelTest(TestCase):
     """ Test case for the Comment model """
+
     def setUp(self):
         """ Set up the test data for Comment model tests """
         self.project = Project.objects.create(title='Test Project')
-        self.reporter = User.objects.create_user(username='reporter', password='test')
-        self.user = User.objects.create_user(username='commenter', password='test')
+        self.reporter = User.objects.create_user(
+            username='reporter', password='test'
+        )
+        self.user = User.objects.create_user(
+            username='commenter', password='test'
+        )
         self.issue = Issue.objects.create(
             title='Test Issue',
             description='This is a test issue',
@@ -169,7 +208,11 @@ class CommentModelTest(TestCase):
 
     def test_create_comment(self):
         """ Test creating a Comment instance with valid data """
-        comment = Comment.objects.create(comment_text='This is a test comment', user=self.user, issue=self.issue)
+        comment = Comment.objects.create(
+            comment_text='This is a test comment',
+            user=self.user,
+            issue=self.issue
+        )
         self.assertEqual(comment.comment_text, 'This is a test comment')
         self.assertEqual(comment.user, self.user)
         self.assertEqual(comment.issue, self.issue)

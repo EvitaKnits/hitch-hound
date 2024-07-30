@@ -1,9 +1,10 @@
+"""
+This module provides a custom 404 error handler across the whole project.
+"""
+
 from django.shortcuts import render
-from django.utils import timezone
-from django.db.models import Q
-from notifications.models import Change
-from issues.models import UserIssue
 from hitchhound.utils import get_new_notifications
+
 
 def custom_404(request, exception):
     """
@@ -17,7 +18,7 @@ def custom_404(request, exception):
     - HttpResponse: The response object with a rendered 404 page.
     """
 
-    # Calls the utility function to check for new notifications for the current user
+    # Calls utility function to check for new notifications for current user
     new_notifications = get_new_notifications(request.user)
 
     context = {
