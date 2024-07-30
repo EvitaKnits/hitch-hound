@@ -1,5 +1,6 @@
 from django.apps import AppConfig
 
+
 class ReportingConfig(AppConfig):
     """
     Configuration class for the 'reporting' Django application.

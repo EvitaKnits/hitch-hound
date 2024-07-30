@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 class UserModelTest(TestCase):
     """ Test case for the User model """
     def setUp(self):
@@ -10,9 +11,15 @@ class UserModelTest(TestCase):
         Set up the test data for User model tests.
         Create users with different roles for testing.
         """
-        self.developer = User.objects.create_user(username='dev1', password='password123', role='developer')
-        self.qa = User.objects.create_user(username='qa1', password='password123', role='quality_assurance')
-        self.pm = User.objects.create_user(username='pm1', password='password123', role='product_manager')
+        self.developer = User.objects.create_user(
+            username='dev1', password='password123', role='developer'
+        )
+        self.qa = User.objects.create_user(
+            username='qa1', password='password123', role='quality_assurance'
+        )
+        self.pm = User.objects.create_user(
+            username='pm1', password='password123', role='product_manager'
+        )
 
     def test_create_user_with_role(self):
         """

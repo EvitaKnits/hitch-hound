@@ -1,7 +1,8 @@
 from django.test import TestCase
 from users.forms import CustomUserCreationForm, UserProfileForm
 from users.models import User
-from django.urls import reverse 
+from django.urls import reverse
+
 
 class CustomUserCreationFormTest(TestCase):
     """ Test case for the User Creation Form """
@@ -12,7 +13,7 @@ class CustomUserCreationFormTest(TestCase):
             'last_name': 'User',
             'username': 'testuser',
             'email': 'testuser@example.com',
-            'role': 'developer',  
+            'role': 'developer',
             'password1': 'testpassword123',
             'password2': 'testpassword123',
         }
@@ -32,7 +33,7 @@ class CustomUserCreationFormTest(TestCase):
         """
         form = CustomUserCreationForm(data={})
         self.assertFalse(form.is_valid())
-        self.assertEqual(len(form.errors), 7)  
+        self.assertEqual(len(form.errors), 7)
 
     def test_custom_user_creation_form_missing_required_fields(self):
         """
@@ -48,7 +49,7 @@ class CustomUserCreationFormTest(TestCase):
     def test_custom_user_creation_form_password_mismatch(self):
         """
         Test the User Creation Form with mismatched passwords.
-        The form should be invalid and contain errors for the password mismatch.
+        The form should be invalid and contain errors for the password mismatch
         """
         data = self.valid_data.copy()
         data['password2'] = 'differentpassword123'
@@ -75,6 +76,7 @@ class CustomUserCreationFormTest(TestCase):
         response = self.client.post(reverse('signup'), data=self.valid_data)
         self.assertEqual(response.status_code, 302)
         self.assertTrue(User.objects.filter(username='testuser').exists())
+
 
 class UserProfileFormTest(TestCase):
     """ Test case for the User Profile Form """

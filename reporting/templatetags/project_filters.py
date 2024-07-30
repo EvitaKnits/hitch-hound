@@ -4,6 +4,7 @@ from projects.models import Project
 # Register the template library to create custom template tags and filters
 register = template.Library()
 
+
 @register.filter
 def get_project_title(projects, project_id):
     """

@@ -1,6 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, UserManager as DefaultUserManager, Group
+from django.contrib.auth.models import AbstractUser, Group
+from django.contrib.auth.models import UserManager as DefaultUserManager
 from django.utils import timezone
+
 
 class UserManager(DefaultUserManager):
     """
@@ -15,6 +17,7 @@ class UserManager(DefaultUserManager):
     def product_managers(self):
         return self.filter(role='product_manager')
 
+
 class User(AbstractUser):
     """
     Custom user model extending Django's AbstractUser.
@@ -25,11 +28,13 @@ class User(AbstractUser):
         ('quality_assurance', 'Quality Assurance'),
         ('product_manager', 'Product Manager'),
     )
-    role = models.CharField(max_length=20, null=False, choices=ROLE_CHOICES, default='developer')
+    role = models.CharField(
+        max_length=20, null=False, choices=ROLE_CHOICES, default='developer'
+    )
     last_visited_notifications = models.DateTimeField(null=True, blank=True)
     email = models.EmailField(unique=True)
 
-    objects = UserManager() 
+    objects = UserManager()
 
     def __str__(self):
         """
@@ -39,7 +44,8 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         """
-        Override the save method to assign the user to a group based on their role.
+        Override the save method to assign the user to a group based on their
+        role.
         """
         super().save(*args, **kwargs)
         role_group_map = {
