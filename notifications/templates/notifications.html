@@ -15,7 +15,7 @@
             <a href="{% url 'issue_detail' notification.issue.id %}" class="card-link">
                 <div class="card mb-3 mx-auto notification-card">
                     <div class="card-body">
-                        <h5 class="card-title">Issue #{{ notification.issue.id }} "{{ notification.issue.title }}"</h5>
+                        <h3 class="card-title">Issue #{{ notification.issue.id }} "{{ notification.issue.title }}"</h3>
                         <p class="card-text">
                             {{ notification.user.username }} changed {{ notification.get_field_changed_display }} from
                             "{{ notification.old_value }}" to "{{ notification.new_value }}".

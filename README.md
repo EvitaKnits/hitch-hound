@@ -453,17 +453,36 @@ Pixel references for each of the screen sizes:
 
 ### Accessibility 
 
-**Lighthouse**
-To ensure the front end of my program was accessible I used Lighthouse. 
+**Lighthouse**<br>
+To ensure the front end of my program was accessible I used Lighthouse. After my initial rounds of testing, I made changes to the colour of some buttons due to insufficient contrast and added some labels to fields I had missed. This improved accessibility and I have recorded the final results for each page below: 
 
-Here are the results: 
-(screenshot)
+| Page | Result |
+|----|----|
+| Login | ![Lighthouse Screenshot](documentation/lighthouse-login.png)  |
+| Registration |![Lighthouse Screenshot](documentation/lighthouse-register.png)  |
+| Forgotten Password | ![Lighthouse Screenshot](documentation/lighthouse-password-reset.png) |
+| Issue Listing (home page) | ![Lighthouse Screenshot](documentation/lighthouse-issue-listing.png)  |
+| Issue Detail |![Lighthouse Screenshot](documentation/lighthouse-issue-detail.png) |
+| Edit Issue | ![Lighthouse Screenshot](documentation/lighthouse-edit-issue.png) |
+| Change History |  ![Lighthouse Screenshot](documentation/lighthouse-change-history.png) |
+| Create Issue |![Lighthouse Screenshot](documentation/lighthouse-new-issue.png)   |
+| Create Project | ![Lighthouse Screenshot](documentation/lighthouse-new-project.png)  |
+| Project Listing | ![Lighthouse Screenshot](documentation/lighthouse-project-listing.png)   |
+| Project Detail | ![Lighthouse Screenshot](documentation/lighthouse-project-detail.png)  |
+| Edit Project |![Lighthouse Screenshot](documentation/lighthouse-edit-project.png)   |
+| Profile | ![Lighthouse Screenshot](documentation/lighthouse-profile.png)    |
+| Change Password | ![Lighthouse Screenshot](documentation/lighthouse-change-password.png)  |
+| Notifications | ![Lighthouse Screenshot](documentation/lighthouse-notifications.png)  |
+| Issue Listing by Status Report | ![Lighthouse Screenshot](documentation/lighthouse-status-report.png)  |
+| Issue Listing by Assignee Report | ![Lighthouse Screenshot](documentation/lighthouse-assignee-report.png)  |
+| Issue Status Summary Report | ![Lighthouse Screenshot](documentation/lighthouse-status-summary.png)  |
+| Issue Severity Summary Report | ![Lighthouse Screenshot](documentation/lighthouse-severity-summary.png)  |
 
 **Colour Contrast**
 I also checked the colour contrast using of my color palette combinations using [Coolors](https://coolors.co/contrast-checker/112a46-acc8e5.)
 
 **Alternative Text**
-I ensured I had set alternative text for the only image on my site: the logo. 
+I ensured I had set alternative text for the only images on my site: the logo and the 404 image of a pug. 
 
 ## Bugs
 

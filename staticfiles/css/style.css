@@ -77,9 +77,10 @@ nav li i {
 .btn {
     --bs-btn-active-bg: #86B3A6;
     --bs-btn-active-border-color: #86B3A6;
-    background-color: #508072;
-    border-color: #508072;
-    color: #F6F9F8;
+    background-color: #86B3A6;
+    border-color: #86B3A6;
+    color: black; 
+    font-weight: 500;
 }
 
 .btn:hover,
@@ -189,12 +190,9 @@ nav li i {
 }
 
 .custom-pagination .page-item.disabled .page-link {
-    color: #ccc;
-    /* Disabled text color */
-    background-color: #f0f0f0;
-    /* Disabled background color */
-    border-color: #ddd;
-    /* Disabled border color */
+    color: #414644;
+    background-color: rgb(187, 194, 201);
+    border-color: rgb(187, 194, 201);
 }
 
 /* COMMENT CARD STYLING */
@@ -274,8 +272,8 @@ nav li i {
 
 .nav-pills .nav-link.btn {
     margin-right: 0.5rem;
-    color: #F6F9F8; 
-    background-color: #508072; 
+    color: black; 
+    background-color: #86B3A6; 
     border-radius: 0.25rem;
 }
 

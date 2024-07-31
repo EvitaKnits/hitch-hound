@@ -190,9 +190,9 @@ nav li i {
 }
 
 .custom-pagination .page-item.disabled .page-link {
-    color: #414644;
-    background-color: rgb(187, 194, 201);
-    border-color: rgb(187, 194, 201);
+    color: #555A58;
+    background-color: #f0f0f0;
+    border-color: #ddd;
 }
 
 /* COMMENT CARD STYLING */
@@ -272,8 +272,8 @@ nav li i {
 
 .nav-pills .nav-link.btn {
     margin-right: 0.5rem;
-    color: black; 
-    background-color: #86B3A6; 
+    color: #F6F9F8; 
+    background-color: #508072; 
     border-radius: 0.25rem;
 }
 

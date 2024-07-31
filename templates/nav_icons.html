@@ -1,9 +1,9 @@
 <!-- The two icons for adding something new or accessing notifications -->
 <li class="nav-item">
-    <button class="btn btn-primary nav-icons" id="open-modal-btn"><i class="fa-solid fa-plus"></i></button>
+    <button class="btn btn-primary nav-icons" id="open-modal-btn" aria-label="Add new item"><i class="fa-solid fa-plus"></i></button>
 </li>
 <li class="nav-item">
-    <a class="btn btn-primary nav-icons position-relative" href="{% url 'notifications' %}">
+    <a class="btn btn-primary nav-icons position-relative" href="{% url 'notifications' %}" aria-label="Notifications">
         <i class="fa-solid fa-bell {% if new_notifications %}bell-notification{% endif %}"></i>
     </a>
 </li>

@@ -22,7 +22,7 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
-                                    <label class="fw-bold">Select Assignee(s):</label>
+                                    <label class="fw-bold" for="assignee">Select Assignee(s):</label>
                                     <div id="assignee" class="form-check mt-2">
                                         <!-- Loop through user choices to create checkboxes for assignees -->
                                         {% for user in user_choices %}
@@ -31,15 +31,15 @@
                                                 id="assignee-{{ user.username }}" value="{{ user.username }}"
                                                 {% if user.username in selected_assignees %}checked{% endif %}
                                                 onchange="this.form.submit()">
-                                            <label class="form-check-label">{{ user.username }}</label>
+                                            <label class="form-check-label" for="assignee-{{ user.username }}">{{ user.username }}</label>
                                         </div>
                                         {% endfor %}
                                         <!-- Checkbox for including unassigned issues -->
                                         <div class="form-check mt-3">
                                             <input class="form-check-input" type="checkbox" name="include_unassigned"
-                                                {% if include_unassigned %}checked{% endif %}
+                                                id="include_unassigned" {% if include_unassigned %}checked{% endif %}
                                                 onchange="this.form.submit()">
-                                            <label class="form-check-label">View Unassigned
+                                            <label class="form-check-label" for="include_unassigned">View Unassigned
                                                 Issues</label>
                                         </div>
                                     </div>
