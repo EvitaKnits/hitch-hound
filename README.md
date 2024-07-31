@@ -6,6 +6,7 @@
 Automated testing is done with Unittest for Python.
 
 (Add responsive screenshot here)
+To visit the deployed version of Hitch Hound [click here](https://hitchhound-15272de0eee9.herokuapp.com/).
 
 # Table of Contents
 1. [Purpose](#purpose)
@@ -31,7 +32,7 @@ Automated testing is done with Unittest for Python.
     d. [Browser Compatibility and Screen Size Responsiveness](#browser-compatibility-and-screen-size-responsiveness) <br>
     e. [Key Responsiveness Differences](#key-responsiveness-differences) <br>
     f. [Accessibility](#accessibility) <br>
-6. [Bugs](#bugs)
+    g. [Bugs](#bugs)
 7. [Deployment](#deployment)
 8. [Agile Methodology](#agile-methodology) <br>
     a. [Sprint One](#sprint-one-2705-to-0206) <br>
@@ -42,9 +43,14 @@ Automated testing is done with Unittest for Python.
 ## Purpose
 The objective of this program is to streamline the process of tracking and communicating about issues and bugs arising in software development projects. It is lightweight and intuitive, providing ample functionality for small to medium enterprises who don't need an elevated level of auditing and oversight. 
 
+# Features
+
 ## Requirement Gathering and Planning
 
 Before starting the coding for this project, I created a detailed plan including my database schema, user journeys and wireframes.
+<details>
+<summary>Expand</summary>
+
 
 ### Brief Competitor Analysis and Target Demographic
 When considering competitors in the realm of issue and bug tracking software, it's helpful to look at some well-known options. Atlassian's Jira is widely recognised for its range of features and flexibility, making it a go-to choice for companies of all sizes. Another popular option is GitHub's issue tracking system, which seamlessly integrates with its version control platform, making it a convenient choice for teams already using GitHub. Additionally, tools like Trello are valued for their user-friendly interface and adaptability, though they do lack some of the specific features tailored for issue tracking. In this landscape, my program intends to stand out by focusing on simplicity and ease of use, making it ideal for small to medium enterprises (SMEs) looking for a straightforward solution without unnecessary complexity. The goal is to provide a practical and efficient tool for managing software development issues, offering a simpler alternative in a market dominated by larger, more complex platforms.
@@ -99,18 +105,18 @@ As a lightweight issue tracking program, my goal was to make each user journey a
 1. New User
 ```mermaid
 flowchart LR
-    A[Navigate to Hitch Hound] --> B[Enter details on Sign Up form]
-    B --> C[Click Sign Up button]
-    C --> D[Log in with email and password]
+    A[Navigate to \n Hitch Hound] --> B[Enter details on \nRegistration form]
+    B --> C[Click Register \n button]
+    C --> D[Log in with email \n and password]
 ```
 
 2. Create an Issue
 ```mermaid
 flowchart LR
     A[Log In] --> B[Click '+'\n button]
-    B --> |New Item \nPopup|C[Click 'Issue'\n button]
+    B --> |New Item \nModal|C[Click 'New \nIssue' button]
     C --> D[Fill in New\n Issue form]
-    D --> E[Click 'Submit \nNew Issue' button]
+    D --> E[Click 'Create \n Issue' button]
 ```
 
 3. Browse Issues
@@ -122,9 +128,11 @@ flowchart TD
     A --> E[Click on User Profile\n in the navigation bar]
     B --> F[Scroll through issues\nand click through pages]
     C --> G[Click 'View All Issues'\nbutton next to the \ndesired project]
+    G --> F
     D --> H[Click on 'Issue Listing \nby Status' button]
-    H --> I[Select status in dropdown]
-    E --> J[Scroll through issues\n and click through pages]
+    H --> I[Select status in report controls]
+    I --> F
+    E --> F
 ```
 4. Edit an Issue
 ```mermaid
@@ -141,23 +149,23 @@ flowchart LR
     A[Log In] --> B[Navigate to an issue as per\n 'Browse Issues' user journey]
     B --> C[Set status to 'Closed'\n or 'Cancelled']
     B --> E[Click 'Delete Issue']
-    E --> F[Confirm deletion]
+    E --> |Confirm Deletion \n Modal|F[Click 'Yes - delete']
     C --> D[Click 'Save Changes']
 ```
 6. Create a Project
 ```mermaid
 flowchart LR
     A[Log In] --> B[Click '+'\n button]
-    B --> |New Item \nPopup|C[Click 'Project'\n button]
+    B --> |New Item \nModal|C[Click 'New \n Project' button]
     C --> D[Fill in New\n Project form]
-    D --> E[Click 'Create \nNew Project' button]
+    D --> E[Click 'Create \n Project' button]
 ```
 
 7. Browse Projects
 ```mermaid
 flowchart LR
-    A[Log In] --> B[Click 'Projects' in\n the navigation bar]
-    B --> C[Scroll through projects\n and click through pages]
+    A[Log In] --> B[Click 'Projects' in the navigation bar]
+    B --> C[Scroll through projects]
 ```
 
 8. Edit a Project
@@ -174,7 +182,7 @@ flowchart LR
 flowchart LR
     A[Log In] --> B[Navigate to a project as per\n 'Browse Projects' user journey]
     B --> C[Click 'Delete\n Project' button]
-    C --> D[Confirm deletion]
+    C --> |Confirm Deletion \n Modal|D[Click 'Yes - delete']
 ```
 
 10. Generate Reports
@@ -182,7 +190,7 @@ flowchart LR
 flowchart LR
     A[Log In] --> B[Click on 'Reports' in\nthe navigation bar]
     B --> C[Click on one of the\n available report buttons]
-    C --> D[Adjust settings as needed\n with dropdowns provided]
+    C --> D[Adjust settings as needed\n with options provided]
 ```
 
 ### User Permissions
@@ -200,7 +208,11 @@ There are four types of user, each with different permissions.
 
 Each user *must* be assigned a role-based type and *may* also be assigned the superuser type additionally. 
 
+</details>
+
 ## Data Design
+<details>
+<summary>Expand</summary>
 
 ### Database Schema 
 
@@ -278,7 +290,12 @@ The following data validation rules ensure the accuracy and reliability of infor
 - oldValue: Must be a string, can be empty.
 - newValue: Must be a string, can be empty.
 
+</details>
+
 ## User Interface Design
+
+<details>
+<summary>Expand</summary>
 
 ### Computer Wireframes
 
@@ -391,20 +408,27 @@ As I had chosen the name 'Hitch Hound' for my program, I thought this dog in a s
 And this dog was perfect for my favicon:<br>
 ![dog](documentation/dog.png)
 
+</details>
+
 ## Testing
+
+<details>
+<summary>Expand</summary>
 
 ### Test Plan
 
-**Continuous Testing**
+### Continuous Testing
 
 Through a combination of automated testing written using Unittest for Python, and manual testing from the front-end, I achieved a good coverage of test cases. The code I wrote was also passed through validators/linters at the end to ensure adherance to coding standards and best practices, ultimately aiming for robust and maintainable code. I considered using Jest to test my JavaScript files but on balance decided that it was not worth doing because the amount of JavaScript was quite small and the functions quite simple. I will be completing a fifth project with advanced front-end frameworks such as React which is better suited to Jest testing, so I will apply it more valuably there. 
 
 ### Automated Testing
-When I was sufficiently through my project to have a stable enough codebase, I started adding automated tests incrementally for each area. The tests for views, forms and models were added to each app. 
+When I was sufficiently through my project to have a stable enough codebase, I started adding automated tests incrementally for each area. The tests for views, forms and models were added to each app.
 
 ### Manual Testing
 
-My manual testing covered: 
+I constantly manually tested my site as I progressed through building it, ensuring each change achieved what I intended.
+
+My manual testing at the end covered: 
 
 - Each user journey from end to end
 - The level of access when logged out 
@@ -413,7 +437,7 @@ My manual testing covered:
 
 ### Browser Compatibility and Screen Size Responsiveness
 
-I viewed the program on each of the three key screen sizes (mobile, tablet and computer), using devtools, on four of the most popular browsers. I also used the responsive setting to slide the width of the screen from narrow all the way through to wide to check the transition points. 
+I viewed the site on each of the three key screen sizes (mobile, tablet and computer), using devtools, on four of the most popular browsers. I also used the responsive setting to slide the width of the screen from narrow all the way through to wide to check the transition points. 
 
 Pixel references for each of the screen sizes:
 
@@ -478,11 +502,8 @@ To ensure the front end of my program was accessible I used Lighthouse. After my
 | Issue Status Summary Report | ![Lighthouse Screenshot](documentation/lighthouse-status-summary.png)  |
 | Issue Severity Summary Report | ![Lighthouse Screenshot](documentation/lighthouse-severity-summary.png)  |
 
-**Colour Contrast**
-I also checked the colour contrast using of my color palette combinations using [Coolors](https://coolors.co/contrast-checker/112a46-acc8e5.)
-
-**Alternative Text**
-I ensured I had set alternative text for the only images on my site: the logo and the 404 image of a pug. 
+**Colour Contrast**<br>
+I checked my initial colour pallette prior to development but found during my accessibility testing with lighthouse that I had combined colours in a few instances that did not have sufficient contrast. These were changed to meet accessibility standards. 
 
 ## Bugs
 
@@ -700,25 +721,59 @@ It is currently possible to register for an account and use the same email addre
 #### Solution
 I changed my user model to make sure that email addresses must be unique. 
 
+</details>
+
 ## Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
 
-These are the steps I took to set up my infrastructure and deploy my app:
-1.
-2.
-3.
-4.
-5.
-6.
-7.
-8. I created a new repository on my GitHub from the [Code Institute template](https://github.com/Code-Institute-Org/p3-template) and named it 'hitch-hound'
-9. I opened this repo on my IDE and
-10. 
-11.
-12. Next I clicked on the 'Deploy' tab and connected my github repository code to the Heroku app. I clicked 'Enable Automatic Deploys' and Heroku deployed the app for me. Once this was done, the link to the app appeared and could be clicked to go to the deployed app.
+<details>
+<summary>Expand</summary>
+
+These are the steps required to set up the infrastructure and deploy the app:
+1. Create a PostgreSQL Database 
+- Create a PostgreSQL database using your preferred provider. As a student of Code Institute, I used their [proprietary offering](https://dbs.ci-dbs.net/).
+2. Create a new app on Heroku
+- Go to [Heroku](https://id.heroku.com/login) and create a new app.
+3. Configure Database
+- In the 'Settings' tab of your new app, under 'CONFIG VARS', add a key called `DATABASE_URL` and paste the database URL into the value field. 
+4. Clone the repository and connect to Heroku
+- Clone this repository from GitHub and go to Heroku to connect it on the 'Deploy' tab of your app.
+5. Set up an Email Address for use in the Password Reset process
+- Set up an email address with your preferred provider from which to send password reset emails. 
+- Generate an app password from this provider. 
+6. Create an `env.py` file
+- Create an `env.py` file which should be included in your `.gitignore` file, in the root of your project to store your environment variables.
+- Add a secret key. I used [Djecrety](https://djecrety.ir/). 
+- Add the email address and app password from the previous step here too
+7. Update your `CONFIG VARS` section on Heroku
+- Add your secret key
+- Add your email address
+- Add your app password
+8. Configure Django settings
+- Update your `settings.py` file to use the environment variables you set up in earlier steps
+- Ensure `DEBUG` is set to `False` for deployment
+- Set `ALLOWED_HOSTS` to include your Heroku app's domain
+- Configure static file handling - I used `whitenoise` for static file management and added it to my 'MIDDLEWARE' settings.
+9. Install Dependencies
+- Ensure all dependencies are installed by running: `pip install -r requirements.txt`
+10. Collect Static files
+- Collect the static files in your project using: `python manage.py collectstatic`
+11. Add 'python' Buildpack on Heroku
+- Go to the 'Settings' tab on Heroku and add the `python` buildpack.
+12. Migrate Database 
+- Run database migrations in your terminal: `python manage.py migrate`
+13. Create a Superuser
+- Create a Django superuser for accessing the admin interface: `python manage.py createsuperuser`
+14. Deploy the App
+- Either enable automatic deploys or click to deploy manually in Heroku's 'Deploy' tab
+
+</details>
 
 ## Agile Methodology
 I set this project up in GitHub projects using agile methodology. This facilitated my prioritisation and time management. I added all the user stories as issues and then divided them into 'MVP'(Minimum Viable Product) and 'Future Enhancements' to signify what I intend to complete for my assessed project and what could come later. Those MVP stories were then stack-ranked. I added three one-week sprints to the project and filled my first sprint with my intended work according to the MoSCoW prioritisation system. 
+
+<details>
+<summary>Expand</summary>
 
 ### Sprint One: 05/06 to 11/06
 ![Sprint One](documentation/sprint1.png)
@@ -828,12 +883,13 @@ These three stories were nice to haves if I found I had enough time to implement
 
 I also looked into the possibility of retaining the formatting and line breaks in the Comments, as my program currently removes them upon saving. However, I decided against making any changes because my research indicated that to preserve formatting and lines breaks, the comment text would need to be rendered as HTML. Django automatically escapes HTML to prevent Cross-Site Scripting attacks as a security measure. I don't want to make changes that override Django's security protocols, especially as I don't believe preservation of formatting justifies compromising security measures. 
 
+</details>
+
 ## Credits
 
-### APIs and Third Party Libraries
+<details>
+<summary>Expand</summary>
 
-
-### Sources
 I referred back to the Code Institute set up videos to remind me how to set up the APIs, credentials and files before starting coding.
 
 - I built my flowcharts using [Mermaid](https://mermaid.js.org/syntax/flowchart.html) in my readme.
@@ -841,7 +897,7 @@ I referred back to the Code Institute set up videos to remind me how to set up t
 - I visually represented my colour palette using [Adobe Colour](https://color.adobe.com/create/color-wheel).
 - I sourced my icons from [Font Awesome](https://fontawesome.com/search?q=dog&o=r&m=free)
 - I created all my favicons with [Real Favicon Generator](https://realfavicongenerator.net/)
-- I used [Chat GPT](https://chatgpt.com) to explain error messages and research the best way to go about my implementation.
+- I used [ChatGPT](https://chatgpt.com) to explain error messages and research the best way to go about my implementation.
 - I used [Learn Django](https://learndjango.com/tutorials/django-login-and-logout-tutorial) to help me set up login/logout etc.
 - I used [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Testing) to walk me through testing a Django web app.
 - The image of the sad pug on the custom 404 page is from [Unsplash](https://unsplash.com/photos/fawn-pug-lying-on-floor-6x-hVXXiBxs).
@@ -856,6 +912,8 @@ I also used the documentation of all the elements included in this project:
 ### General Credit
 As ever, I want to thank the open source community for the great resources that teach me so much and also remind me of what I learnt in my Code Institute lessons. 
 
-I believe I have specifically credited where I used specific items in the previous section but this is a general credit to the reference resources I looked through to teach me new elements as well as reminding me how things I'd already come across worked as I went along. 
+I believe I have credited where I used specific items in the previous section but this is a general credit to the reference resources I looked through to teach me new elements as well as reminding me how things I'd already come across worked as I went along. 
 
 Every effort has been made to credit everything used, but if I find anything else specific later on that needs crediting, that I missed, I will be sure to add it.
+
+</details>
