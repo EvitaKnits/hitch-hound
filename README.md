@@ -46,10 +46,10 @@ To visit the deployed version of Hitch Hound [click here](https://hitchhound-152
 10. [Future Development](#future-development)
 11. [Credits](#credits)
 
-## Purpose
+## 1. Purpose
 The objective of this program is to streamline the process of tracking and communicating about issues and bugs arising in software development projects. It is lightweight and intuitive, providing ample functionality for small to medium enterprises who don't need an elevated level of auditing and oversight. 
 
-## Features
+## 2. Features
 
  - **HEADER**
  The header is present on every page and allows easy and intuitive access to all areas of the site. The logo will always return the user to the home page. The navigation bar allows the user to navigate to the different sections of the site. The + icon allows the user to create a new issue or project and the notification bell 'lights up' yellow when the user has new notifications. Clicking the notifications bell takes the user to their list of notifications. 
@@ -110,8 +110,13 @@ The objective of this program is to streamline the process of tracking and commu
  
     ![Profile Page Screenshot](documentation/profile.png)
 
+- **NOTIFICATIONS**
+The notifications list informs each user of any changes made to the issues that they've either reported or are assigned to. This keeps the entire team informed on all changes and developments. A yellow bell indicates to the user when a new notification is available. This icon reverts to its original colour when all notifications have already been viewed. 
 
-## Requirement Gathering and Planning
+    ![Notifications Screenshot](documentation/notifications.png)
+
+
+## 3. Requirement Gathering and Planning
 
 Before starting the coding for this project, I created a detailed plan including my database schema, user journeys and wireframes.
 
@@ -269,16 +274,28 @@ There are four types of user, each with different permissions.
 
 Each user *must* be assigned a role-based type and *may* also be assigned the superuser type additionally. 
 
-## Data Design
+## 4. Data Design
 
 ### Database Schema 
 
-The following Entity Relationship Diagram (ERD) illustrates the key entities and relationships in Hitch Hound. It defines the relationships between Issues and all other entities.
+**Pre-programming**
 
-![erd](documentation/erd.png)
+I constructed an Entity Relationship Diagram before starting my project to define the key entities and relationships in Hitch Hound, centering Issues and their relationships to all other entities. This is what it looked like: 
 
-*Added mid-development: 
+![Initial ERD Diagram](documentation/erd.png)
+
+**An addition mid-development**
 A 'Project ID' to be the primary key for the Projects table. This was required because at the time of designing my database, I didn't realise that it is not possible to edit a primary key. Therefore the title could not be the primary key because the title needs to be editable by users. 
+
+**Post-programming**
+
+At the end of the project, I realised that my diagram was not entirely accurate anymore and that I had implemented things slightly differently, as well as making some additions. I therefore created another Entity Relationship Diagram that accurately represents the end result: 
+
+![Second ERD Diagram](documentation/erd-2.png)
+
+A couple of notes: 
+- The user model inherits from the Abstract User built into Django which provides fields such as first name, last name and username. I have therefore only shown the fields I have extended it with or amended in this diagram.
+- In constructing this second ERD, I realised that my initial belief that I required a bridging 'User Issue' table between the 'User' and 'Issue' tables due to the many-to-many relationship between users and issues, may not have been correct. I've ended up only using the 'User Issue' table to power notifications in the system which could potentially have been driven by the 'User' and 'Issue' tables instead. 
 
 ### Data Manipulation
 
@@ -302,49 +319,56 @@ Hitch Hound uses CRUD principles to guide all data manipulation.
 
 ### Data Validation
 
-The following data validation rules ensure the accuracy and reliability of information stored in the system, ensuring all entries adhere to expected formats.
+Data validation rules ensure the accuracy and reliability of information stored in the system, ensuring all entries adhere to expected formats. Below, I have detailed the requirements either defined in my models, required by my forms or as they stand in the Abstract User model inherited from Django:
 
 **Users**
-- userID: Must be a unique integer
-- firstName: Must be non-empty string 
-- lastName: Must be non-empty string
-- emailAddress: Must be a valid email format and unique within the system
-- password: Must meet complexity requirements (e.g., minimum length, inclusion of special characters)
-- role: Must be one of the predefined roles (developer, quality assurance or product manager)
-- superuser: Must be a boolean value
+- User ID: Must be a unique integer
+- First Name: Must be a non-empty string (max-length 150 characters)
+- Last Name: Must be a non-empty string (max-length 150 characters)
+- Email Address: Must be a valid email format and unique within the system
+- Password: Must meet validity requirements set out by Django's built-in password validators, quoted below [from the source](https://docs.djangoproject.com/en/5.0/topics/auth/passwords/#using-built-in-validators).
+    - UserAttributeSimilarityValidator, which checks the similarity between the password and a set of attributes of the user.
+    - MinimumLengthValidator, which checks whether the password meets a minimum length. This validator is configured with a custom option: it now requires the minimum length to be nine characters, instead of the default eight.
+    - CommonPasswordValidator, which checks whether the password occurs in a list of common passwords. By default, it compares to an included list of 20,000 common passwords.
+    - NumericPasswordValidator, which checks whether the password isn’t entirely numeric.
+- Role: Must be one of the predefined roles (developer, quality assurance or product manager)
+- Superuser: Must be a boolean value
+- Last Visited Notifications: Datetime that may be empty (until first value is added)
 
 **Projects**
-- projectID: Must be a unique integer (*Added mid-development. See note below ERD for more information)
-- title: Must be a unique, non-empty string
+- Project ID: Must be a unique integer
+- Title: Must be a unique, non-empty string (max-length 255 characters)
 
 **Issues**
-- issueID: Must be a unique integer
-- title: Must be a non-empty string
-- description: Must be a string, can be empty
-- severity: Must be one of the predefined levels (4-low, 3-medium, 2-high, 1-critical)
-- project: Must reference a valid project title
-- type: Must be one of the predefined types (bug, missed requirement or other issue)
-- status: Must be one of the predefined statuses (open, in progress, testing, approved, closed or cancelled)
-- reporter: Must reference valid userID
-- developer: Must reference valid userID
-- qualityAssurance: Must reference valid userID
-- productManager: Must reference valid userID
+- Issue ID: Must be a unique integer
+- Title: Must be a non-empty string (max-length 255 characters)
+- Description: Text field (mandatory in Issue forms)
+- Severity: Must be one of the predefined levels (4-low, 3-medium, 2-high, 1-critical)
+- Project ID: Must reference a valid project ID
+- Type: Must be one of the predefined types (bug, missed requirement or other issue)
+- Status: Must be one of the predefined statuses (open, in progress, testing, approved, closed or cancelled)
+- Reporter: Must reference a valid user ID
+- Developer: Must reference a valid user ID
+- Quality Assurance: Must reference a valid user ID
+- Product Manager: Must reference a valid user ID
+- Created At: Mandatory and automatically added datetime.
+- Updated By: Must reference a valid user ID
 
 **Comments**
-- commentID: Must be a unique integer
-- commentText: Must be a non-empty string
-- userID: Must reference a valid userID
-- issueID: Must reference a valid issueID
-- commentTimestamp: Must be a valid timestamp
+- Comment ID: Must be a unique integer
+- Comment Text: Text field (mandatory in Comment form)
+- User ID: Must reference a valid user ID
+- Issue ID: Must reference a valid issue ID
+- Commented At: Mandatory and automatically added datetime.
 
 **Changes**
-- changeID: Must be a unique integer
-- issueID: Must reference a valid issueID
-- userID: Must reference a valid userID
-- changeTimestamp: Must be a valid timestamp
-- fieldChanged: Must be one of the predefined types (all 'Issue' attributes apart from IssueID).
-- oldValue: Must be a string, can be empty.
-- newValue: Must be a string, can be empty.
+- Change ID: Must be a unique integer
+- Issue ID: Must reference a valid issue ID
+- User ID: Must reference a valid user ID
+- Changed At: Mandatory and automatically added datetime.
+- Field Changed: Must be one of the predefined types (all 'Issue' attributes apart from Issue ID, Reporter, Created At or Updated By).
+- Old Value: Text field, can be empty.
+- New Value: Text field, can be empty.
 
 ## User Interface Design
 
@@ -807,7 +831,15 @@ This project was deployed to [Heroku](https://id.heroku.com/login): a hosting pl
 - Either enable automatic deploys or click to deploy manually in Heroku's 'Deploy' tab
 
 ## Agile Methodology
-I set this project up in GitHub projects using agile methodology. This facilitated my prioritisation and time management. I added all the user stories as issues and then divided them into 'MVP'(Minimum Viable Product) and 'Future Enhancements' to signify what I intend to complete for my assessed project and what could come later. Those MVP stories were then stack-ranked. I added three one-week sprints to the project and filled my first sprint with my intended work according to the MoSCoW prioritisation system. 
+I set this project up in GitHub projects using agile methodology. This facilitated my prioritisation and time management. I added all the user stories as issues and then divided them into 'MVP'(Minimum Viable Product) and 'Future Enhancements' to signify what I intend to complete for my assessed project and what could come later. Those MVP stories were then stack-ranked. I added three one-week sprints to start the project and filled my first sprint with my intended work according to the MoSCoW prioritisation system. 
+
+**User Stories Assigned to Epics** 
+
+![Epic View Screenshot](documentation/epics.png)
+
+**An Example User Story** 
+
+![Example User Story Screenshot](documentation/user-story.png)
 
 ### Sprint One: 05/06 to 11/06
 ![Sprint One](documentation/sprint1.png)
