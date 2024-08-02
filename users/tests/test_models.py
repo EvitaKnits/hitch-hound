@@ -12,13 +12,13 @@ class UserModelTest(TestCase):
         Create users with different roles for testing.
         """
         self.developer = User.objects.create_user(
-            username='dev1', password='password123', role='developer'
+            username='dev1', password='password123', role='developer', email='dev@hh.com'
         )
         self.qa = User.objects.create_user(
-            username='qa1', password='password123', role='quality_assurance'
+            username='qa1', password='password123', role='quality_assurance', email='qa@hh.com'
         )
         self.pm = User.objects.create_user(
-            username='pm1', password='password123', role='product_manager'
+            username='pm1', password='password123', role='product_manager', email='pm@hh.com'
         )
 
     def test_create_user_with_role(self):

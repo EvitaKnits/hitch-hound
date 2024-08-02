@@ -12,7 +12,7 @@ class CustomUserCreationFormTest(TestCase):
             'first_name': 'Test',
             'last_name': 'User',
             'username': 'testuser',
-            'email': 'testuser@example.com',
+            'email': 'testuser1@hh.com',
             'role': 'developer',
             'password1': 'testpassword123',
             'password2': 'testpassword123',
@@ -87,24 +87,14 @@ class UserProfileFormTest(TestCase):
             password='testpassword123',
             first_name='Test',
             last_name='User',
-            email='testuser@example.com',
+            email='testuser2@hh.com',
             role='developer'
         )
         self.valid_data = {
             'first_name': 'Updated',
             'last_name': 'User',
-            'email': 'updateduser@example.com',
+            'email': 'updateduser@hh.com',
         }
-
-    def test_user_profile_form_valid_data(self):
-        """
-        Test the User Profile Form with valid data.
-        The form should be valid.
-        """
-        form = UserProfileForm(data=self.valid_data, instance=self.user)
-        if not form.is_valid():
-            print(form.errors)
-        self.assertTrue(form.is_valid())
 
     def test_user_profile_form_no_data(self):
         """
@@ -148,4 +138,4 @@ class UserProfileFormTest(TestCase):
         self.assertTrue(form.is_valid())
         updated_user = form.save()
         self.assertEqual(updated_user.first_name, 'Updated')
-        self.assertEqual(updated_user.email, 'updateduser@example.com')
+        self.assertEqual(updated_user.email, 'updateduser@hh.com')

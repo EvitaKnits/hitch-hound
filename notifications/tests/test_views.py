@@ -15,7 +15,7 @@ class ListNotificationsViewTest(TestCase):
 
         # Create a sample user and set last visited notifications timestamp
         self.user = User.objects.create_user(
-            username='testuser', password='12345'
+            username='testuser', password='12345', email='user@hh.com'
         )
         self.user.last_visited_notifications = (
             timezone.now() - timezone.timedelta(days=2)
@@ -24,7 +24,7 @@ class ListNotificationsViewTest(TestCase):
 
         # Create another user to make changes
         self.other_user = User.objects.create_user(
-            username='otheruser', password='12345'
+            username='otheruser', password='12345', email='other-user@hh.com'
         )
 
         # Create a project and an issue associated with the user

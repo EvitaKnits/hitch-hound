@@ -103,7 +103,7 @@ The objective of this program is to streamline the process of tracking and commu
 
     - **Issue Severity Summary**: this report shows a summary of all issues' severity by project in a pie chart format. The user can select a project to show that project's chart.
 
-    ![Issue Severity Summary Report Screeenshot](documentation/severity-pie.png)
+    ![Issue Severity Summary Report Screenshot](documentation/severity-pie.png)
 
  - **PROFILE**
  The profile page allows the user to change their name and email address, it also shows their role and advises that they should contact an admin if they want to change it. They can change their password from this screen and view all the issues they reported and are assigned to. This provides a one stop view of the system from the perspective of the individual user, preventing the need to trawl the site to find things relevant to themselves.
@@ -141,7 +141,7 @@ My user stories can be seen in full in the associated GitHub Project on my repo.
 
 | Epic | Stories |
 |---| ---|
-| 1. User Managment | Create basic front-end |
+| 1. User Management | Create basic front-end |
 | | User Registration |
 | | User Login and Logout |
 | | Password Reset |
@@ -378,99 +378,99 @@ The wireframes I created illustrate the core user interface and functionality of
 
 **Home: Sign Up**
 
-![signup](documentation/signup.png)
+![Sign Up Wireframe](documentation/signup.png)
 
 **Home: Log In**
 
-![login](documentation/login.png)
+![Login Wireframe](documentation/login.png)
 
 **Home: Logged In**
 
-![loggedin](documentation/loggedin.png)
+![Logged In Wireframe](documentation/loggedin.png)
 
 **Individual Issue**
 
-![individualissue](documentation/individualissue.png)
+![Individual Issue Wireframe](documentation/individualissue.png)
 
 **Issue Change History**
 
-![changehistory](documentation/changehistory.png)
+![Change History Wireframe](documentation/changehistory.png)
 
 **New Issue**
 
-![newissue](documentation/newissue.png)
+![New Issue Wireframe](documentation/newissue.png)
 
 **Projects**
 
-![projects](documentation/projects.png)
+![Projects Wireframe](documentation/projects.png)
 
 **Individual Project**
 
-![individualproject](documentation/individualproject.png)
+![Individual Project Wireframe](documentation/individualproject.png)
 
 **New Project**
 
-![newproject](documentation/newproject.png)
+![New Project Wireframe](documentation/newproject.png)
 
 **Edit Project**
 
-![editproject](documentation/editproject.png)
+![Edit Project Wireframe](documentation/editproject.png)
 
 **Reports**
 
-![reports](documentation/reports.png)
+![Reports Wireframe](documentation/reports.png)
 
 **User Profile**
 
-![userprofile](documentation/userprofile.png)
+![User Profile Wireframe](documentation/userprofile.png)
 
 **Notification Modal**
 
-![notificationmodal](documentation/notificationmodal.png)
+![Notification Modal Wireframe](documentation/notificationmodal.png)
 
 **404 Page**
 
-![404page](documentation/404page.png)
+![404 Page Wireframe](documentation/404page.png)
 
 ### Mobile Wireframes
 
 | **Sign Up** | **Log In** |
 |---|---|
-|![signupmobile](documentation/signupmobile.png) | ![loginmobile](documentation/loginmobile.png) |
+|![Sign Up Mobile Wireframe](documentation/signupmobile.png) | ![Login Mobile Wireframe](documentation/loginmobile.png) |
 
 | **All Issues** | **Individual Issue** |
 |---|---|
-|![loggedinmobile](documentation/loggedinmobile.png)| ![individualissuemobile](documentation/individualissuemobile.png)|
+|![Logged In Mobile Wireframe](documentation/loggedinmobile.png)| ![Individual Issue Mobile Wireframe](documentation/individualissuemobile.png)|
 
 |**Issue Change History**| **New Issue** |
 |---|---|
-|![changehistorymobile](documentation/changehistorymobile.png) | ![newissuemobile](documentation/newissuemobile.png) |
+|![Change History Mobile Wireframe](documentation/changehistorymobile.png) | ![New Issue Mobile Wireframe](documentation/newissuemobile.png) |
 
 | **Projects** | **Individual Projects** |
 |---|---|
-|![projectsmobile](documentation/projectsmobile.png) | ![individualprojectmobile](documentation/individualprojectmobile.png) |
+|![Projects Mobile Wireframe](documentation/projectsmobile.png) | ![Individual Project Mobile Wireframe](documentation/individualprojectmobile.png) |
 
 | **New Project** | **Edit Project** |
 |---|---|
-|![newprojectmobile](documentation/newprojectmobile.png) | ![editprojectmobile](documentation/editprojectmobile.png) |
+|![New Project Mobile Wireframe](documentation/newprojectmobile.png) | ![Edit Project Mobile Wireframe](documentation/editprojectmobile.png) |
 
 | **Reports** |
 |---|
-| ![reportsmobile](documentation/reportsmobile.png) | 
+| ![Reports Mobile Wireframe](documentation/reportsmobile.png) | 
 
 | **User Profile** | **Notifications** |
 |---|---|
-|![userprofilemobile](documentation/userprofilemobile.png)| ![notificationmobile](documentation/notificationsmobile.png) |
+|![User Profile Mobile Wireframe](documentation/userprofilemobile.png)| ![Notification Mobile Wireframe](documentation/notificationsmobile.png) |
 
 | **404 Page** |
 |---|
-| ![404pagemobile](documentation/404pagemobile.png) |
+| ![404 Page Mobile Wireframe](documentation/404pagemobile.png) |
 
 ### Colour Scheme 
 
 I wanted to pick a muted palette to reflect the business nature of my program. I chose my base colour and then selected two lighter shades to implement as a gradient. I then desaturated my base colour by 90% to find a complementary charcoal grey. Finally, I lightened my colour by 95% to find a complementary cream colour. 
 
-![colourscheme](documentation/colourscheme.png)
+![Colour Scheme Image](documentation/colourscheme.png)
 
 ### Icons
 
@@ -478,16 +478,121 @@ As I had chosen the name 'Hitch Hound' for my program, I found these dog themed 
 
 | Logo | Favicon |
 |---|---|
-|![shield](documentation/shield.png) | ![dog](documentation/dog.png) |
+|![Shield Icon](documentation/shield.png) | ![Dog Icon](documentation/dog.png) |
 
 ## Testing
 
 ### Continuous Testing
 
-Through a combination of automated testing written using Unittest for Python, and manual testing from the front-end, I achieved a good coverage of test cases. The code I wrote was also passed through validators/linters at the end to ensure adherance to coding standards and best practices, ultimately aiming for robust and maintainable code. I considered using Jest to test my JavaScript files but on balance decided that it was not worth doing because the amount of JavaScript was quite small and the functions quite simple. I will be completing a fifth project with advanced front-end frameworks such as React which is better suited to Jest testing, so I will apply it more valuably there. 
+Through a combination of automated testing written using Unittest for Python, and manual testing from the front-end, I achieved a good coverage of test cases. The code I wrote was also passed through validators/linters at the end to ensure adherence to coding standards and best practices, ultimately aiming for robust and maintainable code. I considered using Jest to test my JavaScript files but on balance decided that it was not worth doing because the amount of JavaScript was quite small and the functions quite simple. I will be completing a fifth project with advanced front-end frameworks such as React which is better suited to Jest testing, so I will apply it more valuably there. 
 
 ### Automated Testing
-When I was sufficiently through my project to have a stable enough codebase, I started adding automated tests incrementally for each area. The tests for views, forms and models were added to each app.
+When I was sufficiently through my project to have a stable enough codebase, I started adding automated tests incrementally for each area. The tests for views, forms and models were added to each app. I carried them out throughout development and also at the very end. I have recorded the outcomes at the end in the table below.
+
+**The Issues App**
+
+| Test Elements | The Test | The Outcome |
+|--|--|--|
+| Forms | Filling out the Issue form with valid data | Pass |
+| | Filling out the Issue form with no data | Pass |
+| | Filling out the Issue form with some required fields missing | Pass |
+| | Filling out the Issue form with invalid choices for some fields | Pass |
+| | Filling out the Comment form with valid data | Pass |
+| | Submitting the Comment form with no data | Pass |
+| Models | Creating an Issue instance with valid data | Pass |
+| | Creating an Issue instance with the default values | Pass |
+| | Creating an Issue instance with a missing required field | Pass |
+| | Checking the maximum length of the title field | Pass |
+| | Ensuring the cascading deletion of related objects: deleting an Issue should delete related Comments | Pass |
+| | Ensuring the permission system for updating the status of an Issue is adhered to | Pass |
+| | Testing the custom save method for permissions when updating the status of an Issue | Pass |
+| | Checking that the Comment text field cannot be blank | Pass |
+| | Testing that the __str__ method of the Comment model returns the first 20 characters of the Comment text | Pass |
+| Views | Testing the home page/ list all issues view | Pass |
+| | Sorting Issues in the list all issues view | Pass |
+| | Testing the issue detail view | Pass |
+| | Testing the GET request on the Create Issue view | Pass |
+| | Testing the POST request on the Create Issue view | Pass |
+| | Testing the GET request on the Edit Issue view | Pass |
+| | Testing the POST request on the Edit Issue view | Pass |
+| | Testing the Delete Issue view | Pass |
+| | Testing the Add Comment view | Pass |
+| | Testing the Add Comment view with invalid data | Pass | 
+
+**The Notifications App**
+
+| Test Elements | The Test | The Outcome |
+|--|--|--|
+| Models | Testing that the field choices in the Change model include expected fields | Pass |
+| | Testing that the __str__ method of the Change model returns a human-readable string representing the change in the required format | Pass |
+| Views | Check that the Last Visited Notifications datetime is updated after the Notifications page is viewed | Pass |
+| | Check whether the Notifications list is correctly populated | Pass |
+| | Check the Change History view of a specific Issue | Pass |
+| | Check the Change History view when there are no changes for a specific Issue | Pass |
+
+**The Projects App**
+
+| Test Elements | The Test | The Outcome |
+|--|--|--|
+| Forms | Filling out the Project form with valid data | Pass |
+| | Submitting the Project form with no data | Pass |
+| Models | Creating a Project with a title | Pass |
+| | Creating a project without a title | Pass |
+| Views | Check the main Project listing view | Pass |
+| | Check the specific Project view that lists all Issues for that Project | Pass |
+| | Testing the GET request for the Create Project view | Pass |
+| | Testing the POST request for the Create Project view | Pass |
+| | Testing the GET request for the Edit Project view | Pass |
+| | Testing the POST request for the Edit Project view | Pass |
+| | Testing the POST request for deleting a Project | Pass |
+
+**The Reporting App**
+
+| Test Elements | The Test | The Outcome |
+|--|--|--|
+| Views | Check the Issue Listing by Status report view returns the correct template and context data | Pass |
+| | Check the Issue Listing by Assignee report view returns the correct template and context data | Pass |
+| | Check the Issue Status Summary report view returns the correct template and context data | Pass |
+| | Check the Issue Severity Summary report view returns the correct template and context data | Pass |
+
+**The Users App**
+
+| Test Elements | The Test | The Outcome |
+|--|--|--|
+| Forms | Filling out the User Creation form with valid data | Pass |
+| | Filling out the User Creation form with no data | Pass |
+| | Filling out the User Creation form with some required fields missing | Pass |
+| | Filling out the User Creation form with mismatched passwords | Pass |
+| | Filling out the User Creation form with an invalid email address | Pass |
+| | Testing the user is created via the signup view | Pass |
+| | Testing the User Profile form with valid data | Pass |
+| | Testing the User Profile form with no data | Pass |
+| | Testing the User Profile form with some required fields missing | Pass |
+| | Testing the User Profile form with an invalid email address | Pass |
+| | Testing updating the User Profile form with valid data | Pass |
+| Models | Create a User with a specific role | Pass |
+| | Check the __str__ method of the User Model returns the username | Pass |
+| | Test that the User Manager model's developers method returns users with the 'developer' role | Pass |
+| | Test that the User Manager model's quality assurance method returns users with the 'quality assurance' role | Pass |
+| | Test that the User Manager model's product managers method returns users with the 'product manager' role | Pass |
+| Views | Test the GET request for the Login view | Pass |
+| | Test the POST request for the Login view with valid credentials | Pass |
+| | Test the POST request for the Login view with invalid credentials | Pass |
+| | Test the GET request for the Sign Up view | Pass |
+| | test the POST request for the Sign Up view with valid data | Pass |
+| | Test the POST request for the Sign Up view with invalid data | Pass |
+| | Test the GET request for the Password Reset view | Pass |
+| | Test the POST request for the Password Reset view with a valid email address | Pass |
+| | Test a password reset email is sent | Pass |
+| | Test the POST request for the Password Reset view with an invalid email address | Pass |
+| | Test the GET request for the Password Reset Done view | Pass |
+| | Test the GET request for the Password Reset Complete view | Pass |
+| | Test the GET request for the User Profile view | Pass |
+| | Test the GET request for the Change Password view | Pass |
+| | Test the POST request for the Change Password view with valid data | Pass |
+| | Test the POST request for the Change Password view with invalid data | Pass |
+| | Test the GET request for the User Profile view sorting | Pass |
+| | test the GET request for the User Profile view with pagination | Pass |
 
 ### Manual Testing
 
@@ -499,6 +604,8 @@ My manual testing at the end covered:
 - The level of access when logged out 
 - The level of access when logged in as a regular user
 - The level of access when logged in as a superuser
+
+All manual testing was successful and passed. 
 
 ### Browser Compatibility and Screen Size Responsiveness
 
@@ -570,7 +677,7 @@ To ensure the front end of my program was accessible I used Lighthouse. After my
 
 **Colour Contrast** 
 
-I checked my initial colour pallette prior to development but found during my accessibility testing with lighthouse that I had combined colours in a few instances that did not have sufficient contrast. These were changed to meet accessibility standards. 
+I checked my initial colour palette prior to development but found during my accessibility testing with lighthouse that I had combined colours in a few instances that did not have sufficient contrast. These were changed to meet accessibility standards. 
 
 ## Bugs
 
@@ -694,7 +801,7 @@ Here is the list of bugs mostly found towards the end of development when I enco
 ### Bug Twelve
 
 **Issue**
->Alerts are eroneously showing up in three different scenarios: 
+>Alerts are erroneously showing up in three different scenarios: 
 >1. When a user goes to the 'Change Password' form from the Profile page and clicks the 'Save' button, the 'successfully changed password' alert appears on the next page the user accesses that has an alert placeholder on it, regardless of if they actually changed their password or not. 
 >2. When a user uses the 'Create Issue' form without adding all mandatory information and clicks the 'Save' button, receives validation errors, then decides not to create a new issue and cancels, the 'created a new issue' alert appears anyway. 
 >3. When a user uses the 'Create Project' form without filling the field in and clicks the 'Save' button, receives a validation error, then decides not to create a new project and cancels, the 'created a new project' alert appears anyway. 
@@ -708,7 +815,7 @@ Here is the list of bugs mostly found towards the end of development when I enco
 >I made a change that removed the 'Status' field from the form used to create a new issue. This is because when an issue is created it should automatically be set to 'Open' and not be changeable at this stage. It should however be changeable afterwards, when a user edits an issue. I realised I accidentally removed the 'Status' field from both the create and edit issue forms. 
 
 **Solution**
->As the same form is used for creating and editing issues, I needed to include the 'Status' field conditionally. So I added the 'Status' field back into the list of fields for this form, then made sure it only appears on the edit issue form by checking whether the issue instance already exists or not. If it does not exist already, this means its a new issue and the status field should not appear, therefore it is removed from the list of fields. 
+>As the same form is used for creating and editing issues, I needed to include the 'Status' field conditionally. So I added the 'Status' field back into the list of fields for this form, then made sure it only appears on the edit issue form by checking whether the issue instance already exists or not. If it does not exist already, this means it's a new issue and the status field should not appear, therefore it is removed from the list of fields. 
 
 ### Bug Fourteen
 
@@ -807,15 +914,15 @@ This project was deployed to [Heroku](https://id.heroku.com/login): a hosting pl
 6. Create an `env.py` file
 - Create an `env.py` file which should be included in your `.gitignore` file, in the root of your project to store your environment variables.
 - Add a secret key. I used [Djecrety](https://djecrety.ir/). 
-- Add the email address and app password from the previous step here too
+- Add the email address and app password from the previous step here too.
 7. Update your `CONFIG VARS` section on Heroku
-- Add your secret key
-- Add your email address
-- Add your app password
+- Add your secret key.
+- Add your email address.
+- Add your app password.
 8. Configure Django settings
-- Update your `settings.py` file to use the environment variables you set up in earlier steps
-- Ensure `DEBUG` is set to `False` for deployment
-- Set `ALLOWED_HOSTS` to include your Heroku app's domain
+- Update your `settings.py` file to use the environment variables you set up in earlier steps.
+- Ensure `DEBUG` is set to `False` for deployment.
+- Set `ALLOWED_HOSTS` to include your Heroku app's domain.
 - Configure static file handling - I used `whitenoise` for static file management and added it to my 'MIDDLEWARE' settings.
 9. Install Dependencies
 - Ensure all dependencies are installed by running: `pip install -r requirements.txt`
@@ -828,7 +935,7 @@ This project was deployed to [Heroku](https://id.heroku.com/login): a hosting pl
 13. Create a Superuser
 - Create a Django superuser for accessing the admin interface: `python manage.py createsuperuser`
 14. Deploy the App
-- Either enable automatic deploys or click to deploy manually in Heroku's 'Deploy' tab
+- Either enable automatic deploys or click to deploy manually in Heroku's 'Deploy' tab.
 
 ## Agile Methodology
 I set this project up in GitHub projects using agile methodology. This facilitated my prioritisation and time management. I added all the user stories as issues and then divided them into 'MVP'(Minimum Viable Product) and 'Future Enhancements' to signify what I intend to complete for my assessed project and what could come later. Those MVP stories were then stack-ranked. I added three one-week sprints to start the project and filled my first sprint with my intended work according to the MoSCoW prioritisation system. 

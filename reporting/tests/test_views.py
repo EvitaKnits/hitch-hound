@@ -25,7 +25,7 @@ class ViewsTestCase(TestCase):
         self.project = Project.objects.create(title='Test Project')
         self.issue = Issue.objects.create(
             title='Test Issue',
-            status='Open',
+            status='open',
             project=self.project,
             reporter=self.user
         )

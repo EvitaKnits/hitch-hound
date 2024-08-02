@@ -13,16 +13,16 @@ class IssueModelTest(TestCase):
         """ Set up the test data for Issue model tests """
         self.project = Project.objects.create(title='Test Project')
         self.reporter = User.objects.create_user(
-            username='reporter', password='test'
+            username='reporter', password='test', email='reporter@hh.com'
         )
         self.developer = User.objects.create_user(
-            username='developer', password='test', role='developer'
+            username='developer', password='test', role='developer', email='dev@hh.com'
         )
         self.qa = User.objects.create_user(
-            username='qa', password='test', role='quality_assurance'
+            username='qa', password='test', role='quality_assurance', email='qa@hh.com'
         )
         self.pm = User.objects.create_user(
-            username='pm', password='test', role='product_manager'
+            username='pm', password='test', role='product_manager', email='pm@hh.com'
         )
         self.superuser = User.objects.create_superuser(
             username='superuser', password='test123'
@@ -134,43 +134,43 @@ class IssueModelTest(TestCase):
         Test the permission system for updating the status of an Issue.
         Different roles have different permissions for changing status.
         """
-    # Developer can only move to 'in_progress'
-    self.assertTrue(
-        self.issue.can_user_update_status(self.developer, 'in_progress')
-    )
-    self.assertFalse(
-        self.issue.can_user_update_status(self.developer, 'closed')
-    )
+        # Developer can only move to 'in_progress'
+        self.assertTrue(
+            self.issue.can_user_update_status(self.developer, 'in_progress')
+        )
+        self.assertFalse(
+            self.issue.can_user_update_status(self.developer, 'closed')
+        )
 
-    # QA can only move to 'testing'
-    self.assertTrue(
-        self.issue.can_user_update_status(self.qa, 'testing')
-    )
-    self.assertFalse(
-        self.issue.can_user_update_status(self.qa, 'approved')
-    )
+        # QA can only move to 'testing'
+        self.assertTrue(
+            self.issue.can_user_update_status(self.qa, 'testing')
+        )
+        self.assertFalse(
+            self.issue.can_user_update_status(self.qa, 'approved')
+        )
 
-    # Product Manager can move to 'approved', 'closed', and 'cancelled'
-    self.assertTrue(
-        self.issue.can_user_update_status(self.pm, 'approved')
-    )
-    self.assertTrue(
-        self.issue.can_user_update_status(self.pm, 'closed')
-    )
-    self.assertTrue(
-        self.issue.can_user_update_status(self.pm, 'cancelled')
-    )
-    self.assertFalse(
-        self.issue.can_user_update_status(self.pm, 'testing')
-    )
+        # Product Manager can move to 'approved', 'closed', and 'cancelled'
+        self.assertTrue(
+            self.issue.can_user_update_status(self.pm, 'approved')
+        )
+        self.assertTrue(
+            self.issue.can_user_update_status(self.pm, 'closed')
+        )
+        self.assertTrue(
+            self.issue.can_user_update_status(self.pm, 'cancelled')
+        )
+        self.assertFalse(
+            self.issue.can_user_update_status(self.pm, 'testing')
+        )
 
-    # Superuser can move to any status
-    self.assertTrue(
-        self.issue.can_user_update_status(self.superuser, 'closed')
-    )
-    self.assertTrue(
-        self.issue.can_user_update_status(self.superuser, 'in_progress')
-    )
+        # Superuser can move to any status
+        self.assertTrue(
+            self.issue.can_user_update_status(self.superuser, 'closed')
+        )
+        self.assertTrue(
+            self.issue.can_user_update_status(self.superuser, 'in_progress')
+        )
 
     def test_save_method_permissions(self):
         """
@@ -194,10 +194,10 @@ class CommentModelTest(TestCase):
         """ Set up the test data for Comment model tests """
         self.project = Project.objects.create(title='Test Project')
         self.reporter = User.objects.create_user(
-            username='reporter', password='test'
+            username='reporter', password='test', email='reporter@hh.com'
         )
         self.user = User.objects.create_user(
-            username='commenter', password='test'
+            username='commenter', password='test', email='commenter@hh.com'
         )
         self.issue = Issue.objects.create(
             title='Test Issue',

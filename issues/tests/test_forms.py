@@ -15,13 +15,13 @@ class IssueFormTest(TestCase):
         """
         self.project = Project.objects.create(title='Test Project')
         self.developer = User.objects.create_user(
-            username='developer', password='password', role='developer'
+            username='developer', password='password', role='developer', email='dev@hh.com'
         )
         self.quality_assurance = User.objects.create_user(
-            username='qa', password='password', role='quality_assurance'
+            username='qa', password='password', role='quality_assurance', email='qa@hh.com'
         )
         self.product_manager = User.objects.create_user(
-            username='pm', password='password', role='product_manager'
+            username='pm', password='password', role='product_manager', email='pm@hh.com'
         )
 
     def test_issue_form_valid_data(self):
@@ -101,7 +101,8 @@ class CommentFormTest(TestCase):
         self.project = Project.objects.create(title='Test Project')
         self.reporter = User.objects.create_user(
             username='reporter',
-            password='test'
+            password='test',
+            email='reporter@hh.com'
         )
         self.issue = Issue.objects.create(
             title='Test Issue',

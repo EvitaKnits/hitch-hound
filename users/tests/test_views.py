@@ -20,7 +20,7 @@ class UserViewsTest(TestCase):
         self.client = Client()
         self.user = User.objects.create_user(
             username='testuser',
-            email='testuser@example.com',
+            email='testuser@hh.com',
             password='password'
         )
         self.project = Project.objects.create(title='Test Project')
@@ -86,7 +86,7 @@ class UserViewsTest(TestCase):
         """
         response = self.client.post(reverse('signup'), {
             'username': 'newuser',
-            'email': 'newuser@example.com',
+            'email': 'newuser@hh.com',
             'password1': 'complex_password_123',
             'password2': 'complex_password_123',
             'first_name': 'First',
@@ -105,7 +105,7 @@ class UserViewsTest(TestCase):
         """
         response = self.client.post(reverse('signup'), {
             'username': 'newuser',
-            'email': 'newuser@example.com',
+            'email': 'newuser@hh.com',
             'password1': 'password123',
             'password2': 'wrongpassword',
             'first_name': 'First',
@@ -135,7 +135,7 @@ class UserViewsTest(TestCase):
         Ensure the user is redirected and a password reset email is sent.
         """
         response = self.client.post(
-            reverse('password_reset'), {'email': 'testuser@example.com'}
+            reverse('password_reset'), {'email': 'testuser@hh.com'}
         )
         self.assertRedirects(response, reverse('password_reset_done'))
         self.assertEqual(len(mail.outbox), 1)
@@ -147,7 +147,7 @@ class UserViewsTest(TestCase):
         email. Ensure the user is redirected and no email is sent.
         """
         response = self.client.post(
-            reverse('password_reset'), {'email': 'nonexistent@example.com'}
+            reverse('password_reset'), {'email': 'nonexistent@hh.com'}
         )
         self.assertEqual(response.status_code, 302)  # Expecting a redirect
         self.assertEqual(len(mail.outbox), 0)
