@@ -28,24 +28,23 @@ To visit the deployed version of Hitch Hound [click here](https://hitchhound-152
     -  [Colour Scheme](#colour-scheme) 
     -  [Icons](#icons) 
 6. [Testing](#testing) 
-    -  [Test Plan](#test-plan) 
     -  [Continuous Testing](#continuous-testing) 
     -  [Automated Testing](#automated-testing)
     -  [Manual Testing](#manual-testing)
     -  [Browser Compatibility and Screen Size Responsiveness](#browser-compatibility-and-screen-size-responsiveness)
     -  [Code Validation](#code-validation)
     -  [Accessibility](#accessibility)
-    -  [Bugs](#bugs)
-7. [Deployment](#deployment)
-8. [Agile Methodology](#agile-methodology)
+7. [Bugs](#bugs)
+8. [Deployment](#deployment)
+9. [Agile Methodology](#agile-methodology)
     -  [Sprint One](#sprint-one-2705-to-0206)
     -  [Sprint Two](#sprint-two-0306-to-0906)
     -  [Sprint Three](#sprint-three-1006-to-1606)
     -  [Sprint Four](#sprint-four-2606-to-0207)
     -  [Sprint Five](#sprint-five-0307-to-0907)
     -  [Sprint Six](#sprint-six-1007-to-1607)
-9. [Future Development](#future-development)
-10. [Credits](#credits)
+10. [Future Development](#future-development)
+11. [Credits](#credits)
 
 ## Purpose
 The objective of this program is to streamline the process of tracking and communicating about issues and bugs arising in software development projects. It is lightweight and intuitive, providing ample functionality for small to medium enterprises who don't need an elevated level of auditing and oversight. 
@@ -285,20 +284,19 @@ A 'Project ID' to be the primary key for the Projects table. This was required b
 
 Hitch Hound uses CRUD principles to guide all data manipulation. 
 
-#### Issues
+**Issues**
 - Create: report a new issue, filling in all mandatory fields.
 - Read: retrieve an issue by project, issues page, reports or user profile.
 - Update: edit an issue's fields or add a new comment. 
 - Delete: delete an issue.
 
-#### Projects
+**Projects**
 - Create: start a new project, filling in the title. 
 - Read: retrieve a project via the projects page.
 - Update: change the title of a project. 
 - Delete: delete a project and all of its issues. 
 
-#### Other Data
-
+**Other Data**
 - The 'Change' entity type is a type of metadata created after an 'Issue' entity is updated in any way. It is not possible to update or delete a 'Change' entity.
 - The 'Comment' entity type is simply one of the updates to the 'Issue' entity type.
 
@@ -306,7 +304,7 @@ Hitch Hound uses CRUD principles to guide all data manipulation.
 
 The following data validation rules ensure the accuracy and reliability of information stored in the system, ensuring all entries adhere to expected formats.
 
-#### Users
+**Users**
 - userID: Must be a unique integer
 - firstName: Must be non-empty string 
 - lastName: Must be non-empty string
@@ -315,11 +313,11 @@ The following data validation rules ensure the accuracy and reliability of infor
 - role: Must be one of the predefined roles (developer, quality assurance or product manager)
 - superuser: Must be a boolean value
 
-#### Projects
+**Projects**
 - projectID: Must be a unique integer (*Added mid-development. See note below ERD for more information)
 - title: Must be a unique, non-empty string
 
-#### Issues
+**Issues**
 - issueID: Must be a unique integer
 - title: Must be a non-empty string
 - description: Must be a string, can be empty
@@ -332,14 +330,14 @@ The following data validation rules ensure the accuracy and reliability of infor
 - qualityAssurance: Must reference valid userID
 - productManager: Must reference valid userID
 
-#### Comments
+**Comments**
 - commentID: Must be a unique integer
 - commentText: Must be a non-empty string
 - userID: Must reference a valid userID
 - issueID: Must reference a valid issueID
 - commentTimestamp: Must be a valid timestamp
 
-#### Changes
+**Changes**
 - changeID: Must be a unique integer
 - issueID: Must reference a valid issueID
 - userID: Must reference a valid userID
@@ -354,94 +352,93 @@ The following data validation rules ensure the accuracy and reliability of infor
 
 The wireframes I created illustrate the core user interface and functionality of Hitch Hound from both a desktop/laptop perspective and a mobile/tablet perspective. These visual guides serve as a blueprint for the design and structure of the application, ensuring a cohesive and intuitive user experience. 
 
-#### Home: Sign Up
+**Home: Sign Up**
 
 ![signup](documentation/signup.png)
 
-#### Home: Log In
+**Home: Log In**
 
 ![login](documentation/login.png)
 
-#### Home: Logged In
+**Home: Logged In**
 
 ![loggedin](documentation/loggedin.png)
 
-#### Individual Issue
+**Individual Issue**
 
 ![individualissue](documentation/individualissue.png)
 
-#### Issue Change History
+**Issue Change History**
 
 ![changehistory](documentation/changehistory.png)
 
-#### New Issue
+**New Issue**
 
 ![newissue](documentation/newissue.png)
 
-
-#### Projects
+**Projects**
 
 ![projects](documentation/projects.png)
 
-#### Individual Project
+**Individual Project**
 
 ![individualproject](documentation/individualproject.png)
 
-#### New Project
+**New Project**
 
 ![newproject](documentation/newproject.png)
 
-#### Edit Project
+**Edit Project**
 
 ![editproject](documentation/editproject.png)
 
-#### Reports
+**Reports**
 
 ![reports](documentation/reports.png)
 
-#### User Profile
+**User Profile**
 
 ![userprofile](documentation/userprofile.png)
 
-#### Notification Modal
+**Notification Modal**
 
 ![notificationmodal](documentation/notificationmodal.png)
 
-#### 404 Page
+**404 Page**
 
 ![404page](documentation/404page.png)
 
 ### Mobile Wireframes
 
-| Sign Up | Log In |
+| **Sign Up** | **Log In** |
 |---|---|
 |![signupmobile](documentation/signupmobile.png) | ![loginmobile](documentation/loginmobile.png) |
 
-| All Issues | Individual Issue  |
+| **All Issues** | **Individual Issue** |
 |---|---|
 |![loggedinmobile](documentation/loggedinmobile.png)| ![individualissuemobile](documentation/individualissuemobile.png)|
 
-|Issue Change History| New Issue |
+|**Issue Change History**| **New Issue** |
 |---|---|
 |![changehistorymobile](documentation/changehistorymobile.png) | ![newissuemobile](documentation/newissuemobile.png) |
 
-| Projects | Individual Projects |
+| **Projects** | **Individual Projects** |
 |---|---|
 |![projectsmobile](documentation/projectsmobile.png) | ![individualprojectmobile](documentation/individualprojectmobile.png) |
 
-| New Project | Edit Project |
+| **New Project** | **Edit Project** |
 |---|---|
 |![newprojectmobile](documentation/newprojectmobile.png) | ![editprojectmobile](documentation/editprojectmobile.png) |
 
-| Reports |
+| **Reports** |
 |---|
 | ![reportsmobile](documentation/reportsmobile.png) | 
 
-| User Profile | Notifications |
+| **User Profile** | **Notifications** |
 |---|---|
 |![userprofilemobile](documentation/userprofilemobile.png)| ![notificationmobile](documentation/notificationsmobile.png) |
 
-| 404 Page |
+| **404 Page** |
 |---|
 | ![404pagemobile](documentation/404pagemobile.png) |
 
@@ -460,8 +457,6 @@ As I had chosen the name 'Hitch Hound' for my program, I found these dog themed 
 |![shield](documentation/shield.png) | ![dog](documentation/dog.png) |
 
 ## Testing
-
-### Test Plan
 
 ### Continuous Testing
 
@@ -559,39 +554,39 @@ Here is the list of bugs mostly found towards the end of development when I enco
 
 ### Bug One
 
-#### Issue
+**Issue**
 >About halfway through development, I tried to change the primary key of my 'Project' model from the 'Title' field to a new 'Project ID' field. This was because I had discovered that it is not possible to edit a primary key, so if a user wanted to change the title of their project, they would not be able to do so. Whilst making this change, I also found that Django automatically assigns an auto-incrementing ID to every model you create. I may have learnt this at some point, but because this auto-assignment is implicit and not actually visible in the files I was working on, I did not realise. I had to delete the ID fields from all my models and recreate my database. The issue this ultimately created was that I had been working for quite some time on the original data models and they were intertwined throughout my functionality. Making this change broke a significant portion of my existing functionality. 
 
-#### Solution
+**Solution**
 >The solution to this was going through systematically, encountering errors and resolving them until all references to IDs had either been removed or switched to the auto-assigned ones in Django. 
 
 ### Bug Two
 
-#### Issue
+**Issue**
 >I noticed that the error message on my login page wasn't working anymore. When incorrect login credentials are entered, the page simply reloads without displaying any error message, leaving the user unaware of why they haven't been logged in. 
 
-#### Solution
+**Solution**
 >The solution involved modifying the template to properly handle and display error messaging when login credentials are incorrect. I previously had a small bit of Javascript at the bottom of the page to handle this, but as it wasn't working, I changed to using Django templating language in the body of the template and it started working again. See related commit for the code change.
 
 ### Bug Three
 
-#### Issue
+**Issue**
 >Sorting by project or reporter on the Issues Listing page causes a FieldError: "Cannot resolve keyword 'project.title' into field" and "Cannot resolve keyword 'reporter.username' into field." 
 
-#### Solution
+**Solution**
 
 >For both of these, I discovered that in Django, you need to use double underscores instead of dots to traverse relationships between models. So because 'Projects' and 'Users' are two separate models from the 'Issue' model which is the main one being used in this table, I needed to use underscores for them, not dots. For example, 'project__title' not 'project.title'.
 
 ### Bug Four
 
-#### Issue
+**Issue**
 >When a large amount of text is added to the Issue Description field, it causes the table on the Issue Detail page to go off the right edge of the page. It also causes there to be a scroll bar on the Change History page.
 
 | | |
 | --| --| 
 | ![Bug 4 Issue Detail](documentation/bug4-issue.png) | ![Bug 4 Change History](documentation/bug4-history.png) |
 
-#### Solution
+**Solution**
 >I added Bootstrap's text wrapping and word break utilities on the offending table columns. This is what they looked like after the change: 
 
 | | |
@@ -600,60 +595,60 @@ Here is the list of bugs mostly found towards the end of development when I enco
 
 ### Bug Five
 
-#### Issue
+**Issue**
 >A separate issue caused by a large amount of text that persisted after the fix for bug four, was the throwing off of the header row on the Change History table. See solution images in bug four above. 
 
-#### Solution
+**Solution**
 >I added Bootstrap's utility that prevents text wrapping to the whole table heading row. 
 
 ![Bug 5 fix](documentation/bug5.png)
 
 ### Bug Six
 
-#### Issue
+**Issue**
 >I noticed that instead of values such as 'In Progress' - I could see values formatted as 'in_progress' on the UI. I took a look at my models and I had ordered my choice sets correctly, with the stored value first, then the display value. So it meant that I was showing the stored database values rather than the corresponding display values. Here, the Severity, Type and Status columns are using the stored values as evidence by the lowercase words and underscores.
 
 ![Bug 6](documentation/bug6.png)
 
-#### Solution
+**Solution**
 >The solution was to go through the site and find all the places I am displaying such fields and ensure I am using the display values. For example, where I had used `issue.status`, I now used `issue.get_status_display`. This ensured all the display values were being shown on the UI. Here is the same table using the display values: 
 
 ![Bug 6 fix](documentation/bug6-fix.png)
 
 ### Bug Seven
 
-#### Issue
+**Issue**
 >The sorting by Severity on tables like the Issue Listing page, was not working as expected. The column was being sorted alphabetically rather than by severity. 
 
-#### Solution
+**Solution**
 >I changed the Issue Model's 'Severity' choices to integers and sorted by those instead of the previous names, so the display names remain in the format '1-Critical' but the stored values are just integers, e.g. 1. This solved the issue and allowed the sorting by severity to be accurate. 
 
 ### Bug Eight
 
-#### Issue
+**Issue**
 >There was an alert on the Password Reset form page indicating the deletion of a project, which is irrelevant to the scenario. 
 
 ![Bug 8](documentation/bug8.png)
 
-#### Solution
+**Solution**
 > I found that I had a block of code implementing alerts on this page. I removed this and that removed the project deletion alert. 
 
 ![Bug 8 Fix](documentation/bug8-fix.png)
 
 ### Bug Nine
 
-#### Issue
+**Issue**
 >When I finished the main coding of my project and started to go through my files to tidy them all up, I came across my secret ket in my settings file. I had overlooked this throughout development and therefore committed it to GitHub. It was therefore no longer secret. 
 
-#### Solution 
+**Solution** 
 >I used [Djecrety](https://djecrety.ir/) to generate a new secret key, placed this in the env file and hooked it up to the settings. This reinstated this security setting correctly. 
 
 ### Bug Ten
 
-#### Issue
+**Issue**
 >After I had finished going through and adding my docstrings and comments, as well as ensuring consistent quote marks and naming across all files, I had accidentally made changes that meant my pie charts and alerts were no longer displaying. 
 
-#### Solution
+**Solution**
 >I found that I had used my IDE to do an automatic format (right-click/format document) and that this had thrown the data and labels off in the code snippet below. Restoring them to this state made my pie charts reappear.  
 
 `const labels = {{ labels | safe }};`  
@@ -666,80 +661,80 @@ Here is the list of bugs mostly found towards the end of development when I enco
 
 ### Bug Eleven
 
-#### Issue
+**Issue**
 >The user details form on the Profile page is not working as expected: the Cancel button saves the form rather than cancelling any changes. 
 
-#### Solution
+**Solution**
 >I made a change so that the Cancel button simply refreshes the Profile page, thus effectively removing any changes and setting the form back to non-edit mode. 
 
 ### Bug Twelve
 
-#### Issue
+**Issue**
 >Alerts are eroneously showing up in three different scenarios: 
 >1. When a user goes to the 'Change Password' form from the Profile page and clicks the 'Save' button, the 'successfully changed password' alert appears on the next page the user accesses that has an alert placeholder on it, regardless of if they actually changed their password or not. 
 >2. When a user uses the 'Create Issue' form without adding all mandatory information and clicks the 'Save' button, receives validation errors, then decides not to create a new issue and cancels, the 'created a new issue' alert appears anyway. 
 >3. When a user uses the 'Create Project' form without filling the field in and clicks the 'Save' button, receives a validation error, then decides not to create a new project and cancels, the 'created a new project' alert appears anyway. 
 
-#### Solution
+**Solution**
 >I found that I had set up the alerts to be triggered when clicking the button, rather than when the new item is actually saved. I removed this behaviour from the buttons and switched to setting the session variable in the view when the new item is saved successfully. This meant that I moved the session variable to the server side and therefore needed to pass it to the client side via the context on each page that displays the alerts. This solved all three scenarios. 
 
 ### Bug Thirteen
 
-#### Issue
+**Issue**
 >I made a change that removed the 'Status' field from the form used to create a new issue. This is because when an issue is created it should automatically be set to 'Open' and not be changeable at this stage. It should however be changeable afterwards, when a user edits an issue. I realised I accidentally removed the 'Status' field from both the create and edit issue forms. 
 
-#### Solution
+**Solution**
 >As the same form is used for creating and editing issues, I needed to include the 'Status' field conditionally. So I added the 'Status' field back into the list of fields for this form, then made sure it only appears on the edit issue form by checking whether the issue instance already exists or not. If it does not exist already, this means its a new issue and the status field should not appear, therefore it is removed from the list of fields. 
 
 ### Bug Fourteen
 
-#### Issue
+**Issue**
 >The 404 page shows 'Login' in the navbar rather than the full menu that the user needs to use to navigate away from the 404 page. 
 
-#### Solution
+**Solution**
 >When I changed the way my navbar was coded in order to remove repetition whilst ensuring the correct version of the navbar is included in each page, I overlooked the 404 page. I just had to add the correct context to the custom_404 view and this reinstated the full navbar. 
 
 ### Bug Fifteen
 
-#### Issue
+**Issue**
 >The Edit Issue page does not show an alert to explain to the user why they cannot change the Status of issues to a particular value. 
 
-#### Solution
+**Solution**
 >I looked back at the changes I made when I first implemented it and I saw that at some point along the way I had lost the section in my Edit Issue template, which displays the alerts. Adding this back in fixed the issue. I also realised that I had duplicate and redundant code in the 'Change Issue Status' view. It was redundant because I had incorporated the functionality into the main 'Edit Issue' view, so I deleted the other view. Also, related to this bug, I saw that in my message to the user about why they couldn't change the status to a particular value, I was showing the internal status values rather than the intended display values, so I changed this too. 
 
 ### Bug Sixteen
 
-#### Issue
+**Issue**
 >When a user clicks 'Add a Comment' on an Issue Detail page, without entering any text into the box, the page refreshes and the navbar contains only a link to 'Login' despite the user already being logged in and it having no relevance to the task at hand. 
 
-#### Solution
+**Solution**
 >I made a change so that the 'Add a Comment' button is disabled when there is no text in the comment box. This solves the issue.
 
 ### Bug Seventeen
 
-#### Issue
+**Issue**
 >On the Change History page of an Issue, and on the Issue Status Summary report, I was showing the stored database values rather than the corresponding display values. This is the same type of issue as Bug Six. 
 
 ![Bug Seventeen](documentation/bug17.png)
 
-#### Solution
+**Solution**
 >For the Change History page, this needed a more in-depth solution in my Change model, where I implemented methods to dynamically fetch and show the display values for various fields based on their defined choices. For the Report, I updated the view to map the status values to their display names before passing them to the pie chart so it could display them correctly. 
 
 ![Bug Seventeen Fixed](documentation/bug17-fix.png)
 
 #### Bug Eighteen
 
-#### Issue
+**Issue**
 >After deleting a project, an alert appears on the 'Edit Issue' page when the user next accesses it informing them 'Project Deleted Successfully'. Firstly, a similar alert will have been seen on the Projects page when the user is directed back there after project deletion. Secondly, this alert is not relevant to the Edit Issue page.
 
 ![Bug Eighteen](documentation/bug18.png)
 
-#### Solution
+**Solution**
 >I found that I had accidentally left a line of code in my 'Delete Project' view from a previous version of my alerting system that was causing this message to appear. I removed this line and the bug was fixed.
 
 #### Bug Nineteen
 
-#### Issue
+**Issue**
 >This bug contains all the cosmetic issues found on mobile and tablet screens during browser and responsivity testing: 
 >- a. Burger Menu is aligned right and looks odd.
 >- b. Buttons on 'Issue Detail' page stuck together on two rows.
@@ -751,7 +746,7 @@ Here is the list of bugs mostly found towards the end of development when I enco
 >- h. The pie charts are too small on tablet screens and have a varying amount of padding underneath depending on the various screen sizes. This should be consistent.
 >- i. The pie charts sometimes had no padding at the bottom of the screen and other times did have it, depending on screen size. This was despite me not specifying padding my screen size.
 
-#### Solution
+**Solution**
 >These have all been solved: 
 >- a. The burger menu has been changed to an offcanvas navbar using Bootstrap.
 >- b. The buttons on 'Issue Detail' pages have been converted to 100% width on mobile screens in the same way that other buttons on different pages were already.
@@ -765,10 +760,10 @@ Here is the list of bugs mostly found towards the end of development when I enco
 
 #### Bug Twenty
 
-#### Issue
+**Issue**
 >It is currently possible to register for an account and use the same email address as an existing user.
 
-#### Solution
+**Solution**
 >I changed my user model to make sure that email addresses must be unique. 
 
 ## Deployment
@@ -817,10 +812,10 @@ I set this project up in GitHub projects using agile methodology. This facilitat
 ### Sprint One: 05/06 to 11/06
 ![Sprint One](documentation/sprint1.png)
 
-#### Sprint Planning
+**Sprint Planning**
 Sprint planning involved taking the highest priority issues from the top of the stack and assigning them to the first sprint. I marked the first three as 'Must Have' for this sprint, the next one 'Should Have' and the last two 'Could Have'. This gave me a breakdown of 50% for must, 16.6% for should and 33.4% for could. If I achieve all of these user stories in the first sprint, I will have completed my first epic: User Management.
 
-#### Sprint Retrospective
+**Sprint Retrospective**
 
 Sprint Overview: 
 During my initial one-week sprint, I completed the user story for 'Create basic front-end'. This task involved laying much of the foundational work for my project.
@@ -844,10 +839,10 @@ Action Items for Next Sprint:
 ### Sprint Two: 12/06 to 18/06
 ![Sprint Two](documentation/sprint2.png)
 
-#### Sprint Planning
+**Sprint Planning**
 For the second sprint, I carried over the same stories I had planned for the first sprint but not finished. I did not include any more because experience has shown me that I am unlikely to get all these stories finished. Therefore only 40% of the stories are must have, 20% should have and 40% could have. With more time this sprint, I should be able to complete the must have stories at a minimum. 
 
-#### Sprint Retrospective
+**Sprint Retrospective**
 Achievements: 
 - Successfully created the user registration, login and logout.
 
@@ -866,10 +861,10 @@ Action Items for Next Sprint:
 ### Sprint Three: 19/06 to 25/06
 ![Sprint Three](documentation/sprint3.png)
 
-#### Sprint Planning
+**Sprint Planning**
 For the third sprint, I carried over one story and put back another story, towards the bottom of the backlog as I realised I would not be able to sort out all the permissions until I had the bulk of the reset of the development complete. 50% of my stories for sprint 3 are must have, 25% should have and 25% could have. If I manage to complete these, I can always pull in some more stories. 
 
-#### Sprint Retrospective
+**Sprint Retrospective**
 I realised after the sprint had begun, that I needed a user story for creating the user profile page. I'd missed it when initially writing up my user stories. This has a list of issues assigned to the user on it however, so needs to be done later on in the project. I created it and put it further down the backlog. 
 
 I also picked up speed this sprint and completed all four of the planned user stories by the middle of the sprint. I pulled in four more, labelling two of them 'Should Have' and the other two 'Could Have' as I had already met my sprint commitments. 
@@ -877,28 +872,28 @@ I also picked up speed this sprint and completed all four of the planned user st
 ### Sprint Four: 26/06 to 02/07
 ![Sprint Four](documentation/sprint4.png)
 
-#### Sprint Planning
+**Sprint Planning**
 For my fourth sprint, I carried over two of the four I pulled in half way through, and added five more stories for a total of 7. I've got 3 must haves, 2 should haves and 2 could haves. I do have quite a large issue to deal with first but I feel as though I am into the flow of how Django works and what my project should do to be able to work with this split. 
 
-#### Sprint Retrospective
+**Sprint Retrospective**
 I nearly achieved all of my must haves but had to pause to add automated testing to the whole project so far, as I had not added any up to this point. I was very close to finishing the final must have but I had implemented two independent forms on the same page and they were interfering with each other. I think I'll need to split them up so they can be on different pages and not influence each other as they currently do. I also had to replace my database due to having assigned IDs to my models and not realising that Django does this automatically for you. There were significant delays this sprint. 
  
 ### Sprint Five: 03/07 to 09/07
 ![Sprint Five](documentation/sprint5.png) 
 
-#### Sprint Planning
+**Sprint Planning**
 I have planned the remainder of my stories into sprint five with 3 must haves, 2 should haves and 2 could haves. If I need a sixth sprint, I will of course carry over any that were not completed this sprint. 
 
-#### Sprint Retrospective
+**Sprint Retrospective**
 I got through a tremendous amount in this sprint, finishing all but one of my user stories. I could really see how much I had improved from the start of the project as things took me less time to figure out. 
 
 ### Sprint Six: 10/07 to 16/07
 ![Sprint Six](documentation/sprint6.png)
 
-#### Sprint Planning
+**Sprint Planning**
 I have moved my final story over to this sprint, plus added one more 'Add breadcrumbs' as I realise I need them for effective navigation. I will also be refactoring my code, adding more comments and docstrings, as well as finishing off my README this sprint. The goal is to complete my project by the end of it. As such, both the stories in this sprint have been marked as must haves. 
 
-#### Sprint Retrospective
+**Sprint Retrospective**
 I finished the reporting feature early in the sprint and moved onto the final story: the breadcrumbs. 
 
 As I was implementing the breadcrumb feature, I thought about the breadcrumbs I actually wanted to implement. All top levels of the breadcrumbs could be accessed via the navigation bar, then all but one of the breacrumbs were just two pages deep. They would be mostly duplicating my existing navbar and therefore be presenting duplicate information on the page. I thought this could be confusing for the user and look messy, so I reverted my changes and decided against breadcrumbs after all. 
@@ -943,7 +938,7 @@ I also used the documentation of all the elements included in this project:
 - [PostgreSQL](https://www.postgresql.org/docs/current/)
 
 
-### General Credit
+**General Credit**
 As ever, I want to thank the open source community for the great resources that teach me so much and also remind me of what I learnt in my Code Institute lessons. 
 
 I believe I have credited where I used specific items in the previous section but this is a general credit to the reference resources I looked through to teach me new elements as well as reminding me how things I'd already come across worked as I went along. 
