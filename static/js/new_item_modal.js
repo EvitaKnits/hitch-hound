@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     // Get the modal element
-    var modal = document.getElementById('myModal');
+    var modal = document.getElementById('my-modal');
 
     // Get the button that opens the modal
     var btn = document.getElementById('open-modal-btn');
