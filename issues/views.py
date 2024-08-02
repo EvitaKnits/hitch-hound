@@ -12,26 +12,19 @@ from hitchhound.utils import paginate, get_new_notifications
 @login_required
 def list_issues(request):
     """
-    View to list all issues, optionally filtered by project and sorted by
-    various fields.Handles pagination and sorting, and includes user
-    notifications.
+    View to list all issues, sorted by various fields. Handles
+    pagination and sorting, and includes user notifications.
     """
     # Handle session flag to show a success toast when user just registered
     show_toast = request.session.pop('registration_success', False)
 
-    # Get sorting and filtering parameters from the request
+    # Get sorting parameters from the request
     sort_by = request.GET.get('sort_by', 'title')
     order = request.GET.get('order', 'asc')
     project_id = request.GET.get('project_id')
 
-    project = None
-
-    # Filter issues by project if project_id is provided
-    if project_id:
-        project = get_object_or_404(Project, id=project_id)
-        issues = Issue.objects.filter(project=project)
-    else:
-        issues = Issue.objects.all()
+    # Retrieve all issues
+    issues = Issue.objects.all()
 
     # Determine the ordering of issues
     ordering = f'{'' if order == 'asc' else '-'}{sort_by.replace('.', '__')}'
@@ -66,9 +59,6 @@ def list_issues(request):
         """
         return 'asc' if current_order == 'desc' else 'desc'
 
-    # Calculate whether there are new notifications for the current user
-    new_notifications = get_new_notifications(request.user)
-
     # Check if there's an alert type in the session and add it to the context
     alert_type = request.session.pop('Alert Type', None)
 
@@ -76,11 +66,10 @@ def list_issues(request):
         'active_page': 'issues',
         'show_toast': show_toast,
         'page_obj': page_obj,
-        'project': project,
         'sort_by': sort_by,
         'order': order,
         'toggle_order': toggle_order(order),
-        'new_notifications': new_notifications,
+        'new_notifications': get_new_notifications(request.user),
         'show_navbar': True,
         'alert_type': alert_type,
     }
@@ -97,14 +86,11 @@ def issue_detail(request, id):
     comments = Comment.objects.filter(issue=issue).order_by('-commented_at')
     form = CommentForm()
 
-    # Calculate whether there are new notifications for the current user
-    new_notifications = get_new_notifications(request.user)
-
     context = {
         'issue': issue,
         'comments': comments,
         'form': form,
-        'new_notifications': new_notifications,
+        'new_notifications': get_new_notifications(request.user),
         'active_page': 'issues',
         'show_navbar': True,
     }
@@ -150,12 +136,9 @@ def create_issue(request):
     else:
         form = IssueForm()
 
-    # Calculate whether there are new notifications for the current user
-    new_notifications = get_new_notifications(request.user)
-
     context = {
         'form': form,
-        'new_notifications': new_notifications,
+        'new_notifications': get_new_notifications(request.user),
         'active_page': 'issues',
         'show_navbar': True,
     }
@@ -195,13 +178,10 @@ def edit_issue(request, id):
     else:
         form = IssueForm(instance=issue)
 
-    # Calculate whether there are new notifications for the current user
-    new_notifications = get_new_notifications(request.user)
-
     context = {
         'form': form,
         'issue': issue,
-        'new_notifications': new_notifications,
+        'new_notifications': get_new_notifications(request.user),
         'active_page': 'issues',
         'show_navbar': True,
     }

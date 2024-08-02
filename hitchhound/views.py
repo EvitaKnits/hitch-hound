@@ -18,11 +18,8 @@ def custom_404(request, exception):
     - HttpResponse: The response object with a rendered 404 page.
     """
 
-    # Calls utility function to check for new notifications for current user
-    new_notifications = get_new_notifications(request.user)
-
     context = {
-        'new_notifications': new_notifications,
+        'new_notifications': get_new_notifications(request.user),
         'show_navbar': True,
     }
 

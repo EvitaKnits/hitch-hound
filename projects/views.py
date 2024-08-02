@@ -17,15 +17,12 @@ def list_projects(request):
             '-created_at'
         )[:3]
 
-    # Calculate new notifications
-    new_notifications = get_new_notifications(request.user)
-
     # Check if there's an alert type in the session and add it to the context
     alert_type = request.session.pop('Alert Type', None)
 
     context = {
         'projects': projects,
-        'new_notifications': new_notifications,
+        'new_notifications': get_new_notifications(request.user),
         'active_page': 'projects',
         'show_navbar': True,
         'alert_type': alert_type,
@@ -58,16 +55,13 @@ def view_all_issues(request, project_id):
     # Toggle order for sorting links
     toggle_order = 'asc' if order == 'desc' else 'desc'
 
-    # Calculate new notifications
-    new_notifications = get_new_notifications(request.user)
-
     context = {
         'project': project,
         'page_obj': page_obj,
         'sort_by': sort_by,
         'order': order,
         'toggle_order': toggle_order,
-        'new_notifications': new_notifications,
+        'new_notifications': get_new_notifications(request.user),
         'active_page': 'projects',
         'show_navbar': True,
     }
@@ -86,12 +80,9 @@ def create_project(request):
     else:
         form = ProjectForm()
 
-    # Calculate new notifications
-    new_notifications = get_new_notifications(request.user)
-
     context = {
         'form': form,
-        'new_notifications': new_notifications,
+        'new_notifications': get_new_notifications(request.user),
         'active_page': 'projects',
         'show_navbar': True,
     }
@@ -111,12 +102,9 @@ def edit_project(request, id):
     else:
         form = ProjectForm(instance=project)
 
-    # Calculate new notifications
-    new_notifications = get_new_notifications(request.user)
-
     context = {
         'form': form,
-        'new_notifications': new_notifications,
+        'new_notifications': get_new_notifications(request.user),
         'active_page': 'projects',
         'show_navbar': True,
     }

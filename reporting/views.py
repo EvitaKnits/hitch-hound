@@ -33,9 +33,6 @@ def issue_listing_by_status(request):
     # Use the paginate utility function to handle pagination
     page_obj = paginate(request, issues)
 
-    # Calculate new notifications for the current user
-    new_notifications = get_new_notifications(request.user)
-
     context = {
         'issues': page_obj,
         'status_choices': status_choices,
@@ -45,7 +42,7 @@ def issue_listing_by_status(request):
         'page_obj': page_obj,
         'active_page': 'reports',
         'show_navbar': True,
-        'new_notifications': new_notifications,
+        'new_notifications': get_new_notifications(request.user),
     }
     return render(request, 'issue_listing_by_status.html', context)
 
@@ -83,9 +80,6 @@ def issue_listing_by_assignee(request):
     # Use the paginate utility function to handle pagination
     page_obj = paginate(request, issues)
 
-    # Calculate new notifications for the current user
-    new_notifications = get_new_notifications(request.user)
-
     user_choices = User.objects.all()
 
     context = {
@@ -96,7 +90,7 @@ def issue_listing_by_assignee(request):
         'page_obj': page_obj,
         'active_page': 'reports',
         'show_navbar': True,
-        'new_notifications': new_notifications,
+        'new_notifications': get_new_notifications(request.user),
     }
 
     return render(request, 'issue_listing_by_assignee.html', context)
@@ -130,9 +124,6 @@ def issue_status_summary(request):
     labels = [status_dict[status['status']] for status in status_summary]
     data = [status['count'] for status in status_summary]
 
-    # Calculate new notifications for the current user
-    new_notifications = get_new_notifications(request.user)
-
     context = {
         'labels': labels,
         'data': data,
@@ -141,7 +132,7 @@ def issue_status_summary(request):
         'selected_project_title': selected_project_title,
         'active_page': 'reports',
         'show_navbar': True,
-        'new_notifications': new_notifications,
+        'new_notifications': get_new_notifications(request.user),
     }
 
     return render(request, 'issue_status_summary.html', context)
@@ -178,9 +169,6 @@ def issue_severity_summary(request):
     ]
     data = [severity['count'] for severity in severity_summary]
 
-    # Calculate new notifications for the current user
-    new_notifications = get_new_notifications(request.user)
-
     context = {
         'labels': labels,
         'data': data,
@@ -189,7 +177,7 @@ def issue_severity_summary(request):
         'selected_project_title': selected_project_title,
         'active_page': 'reports',
         'show_navbar': True,
-        'new_notifications': new_notifications,
+        'new_notifications': get_new_notifications(request.user),
     }
 
     return render(request, 'issue_severity_summary.html', context)

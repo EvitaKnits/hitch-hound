@@ -58,6 +58,7 @@ def password_reset(request):
     if request.method == 'POST':
         form = PasswordResetForm(request.POST)
         if form.is_valid():
+            # Ensure using successfully validated email
             email = form.cleaned_data['email']
             users = form.get_users(email)
             if users:
@@ -166,9 +167,6 @@ def user_profile(request):
     # Use the paginate utility function to handle pagination
     page_obj = paginate(request, issues)
 
-    # Calculate new notifications for the current user
-    new_notifications = get_new_notifications(request.user)
-
     # Check if there's an alert type in the session and add it to the context
     alert_type = request.session.pop('Alert Type', None)
 
@@ -179,7 +177,7 @@ def user_profile(request):
         'sort_by': sort_by,
         'order': order,
         'toggle_order': toggle_order,
-        'new_notifications': new_notifications,
+        'new_notifications': get_new_notifications(request.user),
         'active_page': 'profile',
         'show_navbar': True,
         'alert_type': alert_type,
@@ -202,12 +200,9 @@ def change_password(request):
     else:
         password_change_form = PasswordChangeForm(user=request.user)
 
-    # Calculate new notifications for current user
-    new_notifications = get_new_notifications(request.user)
-
     context = {
         'password_change_form': password_change_form,
-        'new_notifications': new_notifications,
+        'new_notifications': get_new_notifications(request.user),
         'active_page': 'profile',
         'show_navbar': True,
     }

@@ -16,9 +16,6 @@ def list_notifications(request):
     """
     current_user = request.user
 
-    # Check if there are new notifications
-    new_notifications = get_new_notifications(current_user)
-
     # Fetch issues the user is assigned to
     user_issues = UserIssue.objects.filter(
         user=current_user
@@ -43,7 +40,7 @@ def list_notifications(request):
 
     context = {
         'page_obj': page_obj,
-        'new_notifications': new_notifications,
+        'new_notifications': get_new_notifications(request.user),
         'show_navbar': True,
     }
 
@@ -59,16 +56,13 @@ def change_history(request, issue_id):
     # Fetch all changes for the specific issue, ordered by the change date
     changes = Change.objects.filter(issue=issue).order_by('-changed_at')
 
-    # Calculate new notifications for the current user
-    new_notifications = get_new_notifications(request.user)
-
     # Use the paginate utility function to handle pagination
     page_obj = paginate(request, changes)
 
     context = {
         'page_obj': page_obj,
         'changes': changes,
-        'new_notifications': new_notifications,
+        'new_notifications': get_new_notifications(request.user),
         'issue': issue,
         'active_page': 'issues',
         'show_navbar': True,
