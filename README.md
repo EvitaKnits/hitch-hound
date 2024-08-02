@@ -10,41 +10,41 @@ Automated testing is done with Unittest for Python.
 To visit the deployed version of Hitch Hound [click here](https://hitchhound-15272de0eee9.herokuapp.com/).
 
 ## Table of Contents
-1. [Purpose](#purpose) 
-2. [Features](#features) 
-3. [Requirement Gathering and Planning](#requirement-gathering-and-planning) 
+1. [Purpose](#1-purpose) 
+2. [Features](#2-features) 
+3. [Requirement Gathering and Planning](#3-requirement-gathering-and-planning) 
     - [Brief Competitor Analysis and Target Demographic](#brief-competitor-analysis-and-target-demographic) 
     - [Data and Security features](#data-and-security-features)
     - [Epics and User Stories](#epics-and-user-stories) 
     - [User Journeys](#user-journeys) 
     - [User Permissions](#user-permissions)
-4. [Data Design](#data) 
+4. [Data Design](#4-data) 
     -  [Database Schema](#database-schema) 
     -  [Data Manipulation](#data-manipulation) 
     -  [Data Validation](#data-validation) 
-5. [User Interface Design](#user-interface-design) 
+5. [User Interface Design](#5-user-interface-design) 
     -  [Computer Wireframes](#computer-wireframes)
     -  [Mobile Wireframes](#mobile-wireframes)
     -  [Colour Scheme](#colour-scheme) 
     -  [Icons](#icons) 
-6. [Testing](#testing) 
+6. [Testing](#6-testing) 
     -  [Continuous Testing](#continuous-testing) 
     -  [Automated Testing](#automated-testing)
     -  [Manual Testing](#manual-testing)
     -  [Browser Compatibility and Screen Size Responsiveness](#browser-compatibility-and-screen-size-responsiveness)
     -  [Code Validation](#code-validation)
     -  [Accessibility](#accessibility)
-7. [Bugs](#bugs)
-8. [Deployment](#deployment)
-9. [Agile Methodology](#agile-methodology)
+7. [Bugs](#7-bugs)
+8. [Deployment](#8-deployment)
+9. [Agile Methodology](#9-agile-methodology)
     -  [Sprint One](#sprint-one-2705-to-0206)
     -  [Sprint Two](#sprint-two-0306-to-0906)
     -  [Sprint Three](#sprint-three-1006-to-1606)
     -  [Sprint Four](#sprint-four-2606-to-0207)
     -  [Sprint Five](#sprint-five-0307-to-0907)
     -  [Sprint Six](#sprint-six-1007-to-1607)
-10. [Future Development](#future-development)
-11. [Credits](#credits)
+10. [Future Development](#10-future-development)
+11. [Credits](#11-credits)
 
 ## 1. Purpose
 The objective of this program is to streamline the process of tracking and communicating about issues and bugs arising in software development projects. It is lightweight and intuitive, providing ample functionality for small to medium enterprises who don't need an elevated level of auditing and oversight. 
@@ -370,7 +370,7 @@ Data validation rules ensure the accuracy and reliability of information stored 
 - Old Value: Text field, can be empty.
 - New Value: Text field, can be empty.
 
-## User Interface Design
+## 5. User Interface Design
 
 ### Computer Wireframes 
 
@@ -480,7 +480,7 @@ As I had chosen the name 'Hitch Hound' for my program, I found these dog themed 
 |---|---|
 |![Shield Icon](documentation/shield.png) | ![Dog Icon](documentation/dog.png) |
 
-## Testing
+## 6. Testing
 
 ### Continuous Testing
 
@@ -679,7 +679,7 @@ To ensure the front end of my program was accessible I used Lighthouse. After my
 
 I checked my initial colour palette prior to development but found during my accessibility testing with lighthouse that I had combined colours in a few instances that did not have sufficient contrast. These were changed to meet accessibility standards. 
 
-## Bugs
+## 7. Bugs
 
 Here is the list of bugs mostly found towards the end of development when I encountered functionality not working as intended that I had previously thought did. I don't believe I have left any unresolved bugs. 
 
@@ -897,7 +897,7 @@ Here is the list of bugs mostly found towards the end of development when I enco
 **Solution**
 >I changed my user model to make sure that email addresses must be unique. 
 
-## Deployment
+## 8. Deployment
 This project was deployed to [Heroku](https://id.heroku.com/login): a hosting platform. 
 
 1. Create a PostgreSQL Database 
@@ -937,7 +937,7 @@ This project was deployed to [Heroku](https://id.heroku.com/login): a hosting pl
 14. Deploy the App
 - Either enable automatic deploys or click to deploy manually in Heroku's 'Deploy' tab.
 
-## Agile Methodology
+## 9. Agile Methodology
 I set this project up in GitHub projects using agile methodology. This facilitated my prioritisation and time management. I added all the user stories as issues and then divided them into 'MVP'(Minimum Viable Product) and 'Future Enhancements' to signify what I intend to complete for my assessed project and what could come later. Those MVP stories were then stack-ranked. I added three one-week sprints to start the project and filled my first sprint with my intended work according to the MoSCoW prioritisation system. 
 
 **User Stories Assigned to Epics** 
@@ -1047,7 +1047,7 @@ I also did a tidy up which included fixing bugs (see dedicated bug section above
 - Removing the role dropdown and making the field read-only on the Profile page. 
 - Removing the status field from the Create Issue page and auto-populating this value to 'Open'. 
 
-## Future Development
+## 10. Future Development
 These three stories were nice to haves if I found I had enough time to implement them. They are under Epic 4: Enhanced Issue Management. In the end, I only had enough time to implement the first story in this epic: 'Provide a Change History Log'. I completed all other stories in all other epics. 
 
 - Attach Files to Issues
@@ -1056,7 +1056,7 @@ These three stories were nice to haves if I found I had enough time to implement
 
 I also looked into the possibility of retaining the formatting and line breaks in the Comments, as my program currently removes them upon saving. However, I decided against making any changes because my research indicated that to preserve formatting and lines breaks, the comment text would need to be rendered as HTML. Django automatically escapes HTML to prevent Cross-Site Scripting attacks as a security measure. I don't want to make changes that override Django's security protocols, especially as I don't believe preservation of formatting justifies compromising security measures. 
 
-## Credits
+## 11. Credits
 
 I referred back to the Code Institute set up videos to remind me how to set up the APIs, credentials and files before starting coding.
 
